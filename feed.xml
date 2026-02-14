@@ -5,7 +5,7 @@
      xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>41 Labs Blog</title>
-    <link>https://41labs.ai/blog.html</link>
+    <link>https://41labs.ai/blog</link>
     <description>Practical insights on AI systems, automation, and operational efficiency for B2B businesses in Southeast Asia.</description>
     <language>en-us</language>
     <lastBuildDate>Fri, 07 Feb 2026 00:00:00 GMT</lastBuildDate>
@@ -18,8 +18,8 @@
 
     <item>
       <title>When Should a Business Invest in AI Automation? 7 Signs You're Ready</title>
-      <link>https://41labs.ai/post.html?slug=when-should-business-invest-in-ai</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=when-should-business-invest-in-ai</guid>
+      <link>https://41labs.ai/post?slug=when-should-business-invest-in-ai</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=when-should-business-invest-in-ai</guid>
       <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -28,8 +28,8 @@
 
     <item>
       <title>What Is Intelligent Document Processing (IDP)? Complete Guide</title>
-      <link>https://41labs.ai/post.html?slug=what-is-intelligent-document-processing</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=what-is-intelligent-document-processing</guid>
+      <link>https://41labs.ai/post?slug=what-is-intelligent-document-processing</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=what-is-intelligent-document-processing</guid>
       <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -38,8 +38,8 @@
 
     <item>
       <title>AI Implementation Timeline: What to Expect from Start to Deployment</title>
-      <link>https://41labs.ai/post.html?slug=ai-implementation-timeline</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=ai-implementation-timeline</guid>
+      <link>https://41labs.ai/post?slug=ai-implementation-timeline</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-implementation-timeline</guid>
       <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -48,8 +48,8 @@
 
     <item>
       <title>AI ROI Calculator: How to Measure and Predict AI Automation Returns</title>
-      <link>https://41labs.ai/post.html?slug=ai-roi-calculator-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=ai-roi-calculator-guide</guid>
+      <link>https://41labs.ai/post?slug=ai-roi-calculator-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-roi-calculator-guide</guid>
       <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -58,8 +58,8 @@
 
     <item>
       <title>Is Your Business AI-Ready? 10-Point Assessment Checklist</title>
-      <link>https://41labs.ai/post.html?slug=is-your-business-ai-ready</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=is-your-business-ai-ready</guid>
+      <link>https://41labs.ai/post?slug=is-your-business-ai-ready</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=is-your-business-ai-ready</guid>
       <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -68,8 +68,8 @@
 
     <item>
       <title>AI for Small Business: What SMBs Need to Know Before Investing</title>
-      <link>https://41labs.ai/post.html?slug=ai-for-small-business-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=ai-for-small-business-guide</guid>
+      <link>https://41labs.ai/post?slug=ai-for-small-business-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-for-small-business-guide</guid>
       <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -78,8 +78,8 @@
 
     <item>
       <title>What Is AI Quote Automation? A Complete Guide for B2B Companies</title>
-      <link>https://41labs.ai/post.html?slug=what-is-ai-quote-automation</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=what-is-ai-quote-automation</guid>
+      <link>https://41labs.ai/post?slug=what-is-ai-quote-automation</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=what-is-ai-quote-automation</guid>
       <pubDate>Thu, 06 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -88,8 +88,8 @@
 
     <item>
       <title>How Much Does Custom AI Cost? Pricing Guide for B2B Companies</title>
-      <link>https://41labs.ai/post.html?slug=how-much-does-custom-ai-cost</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=how-much-does-custom-ai-cost</guid>
+      <link>https://41labs.ai/post?slug=how-much-does-custom-ai-cost</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=how-much-does-custom-ai-cost</guid>
       <pubDate>Wed, 05 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -98,8 +98,8 @@
 
     <item>
       <title>Custom AI vs ChatGPT for Business: When to Use Each</title>
-      <link>https://41labs.ai/post.html?slug=custom-ai-vs-chatgpt-for-business</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=custom-ai-vs-chatgpt-for-business</guid>
+      <link>https://41labs.ai/post?slug=custom-ai-vs-chatgpt-for-business</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=custom-ai-vs-chatgpt-for-business</guid>
       <pubDate>Tue, 04 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -108,8 +108,8 @@
 
     <item>
       <title>AI Automation in Southeast Asia: 2026 Trends and Opportunities</title>
-      <link>https://41labs.ai/post.html?slug=ai-automation-southeast-asia-2026-trends</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=ai-automation-southeast-asia-2026-trends</guid>
+      <link>https://41labs.ai/post?slug=ai-automation-southeast-asia-2026-trends</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-automation-southeast-asia-2026-trends</guid>
       <pubDate>Tue, 28 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -118,8 +118,8 @@
 
     <item>
       <title>How to Choose an AI Vendor: A Practical Guide for Business Leaders</title>
-      <link>https://41labs.ai/post.html?slug=how-to-choose-ai-vendor-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=how-to-choose-ai-vendor-guide</guid>
+      <link>https://41labs.ai/post?slug=how-to-choose-ai-vendor-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=how-to-choose-ai-vendor-guide</guid>
       <pubDate>Sun, 26 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -128,8 +128,8 @@
 
     <item>
       <title>The ROI of AI Automation: Real Numbers from Real Projects</title>
-      <link>https://41labs.ai/post.html?slug=roi-of-ai-automation-real-numbers</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=roi-of-ai-automation-real-numbers</guid>
+      <link>https://41labs.ai/post?slug=roi-of-ai-automation-real-numbers</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=roi-of-ai-automation-real-numbers</guid>
       <pubDate>Fri, 24 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Case Studies</category>
@@ -138,8 +138,8 @@
 
     <item>
       <title>Why Generic AI Tools Fail Complex Businesses</title>
-      <link>https://41labs.ai/post.html?slug=why-generic-ai-fails-complex-businesses</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=why-generic-ai-fails-complex-businesses</guid>
+      <link>https://41labs.ai/post?slug=why-generic-ai-fails-complex-businesses</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=why-generic-ai-fails-complex-businesses</guid>
       <pubDate>Wed, 22 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>AI Systems</category>
@@ -148,8 +148,8 @@
 
     <item>
       <title>From Hours to Minutes: Automating Quote Generation with AI</title>
-      <link>https://41labs.ai/post.html?slug=from-hours-to-minutes-quote-generation</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=from-hours-to-minutes-quote-generation</guid>
+      <link>https://41labs.ai/post?slug=from-hours-to-minutes-quote-generation</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=from-hours-to-minutes-quote-generation</guid>
       <pubDate>Mon, 20 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Case Studies</category>
@@ -158,8 +158,8 @@
 
     <item>
       <title>Is Your Business Ready for AI? A Practical Checklist</title>
-      <link>https://41labs.ai/post.html?slug=ai-readiness-checklist-for-operations</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=ai-readiness-checklist-for-operations</guid>
+      <link>https://41labs.ai/post?slug=ai-readiness-checklist-for-operations</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-readiness-checklist-for-operations</guid>
       <pubDate>Wed, 15 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
@@ -168,8 +168,8 @@
 
     <item>
       <title>5 Signs Your Business Needs AI Automation (Not Just Better Software)</title>
-      <link>https://41labs.ai/post.html?slug=5-signs-business-needs-ai-automation</link>
-      <guid isPermaLink="true">https://41labs.ai/post.html?slug=5-signs-business-needs-ai-automation</guid>
+      <link>https://41labs.ai/post?slug=5-signs-business-needs-ai-automation</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=5-signs-business-needs-ai-automation</guid>
       <pubDate>Fri, 10 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
