@@ -100,6 +100,62 @@
     }
     </script>
 
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://41labs.ai/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://41labs.ai/"},
+            {"@type": "ListItem", "position": 3, "name": "Quote Automation", "item": "https://41labs.ai/services/quote-automation"}
+        ]
+    }
+    </script>
+
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How AI Quote Automation Works",
+        "description": "Learn how 41 Labs implements AI-powered quote automation that reduces quoting time from hours to minutes.",
+        "totalTime": "PT8W",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Discovery & Data Mapping",
+                "text": "We analyze your existing quoting process, identify data sources (CRM, ERP, product catalogs, pricing rules), and map the complete quote workflow. This typically takes 1-2 weeks."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "AI System Design",
+                "text": "We design the AI architecture to connect all your data sources, define pricing logic, and create the quote generation pipeline. The system is designed to handle your specific product complexity and pricing rules."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Development & Training",
+                "text": "We build and train the AI system using your historical quotes, product data, and pricing rules. The system learns your specific patterns, exceptions, and business logic. This phase takes 3-5 weeks."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Testing & Validation",
+                "text": "We test the system against real-world scenarios, comparing AI-generated quotes with human-generated ones. We validate accuracy, edge cases, and integration with your existing tools."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Deployment & Team Training",
+                "text": "We deploy the system into production, train your team, and monitor performance. Most teams see 97% time reduction in quote generation from day one."
+            }
+        ]
+    }
+    </script>
+
     <link rel="icon" type="image/png" sizes="32x32" href="../logo-icon.png">
     <link rel="apple-touch-icon" href="../logo-icon.png">
 

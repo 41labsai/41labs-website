@@ -108,6 +108,62 @@
     }
     </script>
 
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://41labs.ai/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://41labs.ai/"},
+            {"@type": "ListItem", "position": 3, "name": "Document Processing", "item": "https://41labs.ai/services/document-processing"}
+        ]
+    }
+    </script>
+
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How AI Document Processing Works",
+        "description": "Learn how 41 Labs implements AI-powered document processing that automates data extraction from PDFs, contracts, and forms.",
+        "totalTime": "PT10W",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Document Analysis & Classification",
+                "text": "We analyze your document types (invoices, contracts, forms, customs declarations) and classify them by structure, complexity, and extraction requirements. This takes 1-2 weeks."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "AI Model Configuration",
+                "text": "We configure AI models for each document type, defining extraction fields, validation rules, and accuracy thresholds. Models are trained on your specific document formats and terminology."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Integration Setup",
+                "text": "We connect the document processing system to your existing workflow — ERP, CRM, databases, and filing systems. Documents are automatically routed and processed without manual intervention."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Training & Accuracy Optimization",
+                "text": "We train the system on your historical documents, achieving 95-99% extraction accuracy. The system continuously learns from corrections, improving accuracy over time."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Production Deployment",
+                "text": "We deploy the system into production with monitoring dashboards, error flagging for human review, and automated quality checks. Processing time drops from hours to minutes."
+            }
+        ]
+    }
+    </script>
+
     <link rel="icon" type="image/png" sizes="32x32" href="../logo-icon.png">
     <link rel="apple-touch-icon" href="../logo-icon.png">
 
