@@ -1,6 +1,86 @@
 {
   "posts": [
     {
+      "slug": "psg-grant-ai-automation-singapore",
+      "title": "PSG Grant for AI Automation: How Singapore SMEs Get 50% Funding",
+      "date": "2026-02-18",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "Singapore SMEs can get up to 50% funding for AI automation through the Productivity Solutions Grant (PSG). Here's how the grant works, what qualifies, and how to apply successfully.",
+      "readTime": "7 min read",
+      "image": ""
+    },
+    {
+      "slug": "what-is-agentic-ai-business-guide",
+      "title": "What is Agentic AI? A Business Leader's Guide (2026)",
+      "date": "2026-02-17",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "Agentic AI represents the next evolution beyond chatbots — AI that autonomously plans, decides, and acts. Here's what business leaders need to know about deploying AI agents in 2026.",
+      "readTime": "8 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-automation-cost-singapore-pricing-guide",
+      "title": "AI Automation Cost in Singapore: Complete Pricing Guide (2026)",
+      "date": "2026-02-16",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "How much does AI automation cost in Singapore? From S$10K entry-level projects to S$150K+ enterprise systems, here's a complete breakdown of AI pricing in the Singapore market.",
+      "readTime": "7 min read",
+      "image": ""
+    },
+    {
+      "slug": "custom-ai-vs-off-the-shelf-solutions",
+      "title": "Custom AI vs Off-the-Shelf Solutions: Which Saves More Money?",
+      "date": "2026-02-15",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "Off-the-shelf AI is cheaper upfront but custom AI delivers 2-3x stronger ROI. Here's a head-to-head comparison to help you decide which approach saves more money long term.",
+      "readTime": "6 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-freight-forwarding-quote-automation",
+      "title": "How AI Automates Freight Forwarding Quotes (85% Faster)",
+      "date": "2026-02-14",
+      "author": "Alexander Lee",
+      "category": "case-studies",
+      "excerpt": "Freight forwarders spend 2-4 hours per RFQ manually. AI automation cuts that by 85%, enabling teams to handle 4x more quotes with fewer errors. Here's how it works.",
+      "readTime": "6 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-claims-processing-singapore-insurance",
+      "title": "AI Claims Processing: A Guide for Singapore Insurers",
+      "date": "2026-02-13",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "AI is transforming insurance claims processing — reducing turnaround from days to hours with 70% faster processing and 85% less manual review. Here's how Singapore insurers can implement it.",
+      "readTime": "7 min read",
+      "image": ""
+    },
+    {
+      "slug": "rpa-vs-ai-automation-difference",
+      "title": "RPA vs AI Automation: What's the Difference and Which Do You Need?",
+      "date": "2026-02-12",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "RPA follows scripts. AI learns patterns. Here's a clear comparison of Robotic Process Automation vs AI automation — when to use each, and when to combine them.",
+      "readTime": "6 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-pdpa-compliance-singapore",
+      "title": "AI and PDPA Compliance in Singapore: What Businesses Need to Know",
+      "date": "2026-02-11",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "Deploying AI in Singapore requires PDPA compliance. Here's what businesses need to know about data protection obligations, the PDPC's AI guidelines, and how to build compliant AI systems.",
+      "readTime": "6 min read",
+      "image": ""
+    },
+    {
       "slug": "when-should-business-invest-in-ai",
       "title": "When Should a Business Invest in AI Automation? 7 Signs You're Ready",
       "date": "2026-02-07",

@@ -8,13 +8,93 @@
     <link>https://41labs.ai/blog</link>
     <description>Practical insights on AI systems, automation, and operational efficiency for B2B businesses in Southeast Asia.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Feb 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 18 Feb 2026 00:00:00 +0800</lastBuildDate>
     <atom:link href="https://41labs.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://41labs.ai/logo-full.png</url>
       <title>41 Labs Blog</title>
       <link>https://41labs.ai</link>
     </image>
+
+    <item>
+      <title>PSG Grant for AI Automation in Singapore: Complete 2026 Guide</title>
+      <link>https://41labs.ai/post?slug=psg-grant-ai-automation-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=psg-grant-ai-automation-singapore</guid>
+      <pubDate>Wed, 18 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Everything Singapore businesses need to know about using the Productivity Solutions Grant (PSG) to fund AI automation projects in 2026 — eligibility, application process, and approved solutions.</description>
+    </item>
+
+    <item>
+      <title>What Is Agentic AI? A Practical Business Guide</title>
+      <link>https://41labs.ai/post?slug=what-is-agentic-ai-business-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=what-is-agentic-ai-business-guide</guid>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Agentic AI systems can plan, reason, and execute multi-step tasks autonomously. Here's what business leaders need to know about this emerging technology and how it differs from traditional AI.</description>
+    </item>
+
+    <item>
+      <title>AI Automation Cost in Singapore: 2026 Pricing Guide</title>
+      <link>https://41labs.ai/post?slug=ai-automation-cost-singapore-pricing-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-automation-cost-singapore-pricing-guide</guid>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>A detailed breakdown of AI automation costs in Singapore for 2026 — from simple chatbots to complex enterprise systems, with real pricing data and budget planning tips.</description>
+    </item>
+
+    <item>
+      <title>Custom AI vs Off-the-Shelf Solutions: How to Choose</title>
+      <link>https://41labs.ai/post?slug=custom-ai-vs-off-the-shelf-solutions</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=custom-ai-vs-off-the-shelf-solutions</guid>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Custom-built AI delivers better results for complex workflows, but off-the-shelf tools work fine for standard tasks. Here's a framework for deciding which approach fits your business.</description>
+    </item>
+
+    <item>
+      <title>AI for Freight Forwarding: Automating Quote Generation</title>
+      <link>https://41labs.ai/post?slug=ai-freight-forwarding-quote-automation</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-freight-forwarding-quote-automation</guid>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Case Studies</category>
+      <description>How AI is transforming freight forwarding operations by automating quote generation, customs documentation, and rate calculations — reducing turnaround from hours to minutes.</description>
+    </item>
+
+    <item>
+      <title>AI Claims Processing for Singapore Insurance Companies</title>
+      <link>https://41labs.ai/post?slug=ai-claims-processing-singapore-insurance</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-claims-processing-singapore-insurance</guid>
+      <pubDate>Fri, 13 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Case Studies</category>
+      <description>How AI-powered claims processing is helping Singapore insurers reduce processing time by 80% while improving accuracy and compliance with MAS regulations.</description>
+    </item>
+
+    <item>
+      <title>RPA vs AI Automation: What's the Difference and Which Do You Need?</title>
+      <link>https://41labs.ai/post?slug=rpa-vs-ai-automation-difference</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=rpa-vs-ai-automation-difference</guid>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>RPA follows rules; AI makes decisions. Understanding the difference is critical for choosing the right automation approach. Here's a clear comparison with real-world examples.</description>
+    </item>
+
+    <item>
+      <title>AI and PDPA Compliance in Singapore: What Businesses Need to Know</title>
+      <link>https://41labs.ai/post?slug=ai-pdpa-compliance-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-pdpa-compliance-singapore</guid>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 +0800</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Deploying AI while staying compliant with Singapore's PDPA requires careful planning. Here's what businesses need to know about data protection, consent, and AI governance.</description>
+    </item>
 
     <item>
       <title>When Should a Business Invest in AI Automation? 7 Signs You're Ready</title>
