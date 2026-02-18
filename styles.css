@@ -5107,6 +5107,224 @@ a {
     }
 }
 
+/* ===================================
+   PSG GRANT BANNER (Homepage)
+   =================================== */
+.psg-banner {
+    padding: 20px 0;
+}
+
+.psg-banner .container {
+    background: linear-gradient(135deg, #0a2e1a 0%, #1a1a1a 100%);
+    border-radius: var(--border-radius);
+    padding: 48px 60px;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.psg-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.psg-text h3 {
+    color: var(--white);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.psg-text p {
+    color: var(--text-light);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.psg-text p strong {
+    color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .psg-banner .container {
+        padding: 32px 24px;
+    }
+
+    .psg-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+    }
+}
+
+/* ===================================
+   LOCATION GRANT SECTION
+   =================================== */
+.location-grant {
+    padding: 20px 0;
+}
+
+.grant-box {
+    background: linear-gradient(135deg, #0a2e1a 0%, #1a1a1a 100%);
+    border-radius: var(--border-radius);
+    padding: 60px;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    text-align: center;
+}
+
+.grant-box h2 {
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.grant-box > p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.grant-box > p strong {
+    color: var(--accent);
+}
+
+.grant-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.grant-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-sm);
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.grant-item h3 {
+    color: var(--accent);
+    font-size: 1rem;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.grant-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.grant-item ul li {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.grant-item ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.grant-box .btn-primary {
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .grant-box {
+        padding: 40px 24px;
+    }
+
+    .grant-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===================================
+   LOCATION MARKET DATA SECTION
+   =================================== */
+.location-market {
+    padding: 20px 0;
+}
+
+.location-market .container {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 60px;
+    box-shadow: var(--shadow);
+}
+
+.market-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.market-stats .stat-item {
+    text-align: center;
+    padding: 28px 20px;
+    background: #f8f8f8;
+    border-radius: var(--border-radius-sm);
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.market-stats .stat-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(74, 222, 128, 0.12);
+    border-color: rgba(74, 222, 128, 0.3);
+}
+
+.market-stats .stat-number {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.market-stats .stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+@media (max-width: 968px) {
+    .market-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .location-market .container {
+        padding: 40px 24px;
+        border-radius: var(--border-radius-sm);
+    }
+
+    .market-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .market-stats .stat-number {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .market-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ======================
    FORCE LOGO SIZE - NUCLEAR OVERRIDE
    ====================== */
