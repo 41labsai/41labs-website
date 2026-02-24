@@ -7,6 +7,15 @@
 <meta name="description" content="Get a free AI readiness audit for your business in 60 seconds. Powered by the 4+1 Method from 41 Labs.">
 <meta property="og:title" content="Free AI Audit — 41 Labs">
 <meta property="og:description" content="Get a personalized AI roadmap for your business in 60 seconds.">
+<meta property="og:image" content="https://41labs.ai/og-audit.png">
+<meta property="og:url" content="https://41labs.ai/audit">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free AI Audit — 41 Labs">
+<meta name="twitter:description" content="Get a personalized AI roadmap for your business in 60 seconds.">
+<meta name="twitter:image" content="https://41labs.ai/og-audit.png">
+<link rel="icon" href="https://41labs.ai/favicon.ico">
+<link rel="canonical" href="https://41labs.ai/audit">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -886,8 +895,8 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="logo">41 LABS</a>
-  <a href="/" class="nav-link">Back to 41labs.ai</a>
+  <a href="https://41labs.ai" class="logo">41 LABS</a>
+  <a href="https://41labs.ai" class="nav-link">Back to 41labs.ai</a>
 </nav>
 
 <!-- PAGE CONTENT -->
@@ -1602,7 +1611,7 @@ function renderLevel1(audit) {
   // ---- 5f: Level 2 CTA Card ----
   var ctaCard = el('div', { className: 'result-card result-card--premium', style: { textAlign: 'center', padding: '36px 28px' } });
   ctaCard.appendChild(textEl('div', 'Deep Dive Available', { style: { fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--green)', marginBottom: '12px' } }));
-  ctaCard.appendChild(textEl('h3', 'Want the full strategy brief?', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '10px' } }));
+  ctaCard.appendChild(textEl('h2', 'Want the full strategy brief?', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '10px' } }));
   ctaCard.appendChild(textEl('p', 'Unlock competitive intelligence, 90-day roadmap, priority matrix, and budget allocation \u2014 personalized to your business.', { style: { fontSize: '0.9rem', color: 'var(--text-dim)', lineHeight: '1.6', marginBottom: '24px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto' } }));
 
   var ctaBtn = el('button', {
@@ -1630,7 +1639,7 @@ function showLevel2Form() {
   var card = el('div', { className: 'form-card', style: { borderColor: 'rgba(74,222,128,0.15)' } });
 
   card.appendChild(textEl('div', 'Deep Dive Strategy Brief', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--green)', marginBottom: '6px' } }));
-  card.appendChild(textEl('h3', 'Tell us more to personalize your strategy', { style: { fontSize: '1.15rem', fontWeight: '800', color: '#fff', marginBottom: '20px' } }));
+  card.appendChild(textEl('h2', 'Tell us more to personalize your strategy', { style: { fontSize: '1.15rem', fontWeight: '800', color: '#fff', marginBottom: '20px' } }));
 
   // Phone
   var phoneRow = el('div', { className: 'form-row' });
@@ -2106,7 +2115,7 @@ function renderLevel2(deepAudit) {
 
   // ---- 8h: Final CTA ----
   var finalCta = el('div', { className: 'final-cta' });
-  finalCta.appendChild(textEl('h3', 'Ready to implement?', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '6px' } }));
+  finalCta.appendChild(textEl('h2', 'Ready to implement?', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '6px' } }));
   finalCta.appendChild(textEl('p', "Let's build this together.", { style: { fontSize: '1rem', color: 'var(--text-dim)', marginBottom: '24px' } }));
 
   var waLink = el('a', {
