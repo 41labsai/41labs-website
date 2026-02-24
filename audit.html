@@ -354,18 +354,11 @@
 
   .step-spinner {
     display: none;
-    width: 14px; height: 14px;
-    border: 2px solid rgba(74,222,128,0.2);
-    border-top-color: var(--green);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
     margin-left: auto;
     flex-shrink: 0;
   }
 
-  .loading-step.active .step-spinner { display: block; }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-step.active .step-spinner { display: none; }
 
   .step-check {
     display: none;
@@ -375,6 +368,35 @@
     flex-shrink: 0;
   }
   .loading-step.done .step-check { display: block; }
+
+  .loading-progress {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green), #22c55e);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+  .progress-pct {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--green);
+    min-width: 38px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
 
   /* ===== RESULTS SECTION ===== */
   .results-section {
@@ -953,6 +975,10 @@
     <div class="loading-container" id="l1Loading">
       <div class="loading-title">Analyzing your business...</div>
       <div class="loading-steps" id="l1Steps"></div>
+      <div class="loading-progress">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="l1ProgressBar"></div></div>
+        <div class="progress-pct" id="l1ProgressPct">0%</div>
+      </div>
     </div>
 
     <!-- LEVEL 1 RESULTS -->
@@ -965,6 +991,10 @@
     <div class="loading-container" id="l2Loading">
       <div class="loading-title">Building your strategy brief...</div>
       <div class="loading-steps" id="l2Steps"></div>
+      <div class="loading-progress">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="l2ProgressBar"></div></div>
+        <div class="progress-pct" id="l2ProgressPct">0%</div>
+      </div>
     </div>
 
     <!-- LEVEL 2 RESULTS -->
@@ -1081,9 +1111,34 @@ function buildLoadingSteps(containerId, stepTexts) {
   return steps;
 }
 
-function animateSteps(steps, intervalMs) {
+function animateSteps(steps, intervalMs, progressBarId, progressPctId) {
   var current = 0;
   var timers = [];
+  var totalSteps = steps.length;
+  var pctEl = document.getElementById(progressPctId);
+  var barEl = document.getElementById(progressBarId);
+  var currentPct = 0;
+  var targetPct = 0;
+  var pctTimer = null;
+
+  function updatePctDisplay(val) {
+    currentPct = val;
+    if (pctEl) pctEl.textContent = Math.round(val) + '%';
+    if (barEl) barEl.style.width = val + '%';
+  }
+
+  function smoothCount(target) {
+    targetPct = target;
+    if (pctTimer) cancelAnimationFrame(pctTimer);
+    function tick() {
+      if (currentPct < targetPct) {
+        var step = Math.max(0.3, (targetPct - currentPct) * 0.06);
+        updatePctDisplay(Math.min(currentPct + step, targetPct));
+        pctTimer = requestAnimationFrame(tick);
+      }
+    }
+    tick();
+  }
 
   function advance() {
     if (current > 0 && current - 1 < steps.length) {
@@ -1093,6 +1148,9 @@ function animateSteps(steps, intervalMs) {
     if (current < steps.length) {
       steps[current].classList.add('active');
       current++;
+      // Each completed step goes up to (current / totalSteps * 90)%
+      // Reserve last 10% for actual API completion
+      smoothCount(Math.min((current / totalSteps) * 90, 90));
     }
   }
 
@@ -1107,7 +1165,9 @@ function animateSteps(steps, intervalMs) {
     timers: timers,
     finishAll: function() {
       timers.forEach(clearTimeout);
+      if (pctTimer) cancelAnimationFrame(pctTimer);
       while (current <= steps.length) advance();
+      updatePctDisplay(100);
     }
   };
 }
@@ -1150,7 +1210,7 @@ async function runAudit() {
     'Generating your strategy brief'
   ];
   var steps = buildLoadingSteps('l1Steps', stepTexts);
-  var anim = animateSteps(steps, 2500);
+  var anim = animateSteps(steps, 2500, 'l1ProgressBar', 'l1ProgressPct');
 
   try {
     var res = await fetch('https://teaser-deploy.vercel.app/api/audit', {
@@ -1769,7 +1829,7 @@ async function runDeepDive() {
     'Finalizing your strategy brief'
   ];
   var steps = buildLoadingSteps('l2Steps', stepTexts);
-  var anim = animateSteps(steps, 3000);
+  var anim = animateSteps(steps, 3000, 'l2ProgressBar', 'l2ProgressPct');
 
   try {
     var res = await fetch('https://teaser-deploy.vercel.app/api/audit-deep', {
