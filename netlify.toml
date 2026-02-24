@@ -14,6 +14,19 @@
   status = 301
   force = true
 
+# AI Audit tool (proxied to Vercel serverless)
+[[redirects]]
+  from = "/audit"
+  to = "https://teaser-deploy.vercel.app/audit.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/audit"
+  to = "https://teaser-deploy.vercel.app/api/audit"
+  status = 200
+  force = true
+
 # Redirect for clean URLs (optional)
 [[redirects]]
   from = "/blog/*"

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Audit — 41 Labs</title>
+<meta name="description" content="Get a free AI readiness audit for your business in 60 seconds. Powered by the 4+1 Method from 41 Labs.">
+<meta property="og:title" content="Free AI Audit — 41 Labs">
+<meta property="og:description" content="Get a personalized AI roadmap for your business in 60 seconds.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #050505;
+    color: #f0f0f0;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5,5,5,0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .logo {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #4ade80;
+    text-decoration: none;
+  }
+
+  .nav-link {
+    font-size: 0.78rem;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: #4ade80; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 24px 48px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #4ade80;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-size: clamp(2rem, 7vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+  }
+
+  .subtitle {
+    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+    color: #888;
+    line-height: 1.6;
+    margin-top: 16px;
+    max-width: 480px;
+  }
+
+  .green { color: #4ade80; }
+
+  /* ===== FORM ===== */
+  .form-card {
+    margin-top: 36px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 32px 28px;
+  }
+
+  .form-row {
+    margin-bottom: 18px;
+  }
+
+  .form-row label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .form-row input, .form-row textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  .form-row input:focus, .form-row textarea:focus {
+    border-color: rgba(74,222,128,0.4);
+    box-shadow: 0 0 0 3px rgba(74,222,128,0.08);
+  }
+
+  .form-row input::placeholder, .form-row textarea::placeholder {
+    color: #444;
+  }
+
+  .form-row textarea {
+    resize: vertical;
+    min-height: 72px;
+  }
+
+  .form-row-half {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .btn-audit {
+    width: 100%;
+    padding: 16px;
+    background: #4ade80;
+    color: #050505;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: -0.3px;
+    margin-top: 4px;
+  }
+
+  .btn-audit:hover { background: #22c55e; }
+  .btn-audit:active { transform: scale(0.98); }
+  .btn-audit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .trust-bar {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    font-size: 0.72rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .trust-icon { color: #4ade80; font-size: 0.85rem; }
+
+  /* ===== LOADING STATE ===== */
+  .loading-container {
+    display: none;
+    margin-top: 36px;
+    padding: 40px 28px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+  }
+
+  .loading-container.active { display: block; }
+
+  .loading-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+
+  .loading-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .loading-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    opacity: 0.3;
+    transition: opacity 0.5s;
+  }
+
+  .loading-step.active { opacity: 1; }
+  .loading-step.done { opacity: 0.6; }
+
+  .step-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    color: #666;
+    transition: all 0.4s;
+  }
+
+  .loading-step.active .step-icon {
+    background: rgba(74,222,128,0.1);
+    border-color: rgba(74,222,128,0.3);
+    color: #4ade80;
+  }
+
+  .loading-step.done .step-icon {
+    background: rgba(74,222,128,0.15);
+    border-color: rgba(74,222,128,0.2);
+    color: #4ade80;
+  }
+
+  .step-text {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #888;
+  }
+
+  .loading-step.active .step-text { color: #fff; }
+
+  .step-spinner {
+    display: none;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(74,222,128,0.2);
+    border-top-color: #4ade80;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: auto;
+  }
+
+  .loading-step.active .step-spinner { display: block; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .step-check {
+    display: none;
+    margin-left: auto;
+    color: #4ade80;
+    font-size: 0.85rem;
+  }
+  .loading-step.done .step-check { display: block; }
+
+  /* ===== RESULTS ===== */
+  #resultsState {
+    display: none;
+    margin-top: 36px;
+    animation: fadeUp 0.6s ease;
+  }
+
+  #resultsState.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== ERROR STATE ===== */
+  .error-msg {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.2);
+    border-radius: 12px;
+    color: #f87171;
+    font-size: 0.85rem;
+  }
+
+  .error-msg.active { display: block; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 500px) {
+    .form-row-half { grid-template-columns: 1fr; }
+    .hero { padding: 72px 20px 40px; }
+    .form-card, .loading-container { padding: 24px 20px; }
+  }
+
+  @media (min-width: 700px) {
+    .hero { padding: 96px 40px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">41 LABS</a>
+  <a href="/" class="nav-link">Back to 41labs.ai</a>
+</nav>
+
+<!-- HERO + FORM -->
+<div class="hero">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Free AI Readiness Audit
+  </div>
+
+  <h1>Find out where <span class="green">AI</span> can<br>transform your business.</h1>
+
+  <p class="subtitle">Enter your website and we'll analyze your business using the <strong style="color:#fff;">4+1 Method</strong> — the same framework used by 41 Labs to identify AI opportunities across 50+ industries.</p>
+
+  <!-- FORM -->
+  <div class="form-card" id="formCard">
+    <div class="form-row">
+      <label for="url">Website URL</label>
+      <input type="url" id="url" placeholder="https://yourcompany.com" required>
+    </div>
+
+    <div class="form-row-half form-row">
+      <div>
+        <label for="company">Company Name</label>
+        <input type="text" id="company" placeholder="Acme Corp">
+      </div>
+      <div>
+        <label for="email">Your Email</label>
+        <input type="email" id="email" placeholder="you@company.com" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label for="description">What does your company do? <span style="color:#555;font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+      <textarea id="description" placeholder="Brief description of your products/services, industry, team size..."></textarea>
+    </div>
+
+    <button class="btn-audit" id="btnAudit" onclick="runAudit()">
+      Get Your Free AI Audit
+    </button>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <div class="trust-bar">
+      <div class="trust-item"><span class="trust-icon">&#9889;</span> 60-second analysis</div>
+      <div class="trust-item"><span class="trust-icon">&#128274;</span> We don't store your data</div>
+      <div class="trust-item"><span class="trust-icon">&#9733;</span> Powered by Claude AI</div>
+    </div>
+  </div>
+
+  <!-- LOADING STATE -->
+  <div class="loading-container" id="loadingState">
+    <div class="loading-title">Analyzing your business...</div>
+    <div class="loading-steps">
+      <div class="loading-step" id="step1">
+        <div class="step-icon">1</div>
+        <div class="step-text">Scanning your website</div>
+        <div class="step-spinner"></div>
+        <div class="step-check">&#10003;</div>
+      </div>
+      <div class="loading-step" id="step2">
+        <div class="step-icon">2</div>
+        <div class="step-text">Identifying your industry & services</div>
+        <div class="step-spinner"></div>
+        <div class="step-check">&#10003;</div>
+      </div>
+      <div class="loading-step" id="step3">
+        <div class="step-icon">3</div>
+        <div class="step-text">Mapping AI opportunities (4+1 Method)</div>
+        <div class="step-spinner"></div>
+        <div class="step-check">&#10003;</div>
+      </div>
+      <div class="loading-step" id="step4">
+        <div class="step-icon">4</div>
+        <div class="step-text">Generating your personalized report</div>
+        <div class="step-spinner"></div>
+        <div class="step-check">&#10003;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS — built via safe DOM methods -->
+  <div id="resultsState"></div>
+</div>
+
+<script>
+  // HTML entity escaping for safe text rendering
+  function esc(str) {
+    if (!str) return '';
+    const d = document.createElement('div');
+    d.textContent = String(str);
+    return d.innerHTML;
+  }
+
+  async function runAudit() {
+    const url = document.getElementById('url').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const company = document.getElementById('company').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const errorEl = document.getElementById('errorMsg');
+    const btn = document.getElementById('btnAudit');
+
+    errorEl.classList.remove('active');
+
+    if (!url) {
+      errorEl.textContent = 'Please enter your website URL.';
+      errorEl.classList.add('active');
+      return;
+    }
+    if (!email || !email.includes('@')) {
+      errorEl.textContent = 'Please enter a valid email address.';
+      errorEl.classList.add('active');
+      return;
+    }
+
+    document.getElementById('formCard').style.display = 'none';
+    const loading = document.getElementById('loadingState');
+    loading.classList.add('active');
+    btn.disabled = true;
+
+    const steps = ['step1', 'step2', 'step3', 'step4'];
+    let currentStep = 0;
+
+    function advanceStep() {
+      if (currentStep > 0) {
+        document.getElementById(steps[currentStep - 1]).classList.remove('active');
+        document.getElementById(steps[currentStep - 1]).classList.add('done');
+      }
+      if (currentStep < steps.length) {
+        document.getElementById(steps[currentStep]).classList.add('active');
+        currentStep++;
+      }
+    }
+
+    advanceStep();
+    const stepTimers = [
+      setTimeout(() => advanceStep(), 2000),
+      setTimeout(() => advanceStep(), 5000),
+      setTimeout(() => advanceStep(), 8000),
+    ];
+
+    try {
+      const res = await fetch('https://teaser-deploy.vercel.app/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: url.startsWith('http') ? url : 'https://' + url,
+          email,
+          company,
+          description
+        }),
+      });
+
+      stepTimers.forEach(clearTimeout);
+      for (let i = currentStep; i <= steps.length; i++) advanceStep();
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      const data = await res.json();
+      await new Promise(r => setTimeout(r, 800));
+
+      loading.classList.remove('active');
+      renderResults(data.audit);
+
+    } catch (err) {
+      stepTimers.forEach(clearTimeout);
+      loading.classList.remove('active');
+      document.getElementById('formCard').style.display = 'block';
+      btn.disabled = false;
+      errorEl.textContent = err.message || 'Failed to generate audit. Please try again.';
+      errorEl.classList.add('active');
+    }
+  }
+
+  function renderResults(audit) {
+    const container = document.getElementById('resultsState');
+    // Clear previous content
+    while (container.firstChild) container.removeChild(container.firstChild);
+
+    const score = Math.min(10, Math.max(1, parseInt(audit.ai_readiness_score) || 5));
+    const ringOffset = 314 - (314 * score / 10);
+
+    // Build DOM safely
+    function el(tag, attrs, children) {
+      const node = document.createElement(tag);
+      if (attrs) {
+        for (const [k, v] of Object.entries(attrs)) {
+          if (k === 'style' && typeof v === 'object') {
+            Object.assign(node.style, v);
+          } else if (k === 'className') {
+            node.className = v;
+          } else if (k === 'textContent') {
+            node.textContent = v;
+          } else {
+            node.setAttribute(k, v);
+          }
+        }
+      }
+      if (children) {
+        if (typeof children === 'string') {
+          node.textContent = children;
+        } else if (Array.isArray(children)) {
+          children.forEach(c => { if (c) node.appendChild(c); });
+        }
+      }
+      return node;
+    }
+
+    function textEl(tag, text, attrs) {
+      return el(tag, { textContent: text, ...attrs });
+    }
+
+    // Header
+    const header = el('div', { style: { textAlign: 'center', marginBottom: '32px' } }, [
+      textEl('h2', 'Your AI Readiness Report', { style: { fontSize: 'clamp(1.4rem, 5vw, 2rem)', fontWeight: '900', letterSpacing: '-0.5px', color: '#fff' } }),
+      textEl('p', audit.company_summary || '', { style: { marginTop: '12px', fontSize: '0.9rem', color: '#999', lineHeight: '1.5' } }),
+      (() => {
+        const ind = el('div', { style: { fontSize: '0.75rem', color: '#666', marginTop: '4px' } });
+        ind.appendChild(document.createTextNode('Industry: '));
+        ind.appendChild(textEl('span', audit.industry || 'N/A', { style: { color: '#4ade80' } }));
+        return ind;
+      })()
+    ]);
+    container.appendChild(header);
+
+    // Score ring
+    const ringWrap = el('div', { style: { display: 'flex', justifyContent: 'center', margin: '24px 0' } });
+    const ringDiv = el('div', { style: { position: 'relative', width: '120px', height: '120px' } });
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '120');
+    svg.setAttribute('height', '120');
+    svg.setAttribute('viewBox', '0 0 120 120');
+    svg.style.transform = 'rotate(-90deg)';
+
+    const bgCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    bgCircle.setAttribute('cx', '60'); bgCircle.setAttribute('cy', '60'); bgCircle.setAttribute('r', '50');
+    bgCircle.setAttribute('fill', 'none'); bgCircle.setAttribute('stroke', 'rgba(255,255,255,0.06)'); bgCircle.setAttribute('stroke-width', '8');
+    svg.appendChild(bgCircle);
+
+    const fillCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    fillCircle.setAttribute('cx', '60'); fillCircle.setAttribute('cy', '60'); fillCircle.setAttribute('r', '50');
+    fillCircle.setAttribute('fill', 'none'); fillCircle.setAttribute('stroke', '#4ade80'); fillCircle.setAttribute('stroke-width', '8');
+    fillCircle.setAttribute('stroke-linecap', 'round');
+    fillCircle.setAttribute('stroke-dasharray', '314');
+    fillCircle.setAttribute('stroke-dashoffset', '314');
+    fillCircle.style.transition = 'stroke-dashoffset 1.5s ease';
+    svg.appendChild(fillCircle);
+    ringDiv.appendChild(svg);
+
+    const scoreCenter = el('div', { style: { position: 'absolute', inset: '0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' } }, [
+      textEl('div', String(score), { style: { fontSize: '2rem', fontWeight: '900', color: '#4ade80' } }),
+      textEl('div', 'out of 10', { style: { fontSize: '0.6rem', color: '#666', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '2px' } })
+    ]);
+    ringDiv.appendChild(scoreCenter);
+    ringWrap.appendChild(ringDiv);
+    container.appendChild(ringWrap);
+
+    // Framework card builder
+    function makeCard(stepNum, title, content, isPlusOne) {
+      const card = el('div', {
+        style: {
+          background: isPlusOne ? 'rgba(74,222,128,0.04)' : 'rgba(255,255,255,0.02)',
+          border: isPlusOne ? '1px solid rgba(74,222,128,0.15)' : '1px solid rgba(255,255,255,0.06)',
+          borderRadius: '16px',
+          padding: '24px',
+          marginBottom: '16px',
+          animation: 'fadeUp 0.5s ease both'
+        }
+      });
+
+      const hdr = el('div', { style: { display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' } }, [
+        textEl('div', stepNum, {
+          style: {
+            width: '32px', height: '32px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '0.8rem', fontWeight: '800', flexShrink: '0',
+            background: isPlusOne ? 'rgba(74,222,128,0.2)' : 'rgba(74,222,128,0.1)',
+            border: isPlusOne ? '1.5px solid #4ade80' : '1.5px solid rgba(74,222,128,0.25)',
+            color: '#4ade80'
+          }
+        }),
+        textEl('div', title, { style: { fontSize: '1rem', fontWeight: '800', color: '#fff' } })
+      ]);
+      card.appendChild(hdr);
+      card.appendChild(content);
+      return card;
+    }
+
+    function makeBulletList(items) {
+      const ul = el('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' } });
+      items.forEach(text => {
+        const li = el('div', { style: { display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#ccc', lineHeight: '1.5' } }, [
+          el('span', { style: { flexShrink: '0', width: '6px', height: '6px', borderRadius: '50%', background: '#4ade80', marginTop: '7px' } }),
+          textEl('span', text)
+        ]);
+        ul.appendChild(li);
+      });
+      return ul;
+    }
+
+    // 1. AUDIT
+    const auditContent = el('div');
+    if (audit.audit) {
+      auditContent.appendChild(textEl('p', audit.audit.current_state || '', { style: { fontSize: '0.88rem', color: '#999', lineHeight: '1.6' } }));
+      if (audit.audit.manual_processes && audit.audit.manual_processes.length) {
+        auditContent.appendChild(textEl('p', 'Manual processes we identified:', { style: { marginTop: '12px', fontWeight: '700', color: '#fff', fontSize: '0.82rem' } }));
+        auditContent.appendChild(makeBulletList(audit.audit.manual_processes));
+      }
+      if (audit.audit.quick_wins && audit.audit.quick_wins.length) {
+        auditContent.appendChild(textEl('p', 'Quick wins:', { style: { marginTop: '12px', fontWeight: '700', color: '#4ade80', fontSize: '0.82rem' } }));
+        auditContent.appendChild(makeBulletList(audit.audit.quick_wins));
+      }
+    }
+    container.appendChild(makeCard('1', 'Audit \u2014 Where You Stand', auditContent));
+
+    // 2. ADOPT
+    const adoptContent = el('div');
+    if (audit.adopt && audit.adopt.tools) {
+      audit.adopt.tools.forEach(t => {
+        const chip = el('div', { style: { display: 'inline-flex', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 14px', margin: '4px', flexDirection: 'column', gap: '4px' } });
+        const nameRow = el('div', { style: { display: 'flex', alignItems: 'center', gap: '8px' } });
+        nameRow.appendChild(textEl('span', t.name, { style: { fontWeight: '700', fontSize: '0.82rem', color: '#fff' } }));
+        const badgeColor = t.impact === 'high' ? 'rgba(74,222,128,0.15)' : 'rgba(250,204,21,0.15)';
+        const badgeText = t.impact === 'high' ? '#4ade80' : '#facc15';
+        nameRow.appendChild(textEl('span', t.impact, { style: { display: 'inline-block', padding: '2px 8px', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px', background: badgeColor, color: badgeText } }));
+        chip.appendChild(nameRow);
+        chip.appendChild(textEl('div', t.use_case, { style: { fontSize: '0.75rem', color: '#888' } }));
+        adoptContent.appendChild(chip);
+      });
+    }
+    container.appendChild(makeCard('2', 'Adopt \u2014 Tools to Use Today', adoptContent));
+
+    // 3. AUTOMATE
+    const autoContent = el('div');
+    if (audit.automate && audit.automate.workflows) {
+      audit.automate.workflows.forEach(w => {
+        const item = el('div', { style: { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '10px', padding: '14px', marginTop: '10px' } });
+        item.appendChild(textEl('div', w.process, { style: { fontWeight: '700', fontSize: '0.88rem', color: '#fff', marginBottom: '4px' } }));
+        const detail = el('div', { style: { fontSize: '0.8rem', color: '#888', lineHeight: '1.5' } });
+        detail.appendChild(document.createTextNode('Now: ' + (w.current || '')));
+        detail.appendChild(document.createElement('br'));
+        detail.appendChild(document.createTextNode('With AI: ' + (w.automated || '')));
+        detail.appendChild(document.createElement('br'));
+        const saves = textEl('span', 'Saves ~' + (w.time_saved || ''), { style: { color: '#4ade80', fontWeight: '600' } });
+        detail.appendChild(saves);
+        item.appendChild(detail);
+        autoContent.appendChild(item);
+      });
+    }
+    container.appendChild(makeCard('3', 'Automate \u2014 Workflows to Streamline', autoContent));
+
+    // 4. AMPLIFY
+    const ampContent = el('div');
+    if (audit.amplify && audit.amplify.opportunities) {
+      audit.amplify.opportunities.forEach(o => {
+        const item = el('div', { style: { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '10px', padding: '14px', marginTop: '10px' } });
+        item.appendChild(textEl('div', o.idea, { style: { fontWeight: '700', fontSize: '0.88rem', color: '#fff', marginBottom: '4px' } }));
+        item.appendChild(textEl('div', o.description, { style: { fontSize: '0.8rem', color: '#888', lineHeight: '1.5' } }));
+        item.appendChild(textEl('div', o.potential, { style: { marginTop: '6px', fontSize: '0.75rem', color: '#4ade80', fontWeight: '600' } }));
+        ampContent.appendChild(item);
+      });
+    }
+    container.appendChild(makeCard('4', 'Amplify \u2014 New Revenue Opportunities', ampContent));
+
+    // +1 START HERE
+    const plusContent = el('div');
+    if (audit.plus_one) {
+      plusContent.appendChild(textEl('p', audit.plus_one.action || '', { style: { fontWeight: '700', color: '#fff', fontSize: '0.95rem' } }));
+      plusContent.appendChild(textEl('p', audit.plus_one.why || '', { style: { marginTop: '8px', fontSize: '0.88rem', color: '#999', lineHeight: '1.6' } }));
+
+      const howBox = el('div', { style: { marginTop: '12px', padding: '14px', background: 'rgba(74,222,128,0.06)', borderRadius: '10px' } }, [
+        textEl('div', 'How to do it', { style: { fontSize: '0.72rem', fontWeight: '700', color: '#4ade80', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' } }),
+        textEl('div', audit.plus_one.how || '', { style: { fontSize: '0.85rem', color: '#ccc', lineHeight: '1.6' } })
+      ]);
+      plusContent.appendChild(howBox);
+
+      if (audit.plus_one.expected_result) {
+        plusContent.appendChild(textEl('p', 'Expected result: ' + audit.plus_one.expected_result, { style: { marginTop: '8px', fontSize: '0.82rem', color: '#4ade80' } }));
+      }
+    }
+    container.appendChild(makeCard('+1', 'Start Here This Week', plusContent, true));
+
+    // CTA
+    const cta = el('div', { style: { textAlign: 'center', marginTop: '32px', padding: '32px 24px', background: 'rgba(74,222,128,0.04)', border: '1px solid rgba(74,222,128,0.12)', borderRadius: '16px' } }, [
+      textEl('h3', 'Want help implementing this?', { style: { fontSize: '1.2rem', fontWeight: '800', color: '#fff', marginBottom: '8px' } }),
+      textEl('p', '41 Labs builds custom AI solutions for businesses. Let\u2019s turn this audit into action.', { style: { fontSize: '0.85rem', color: '#888', marginBottom: '20px' } }),
+      el('a', {
+        href: 'https://wa.me/6580234886?text=' + encodeURIComponent('Hi Alexander, I just took the AI audit on 41labs.ai and I\u2019d love to chat about implementing some of the recommendations.'),
+        style: { display: 'inline-block', padding: '14px 32px', background: '#4ade80', color: '#050505', border: 'none', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '0.95rem', fontWeight: '800', cursor: 'pointer', textDecoration: 'none' }
+      }, 'Chat with Alexander on WhatsApp')
+    ]);
+    container.appendChild(cta);
+
+    // Powered by
+    container.appendChild(textEl('div', 'Powered by the 4+1 Method  \u00b7  41 Labs  \u00b7  41labs.ai', { style: { textAlign: 'center', marginTop: '20px', fontSize: '0.65rem', color: '#444', paddingBottom: '40px' } }));
+
+    container.classList.add('active');
+
+    // Animate score ring
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        fillCircle.setAttribute('stroke-dashoffset', String(ringOffset));
+      }, 100);
+    });
+
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+
+</body>
+</html>
