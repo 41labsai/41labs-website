@@ -1278,7 +1278,7 @@ async function runAudit() {
     'Generating your strategy brief'
   ];
   var steps = buildLoadingSteps('l1Steps', stepTexts);
-  var anim = animateSteps(steps, 2500, 'l1ProgressBar', 'l1ProgressPct', 'l1Subtitle');
+  var anim = animateSteps(steps, 1500, 'l1ProgressBar', 'l1ProgressPct', 'l1Subtitle');
 
   try {
     var res = await fetch('https://teaser-deploy.vercel.app/api/audit', {
