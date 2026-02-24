@@ -9,13 +9,52 @@
 <meta property="og:description" content="Get a personalized AI roadmap for your business in 60 seconds.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #050505;
+    --bg-card: rgba(255,255,255,0.02);
+    --bg-card-hover: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.06);
+    --border-light: rgba(255,255,255,0.08);
+    --border-subtle: rgba(255,255,255,0.04);
+    --text: #f0f0f0;
+    --text-muted: #999;
+    --text-dim: #888;
+    --text-faint: #666;
+    --text-ghost: #555;
+    --text-invisible: #444;
+    --green: #4ade80;
+    --green-hover: #22c55e;
+    --green-bg: rgba(74,222,128,0.08);
+    --green-bg-strong: rgba(74,222,128,0.15);
+    --green-border: rgba(74,222,128,0.2);
+    --green-border-strong: rgba(74,222,128,0.3);
+    --amber: #f59e0b;
+    --amber-bg: rgba(245,158,11,0.1);
+    --amber-border: rgba(245,158,11,0.25);
+    --red: #ef4444;
+    --red-light: #f87171;
+    --red-bg: rgba(239,68,68,0.08);
+    --red-border: rgba(239,68,68,0.2);
+    --blue: #3b82f6;
+    --blue-bg: rgba(59,130,246,0.1);
+    --blue-border: rgba(59,130,246,0.25);
+    --purple: #8b5cf6;
+    --gold: #eab308;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-pill: 100px;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: #050505;
-    color: #f0f0f0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     min-height: 100vh;
   }
@@ -34,24 +73,31 @@
     background: rgba(5,5,5,0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
   .logo {
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 3px;
-    color: #4ade80;
+    color: var(--green);
     text-decoration: none;
   }
 
   .nav-link {
     font-size: 0.78rem;
-    color: #888;
+    color: var(--text-dim);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-link:hover { color: #4ade80; }
+  .nav-link:hover { color: var(--green); }
+
+  /* ===== LAYOUT ===== */
+  .page-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
   /* ===== HERO ===== */
   .hero {
@@ -60,29 +106,28 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 80px 24px 48px;
-    max-width: 640px;
-    margin: 0 auto;
+    padding-top: 80px;
+    padding-bottom: 48px;
   }
 
   .badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(74,222,128,0.08);
-    border: 1px solid rgba(74,222,128,0.2);
-    border-radius: 100px;
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: var(--radius-pill);
     padding: 6px 16px;
     font-size: 0.72rem;
     font-weight: 600;
-    color: #4ade80;
+    color: var(--green);
     margin-bottom: 24px;
     width: fit-content;
   }
 
   .badge-dot {
     width: 6px; height: 6px;
-    background: #4ade80;
+    background: var(--green);
     border-radius: 50%;
     animation: pulse 2s infinite;
   }
@@ -101,21 +146,22 @@
 
   .subtitle {
     font-size: clamp(0.95rem, 3.5vw, 1.1rem);
-    color: #888;
+    color: var(--text-dim);
     line-height: 1.6;
     margin-top: 16px;
-    max-width: 480px;
+    max-width: 540px;
   }
 
-  .green { color: #4ade80; }
+  .green { color: var(--green); }
 
   /* ===== FORM ===== */
   .form-card {
     margin-top: 36px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
     padding: 32px 28px;
+    backdrop-filter: blur(10px);
   }
 
   .form-row {
@@ -126,32 +172,52 @@
     display: block;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #999;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 8px;
   }
 
-  .form-row input, .form-row textarea {
+  .form-row input,
+  .form-row textarea,
+  .form-row select {
     width: 100%;
     padding: 14px 18px;
     background: rgba(255,255,255,0.04);
-    border: 1.5px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-md);
     color: #fff;
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
     transition: border-color 0.2s, box-shadow 0.2s;
     outline: none;
+    -webkit-appearance: none;
+    appearance: none;
   }
 
-  .form-row input:focus, .form-row textarea:focus {
+  .form-row select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%23666'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .form-row select option {
+    background: #1a1a1a;
+    color: #fff;
+  }
+
+  .form-row input:focus,
+  .form-row textarea:focus,
+  .form-row select:focus {
     border-color: rgba(74,222,128,0.4);
     box-shadow: 0 0 0 3px rgba(74,222,128,0.08);
   }
 
-  .form-row input::placeholder, .form-row textarea::placeholder {
-    color: #444;
+  .form-row input::placeholder,
+  .form-row textarea::placeholder {
+    color: var(--text-invisible);
   }
 
   .form-row textarea {
@@ -165,11 +231,11 @@
     gap: 12px;
   }
 
-  .btn-audit {
+  .btn-primary {
     width: 100%;
     padding: 16px;
-    background: #4ade80;
-    color: #050505;
+    background: var(--green);
+    color: var(--bg);
     border: none;
     border-radius: 14px;
     font-family: 'Inter', sans-serif;
@@ -181,9 +247,9 @@
     margin-top: 4px;
   }
 
-  .btn-audit:hover { background: #22c55e; }
-  .btn-audit:active { transform: scale(0.98); }
-  .btn-audit:disabled {
+  .btn-primary:hover { background: var(--green-hover); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled {
     opacity: 0.5;
     cursor: not-allowed;
     transform: none;
@@ -198,22 +264,22 @@
 
   .trust-item {
     font-size: 0.72rem;
-    color: #555;
+    color: var(--text-ghost);
     display: flex;
     align-items: center;
     gap: 6px;
   }
 
-  .trust-icon { color: #4ade80; font-size: 0.85rem; }
+  .trust-icon { color: var(--green); font-size: 0.85rem; }
 
   /* ===== LOADING STATE ===== */
   .loading-container {
     display: none;
     margin-top: 36px;
     padding: 40px 28px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
   }
 
   .loading-container.active { display: block; }
@@ -252,27 +318,27 @@
     font-weight: 800;
     flex-shrink: 0;
     background: rgba(255,255,255,0.04);
-    border: 1.5px solid rgba(255,255,255,0.08);
-    color: #666;
+    border: 1.5px solid var(--border-light);
+    color: var(--text-faint);
     transition: all 0.4s;
   }
 
   .loading-step.active .step-icon {
     background: rgba(74,222,128,0.1);
-    border-color: rgba(74,222,128,0.3);
-    color: #4ade80;
+    border-color: var(--green-border-strong);
+    color: var(--green);
   }
 
   .loading-step.done .step-icon {
-    background: rgba(74,222,128,0.15);
-    border-color: rgba(74,222,128,0.2);
-    color: #4ade80;
+    background: var(--green-bg-strong);
+    border-color: var(--green-border);
+    color: var(--green);
   }
 
   .step-text {
     font-size: 0.88rem;
     font-weight: 600;
-    color: #888;
+    color: var(--text-dim);
   }
 
   .loading-step.active .step-text { color: #fff; }
@@ -281,10 +347,11 @@
     display: none;
     width: 14px; height: 14px;
     border: 2px solid rgba(74,222,128,0.2);
-    border-top-color: #4ade80;
+    border-top-color: var(--green);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     margin-left: auto;
+    flex-shrink: 0;
   }
 
   .loading-step.active .step-spinner { display: block; }
@@ -294,49 +361,525 @@
   .step-check {
     display: none;
     margin-left: auto;
-    color: #4ade80;
+    color: var(--green);
     font-size: 0.85rem;
+    flex-shrink: 0;
   }
   .loading-step.done .step-check { display: block; }
 
-  /* ===== RESULTS ===== */
-  #resultsState {
+  /* ===== RESULTS SECTION ===== */
+  .results-section {
     display: none;
     margin-top: 36px;
     animation: fadeUp 0.6s ease;
   }
 
-  #resultsState.active { display: block; }
+  .results-section.active { display: block; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ===== ERROR STATE ===== */
+  /* ===== RESULT CARDS ===== */
+  .result-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(8px);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .result-card--green {
+    background: rgba(74,222,128,0.04);
+    border-color: rgba(74,222,128,0.15);
+  }
+
+  .result-card--premium {
+    background: linear-gradient(135deg, rgba(74,222,128,0.06), rgba(59,130,246,0.04));
+    border: 1px solid rgba(74,222,128,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-card--premium::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--blue), var(--purple));
+  }
+
+  /* ===== HERO STATS ===== */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    text-align: center;
+  }
+
+  .stat-card--opportunity {
+    border-color: rgba(74,222,128,0.15);
+  }
+
+  .stat-card--warning {
+    border-color: rgba(245,158,11,0.2);
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+
+  .stat-value {
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  /* ===== RADAR CHART ===== */
+  .radar-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 0;
+  }
+
+  /* ===== PERCENTILE BAR ===== */
+  .percentile-track {
+    position: relative;
+    height: 28px;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    margin: 12px 0;
+  }
+
+  .percentile-zone {
+    height: 100%;
+    transition: width 0.3s;
+  }
+
+  .percentile-marker {
+    position: absolute;
+    top: -8px;
+    width: 3px;
+    height: 44px;
+    background: #fff;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: left 1s ease;
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
+  }
+
+  .percentile-label {
+    position: absolute;
+    top: -28px;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ===== FRAMEWORK CARDS ===== */
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .card-step-num {
+    width: 34px; height: 34px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    background: rgba(74,222,128,0.1);
+    border: 1.5px solid rgba(74,222,128,0.25);
+    color: var(--green);
+  }
+
+  .card-step-num--plus {
+    background: rgba(74,222,128,0.2);
+    border-color: var(--green);
+  }
+
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  /* ===== TOOL CHIP ===== */
+  .tool-chip {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-top: 10px;
+  }
+
+  .tool-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .pill--green { background: rgba(74,222,128,0.15); color: var(--green); }
+  .pill--yellow { background: rgba(250,204,21,0.15); color: #facc15; }
+  .pill--blue { background: var(--blue-bg); color: var(--blue); }
+  .pill--amber { background: var(--amber-bg); color: var(--amber); }
+  .pill--red { background: var(--red-bg); color: var(--red-light); }
+  .pill--purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+
+  .tool-meta {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    margin-top: 8px;
+  }
+
+  /* ===== WORKFLOW ITEM ===== */
+  .workflow-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-top: 10px;
+  }
+
+  .cost-arrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .cost-box {
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .cost-box--before {
+    background: var(--red-bg);
+    color: var(--red-light);
+    border: 1px solid var(--red-border);
+  }
+
+  .cost-box--after {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid var(--green-border);
+  }
+
+  .cost-arrow-icon {
+    color: var(--text-faint);
+    font-size: 1.2rem;
+  }
+
+  /* ===== ROI SUMMARY ===== */
+  .roi-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    text-align: center;
+    margin: 16px 0;
+  }
+
+  .roi-arrow {
+    font-size: 1.8rem;
+    color: var(--green);
+  }
+
+  /* ===== LEVEL 2 FORM ===== */
+  .l2-form-section {
+    display: none;
+    margin-top: 16px;
+    animation: fadeUp 0.5s ease;
+  }
+
+  .l2-form-section.active { display: block; }
+
+  /* ===== LEVEL 2 RESULTS ===== */
+  .l2-results-section {
+    display: none;
+    margin-top: 16px;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .l2-results-section.active { display: block; }
+
+  .section-divider {
+    text-align: center;
+    padding: 40px 0 24px;
+    position: relative;
+  }
+
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green-border), transparent);
+  }
+
+  .section-divider-text {
+    position: relative;
+    display: inline-block;
+    background: var(--bg);
+    padding: 0 20px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--green);
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--blue), var(--green), #10b981, var(--gold));
+    border-radius: 1px;
+  }
+
+  .timeline-phase {
+    position: relative;
+    margin-bottom: 28px;
+    padding: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -27px;
+    top: 22px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+  }
+
+  /* ===== PRIORITY MATRIX ===== */
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .matrix-cell {
+    border-radius: var(--radius-md);
+    padding: 16px;
+    min-height: 100px;
+  }
+
+  .matrix-cell-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .matrix-pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 3px;
+    background: rgba(0,0,0,0.2);
+    color: #fff;
+  }
+
+  /* ===== DONUT CHART ===== */
+  .donut-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .donut-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+  }
+
+  .donut-legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ===== RISK COLUMNS ===== */
+  .risk-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .risk-col {
+    padding: 18px;
+    border-radius: var(--radius-md);
+    border: 1px solid;
+  }
+
+  .risk-col--act {
+    background: rgba(74,222,128,0.04);
+    border-color: rgba(74,222,128,0.2);
+  }
+
+  .risk-col--dont {
+    background: rgba(239,68,68,0.04);
+    border-color: rgba(239,68,68,0.2);
+  }
+
+  /* ===== BOTTLENECK CARD ===== */
+  .bottleneck-card {
+    background: linear-gradient(135deg, rgba(74,222,128,0.06), rgba(139,92,246,0.04));
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bottleneck-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--purple));
+  }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    text-align: center;
+    margin-top: 32px;
+    padding: 40px 28px;
+    background: rgba(74,222,128,0.04);
+    border: 1px solid rgba(74,222,128,0.12);
+    border-radius: var(--radius-lg);
+  }
+
+  .wa-btn {
+    display: inline-block;
+    padding: 16px 36px;
+    background: var(--green);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .wa-btn:hover { background: var(--green-hover); }
+  .wa-btn:active { transform: scale(0.98); }
+
+  /* ===== ERROR ===== */
   .error-msg {
     display: none;
     margin-top: 16px;
     padding: 14px 18px;
-    background: rgba(239,68,68,0.08);
-    border: 1px solid rgba(239,68,68,0.2);
-    border-radius: 12px;
-    color: #f87171;
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+    border-radius: var(--radius-md);
+    color: var(--red-light);
     font-size: 0.85rem;
   }
 
   .error-msg.active { display: block; }
 
   /* ===== RESPONSIVE ===== */
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     .form-row-half { grid-template-columns: 1fr; }
-    .hero { padding: 72px 20px 40px; }
-    .form-card, .loading-container { padding: 24px 20px; }
+    .hero { padding-top: 72px; padding-bottom: 40px; }
+    .page-container { padding: 0 16px; }
+    .form-card, .loading-container, .result-card, .bottleneck-card { padding: 20px 18px; }
+    .hero-stats { grid-template-columns: 1fr; }
+    .roi-grid { grid-template-columns: 1fr; gap: 8px; }
+    .roi-arrow { transform: rotate(90deg); }
+    .risk-columns { grid-template-columns: 1fr; }
+    .matrix-grid { grid-template-columns: 1fr; }
+    .cost-arrow { flex-direction: column; align-items: flex-start; }
+    .cost-arrow-icon { transform: rotate(90deg); }
+    .stat-value { font-size: 1.2rem; }
   }
 
   @media (min-width: 700px) {
-    .hero { padding: 96px 40px 60px; }
+    .page-container { padding: 0 40px; }
   }
+
+  /* ===== UTILITY ===== */
+  .mt-0 { margin-top: 0; }
+  .mb-0 { margin-bottom: 0; }
+  .text-center { text-align: center; }
 </style>
 </head>
 <body>
@@ -347,412 +890,1243 @@
   <a href="/" class="nav-link">Back to 41labs.ai</a>
 </nav>
 
-<!-- HERO + FORM -->
-<div class="hero">
-  <div class="badge">
-    <span class="badge-dot"></span>
-    Free AI Readiness Audit
+<!-- PAGE CONTENT -->
+<div class="page-container">
+
+  <!-- HERO -->
+  <div class="hero" id="heroSection">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Free AI Readiness Audit
+    </div>
+
+    <h1>Find out where <span class="green">AI</span> can<br>transform your business.</h1>
+
+    <p class="subtitle">Enter your website and we'll analyze your business using the <strong style="color:#fff;">4+1 Method</strong> — the same framework used by 41 Labs to identify AI opportunities across 50+ industries.</p>
+
+    <!-- LEVEL 1 FORM -->
+    <div class="form-card" id="formCard">
+      <div class="form-row">
+        <label for="url">Website URL</label>
+        <input type="url" id="url" placeholder="https://yourcompany.com" required>
+      </div>
+
+      <div class="form-row-half form-row">
+        <div>
+          <label for="company">Company Name</label>
+          <input type="text" id="company" placeholder="Acme Corp">
+        </div>
+        <div>
+          <label for="email">Your Email</label>
+          <input type="email" id="email" placeholder="you@company.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="description">What does your company do? <span style="color:var(--text-ghost);font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <textarea id="description" placeholder="Brief description of your products/services, industry, team size..."></textarea>
+      </div>
+
+      <button class="btn-primary" id="btnAudit" onclick="runAudit()">
+        Get Your Free AI Audit
+      </button>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <div class="trust-bar">
+        <div class="trust-item"><span class="trust-icon">&#9889;</span> 60-second analysis</div>
+        <div class="trust-item"><span class="trust-icon">&#128274;</span> We don't store your data</div>
+        <div class="trust-item"><span class="trust-icon">&#9733;</span> Powered by Claude AI</div>
+      </div>
+    </div>
+
+    <!-- LEVEL 1 LOADING -->
+    <div class="loading-container" id="l1Loading">
+      <div class="loading-title">Analyzing your business...</div>
+      <div class="loading-steps" id="l1Steps"></div>
+    </div>
+
+    <!-- LEVEL 1 RESULTS -->
+    <div class="results-section" id="l1Results"></div>
+
+    <!-- LEVEL 2 GATE FORM -->
+    <div class="l2-form-section" id="l2FormSection"></div>
+
+    <!-- LEVEL 2 LOADING -->
+    <div class="loading-container" id="l2Loading">
+      <div class="loading-title">Building your strategy brief...</div>
+      <div class="loading-steps" id="l2Steps"></div>
+    </div>
+
+    <!-- LEVEL 2 RESULTS -->
+    <div class="l2-results-section" id="l2Results"></div>
   </div>
-
-  <h1>Find out where <span class="green">AI</span> can<br>transform your business.</h1>
-
-  <p class="subtitle">Enter your website and we'll analyze your business using the <strong style="color:#fff;">4+1 Method</strong> — the same framework used by 41 Labs to identify AI opportunities across 50+ industries.</p>
-
-  <!-- FORM -->
-  <div class="form-card" id="formCard">
-    <div class="form-row">
-      <label for="url">Website URL</label>
-      <input type="url" id="url" placeholder="https://yourcompany.com" required>
-    </div>
-
-    <div class="form-row-half form-row">
-      <div>
-        <label for="company">Company Name</label>
-        <input type="text" id="company" placeholder="Acme Corp">
-      </div>
-      <div>
-        <label for="email">Your Email</label>
-        <input type="email" id="email" placeholder="you@company.com" required>
-      </div>
-    </div>
-
-    <div class="form-row">
-      <label for="description">What does your company do? <span style="color:#555;font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-      <textarea id="description" placeholder="Brief description of your products/services, industry, team size..."></textarea>
-    </div>
-
-    <button class="btn-audit" id="btnAudit" onclick="runAudit()">
-      Get Your Free AI Audit
-    </button>
-
-    <div class="error-msg" id="errorMsg"></div>
-
-    <div class="trust-bar">
-      <div class="trust-item"><span class="trust-icon">&#9889;</span> 60-second analysis</div>
-      <div class="trust-item"><span class="trust-icon">&#128274;</span> We don't store your data</div>
-      <div class="trust-item"><span class="trust-icon">&#9733;</span> Powered by Claude AI</div>
-    </div>
-  </div>
-
-  <!-- LOADING STATE -->
-  <div class="loading-container" id="loadingState">
-    <div class="loading-title">Analyzing your business...</div>
-    <div class="loading-steps">
-      <div class="loading-step" id="step1">
-        <div class="step-icon">1</div>
-        <div class="step-text">Scanning your website</div>
-        <div class="step-spinner"></div>
-        <div class="step-check">&#10003;</div>
-      </div>
-      <div class="loading-step" id="step2">
-        <div class="step-icon">2</div>
-        <div class="step-text">Identifying your industry & services</div>
-        <div class="step-spinner"></div>
-        <div class="step-check">&#10003;</div>
-      </div>
-      <div class="loading-step" id="step3">
-        <div class="step-icon">3</div>
-        <div class="step-text">Mapping AI opportunities (4+1 Method)</div>
-        <div class="step-spinner"></div>
-        <div class="step-check">&#10003;</div>
-      </div>
-      <div class="loading-step" id="step4">
-        <div class="step-icon">4</div>
-        <div class="step-text">Generating your personalized report</div>
-        <div class="step-spinner"></div>
-        <div class="step-check">&#10003;</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RESULTS — built via safe DOM methods -->
-  <div id="resultsState"></div>
 </div>
 
 <script>
-  // HTML entity escaping for safe text rendering
-  function esc(str) {
-    if (!str) return '';
-    const d = document.createElement('div');
-    d.textContent = String(str);
-    return d.innerHTML;
-  }
+/* ========================================
+   GLOBAL STATE
+======================================== */
+let level1AuditData = null;
+let level1ScrapedFlag = false;
 
-  async function runAudit() {
-    const url = document.getElementById('url').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const company = document.getElementById('company').value.trim();
-    const description = document.getElementById('description').value.trim();
-    const errorEl = document.getElementById('errorMsg');
-    const btn = document.getElementById('btnAudit');
+/* ========================================
+   SAFE DOM HELPERS
+======================================== */
+function esc(str) {
+  if (!str) return '';
+  return String(str);
+}
 
-    errorEl.classList.remove('active');
-
-    if (!url) {
-      errorEl.textContent = 'Please enter your website URL.';
-      errorEl.classList.add('active');
-      return;
-    }
-    if (!email || !email.includes('@')) {
-      errorEl.textContent = 'Please enter a valid email address.';
-      errorEl.classList.add('active');
-      return;
-    }
-
-    document.getElementById('formCard').style.display = 'none';
-    const loading = document.getElementById('loadingState');
-    loading.classList.add('active');
-    btn.disabled = true;
-
-    const steps = ['step1', 'step2', 'step3', 'step4'];
-    let currentStep = 0;
-
-    function advanceStep() {
-      if (currentStep > 0) {
-        document.getElementById(steps[currentStep - 1]).classList.remove('active');
-        document.getElementById(steps[currentStep - 1]).classList.add('done');
+function el(tag, attrs, children) {
+  var node = document.createElement(tag);
+  if (attrs) {
+    var keys = Object.keys(attrs);
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var v = attrs[k];
+      if (k === 'style' && typeof v === 'object') {
+        var skeys = Object.keys(v);
+        for (var j = 0; j < skeys.length; j++) {
+          node.style[skeys[j]] = v[skeys[j]];
+        }
+      } else if (k === 'className') {
+        node.className = v;
+      } else if (k === 'textContent') {
+        node.textContent = v;
+      } else if (k === 'onclick') {
+        node.addEventListener('click', v);
+      } else {
+        node.setAttribute(k, v);
       }
-      if (currentStep < steps.length) {
-        document.getElementById(steps[currentStep]).classList.add('active');
-        currentStep++;
-      }
-    }
-
-    advanceStep();
-    const stepTimers = [
-      setTimeout(() => advanceStep(), 2000),
-      setTimeout(() => advanceStep(), 5000),
-      setTimeout(() => advanceStep(), 8000),
-    ];
-
-    try {
-      const res = await fetch('https://teaser-deploy.vercel.app/api/audit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          url: url.startsWith('http') ? url : 'https://' + url,
-          email,
-          company,
-          description
-        }),
-      });
-
-      stepTimers.forEach(clearTimeout);
-      for (let i = currentStep; i <= steps.length; i++) advanceStep();
-
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Something went wrong');
-      }
-
-      const data = await res.json();
-      await new Promise(r => setTimeout(r, 800));
-
-      loading.classList.remove('active');
-      renderResults(data.audit);
-
-    } catch (err) {
-      stepTimers.forEach(clearTimeout);
-      loading.classList.remove('active');
-      document.getElementById('formCard').style.display = 'block';
-      btn.disabled = false;
-      errorEl.textContent = err.message || 'Failed to generate audit. Please try again.';
-      errorEl.classList.add('active');
     }
   }
+  if (children !== undefined && children !== null) {
+    if (typeof children === 'string') {
+      node.textContent = children;
+    } else if (Array.isArray(children)) {
+      for (var c = 0; c < children.length; c++) {
+        if (children[c]) node.appendChild(children[c]);
+      }
+    } else if (children.nodeType) {
+      node.appendChild(children);
+    }
+  }
+  return node;
+}
 
-  function renderResults(audit) {
-    const container = document.getElementById('resultsState');
-    // Clear previous content
-    while (container.firstChild) container.removeChild(container.firstChild);
+function textEl(tag, text, attrs) {
+  var merged = { textContent: esc(text) };
+  if (attrs) {
+    var keys = Object.keys(attrs);
+    for (var i = 0; i < keys.length; i++) {
+      merged[keys[i]] = attrs[keys[i]];
+    }
+  }
+  return el(tag, merged);
+}
 
-    const score = Math.min(10, Math.max(1, parseInt(audit.ai_readiness_score) || 5));
-    const ringOffset = 314 - (314 * score / 10);
-
-    // Build DOM safely
-    function el(tag, attrs, children) {
-      const node = document.createElement(tag);
-      if (attrs) {
-        for (const [k, v] of Object.entries(attrs)) {
-          if (k === 'style' && typeof v === 'object') {
-            Object.assign(node.style, v);
-          } else if (k === 'className') {
-            node.className = v;
-          } else if (k === 'textContent') {
-            node.textContent = v;
-          } else {
-            node.setAttribute(k, v);
-          }
+function svgEl(tag, attrs) {
+  var node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  if (attrs) {
+    var keys = Object.keys(attrs);
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var v = attrs[k];
+      if (k === 'style' && typeof v === 'object') {
+        var skeys = Object.keys(v);
+        for (var j = 0; j < skeys.length; j++) {
+          node.style[skeys[j]] = v[skeys[j]];
         }
+      } else if (k === 'textContent') {
+        node.textContent = v;
+      } else {
+        node.setAttribute(k, v);
       }
-      if (children) {
-        if (typeof children === 'string') {
-          node.textContent = children;
-        } else if (Array.isArray(children)) {
-          children.forEach(c => { if (c) node.appendChild(c); });
-        }
-      }
-      return node;
     }
+  }
+  return node;
+}
 
-    function textEl(tag, text, attrs) {
-      return el(tag, { textContent: text, ...attrs });
-    }
+function clearNode(node) {
+  while (node.firstChild) node.removeChild(node.firstChild);
+}
 
-    // Header
-    const header = el('div', { style: { textAlign: 'center', marginBottom: '32px' } }, [
-      textEl('h2', 'Your AI Readiness Report', { style: { fontSize: 'clamp(1.4rem, 5vw, 2rem)', fontWeight: '900', letterSpacing: '-0.5px', color: '#fff' } }),
-      textEl('p', audit.company_summary || '', { style: { marginTop: '12px', fontSize: '0.9rem', color: '#999', lineHeight: '1.5' } }),
-      (() => {
-        const ind = el('div', { style: { fontSize: '0.75rem', color: '#666', marginTop: '4px' } });
-        ind.appendChild(document.createTextNode('Industry: '));
-        ind.appendChild(textEl('span', audit.industry || 'N/A', { style: { color: '#4ade80' } }));
-        return ind;
-      })()
+/* ========================================
+   LOADING STEP BUILDER
+======================================== */
+function buildLoadingSteps(containerId, stepTexts) {
+  var container = document.getElementById(containerId);
+  clearNode(container);
+  var steps = [];
+  for (var i = 0; i < stepTexts.length; i++) {
+    var step = el('div', { className: 'loading-step', id: containerId + '-s' + (i + 1) }, [
+      textEl('div', String(i + 1), { className: 'step-icon' }),
+      textEl('div', stepTexts[i], { className: 'step-text' }),
+      el('div', { className: 'step-spinner' }),
+      textEl('div', '\u2713', { className: 'step-check' })
     ]);
-    container.appendChild(header);
+    container.appendChild(step);
+    steps.push(step);
+  }
+  return steps;
+}
 
-    // Score ring
-    const ringWrap = el('div', { style: { display: 'flex', justifyContent: 'center', margin: '24px 0' } });
-    const ringDiv = el('div', { style: { position: 'relative', width: '120px', height: '120px' } });
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('width', '120');
-    svg.setAttribute('height', '120');
-    svg.setAttribute('viewBox', '0 0 120 120');
-    svg.style.transform = 'rotate(-90deg)';
+function animateSteps(steps, intervalMs) {
+  var current = 0;
+  var timers = [];
 
-    const bgCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    bgCircle.setAttribute('cx', '60'); bgCircle.setAttribute('cy', '60'); bgCircle.setAttribute('r', '50');
-    bgCircle.setAttribute('fill', 'none'); bgCircle.setAttribute('stroke', 'rgba(255,255,255,0.06)'); bgCircle.setAttribute('stroke-width', '8');
-    svg.appendChild(bgCircle);
-
-    const fillCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    fillCircle.setAttribute('cx', '60'); fillCircle.setAttribute('cy', '60'); fillCircle.setAttribute('r', '50');
-    fillCircle.setAttribute('fill', 'none'); fillCircle.setAttribute('stroke', '#4ade80'); fillCircle.setAttribute('stroke-width', '8');
-    fillCircle.setAttribute('stroke-linecap', 'round');
-    fillCircle.setAttribute('stroke-dasharray', '314');
-    fillCircle.setAttribute('stroke-dashoffset', '314');
-    fillCircle.style.transition = 'stroke-dashoffset 1.5s ease';
-    svg.appendChild(fillCircle);
-    ringDiv.appendChild(svg);
-
-    const scoreCenter = el('div', { style: { position: 'absolute', inset: '0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' } }, [
-      textEl('div', String(score), { style: { fontSize: '2rem', fontWeight: '900', color: '#4ade80' } }),
-      textEl('div', 'out of 10', { style: { fontSize: '0.6rem', color: '#666', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '2px' } })
-    ]);
-    ringDiv.appendChild(scoreCenter);
-    ringWrap.appendChild(ringDiv);
-    container.appendChild(ringWrap);
-
-    // Framework card builder
-    function makeCard(stepNum, title, content, isPlusOne) {
-      const card = el('div', {
-        style: {
-          background: isPlusOne ? 'rgba(74,222,128,0.04)' : 'rgba(255,255,255,0.02)',
-          border: isPlusOne ? '1px solid rgba(74,222,128,0.15)' : '1px solid rgba(255,255,255,0.06)',
-          borderRadius: '16px',
-          padding: '24px',
-          marginBottom: '16px',
-          animation: 'fadeUp 0.5s ease both'
-        }
-      });
-
-      const hdr = el('div', { style: { display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' } }, [
-        textEl('div', stepNum, {
-          style: {
-            width: '32px', height: '32px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '0.8rem', fontWeight: '800', flexShrink: '0',
-            background: isPlusOne ? 'rgba(74,222,128,0.2)' : 'rgba(74,222,128,0.1)',
-            border: isPlusOne ? '1.5px solid #4ade80' : '1.5px solid rgba(74,222,128,0.25)',
-            color: '#4ade80'
-          }
-        }),
-        textEl('div', title, { style: { fontSize: '1rem', fontWeight: '800', color: '#fff' } })
-      ]);
-      card.appendChild(hdr);
-      card.appendChild(content);
-      return card;
+  function advance() {
+    if (current > 0 && current - 1 < steps.length) {
+      steps[current - 1].classList.remove('active');
+      steps[current - 1].classList.add('done');
     }
-
-    function makeBulletList(items) {
-      const ul = el('div', { style: { display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' } });
-      items.forEach(text => {
-        const li = el('div', { style: { display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#ccc', lineHeight: '1.5' } }, [
-          el('span', { style: { flexShrink: '0', width: '6px', height: '6px', borderRadius: '50%', background: '#4ade80', marginTop: '7px' } }),
-          textEl('span', text)
-        ]);
-        ul.appendChild(li);
-      });
-      return ul;
+    if (current < steps.length) {
+      steps[current].classList.add('active');
+      current++;
     }
+  }
 
-    // 1. AUDIT
-    const auditContent = el('div');
-    if (audit.audit) {
-      auditContent.appendChild(textEl('p', audit.audit.current_state || '', { style: { fontSize: '0.88rem', color: '#999', lineHeight: '1.6' } }));
-      if (audit.audit.manual_processes && audit.audit.manual_processes.length) {
-        auditContent.appendChild(textEl('p', 'Manual processes we identified:', { style: { marginTop: '12px', fontWeight: '700', color: '#fff', fontSize: '0.82rem' } }));
-        auditContent.appendChild(makeBulletList(audit.audit.manual_processes));
-      }
-      if (audit.audit.quick_wins && audit.audit.quick_wins.length) {
-        auditContent.appendChild(textEl('p', 'Quick wins:', { style: { marginTop: '12px', fontWeight: '700', color: '#4ade80', fontSize: '0.82rem' } }));
-        auditContent.appendChild(makeBulletList(audit.audit.quick_wins));
-      }
+  advance();
+  for (var i = 1; i < steps.length; i++) {
+    (function(idx) {
+      timers.push(setTimeout(function() { advance(); }, intervalMs * idx));
+    })(i);
+  }
+
+  return {
+    timers: timers,
+    finishAll: function() {
+      timers.forEach(clearTimeout);
+      while (current <= steps.length) advance();
     }
-    container.appendChild(makeCard('1', 'Audit \u2014 Where You Stand', auditContent));
+  };
+}
 
-    // 2. ADOPT
-    const adoptContent = el('div');
-    if (audit.adopt && audit.adopt.tools) {
-      audit.adopt.tools.forEach(t => {
-        const chip = el('div', { style: { display: 'inline-flex', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', padding: '10px 14px', margin: '4px', flexDirection: 'column', gap: '4px' } });
-        const nameRow = el('div', { style: { display: 'flex', alignItems: 'center', gap: '8px' } });
-        nameRow.appendChild(textEl('span', t.name, { style: { fontWeight: '700', fontSize: '0.82rem', color: '#fff' } }));
-        const badgeColor = t.impact === 'high' ? 'rgba(74,222,128,0.15)' : 'rgba(250,204,21,0.15)';
-        const badgeText = t.impact === 'high' ? '#4ade80' : '#facc15';
-        nameRow.appendChild(textEl('span', t.impact, { style: { display: 'inline-block', padding: '2px 8px', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px', background: badgeColor, color: badgeText } }));
-        chip.appendChild(nameRow);
-        chip.appendChild(textEl('div', t.use_case, { style: { fontSize: '0.75rem', color: '#888' } }));
-        adoptContent.appendChild(chip);
-      });
-    }
-    container.appendChild(makeCard('2', 'Adopt \u2014 Tools to Use Today', adoptContent));
+/* ========================================
+   LEVEL 1 — RUN AUDIT
+======================================== */
+async function runAudit() {
+  var urlVal = document.getElementById('url').value.trim();
+  var emailVal = document.getElementById('email').value.trim();
+  var companyVal = document.getElementById('company').value.trim();
+  var descVal = document.getElementById('description').value.trim();
+  var errorEl = document.getElementById('errorMsg');
+  var btn = document.getElementById('btnAudit');
 
-    // 3. AUTOMATE
-    const autoContent = el('div');
-    if (audit.automate && audit.automate.workflows) {
-      audit.automate.workflows.forEach(w => {
-        const item = el('div', { style: { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '10px', padding: '14px', marginTop: '10px' } });
-        item.appendChild(textEl('div', w.process, { style: { fontWeight: '700', fontSize: '0.88rem', color: '#fff', marginBottom: '4px' } }));
-        const detail = el('div', { style: { fontSize: '0.8rem', color: '#888', lineHeight: '1.5' } });
-        detail.appendChild(document.createTextNode('Now: ' + (w.current || '')));
-        detail.appendChild(document.createElement('br'));
-        detail.appendChild(document.createTextNode('With AI: ' + (w.automated || '')));
-        detail.appendChild(document.createElement('br'));
-        const saves = textEl('span', 'Saves ~' + (w.time_saved || ''), { style: { color: '#4ade80', fontWeight: '600' } });
-        detail.appendChild(saves);
-        item.appendChild(detail);
-        autoContent.appendChild(item);
-      });
-    }
-    container.appendChild(makeCard('3', 'Automate \u2014 Workflows to Streamline', autoContent));
+  errorEl.classList.remove('active');
 
-    // 4. AMPLIFY
-    const ampContent = el('div');
-    if (audit.amplify && audit.amplify.opportunities) {
-      audit.amplify.opportunities.forEach(o => {
-        const item = el('div', { style: { background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '10px', padding: '14px', marginTop: '10px' } });
-        item.appendChild(textEl('div', o.idea, { style: { fontWeight: '700', fontSize: '0.88rem', color: '#fff', marginBottom: '4px' } }));
-        item.appendChild(textEl('div', o.description, { style: { fontSize: '0.8rem', color: '#888', lineHeight: '1.5' } }));
-        item.appendChild(textEl('div', o.potential, { style: { marginTop: '6px', fontSize: '0.75rem', color: '#4ade80', fontWeight: '600' } }));
-        ampContent.appendChild(item);
-      });
-    }
-    container.appendChild(makeCard('4', 'Amplify \u2014 New Revenue Opportunities', ampContent));
+  if (!urlVal) {
+    errorEl.textContent = 'Please enter your website URL.';
+    errorEl.classList.add('active');
+    return;
+  }
+  if (!emailVal || emailVal.indexOf('@') === -1) {
+    errorEl.textContent = 'Please enter a valid email address.';
+    errorEl.classList.add('active');
+    return;
+  }
 
-    // +1 START HERE
-    const plusContent = el('div');
-    if (audit.plus_one) {
-      plusContent.appendChild(textEl('p', audit.plus_one.action || '', { style: { fontWeight: '700', color: '#fff', fontSize: '0.95rem' } }));
-      plusContent.appendChild(textEl('p', audit.plus_one.why || '', { style: { marginTop: '8px', fontSize: '0.88rem', color: '#999', lineHeight: '1.6' } }));
+  document.getElementById('formCard').style.display = 'none';
+  var loading = document.getElementById('l1Loading');
+  loading.classList.add('active');
+  btn.disabled = true;
 
-      const howBox = el('div', { style: { marginTop: '12px', padding: '14px', background: 'rgba(74,222,128,0.06)', borderRadius: '10px' } }, [
-        textEl('div', 'How to do it', { style: { fontSize: '0.72rem', fontWeight: '700', color: '#4ade80', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' } }),
-        textEl('div', audit.plus_one.how || '', { style: { fontSize: '0.85rem', color: '#ccc', lineHeight: '1.6' } })
-      ]);
-      plusContent.appendChild(howBox);
+  var stepTexts = [
+    'Scanning your website',
+    'Analyzing your industry position',
+    'Benchmarking against competitors',
+    'Calculating AI opportunity value',
+    'Mapping automation workflows',
+    'Generating your strategy brief'
+  ];
+  var steps = buildLoadingSteps('l1Steps', stepTexts);
+  var anim = animateSteps(steps, 2500);
 
-      if (audit.plus_one.expected_result) {
-        plusContent.appendChild(textEl('p', 'Expected result: ' + audit.plus_one.expected_result, { style: { marginTop: '8px', fontSize: '0.82rem', color: '#4ade80' } }));
-      }
-    }
-    container.appendChild(makeCard('+1', 'Start Here This Week', plusContent, true));
-
-    // CTA
-    const cta = el('div', { style: { textAlign: 'center', marginTop: '32px', padding: '32px 24px', background: 'rgba(74,222,128,0.04)', border: '1px solid rgba(74,222,128,0.12)', borderRadius: '16px' } }, [
-      textEl('h3', 'Want help implementing this?', { style: { fontSize: '1.2rem', fontWeight: '800', color: '#fff', marginBottom: '8px' } }),
-      textEl('p', '41 Labs builds custom AI solutions for businesses. Let\u2019s turn this audit into action.', { style: { fontSize: '0.85rem', color: '#888', marginBottom: '20px' } }),
-      el('a', {
-        href: 'https://wa.me/6580234886?text=' + encodeURIComponent('Hi Alexander, I just took the AI audit on 41labs.ai and I\u2019d love to chat about implementing some of the recommendations.'),
-        style: { display: 'inline-block', padding: '14px 32px', background: '#4ade80', color: '#050505', border: 'none', borderRadius: '12px', fontFamily: 'Inter, sans-serif', fontSize: '0.95rem', fontWeight: '800', cursor: 'pointer', textDecoration: 'none' }
-      }, 'Chat with Alexander on WhatsApp')
-    ]);
-    container.appendChild(cta);
-
-    // Powered by
-    container.appendChild(textEl('div', 'Powered by the 4+1 Method  \u00b7  41 Labs  \u00b7  41labs.ai', { style: { textAlign: 'center', marginTop: '20px', fontSize: '0.65rem', color: '#444', paddingBottom: '40px' } }));
-
-    container.classList.add('active');
-
-    // Animate score ring
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        fillCircle.setAttribute('stroke-dashoffset', String(ringOffset));
-      }, 100);
+  try {
+    var res = await fetch('https://teaser-deploy.vercel.app/api/audit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        url: urlVal.indexOf('http') === 0 ? urlVal : 'https://' + urlVal,
+        email: emailVal,
+        company: companyVal,
+        description: descVal
+      })
     });
 
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    anim.finishAll();
+
+    if (!res.ok) {
+      var errData = await res.json();
+      throw new Error(errData.error || 'Something went wrong');
+    }
+
+    var data = await res.json();
+    level1AuditData = data.audit;
+    level1ScrapedFlag = true;
+
+    await new Promise(function(r) { setTimeout(r, 800); });
+
+    loading.classList.remove('active');
+    renderLevel1(data.audit);
+
+  } catch (err) {
+    anim.finishAll();
+    loading.classList.remove('active');
+    document.getElementById('formCard').style.display = 'block';
+    btn.disabled = false;
+    errorEl.textContent = err.message || 'Failed to generate audit. Please try again.';
+    errorEl.classList.add('active');
   }
+}
+
+/* ========================================
+   RENDER LEVEL 1
+======================================== */
+function renderLevel1(audit) {
+  var container = document.getElementById('l1Results');
+  clearNode(container);
+
+  // ---- 5a: Hero Stats ----
+  var statsGrid = el('div', { className: 'hero-stats' });
+
+  // Opportunity stat
+  var oppCard = el('div', { className: 'stat-card stat-card--opportunity' }, [
+    textEl('div', 'Estimated Annual AI Opportunity', { className: 'stat-label', style: { color: 'var(--green)' } }),
+    textEl('div', audit.estimated_annual_opportunity || 'N/A', { className: 'stat-value', style: { color: 'var(--green)' } })
+  ]);
+  statsGrid.appendChild(oppCard);
+
+  // Cost of inaction stat
+  var warnCard = el('div', { className: 'stat-card stat-card--warning' }, [
+    textEl('div', 'Monthly Cost of Inaction', { className: 'stat-label', style: { color: 'var(--amber)' } }),
+    textEl('div', audit.cost_of_inaction_monthly || 'N/A', { className: 'stat-value', style: { color: 'var(--amber)' } })
+  ]);
+  statsGrid.appendChild(warnCard);
+  container.appendChild(statsGrid);
+
+  // Company summary + industry badge
+  var summaryCard = el('div', { className: 'result-card', style: { textAlign: 'center' } });
+  summaryCard.appendChild(textEl('p', audit.company_summary || '', { style: { fontSize: '0.92rem', color: 'var(--text-muted)', lineHeight: '1.6' } }));
+  var indBadge = el('span', {
+    style: {
+      display: 'inline-block', marginTop: '10px', padding: '4px 14px',
+      background: 'var(--green-bg)', border: '1px solid var(--green-border)',
+      borderRadius: 'var(--radius-pill)', fontSize: '0.72rem', fontWeight: '700', color: 'var(--green)'
+    }
+  });
+  indBadge.textContent = audit.industry || 'N/A';
+  summaryCard.appendChild(indBadge);
+  container.appendChild(summaryCard);
+
+  // ---- 5b: Radar Chart ----
+  var scores = audit.readiness_scores || {};
+  var radarCard = el('div', { className: 'result-card' });
+  radarCard.appendChild(textEl('div', 'AI Readiness Radar', { style: { textAlign: 'center', fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--text-faint)', marginBottom: '8px' } }));
+
+  var radarSize = 280;
+  var radarCenter = radarSize / 2;
+  var radarRadius = 100;
+  var dims = ['digital_infrastructure', 'data_readiness', 'process_maturity', 'team_capability', 'innovation_culture'];
+  var dimLabels = ['Digital Infrastructure', 'Data Readiness', 'Process Maturity', 'Team Capability', 'Innovation Culture'];
+
+  var svg = svgEl('svg', { width: String(radarSize), height: String(radarSize), viewBox: '0 0 ' + radarSize + ' ' + radarSize, style: { display: 'block', margin: '0 auto', maxWidth: '100%' } });
+
+  // Draw pentagon outlines (3 levels: 33%, 66%, 100%)
+  for (var ring = 1; ring <= 3; ring++) {
+    var ringR = radarRadius * ring / 3;
+    var pts = [];
+    for (var d = 0; d < 5; d++) {
+      var angle = (d * 72 - 90) * Math.PI / 180;
+      pts.push((radarCenter + ringR * Math.cos(angle)).toFixed(1) + ',' + (radarCenter + ringR * Math.sin(angle)).toFixed(1));
+    }
+    svg.appendChild(svgEl('polygon', { points: pts.join(' '), fill: 'none', stroke: 'rgba(255,255,255,0.06)', 'stroke-width': '1' }));
+  }
+
+  // Draw axis lines
+  for (var d = 0; d < 5; d++) {
+    var angle = (d * 72 - 90) * Math.PI / 180;
+    svg.appendChild(svgEl('line', {
+      x1: String(radarCenter), y1: String(radarCenter),
+      x2: String((radarCenter + radarRadius * Math.cos(angle)).toFixed(1)),
+      y2: String((radarCenter + radarRadius * Math.sin(angle)).toFixed(1)),
+      stroke: 'rgba(255,255,255,0.04)', 'stroke-width': '1'
+    }));
+  }
+
+  // Data polygon (starts at center, will animate)
+  var dataPoints = [];
+  var finalPoints = [];
+  for (var d = 0; d < 5; d++) {
+    var val = Math.min(10, Math.max(0, parseInt(scores[dims[d]]) || 5));
+    var r = radarRadius * val / 10;
+    var angle = (d * 72 - 90) * Math.PI / 180;
+    dataPoints.push(radarCenter + ',' + radarCenter);
+    finalPoints.push((radarCenter + r * Math.cos(angle)).toFixed(1) + ',' + (radarCenter + r * Math.sin(angle)).toFixed(1));
+  }
+
+  var dataPoly = svgEl('polygon', {
+    points: dataPoints.join(' '),
+    fill: 'rgba(74,222,128,0.15)',
+    stroke: 'var(--green)',
+    'stroke-width': '2',
+    style: { transition: 'all 1s ease' }
+  });
+  svg.appendChild(dataPoly);
+
+  // Data point dots (at final positions, initially hidden)
+  var dots = [];
+  for (var d = 0; d < 5; d++) {
+    var val = Math.min(10, Math.max(0, parseInt(scores[dims[d]]) || 5));
+    var r = radarRadius * val / 10;
+    var angle = (d * 72 - 90) * Math.PI / 180;
+    var dot = svgEl('circle', {
+      cx: String(radarCenter), cy: String(radarCenter), r: '4',
+      fill: 'var(--green)', style: { transition: 'all 1s ease' }
+    });
+    dot._finalCx = (radarCenter + r * Math.cos(angle)).toFixed(1);
+    dot._finalCy = (radarCenter + r * Math.sin(angle)).toFixed(1);
+    svg.appendChild(dot);
+    dots.push(dot);
+  }
+
+  // Labels around outside
+  for (var d = 0; d < 5; d++) {
+    var angle = (d * 72 - 90) * Math.PI / 180;
+    var lx = radarCenter + (radarRadius + 28) * Math.cos(angle);
+    var ly = radarCenter + (radarRadius + 28) * Math.sin(angle);
+    var anchor = 'middle';
+    if (d === 1 || d === 2) anchor = 'start';
+    if (d === 3 || d === 4) anchor = 'end';
+
+    var val = Math.min(10, Math.max(0, parseInt(scores[dims[d]]) || 5));
+    var labelGroup = svgEl('text', {
+      x: String(lx.toFixed(1)), y: String(ly.toFixed(1)),
+      fill: '#888', 'font-size': '10', 'font-family': 'Inter, sans-serif',
+      'font-weight': '600', 'text-anchor': anchor, 'dominant-baseline': 'middle',
+      textContent: dimLabels[d] + ' (' + val + ')'
+    });
+    svg.appendChild(labelGroup);
+  }
+
+  // Center score
+  var overallScore = Math.min(10, Math.max(0, parseInt(scores.overall) || 5));
+  svg.appendChild(svgEl('text', {
+    x: String(radarCenter), y: String(radarCenter - 6),
+    fill: 'var(--green)', 'font-size': '24', 'font-weight': '900',
+    'font-family': 'Inter, sans-serif', 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+    textContent: String(overallScore)
+  }));
+  svg.appendChild(svgEl('text', {
+    x: String(radarCenter), y: String(radarCenter + 14),
+    fill: '#666', 'font-size': '9', 'font-weight': '700',
+    'font-family': 'Inter, sans-serif', 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+    textContent: 'OVERALL'
+  }));
+
+  radarCard.appendChild(el('div', { className: 'radar-wrap' }, [svg]));
+  container.appendChild(radarCard);
+
+  // Animate radar after render
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      dataPoly.setAttribute('points', finalPoints.join(' '));
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].setAttribute('cx', dots[i]._finalCx);
+        dots[i].setAttribute('cy', dots[i]._finalCy);
+      }
+    }, 150);
+  });
+
+  // ---- 5c: Industry Percentile Bar ----
+  var pctVal = Math.min(100, Math.max(0, parseInt(audit.industry_ai_percentile) || 35));
+  var pctCard = el('div', { className: 'result-card' });
+  pctCard.appendChild(textEl('div', 'Industry AI Adoption Percentile', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--text-faint)', marginBottom: '12px' } }));
+
+  var track = el('div', { className: 'percentile-track', style: { position: 'relative' } });
+  var zones = [
+    { width: '25%', bg: 'rgba(239,68,68,0.3)' },
+    { width: '25%', bg: 'rgba(245,158,11,0.3)' },
+    { width: '25%', bg: 'rgba(74,222,128,0.2)' },
+    { width: '25%', bg: 'rgba(74,222,128,0.4)' }
+  ];
+  for (var z = 0; z < zones.length; z++) {
+    track.appendChild(el('div', { className: 'percentile-zone', style: { width: zones[z].width, background: zones[z].bg } }));
+  }
+
+  var marker = el('div', { className: 'percentile-marker', style: { left: '0%' } });
+  var markerLabel = el('div', { className: 'percentile-label' });
+  markerLabel.textContent = 'You: ' + pctVal + 'th';
+  marker.appendChild(markerLabel);
+  track.appendChild(marker);
+  pctCard.appendChild(track);
+
+  if (audit.industry_ai_context) {
+    pctCard.appendChild(textEl('p', audit.industry_ai_context, { style: { marginTop: '14px', fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.6' } }));
+  }
+  container.appendChild(pctCard);
+
+  // Animate percentile bar
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      marker.style.left = pctVal + '%';
+    }, 200);
+  });
+
+  // ---- 5d: 4+1 Framework Cards ----
+
+  // Card builder helper
+  function makeFrameworkCard(stepNum, title, contentNode, isPlus) {
+    var card = el('div', { className: isPlus ? 'result-card result-card--green' : 'result-card' });
+    var hdr = el('div', { className: 'card-header' }, [
+      textEl('div', stepNum, { className: isPlus ? 'card-step-num card-step-num--plus' : 'card-step-num' }),
+      textEl('div', title, { className: 'card-title' })
+    ]);
+    card.appendChild(hdr);
+    card.appendChild(contentNode);
+    return card;
+  }
+
+  function makeBulletList(items) {
+    var list = el('div', { style: { display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' } });
+    if (!items) return list;
+    for (var i = 0; i < items.length; i++) {
+      var item = el('div', { style: { display: 'flex', gap: '10px', alignItems: 'flex-start', fontSize: '0.85rem', color: '#ccc', lineHeight: '1.5' } }, [
+        el('span', { style: { flexShrink: '0', width: '5px', height: '5px', borderRadius: '50%', background: 'var(--green)', marginTop: '8px' } }),
+        textEl('span', typeof items[i] === 'string' ? items[i] : (items[i].process || items[i].name || items[i].idea || ''))
+      ]);
+      list.appendChild(item);
+    }
+    return list;
+  }
+
+  // 1. AUDIT Card
+  var auditSection = audit.audit || {};
+  var auditContent = el('div');
+
+  if (auditSection.current_state) {
+    auditContent.appendChild(textEl('p', auditSection.current_state, { style: { fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: '1.6' } }));
+  }
+  if (auditSection.industry_benchmark) {
+    auditContent.appendChild(textEl('p', auditSection.industry_benchmark, { style: { marginTop: '10px', fontSize: '0.85rem', color: 'var(--text-dim)', lineHeight: '1.6', fontStyle: 'italic' } }));
+  }
+  if (auditSection.estimated_annual_waste) {
+    var wasteBadge = el('div', { style: { marginTop: '12px', display: 'inline-block', padding: '6px 14px', background: 'var(--red-bg)', border: '1px solid var(--red-border)', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', fontWeight: '700', color: 'var(--red-light)' } });
+    wasteBadge.textContent = 'Estimated Annual Waste: ' + auditSection.estimated_annual_waste;
+    auditContent.appendChild(wasteBadge);
+  }
+
+  // Manual processes with cost badges
+  if (auditSection.manual_processes && auditSection.manual_processes.length) {
+    auditContent.appendChild(textEl('p', 'Manual processes identified:', { style: { marginTop: '16px', fontWeight: '700', color: '#fff', fontSize: '0.82rem' } }));
+    var mpList = el('div', { style: { display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' } });
+    for (var i = 0; i < auditSection.manual_processes.length; i++) {
+      var mp = auditSection.manual_processes[i];
+      var mpName = typeof mp === 'string' ? mp : (mp.process || '');
+      var mpItem = el('div', { style: { display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', fontSize: '0.85rem', color: '#ccc' } });
+      mpItem.appendChild(el('span', { style: { width: '5px', height: '5px', borderRadius: '50%', background: 'var(--green)', flexShrink: '0' } }));
+      mpItem.appendChild(textEl('span', mpName, { style: { fontWeight: '600' } }));
+      if (typeof mp === 'object' && mp.estimated_monthly_cost) {
+        mpItem.appendChild(textEl('span', mp.estimated_monthly_cost + '/mo', { className: 'pill pill--red' }));
+      }
+      if (typeof mp === 'object' && mp.ai_reduction) {
+        mpItem.appendChild(textEl('span', mp.ai_reduction + ' reducible', { className: 'pill pill--green' }));
+      }
+      mpList.appendChild(mpItem);
+    }
+    auditContent.appendChild(mpList);
+  }
+
+  if (auditSection.quick_wins && auditSection.quick_wins.length) {
+    auditContent.appendChild(textEl('p', 'Quick wins:', { style: { marginTop: '14px', fontWeight: '700', color: 'var(--green)', fontSize: '0.82rem' } }));
+    auditContent.appendChild(makeBulletList(auditSection.quick_wins));
+  }
+
+  container.appendChild(makeFrameworkCard('1', 'Audit \u2014 Where You Stand', auditContent));
+
+  // 2. ADOPT Card
+  var adoptSection = audit.adopt || {};
+  var adoptContent = el('div');
+  if (adoptSection.tools && adoptSection.tools.length) {
+    for (var i = 0; i < adoptSection.tools.length; i++) {
+      var t = adoptSection.tools[i];
+      var chip = el('div', { className: 'tool-chip' });
+
+      var nameRow = el('div', { className: 'tool-name-row' });
+      nameRow.appendChild(textEl('span', t.name || '', { style: { fontWeight: '700', fontSize: '0.88rem', color: '#fff' } }));
+
+      var impactClass = t.impact === 'high' ? 'pill pill--green' : 'pill pill--yellow';
+      nameRow.appendChild(textEl('span', t.impact || 'medium', { className: impactClass }));
+
+      if (t.effort) {
+        var effortClass = t.effort === 'low' ? 'pill pill--blue' : 'pill pill--amber';
+        nameRow.appendChild(textEl('span', t.effort + ' effort', { className: effortClass }));
+      }
+      chip.appendChild(nameRow);
+
+      if (t.use_case) {
+        chip.appendChild(textEl('div', t.use_case, { style: { fontSize: '0.82rem', color: 'var(--text-dim)', lineHeight: '1.5', marginTop: '4px' } }));
+      }
+
+      // Cost / payback / savings line
+      var metaParts = [];
+      if (t.monthly_cost) metaParts.push(t.monthly_cost);
+      if (t.payback_period) metaParts.push('Pays for itself in ' + t.payback_period);
+      if (t.annual_savings) metaParts.push('Saves ' + t.annual_savings + '/yr');
+      if (metaParts.length) {
+        chip.appendChild(textEl('div', metaParts.join(' \u00b7 '), { className: 'tool-meta', style: { color: 'var(--green)' } }));
+      }
+
+      adoptContent.appendChild(chip);
+    }
+  }
+  container.appendChild(makeFrameworkCard('2', 'Adopt \u2014 Tools to Use Today', adoptContent));
+
+  // 3. AUTOMATE Card
+  var autoSection = audit.automate || {};
+  var autoContent = el('div');
+  if (autoSection.workflows && autoSection.workflows.length) {
+    for (var i = 0; i < autoSection.workflows.length; i++) {
+      var w = autoSection.workflows[i];
+      var wItem = el('div', { className: 'workflow-item' });
+      wItem.appendChild(textEl('div', w.process || '', { style: { fontWeight: '700', fontSize: '0.9rem', color: '#fff', marginBottom: '8px' } }));
+
+      // Cost arrow: current → automated
+      var arrow = el('div', { className: 'cost-arrow' });
+      arrow.appendChild(textEl('div', w.current_cost || 'Current', { className: 'cost-box cost-box--before' }));
+      arrow.appendChild(textEl('span', '\u2192', { className: 'cost-arrow-icon' }));
+      arrow.appendChild(textEl('div', w.automated_cost || 'Automated', { className: 'cost-box cost-box--after' }));
+      wItem.appendChild(arrow);
+
+      // Savings highlight
+      var savingsLine = el('div', { style: { display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap', marginTop: '6px' } });
+      if (w.monthly_savings || w.annual_savings) {
+        var savingsText = 'Saves ' + (w.monthly_savings || '') + '/month';
+        if (w.annual_savings) savingsText += ' (' + w.annual_savings + '/year)';
+        savingsLine.appendChild(textEl('span', savingsText, { style: { fontSize: '0.82rem', fontWeight: '700', color: 'var(--green)' } }));
+      }
+      if (w.time_saved) {
+        savingsLine.appendChild(textEl('span', w.time_saved + ' saved', { className: 'pill pill--blue' }));
+      }
+      wItem.appendChild(savingsLine);
+
+      autoContent.appendChild(wItem);
+    }
+  }
+  container.appendChild(makeFrameworkCard('3', 'Automate \u2014 Workflows to Streamline', autoContent));
+
+  // 4. AMPLIFY Card
+  var ampSection = audit.amplify || {};
+  var ampContent = el('div');
+  if (ampSection.opportunities && ampSection.opportunities.length) {
+    for (var i = 0; i < ampSection.opportunities.length; i++) {
+      var o = ampSection.opportunities[i];
+      var oItem = el('div', { className: 'workflow-item' });
+      oItem.appendChild(textEl('div', o.idea || '', { style: { fontWeight: '700', fontSize: '0.9rem', color: '#fff', marginBottom: '4px' } }));
+      if (o.description) {
+        oItem.appendChild(textEl('div', o.description, { style: { fontSize: '0.82rem', color: 'var(--text-dim)', lineHeight: '1.5' } }));
+      }
+      if (o.revenue_potential) {
+        oItem.appendChild(textEl('div', o.revenue_potential, { style: { marginTop: '8px', fontSize: '1rem', fontWeight: '800', color: 'var(--green)' } }));
+      }
+      var metaRow = el('div', { style: { display: 'flex', gap: '8px', marginTop: '6px', flexWrap: 'wrap' } });
+      if (o.confidence) {
+        var confClass = o.confidence === 'high' ? 'pill pill--green' : (o.confidence === 'medium' ? 'pill pill--yellow' : 'pill pill--amber');
+        metaRow.appendChild(textEl('span', o.confidence + ' confidence', { className: confClass }));
+      }
+      if (o.timeline) {
+        metaRow.appendChild(textEl('span', o.timeline, { className: 'pill pill--blue' }));
+      }
+      oItem.appendChild(metaRow);
+      ampContent.appendChild(oItem);
+    }
+  }
+  container.appendChild(makeFrameworkCard('4', 'Amplify \u2014 New Revenue Opportunities', ampContent));
+
+  // +1 START HERE Card
+  var plusSection = audit.plus_one || {};
+  var plusContent = el('div');
+  if (plusSection.action) {
+    plusContent.appendChild(textEl('p', plusSection.action, { style: { fontWeight: '700', color: '#fff', fontSize: '0.95rem' } }));
+  }
+  if (plusSection.why) {
+    plusContent.appendChild(textEl('p', plusSection.why, { style: { marginTop: '8px', fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: '1.6' } }));
+  }
+  if (plusSection.how) {
+    var howBox = el('div', { style: { marginTop: '14px', padding: '16px', background: 'rgba(74,222,128,0.06)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(74,222,128,0.1)' } });
+    howBox.appendChild(textEl('div', 'How to do it', { style: { fontSize: '0.72rem', fontWeight: '700', color: 'var(--green)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' } }));
+    howBox.appendChild(textEl('div', plusSection.how, { style: { fontSize: '0.85rem', color: '#ccc', lineHeight: '1.6' } }));
+    plusContent.appendChild(howBox);
+  }
+  if (plusSection.expected_result) {
+    plusContent.appendChild(textEl('p', 'Expected result: ' + plusSection.expected_result, { style: { marginTop: '10px', fontSize: '0.85rem', color: 'var(--green)', fontWeight: '600' } }));
+  }
+  container.appendChild(makeFrameworkCard('+1', 'Start Here This Week', plusContent, true));
+
+  // ---- 5e: ROI Summary Card ----
+  var roi = audit.roi_summary || {};
+  var roiCard = el('div', { className: 'result-card' });
+  roiCard.appendChild(textEl('div', 'Return on Investment', { style: { textAlign: 'center', fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--text-faint)', marginBottom: '16px' } }));
+
+  var roiGrid = el('div', { className: 'roi-grid' });
+
+  // Investment column
+  var investCol = el('div');
+  investCol.appendChild(textEl('div', 'Annual Investment', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: '6px' } }));
+  investCol.appendChild(textEl('div', roi.total_annual_investment || 'N/A', { style: { fontSize: '1.3rem', fontWeight: '800', color: '#fff' } }));
+  roiGrid.appendChild(investCol);
+
+  // Arrow
+  roiGrid.appendChild(textEl('div', '\u2192', { className: 'roi-arrow' }));
+
+  // Return column
+  var returnCol = el('div');
+  returnCol.appendChild(textEl('div', 'Annual Return', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: '6px' } }));
+  returnCol.appendChild(textEl('div', roi.total_annual_return || 'N/A', { style: { fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', fontWeight: '900', color: 'var(--green)' } }));
+  roiGrid.appendChild(returnCol);
+
+  roiCard.appendChild(roiGrid);
+
+  // ROI multiple + payback
+  var roiBottom = el('div', { style: { textAlign: 'center', marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--border)' } });
+  if (roi.roi_multiple) {
+    roiBottom.appendChild(textEl('div', roi.roi_multiple + ' ROI', { style: { fontSize: 'clamp(2rem, 6vw, 3rem)', fontWeight: '900', color: 'var(--green)', letterSpacing: '-1px' } }));
+  }
+  if (roi.payback_period) {
+    roiBottom.appendChild(textEl('div', 'Payback period: ' + roi.payback_period, { style: { fontSize: '0.82rem', color: 'var(--text-dim)', marginTop: '4px' } }));
+  }
+  roiCard.appendChild(roiBottom);
+  container.appendChild(roiCard);
+
+  // ---- 5f: Level 2 CTA Card ----
+  var ctaCard = el('div', { className: 'result-card result-card--premium', style: { textAlign: 'center', padding: '36px 28px' } });
+  ctaCard.appendChild(textEl('div', 'Deep Dive Available', { style: { fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--green)', marginBottom: '12px' } }));
+  ctaCard.appendChild(textEl('h3', 'Want the full strategy brief?', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '10px' } }));
+  ctaCard.appendChild(textEl('p', 'Unlock competitive intelligence, 90-day roadmap, priority matrix, and budget allocation \u2014 personalized to your business.', { style: { fontSize: '0.9rem', color: 'var(--text-dim)', lineHeight: '1.6', marginBottom: '24px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto' } }));
+
+  var ctaBtn = el('button', {
+    className: 'btn-primary',
+    style: { width: 'auto', padding: '16px 40px', display: 'inline-block' },
+    onclick: function() { showLevel2Form(); }
+  }, 'Get Your Deep Dive \u2014 Free');
+  ctaCard.appendChild(ctaBtn);
+  container.appendChild(ctaCard);
+
+  // Powered by
+  container.appendChild(textEl('div', 'Powered by the 4+1 Method \u00b7 41 Labs \u00b7 41labs.ai', { style: { textAlign: 'center', marginTop: '20px', fontSize: '0.65rem', color: 'var(--text-invisible)', paddingBottom: '20px' } }));
+
+  container.classList.add('active');
+  container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ========================================
+   SHOW LEVEL 2 FORM
+======================================== */
+function showLevel2Form() {
+  var section = document.getElementById('l2FormSection');
+  clearNode(section);
+
+  var card = el('div', { className: 'form-card', style: { borderColor: 'rgba(74,222,128,0.15)' } });
+
+  card.appendChild(textEl('div', 'Deep Dive Strategy Brief', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.5px', color: 'var(--green)', marginBottom: '6px' } }));
+  card.appendChild(textEl('h3', 'Tell us more to personalize your strategy', { style: { fontSize: '1.15rem', fontWeight: '800', color: '#fff', marginBottom: '20px' } }));
+
+  // Phone
+  var phoneRow = el('div', { className: 'form-row' });
+  phoneRow.appendChild(textEl('label', 'Phone Number', { 'for': 'l2phone' }));
+  phoneRow.appendChild(el('input', { type: 'tel', id: 'l2phone', placeholder: '+1 (555) 000-0000' }));
+  card.appendChild(phoneRow);
+
+  // Role + Team Size
+  var row1 = el('div', { className: 'form-row-half form-row' });
+
+  var roleWrap = el('div');
+  roleWrap.appendChild(textEl('label', 'Your Role', { 'for': 'l2role' }));
+  var roleSel = el('select', { id: 'l2role' });
+  var roleOpts = ['Founder/CEO', 'COO/Operations', 'CTO/Tech', 'Marketing Lead', 'Other'];
+  for (var i = 0; i < roleOpts.length; i++) {
+    roleSel.appendChild(textEl('option', roleOpts[i], { value: roleOpts[i] }));
+  }
+  roleWrap.appendChild(roleSel);
+  row1.appendChild(roleWrap);
+
+  var teamWrap = el('div');
+  teamWrap.appendChild(textEl('label', 'Team Size', { 'for': 'l2team' }));
+  var teamSel = el('select', { id: 'l2team' });
+  var teamOpts = ['1-5', '6-20', '21-50', '51-200', '200+'];
+  for (var i = 0; i < teamOpts.length; i++) {
+    teamSel.appendChild(textEl('option', teamOpts[i], { value: teamOpts[i] }));
+  }
+  teamWrap.appendChild(teamSel);
+  row1.appendChild(teamWrap);
+  card.appendChild(row1);
+
+  // Revenue + Software Spend
+  var row2 = el('div', { className: 'form-row-half form-row' });
+
+  var revWrap = el('div');
+  revWrap.appendChild(textEl('label', 'Annual Revenue', { 'for': 'l2revenue' }));
+  var revSel = el('select', { id: 'l2revenue' });
+  var revOpts = ['Pre-revenue', '<$500K', '$500K-$2M', '$2M-$10M', '$10M+'];
+  for (var i = 0; i < revOpts.length; i++) {
+    revSel.appendChild(textEl('option', revOpts[i], { value: revOpts[i] }));
+  }
+  revWrap.appendChild(revSel);
+  row2.appendChild(revWrap);
+
+  var spendWrap = el('div');
+  spendWrap.appendChild(textEl('label', 'Monthly Tools Spend', { 'for': 'l2spend' }));
+  var spendSel = el('select', { id: 'l2spend' });
+  var spendOpts = ['<$500', '$500-$2K', '$2K-$10K', '$10K+'];
+  for (var i = 0; i < spendOpts.length; i++) {
+    spendSel.appendChild(textEl('option', spendOpts[i], { value: spendOpts[i] }));
+  }
+  spendWrap.appendChild(spendSel);
+  row2.appendChild(spendWrap);
+  card.appendChild(row2);
+
+  // Bottleneck
+  var bnRow = el('div', { className: 'form-row' });
+  bnRow.appendChild(textEl('label', 'Biggest Operational Bottleneck'));
+  bnRow.appendChild(el('textarea', { id: 'l2bottleneck', placeholder: 'What takes the most time in your business?', style: { minHeight: '90px' } }));
+  card.appendChild(bnRow);
+
+  // AI Experience
+  var aiRow = el('div', { className: 'form-row' });
+  aiRow.appendChild(textEl('label', 'AI Experience', { 'for': 'l2aiexp' }));
+  var aiSel = el('select', { id: 'l2aiexp' });
+  var aiOpts = ['Using AI actively', 'Tried a few tools', "Haven't started yet"];
+  for (var i = 0; i < aiOpts.length; i++) {
+    aiSel.appendChild(textEl('option', aiOpts[i], { value: aiOpts[i] }));
+  }
+  aiRow.appendChild(aiSel);
+  card.appendChild(aiRow);
+
+  // Submit button
+  var submitBtn = el('button', {
+    className: 'btn-primary',
+    id: 'btnDeepDive',
+    onclick: function() { runDeepDive(); }
+  }, 'Generate Deep Dive Strategy Brief');
+  card.appendChild(submitBtn);
+
+  // Error
+  card.appendChild(el('div', { className: 'error-msg', id: 'l2ErrorMsg' }));
+
+  section.appendChild(card);
+  section.classList.add('active');
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ========================================
+   LEVEL 2 — RUN DEEP DIVE
+======================================== */
+async function runDeepDive() {
+  var phone = document.getElementById('l2phone').value.trim();
+  var role = document.getElementById('l2role').value;
+  var team = document.getElementById('l2team').value;
+  var revenue = document.getElementById('l2revenue').value;
+  var spend = document.getElementById('l2spend').value;
+  var bottleneck = document.getElementById('l2bottleneck').value.trim();
+  var aiExp = document.getElementById('l2aiexp').value;
+  var errEl = document.getElementById('l2ErrorMsg');
+  var btn = document.getElementById('btnDeepDive');
+
+  errEl.classList.remove('active');
+
+  if (!phone) {
+    errEl.textContent = 'Please enter your phone number.';
+    errEl.classList.add('active');
+    return;
+  }
+  if (!bottleneck) {
+    errEl.textContent = 'Please describe your biggest operational bottleneck.';
+    errEl.classList.add('active');
+    return;
+  }
+
+  document.getElementById('l2FormSection').classList.remove('active');
+  document.getElementById('l2FormSection').style.display = 'none';
+  var loading = document.getElementById('l2Loading');
+  loading.classList.add('active');
+  btn.disabled = true;
+
+  var stepTexts = [
+    'Researching your competitors',
+    'Building implementation roadmap',
+    'Calculating budget allocation',
+    'Assessing risks and priorities',
+    'Finalizing your strategy brief'
+  ];
+  var steps = buildLoadingSteps('l2Steps', stepTexts);
+  var anim = animateSteps(steps, 3000);
+
+  try {
+    var res = await fetch('https://teaser-deploy.vercel.app/api/audit-deep', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        url: document.getElementById('url').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        company: document.getElementById('company').value.trim(),
+        description: document.getElementById('description').value.trim(),
+        phone: phone,
+        role: role,
+        teamSize: team,
+        annualRevenue: revenue,
+        monthlyToolsSpend: spend,
+        biggestBottleneck: bottleneck,
+        aiExperience: aiExp,
+        level1Audit: level1AuditData
+      })
+    });
+
+    anim.finishAll();
+
+    if (!res.ok) {
+      var errData = await res.json();
+      throw new Error(errData.error || 'Something went wrong');
+    }
+
+    var data = await res.json();
+    await new Promise(function(r) { setTimeout(r, 800); });
+
+    loading.classList.remove('active');
+    renderLevel2(data.audit || data.deepAudit || data);
+
+  } catch (err) {
+    anim.finishAll();
+    loading.classList.remove('active');
+    document.getElementById('l2FormSection').style.display = '';
+    document.getElementById('l2FormSection').classList.add('active');
+    btn.disabled = false;
+    errEl.textContent = err.message || 'Failed to generate deep dive. Please try again.';
+    errEl.classList.add('active');
+  }
+}
+
+/* ========================================
+   RENDER LEVEL 2
+======================================== */
+function renderLevel2(deepAudit) {
+  var container = document.getElementById('l2Results');
+  clearNode(container);
+
+  // ---- 8a: Section Divider ----
+  var divider = el('div', { className: 'section-divider' });
+  divider.appendChild(textEl('span', 'Your Deep Dive Strategy Brief', { className: 'section-divider-text' }));
+  container.appendChild(divider);
+
+  // ---- 8b: Competitive Intelligence ----
+  var ci = deepAudit.competitive_intelligence || {};
+  var ciCard = el('div', { className: 'result-card' });
+  ciCard.appendChild(el('div', { className: 'card-header' }, [
+    textEl('div', '\u{1F50D}', { className: 'card-step-num', style: { fontSize: '1rem' } }),
+    textEl('div', 'Competitive Intelligence', { className: 'card-title' })
+  ]));
+
+  if (ci.industry_ai_trends && ci.industry_ai_trends.length) {
+    ciCard.appendChild(textEl('div', 'Industry AI Trends', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: '10px' } }));
+    var trendList = el('div', { style: { display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' } });
+    for (var i = 0; i < ci.industry_ai_trends.length; i++) {
+      var trendItem = el('div', { style: { display: 'flex', gap: '10px', alignItems: 'flex-start' } });
+      trendItem.appendChild(textEl('span', String(i + 1) + '.', { style: { fontWeight: '800', color: 'var(--green)', fontSize: '0.85rem', flexShrink: '0', minWidth: '20px' } }));
+      trendItem.appendChild(textEl('span', ci.industry_ai_trends[i], { style: { fontSize: '0.85rem', color: '#ccc', lineHeight: '1.5' } }));
+      trendList.appendChild(trendItem);
+    }
+    ciCard.appendChild(trendList);
+  }
+
+  if (ci.what_leaders_do) {
+    ciCard.appendChild(textEl('div', 'What Leaders Do', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-faint)', marginBottom: '6px' } }));
+    ciCard.appendChild(textEl('p', ci.what_leaders_do, { style: { fontSize: '0.88rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '14px' } }));
+  }
+
+  if (ci.their_gap) {
+    var gapBox = el('div', { style: { padding: '14px', background: 'var(--amber-bg)', border: '1px solid var(--amber-border)', borderRadius: 'var(--radius-sm)' } });
+    gapBox.appendChild(textEl('div', 'Your Gap', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--amber)', marginBottom: '4px' } }));
+    gapBox.appendChild(textEl('p', ci.their_gap, { style: { fontSize: '0.85rem', color: '#ddd', lineHeight: '1.5' } }));
+    ciCard.appendChild(gapBox);
+  }
+  container.appendChild(ciCard);
+
+  // ---- 8c: 90-Day Implementation Roadmap ----
+  var roadmap = deepAudit.implementation_roadmap || {};
+  var phases = ['phase_1', 'phase_2', 'phase_3', 'phase_4'];
+  var phaseColors = ['#3b82f6', '#4ade80', '#10b981', '#eab308'];
+  var phaseBgs = ['rgba(59,130,246,0.1)', 'rgba(74,222,128,0.1)', 'rgba(16,185,129,0.1)', 'rgba(234,179,8,0.1)'];
+
+  var roadmapCard = el('div', { className: 'result-card' });
+  roadmapCard.appendChild(el('div', { className: 'card-header' }, [
+    textEl('div', '\u{1F4C5}', { className: 'card-step-num', style: { fontSize: '1rem' } }),
+    textEl('div', '90-Day Implementation Roadmap', { className: 'card-title' })
+  ]));
+
+  var timeline = el('div', { className: 'timeline' });
+
+  for (var p = 0; p < phases.length; p++) {
+    var phase = roadmap[phases[p]];
+    if (!phase) continue;
+
+    var phaseEl = el('div', { className: 'timeline-phase', style: { borderColor: phaseColors[p] + '33' } });
+
+    var dot = el('div', { className: 'timeline-dot', style: { background: phaseBgs[p], borderColor: phaseColors[p] } });
+    phaseEl.appendChild(dot);
+
+    phaseEl.appendChild(textEl('div', phase.title || ('Phase ' + (p + 1)), { style: { fontWeight: '700', fontSize: '0.92rem', color: '#fff', marginBottom: '10px' } }));
+
+    if (phase.actions && phase.actions.length) {
+      var actionList = el('div', { style: { display: 'flex', flexDirection: 'column', gap: '6px' } });
+      for (var a = 0; a < phase.actions.length; a++) {
+        var actionItem = el('div', { style: { display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '0.82rem', color: '#ccc', lineHeight: '1.5' } });
+        actionItem.appendChild(el('span', { style: { width: '5px', height: '5px', borderRadius: '50%', background: phaseColors[p], marginTop: '7px', flexShrink: '0' } }));
+        actionItem.appendChild(textEl('span', phase.actions[a]));
+        actionList.appendChild(actionItem);
+      }
+      phaseEl.appendChild(actionList);
+    }
+
+    var phaseFooter = el('div', { style: { display: 'flex', gap: '10px', marginTop: '12px', flexWrap: 'wrap' } });
+    if (phase.investment) {
+      phaseFooter.appendChild(textEl('span', 'Investment: ' + phase.investment, { className: 'pill pill--blue' }));
+    }
+    if (phase.expected_savings) {
+      phaseFooter.appendChild(textEl('span', 'Savings: ' + phase.expected_savings, { className: 'pill pill--green' }));
+    }
+    if (phase.expected_revenue) {
+      phaseFooter.appendChild(textEl('span', 'Revenue: ' + phase.expected_revenue, { className: 'pill pill--green' }));
+    }
+    phaseEl.appendChild(phaseFooter);
+
+    timeline.appendChild(phaseEl);
+  }
+
+  roadmapCard.appendChild(timeline);
+  container.appendChild(roadmapCard);
+
+  // ---- 8d: Priority Matrix ----
+  var matrix = deepAudit.priority_matrix || [];
+  var matrixCard = el('div', { className: 'result-card' });
+  matrixCard.appendChild(el('div', { className: 'card-header' }, [
+    textEl('div', '\u{1F3AF}', { className: 'card-step-num', style: { fontSize: '1rem' } }),
+    textEl('div', 'Priority Matrix', { className: 'card-title' })
+  ]));
+
+  var matrixGrid = el('div', { className: 'matrix-grid' });
+
+  var quadrants = [
+    { key: 'do_first', title: 'Do First', sub: 'High Impact, Low Effort', bg: 'rgba(74,222,128,0.08)', border: 'rgba(74,222,128,0.2)', titleColor: 'var(--green)' },
+    { key: 'plan_carefully', title: 'Plan Carefully', sub: 'High Impact, High Effort', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.2)', titleColor: 'var(--amber)' },
+    { key: 'delegate', title: 'Quick Wins', sub: 'Medium Impact, Low Effort', bg: 'rgba(59,130,246,0.08)', border: 'rgba(59,130,246,0.2)', titleColor: 'var(--blue)' },
+    { key: 'skip', title: 'Reconsider', sub: 'Low Impact, High Effort', bg: 'rgba(255,255,255,0.03)', border: 'rgba(255,255,255,0.08)', titleColor: 'var(--text-faint)' }
+  ];
+
+  for (var q = 0; q < quadrants.length; q++) {
+    var quad = quadrants[q];
+    var cell = el('div', { className: 'matrix-cell', style: { background: quad.bg, border: '1px solid ' + quad.border } });
+    cell.appendChild(textEl('div', quad.title, { className: 'matrix-cell-title', style: { color: quad.titleColor } }));
+    cell.appendChild(textEl('div', quad.sub, { style: { fontSize: '0.65rem', color: 'var(--text-faint)', marginBottom: '8px' } }));
+
+    for (var m = 0; m < matrix.length; m++) {
+      if (matrix[m].quadrant === quad.key) {
+        cell.appendChild(textEl('span', matrix[m].item || '', { className: 'matrix-pill' }));
+      }
+    }
+    matrixGrid.appendChild(cell);
+  }
+
+  matrixCard.appendChild(matrixGrid);
+  container.appendChild(matrixCard);
+
+  // ---- 8e: Budget Allocation (Donut Chart) ----
+  var budget = deepAudit.budget_allocation || {};
+  var breakdown = budget.breakdown || [];
+  var budgetCard = el('div', { className: 'result-card' });
+  budgetCard.appendChild(el('div', { className: 'card-header' }, [
+    textEl('div', '\u{1F4B0}', { className: 'card-step-num', style: { fontSize: '1rem' } }),
+    textEl('div', 'Recommended Budget Allocation', { className: 'card-title' })
+  ]));
+
+  var donutWrap = el('div', { className: 'donut-wrap' });
+
+  // SVG donut chart
+  var donutSize = 200;
+  var donutR = 70;
+  var donutStroke = 28;
+  var donutCirc = 2 * Math.PI * donutR;
+  var donutColors = ['#4ade80', '#3b82f6', '#f59e0b', '#8b5cf6'];
+
+  var donutSvg = svgEl('svg', { width: String(donutSize), height: String(donutSize), viewBox: '0 0 ' + donutSize + ' ' + donutSize });
+
+  // Background ring
+  donutSvg.appendChild(svgEl('circle', {
+    cx: String(donutSize / 2), cy: String(donutSize / 2), r: String(donutR),
+    fill: 'none', stroke: 'rgba(255,255,255,0.04)', 'stroke-width': String(donutStroke)
+  }));
+
+  var cumulativeOffset = 0;
+  for (var b = 0; b < breakdown.length; b++) {
+    var pct = parseInt(breakdown[b].percentage) || 25;
+    var segLength = donutCirc * pct / 100;
+    var gapLength = donutCirc - segLength;
+
+    var seg = svgEl('circle', {
+      cx: String(donutSize / 2), cy: String(donutSize / 2), r: String(donutR),
+      fill: 'none',
+      stroke: donutColors[b % donutColors.length],
+      'stroke-width': String(donutStroke),
+      'stroke-dasharray': segLength.toFixed(1) + ' ' + gapLength.toFixed(1),
+      'stroke-dashoffset': String((-cumulativeOffset + donutCirc * 0.25).toFixed(1)),
+      'stroke-linecap': 'butt',
+      style: { transition: 'stroke-dasharray 1s ease, stroke-dashoffset 1s ease' }
+    });
+    donutSvg.appendChild(seg);
+    cumulativeOffset += segLength;
+  }
+
+  // Center text
+  if (budget.recommended_monthly_budget) {
+    donutSvg.appendChild(svgEl('text', {
+      x: String(donutSize / 2), y: String(donutSize / 2 - 8),
+      fill: '#fff', 'font-size': '16', 'font-weight': '800',
+      'font-family': 'Inter, sans-serif', 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+      textContent: budget.recommended_monthly_budget
+    }));
+    donutSvg.appendChild(svgEl('text', {
+      x: String(donutSize / 2), y: String(donutSize / 2 + 12),
+      fill: '#666', 'font-size': '9', 'font-weight': '700',
+      'font-family': 'Inter, sans-serif', 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+      textContent: 'PER MONTH'
+    }));
+  }
+
+  donutWrap.appendChild(donutSvg);
+
+  // Legend
+  var legend = el('div', { className: 'donut-legend' });
+  for (var b = 0; b < breakdown.length; b++) {
+    var legendItem = el('div', { className: 'donut-legend-item' });
+    legendItem.appendChild(el('div', { className: 'donut-legend-swatch', style: { background: donutColors[b % donutColors.length] } }));
+    legendItem.appendChild(textEl('span', (breakdown[b].category || '') + ' \u2014 ' + (breakdown[b].amount || '') + ' (' + (breakdown[b].percentage || 0) + '%)', { style: { color: '#ccc' } }));
+    legend.appendChild(legendItem);
+  }
+  donutWrap.appendChild(legend);
+
+  budgetCard.appendChild(donutWrap);
+  container.appendChild(budgetCard);
+
+  // ---- 8f: Bottleneck Solution Card ----
+  var bnSolution = deepAudit.bottleneck_solution || deepAudit.bottleneck_analysis || null;
+  if (bnSolution) {
+    var bnCard = el('div', { className: 'bottleneck-card' });
+    bnCard.appendChild(el('div', { className: 'card-header' }, [
+      textEl('div', '\u{1F527}', { className: 'card-step-num card-step-num--plus', style: { fontSize: '1rem' } }),
+      textEl('div', 'Your Bottleneck \u2014 Solved', { className: 'card-title' })
+    ]));
+
+    if (bnSolution.problem) {
+      var probBox = el('div', { style: { padding: '12px 16px', background: 'var(--red-bg)', border: '1px solid var(--red-border)', borderRadius: 'var(--radius-sm)', marginBottom: '16px' } });
+      probBox.appendChild(textEl('div', 'The Problem', { style: { fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--red-light)', marginBottom: '4px' } }));
+      probBox.appendChild(textEl('p', bnSolution.problem, { style: { fontSize: '0.85rem', color: '#ddd', lineHeight: '1.5' } }));
+      bnCard.appendChild(probBox);
+    }
+
+    if (bnSolution.solution) {
+      bnCard.appendChild(textEl('div', 'The Solution', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--green)', marginBottom: '8px' } }));
+      bnCard.appendChild(textEl('p', bnSolution.solution, { style: { fontSize: '0.88rem', color: '#ccc', lineHeight: '1.6', marginBottom: '14px' } }));
+    }
+
+    if (bnSolution.steps && bnSolution.steps.length) {
+      var stepList = el('div', { style: { display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '14px' } });
+      for (var s = 0; s < bnSolution.steps.length; s++) {
+        var stepItem = el('div', { style: { display: 'flex', gap: '10px', alignItems: 'flex-start' } });
+        stepItem.appendChild(textEl('span', String(s + 1) + '.', { style: { fontWeight: '800', color: 'var(--green)', fontSize: '0.85rem', flexShrink: '0', minWidth: '20px' } }));
+        stepItem.appendChild(textEl('span', bnSolution.steps[s], { style: { fontSize: '0.85rem', color: '#ccc', lineHeight: '1.5' } }));
+        stepList.appendChild(stepItem);
+      }
+      bnCard.appendChild(stepList);
+    }
+
+    // Tools needed
+    if (bnSolution.tools_needed && bnSolution.tools_needed.length) {
+      var toolsRow = el('div', { style: { display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '12px' } });
+      toolsRow.appendChild(textEl('span', 'Tools:', { style: { fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-faint)', marginRight: '4px', lineHeight: '2' } }));
+      for (var t = 0; t < bnSolution.tools_needed.length; t++) {
+        toolsRow.appendChild(textEl('span', bnSolution.tools_needed[t], { className: 'pill pill--purple' }));
+      }
+      bnCard.appendChild(toolsRow);
+    }
+
+    // Timeline + Savings
+    var bnMeta = el('div', { style: { display: 'flex', gap: '12px', flexWrap: 'wrap' } });
+    if (bnSolution.implementation_timeline) {
+      bnMeta.appendChild(textEl('span', 'Timeline: ' + bnSolution.implementation_timeline, { className: 'pill pill--blue' }));
+    }
+    if (bnSolution.estimated_savings) {
+      bnMeta.appendChild(textEl('span', 'Savings: ' + bnSolution.estimated_savings, { className: 'pill pill--green' }));
+    }
+    bnCard.appendChild(bnMeta);
+
+    container.appendChild(bnCard);
+  }
+
+  // ---- 8g: Risk Assessment ----
+  var risk = deepAudit.risk_assessment || {};
+  var riskCard = el('div', { className: 'result-card' });
+  riskCard.appendChild(el('div', { className: 'card-header' }, [
+    textEl('div', '\u26A0', { className: 'card-step-num', style: { fontSize: '1rem' } }),
+    textEl('div', 'Risk Assessment', { className: 'card-title' })
+  ]));
+
+  var riskCols = el('div', { className: 'risk-columns' });
+
+  // If You Act
+  var actCol = el('div', { className: 'risk-col risk-col--act' });
+  actCol.appendChild(textEl('div', 'If You Act', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--green)', marginBottom: '8px' } }));
+  actCol.appendChild(textEl('p', risk.if_you_act || '', { style: { fontSize: '0.85rem', color: '#ccc', lineHeight: '1.6' } }));
+  riskCols.appendChild(actCol);
+
+  // If You Don't
+  var dontCol = el('div', { className: 'risk-col risk-col--dont' });
+  dontCol.appendChild(textEl('div', "If You Don't", { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--red-light)', marginBottom: '8px' } }));
+  dontCol.appendChild(textEl('p', risk.if_you_dont || '', { style: { fontSize: '0.85rem', color: '#ccc', lineHeight: '1.6' } }));
+  riskCols.appendChild(dontCol);
+
+  riskCard.appendChild(riskCols);
+
+  if (risk.biggest_risk) {
+    var riskBottom = el('div', { style: { marginTop: '14px', padding: '14px', background: 'var(--amber-bg)', border: '1px solid var(--amber-border)', borderRadius: 'var(--radius-sm)' } });
+    riskBottom.appendChild(textEl('div', 'Biggest Risk + Mitigation', { style: { fontSize: '0.72rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--amber)', marginBottom: '4px' } }));
+    riskBottom.appendChild(textEl('p', risk.biggest_risk, { style: { fontSize: '0.85rem', color: '#ddd', lineHeight: '1.5' } }));
+    riskCard.appendChild(riskBottom);
+  }
+
+  container.appendChild(riskCard);
+
+  // ---- 8h: Final CTA ----
+  var finalCta = el('div', { className: 'final-cta' });
+  finalCta.appendChild(textEl('h3', 'Ready to implement?', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '6px' } }));
+  finalCta.appendChild(textEl('p', "Let's build this together.", { style: { fontSize: '1rem', color: 'var(--text-dim)', marginBottom: '24px' } }));
+
+  var waLink = el('a', {
+    className: 'wa-btn',
+    href: 'https://wa.me/6580234886?text=' + encodeURIComponent('Hi Alexander, I just completed the deep dive AI audit on 41labs.ai and I\'d love to discuss implementing the recommendations.'),
+    target: '_blank',
+    rel: 'noopener noreferrer'
+  }, 'Chat with Alexander on WhatsApp');
+  finalCta.appendChild(waLink);
+
+  finalCta.appendChild(textEl('div', '41 Labs \u00b7 4+1 Method \u00b7 41labs.ai', { style: { marginTop: '20px', fontSize: '0.65rem', color: 'var(--text-invisible)' } }));
+
+  container.appendChild(finalCta);
+
+  // Bottom spacer
+  container.appendChild(el('div', { style: { height: '60px' } }));
+
+  container.classList.add('active');
+  container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 </script>
 
 </body>
