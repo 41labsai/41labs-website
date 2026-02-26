@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — 41 Labs AI Audit</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/logo-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050505;
+    --bg-card: rgba(255,255,255,0.02);
+    --bg-card-hover: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.06);
+    --border-light: rgba(255,255,255,0.08);
+    --text: #f0f0f0;
+    --text-muted: #999;
+    --text-dim: #888;
+    --text-faint: #666;
+    --text-ghost: #555;
+    --green: #4ade80;
+    --green-hover: #22c55e;
+    --green-bg: rgba(74,222,128,0.08);
+    --green-bg-strong: rgba(74,222,128,0.15);
+    --green-border: rgba(74,222,128,0.2);
+    --green-border-strong: rgba(74,222,128,0.3);
+    --amber: #f59e0b;
+    --amber-bg: rgba(245,158,11,0.1);
+    --red: #ef4444;
+    --red-light: #f87171;
+    --red-bg: rgba(239,68,68,0.08);
+    --red-border: rgba(239,68,68,0.2);
+    --blue: #3b82f6;
+    --blue-bg: rgba(59,130,246,0.1);
+    --purple: #8b5cf6;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  .auth-gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+  .auth-box { max-width: 360px; width: 100%; text-align: center; }
+  .auth-box h1 { font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .auth-box p { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 24px; }
+  .auth-input { width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1.5px solid var(--border-light); border-radius: var(--radius-md); color: #fff; font-family: inherit; font-size: 0.9rem; outline: none; margin-bottom: 12px; }
+  .auth-input:focus { border-color: var(--green-border-strong); }
+  .auth-btn { width: 100%; padding: 14px; background: var(--green); color: #000; border: none; border-radius: var(--radius-md); font-family: inherit; font-size: 0.9rem; font-weight: 800; cursor: pointer; }
+  .auth-btn:hover { background: var(--green-hover); }
+  .auth-error { color: var(--red-light); font-size: 0.8rem; margin-top: 10px; display: none; }
+  .admin-nav { padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(5,5,5,0.95); backdrop-filter: blur(20px); z-index: 100; }
+  .admin-nav .logo-img { height: 26px; filter: brightness(0) invert(1); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .lead-count { font-size: 0.72rem; font-weight: 700; color: var(--green); background: var(--green-bg); padding: 4px 12px; border-radius: 20px; }
+  .back-btn { display: none; padding: 6px 16px; background: transparent; border: 1px solid var(--border-light); border-radius: var(--radius-sm); color: var(--text-dim); font-family: inherit; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+  .back-btn:hover { border-color: var(--green); color: var(--green); }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+  .lead-row { display: grid; grid-template-columns: 1fr 1.5fr 1fr 0.8fr 0.6fr; gap: 12px; align-items: center; padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .lead-row:hover { border-color: var(--green-border); background: var(--bg-card-hover); }
+  .lead-row .company { font-weight: 700; color: #fff; font-size: 0.88rem; }
+  .lead-row .email { font-size: 0.78rem; color: var(--text-dim); }
+  .lead-row .industry { font-size: 0.75rem; color: var(--text-faint); }
+  .lead-row .opp { font-size: 0.78rem; font-weight: 700; color: var(--green); }
+  .type-badge { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; display: inline-block; }
+  .type-badge.l1 { background: var(--blue-bg); color: var(--blue); }
+  .type-badge.l2 { background: var(--green-bg-strong); color: var(--green); }
+  .lead-row .date { font-size: 0.7rem; color: var(--text-ghost); }
+  .lead-header { display: grid; grid-template-columns: 1fr 1.5fr 1fr 0.8fr 0.6fr; gap: 12px; padding: 8px 20px; margin-bottom: 4px; }
+  .lead-header span { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-ghost); }
+  .detail-view { display: none; }
+  .detail-view.active { display: block; }
+  .lead-list.hidden { display: none; }
+  .lead-info-bar { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 20px; }
+  .lead-info-item { flex: 1; min-width: 140px; }
+  .lead-info-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-ghost); margin-bottom: 4px; }
+  .lead-info-value { font-size: 0.85rem; color: #fff; font-weight: 600; }
+  .lead-info-value a { color: var(--green); text-decoration: none; }
+  .lead-info-value a:hover { text-decoration: underline; }
+  .action-bar { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+  .action-btn { padding: 10px 20px; border-radius: var(--radius-sm); font-family: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: none; transition: background 0.2s; text-decoration: none; display: inline-block; }
+  .action-btn--wa { background: #25d366; color: #000; }
+  .action-btn--wa:hover { background: #20bd5a; }
+  .action-btn--email { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(59,130,246,0.25); }
+  .action-btn--email:hover { background: rgba(59,130,246,0.15); }
+  .result-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 16px; animation: fadeUp 0.5s ease both; }
+  .result-card--green { background: rgba(74,222,128,0.04); border-color: rgba(74,222,128,0.15); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+  .stat-card--opp { border-color: rgba(74,222,128,0.15); }
+  .stat-card--warn { border-color: rgba(245,158,11,0.2); }
+  .stat-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .stat-value { font-size: clamp(1.3rem, 4vw, 1.8rem); font-weight: 900; letter-spacing: -0.5px; line-height: 1.1; }
+  .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .card-step-num { width: 34px; height: 34px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 800; flex-shrink: 0; background: rgba(74,222,128,0.1); border: 1.5px solid rgba(74,222,128,0.25); color: var(--green); }
+  .card-title { font-size: 1.05rem; font-weight: 800; color: #fff; }
+  .tool-chip { background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 16px; margin-top: 10px; }
+  .tool-name-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pill--green { background: rgba(74,222,128,0.15); color: var(--green); }
+  .pill--yellow { background: rgba(250,204,21,0.15); color: #facc15; }
+  .tool-meta { font-size: 0.75rem; color: var(--text-faint); margin-top: 8px; }
+  .workflow-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md); padding: 16px; margin-top: 10px; }
+  .cost-arrow { display: flex; align-items: center; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+  .cost-box { padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.82rem; font-weight: 700; }
+  .cost-box--before { background: var(--red-bg); color: var(--red-light); border: 1px solid var(--red-border); }
+  .cost-box--after { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .cost-arrow-icon { color: var(--text-faint); font-size: 1.2rem; }
+  .roi-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; text-align: center; margin: 16px 0; }
+  .roi-arrow { font-size: 1.8rem; color: var(--green); }
+  .empty-state { text-align: center; padding: 80px 20px; color: var(--text-ghost); }
+  .empty-state h2 { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 8px; }
+  .loading-msg { text-align: center; padding: 60px; color: var(--text-ghost); font-size: 0.85rem; }
+  .score-bar-wrap { margin-top: 10px; }
+  .score-bar-row { display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 4px; }
+  .score-bar-label { color: var(--text-dim); }
+  .score-bar-val { color: var(--green); font-weight: 700; }
+  .score-bar-track { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+  .score-bar-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 1s ease; }
+  @media (max-width: 700px) {
+    .lead-row { grid-template-columns: 1fr; gap: 6px; }
+    .lead-header { display: none; }
+    .hero-stats { grid-template-columns: 1fr; }
+    .lead-info-bar { flex-direction: column; gap: 12px; }
+    .roi-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- AUTH GATE -->
+<div class="auth-gate" id="authGate">
+  <div class="auth-box">
+    <img src="/logo-nav.png" alt="41 Labs" style="height:36px;filter:brightness(0) invert(1);margin-bottom:24px">
+    <h1>Audit Admin</h1>
+    <p>Enter admin password to view leads and research</p>
+    <input type="password" class="auth-input" id="authKey" placeholder="Admin key">
+    <button class="auth-btn" id="authBtn">Access Dashboard</button>
+    <div class="auth-error" id="authError">Invalid key. Try again.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none">
+  <div class="admin-nav">
+    <a href="/admin"><img src="/logo-nav.png" alt="41 Labs" class="logo-img"></a>
+    <div class="nav-right">
+      <span class="lead-count" id="leadCount">0 leads</span>
+      <button class="back-btn" id="backBtn">Back to list</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="lead-list" id="leadList">
+      <div class="loading-msg">Loading leads...</div>
+    </div>
+    <div class="detail-view" id="detailView">
+      <div id="leadInfoBar" class="lead-info-bar"></div>
+      <div id="actionBar" class="action-bar"></div>
+      <div id="auditRender"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== CONFIG =====
+// Update APPS_SCRIPT_URL after deploying the new Apps Script version
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLnn4kq9q-8eQIxoXm4WxwrKwMb2-b0AxOcYqmmxxhEW7OvUBhSJjEl0rUd7cH3liJ/exec';
+var ADMIN_KEY = '';
+
+function esc(str) {
+  var d = document.createElement('div');
+  d.textContent = str || '';
+  return d.textContent;
+}
+
+function makeEl(tag, attrs, text) {
+  var el = document.createElement(tag);
+  if (attrs) { for (var k in attrs) { if (k === 'style' && typeof attrs[k] === 'object') { for (var s in attrs[k]) el.style[s] = attrs[k][s]; } else el.setAttribute(k, attrs[k]); } }
+  if (text) el.textContent = text;
+  return el;
+}
+
+// ===== AUTH =====
+document.getElementById('authKey').addEventListener('keydown', function(e) { if (e.key === 'Enter') doAuth(); });
+document.getElementById('authBtn').addEventListener('click', doAuth);
+document.getElementById('backBtn').addEventListener('click', showList);
+
+function doAuth() {
+  var key = document.getElementById('authKey').value.trim();
+  if (!key) return;
+  ADMIN_KEY = key;
+  document.getElementById('authGate').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  loadLeads();
+}
+
+// ===== LOAD LEADS =====
+async function loadLeads() {
+  var listEl = document.getElementById('leadList');
+  listEl.textContent = '';
+  listEl.appendChild(makeEl('div', { class: 'loading-msg' }, 'Loading leads...'));
+
+  try {
+    var url = APPS_SCRIPT_URL + '?key=' + encodeURIComponent(ADMIN_KEY) + '&action=list';
+    var res = await fetch(url);
+    var text = await res.text();
+    var data = JSON.parse(text);
+
+    if (data.error === 'Unauthorized') {
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('authGate').style.display = 'flex';
+      document.getElementById('authError').style.display = 'block';
+      return;
+    }
+
+    var leads = data.leads || [];
+    document.getElementById('leadCount').textContent = leads.length + ' lead' + (leads.length !== 1 ? 's' : '');
+
+    listEl.textContent = '';
+
+    if (leads.length === 0) {
+      var empty = makeEl('div', { class: 'empty-state' });
+      empty.appendChild(makeEl('h2', null, 'No leads yet'));
+      empty.appendChild(makeEl('p', null, 'Run an audit at 41labs.ai/audit to generate your first lead'));
+      listEl.appendChild(empty);
+      return;
+    }
+
+    // Header
+    var header = makeEl('div', { class: 'lead-header' });
+    ['Company', 'Email', 'Industry', 'Opportunity', 'Type'].forEach(function(t) {
+      header.appendChild(makeEl('span', null, t));
+    });
+    listEl.appendChild(header);
+
+    // Rows
+    leads.forEach(function(l) {
+      var row = makeEl('div', { class: 'lead-row', 'data-row': l.row });
+      row.addEventListener('click', function() { viewLead(l.row); });
+
+      var col1 = makeEl('div');
+      col1.appendChild(makeEl('div', { class: 'company' }, l.company || 'Unknown'));
+      var ts = l.timestamp ? new Date(l.timestamp).toLocaleDateString() : '';
+      col1.appendChild(makeEl('div', { class: 'date' }, ts));
+      row.appendChild(col1);
+
+      row.appendChild(makeEl('div', { class: 'email' }, l.email));
+      row.appendChild(makeEl('div', { class: 'industry' }, l.industry || '\u2014'));
+      row.appendChild(makeEl('div', { class: 'opp' }, l.opportunity || '\u2014'));
+
+      var typeCol = makeEl('div');
+      var badge = makeEl('span', { class: 'type-badge ' + (l.type === 'level2_deep_dive' ? 'l2' : 'l1') }, l.type === 'level2_deep_dive' ? 'Deep Dive' : 'Level 1');
+      typeCol.appendChild(badge);
+      row.appendChild(typeCol);
+
+      listEl.appendChild(row);
+    });
+
+  } catch (err) {
+    listEl.textContent = '';
+    var errDiv = makeEl('div', { class: 'empty-state' });
+    errDiv.appendChild(makeEl('h2', null, 'Failed to load'));
+    errDiv.appendChild(makeEl('p', null, err.message));
+    listEl.appendChild(errDiv);
+  }
+}
+
+// ===== VIEW LEAD =====
+async function viewLead(row) {
+  document.getElementById('leadList').classList.add('hidden');
+  var detail = document.getElementById('detailView');
+  detail.classList.add('active');
+  document.getElementById('backBtn').style.display = 'inline-block';
+
+  var auditDiv = document.getElementById('auditRender');
+  auditDiv.textContent = '';
+  auditDiv.appendChild(makeEl('div', { class: 'loading-msg' }, 'Loading audit data...'));
+
+  try {
+    var url = APPS_SCRIPT_URL + '?key=' + encodeURIComponent(ADMIN_KEY) + '&action=get&row=' + row;
+    var res = await fetch(url);
+    var text = await res.text();
+    var lead = JSON.parse(text);
+
+    // Info bar
+    var infoBar = document.getElementById('leadInfoBar');
+    infoBar.textContent = '';
+    var fields = [
+      ['Company', lead.company || 'Unknown'],
+      ['Email', lead.email || '\u2014'],
+      ['Phone', lead.phone || '\u2014'],
+      ['Website', lead.url || '\u2014'],
+      ['Role', lead.role || '\u2014'],
+      ['Team', lead.teamSize || '\u2014'],
+      ['Revenue', lead.revenue || '\u2014'],
+      ['AI Score', lead.score ? lead.score + '/10' : '\u2014'],
+    ];
+    fields.forEach(function(f) {
+      var item = makeEl('div', { class: 'lead-info-item' });
+      item.appendChild(makeEl('div', { class: 'lead-info-label' }, f[0]));
+      var val = makeEl('div', { class: 'lead-info-value' });
+      if (f[0] === 'Email' && lead.email) {
+        var a = makeEl('a', { href: 'mailto:' + lead.email }, lead.email);
+        val.appendChild(a);
+      } else if (f[0] === 'Phone' && lead.phone) {
+        var a = makeEl('a', { href: 'tel:' + lead.phone }, lead.phone);
+        val.appendChild(a);
+      } else if (f[0] === 'Website' && lead.url) {
+        var a = makeEl('a', { href: lead.url, target: '_blank' }, lead.url);
+        val.appendChild(a);
+      } else {
+        val.textContent = f[1];
+      }
+      item.appendChild(val);
+      infoBar.appendChild(item);
+    });
+
+    // Actions
+    var actionBar = document.getElementById('actionBar');
+    actionBar.textContent = '';
+    if (lead.phone) {
+      var pDigits = lead.phone.replace(/[^0-9]/g, '');
+      var waBtn = makeEl('a', { class: 'action-btn action-btn--wa', href: 'https://wa.me/' + pDigits + '?text=' + encodeURIComponent('Hi' + (lead.company ? ' ' + lead.company : '') + ", I'm Alexander from 41 Labs. I saw you completed our AI audit \u2014 I'd love to walk you through the findings."), target: '_blank' }, 'WhatsApp');
+      actionBar.appendChild(waBtn);
+    }
+    if (lead.email) {
+      var emBtn = makeEl('a', { class: 'action-btn action-btn--email', href: 'mailto:' + lead.email + '?subject=' + encodeURIComponent('Your 41 Labs AI Audit Results'), target: '_blank' }, 'Email');
+      actionBar.appendChild(emBtn);
+    }
+
+    // Audit
+    auditDiv.textContent = '';
+    if (!lead.audit) {
+      var empty = makeEl('div', { class: 'empty-state' });
+      empty.appendChild(makeEl('h2', null, 'No audit data'));
+      empty.appendChild(makeEl('p', null, "This lead doesn't have stored audit results."));
+      auditDiv.appendChild(empty);
+      return;
+    }
+
+    renderAudit(auditDiv, lead.audit);
+
+  } catch (err) {
+    auditDiv.textContent = '';
+    var errDiv = makeEl('div', { class: 'empty-state' });
+    errDiv.appendChild(makeEl('h2', null, 'Error'));
+    errDiv.appendChild(makeEl('p', null, err.message));
+    auditDiv.appendChild(errDiv);
+  }
+}
+
+function showList() {
+  document.getElementById('leadList').classList.remove('hidden');
+  document.getElementById('detailView').classList.remove('active');
+  document.getElementById('backBtn').style.display = 'none';
+}
+
+// ===== RENDER AUDIT (same visual as audit.html) =====
+function renderAudit(container, audit) {
+  // Hero stats
+  var stats = document.createElement('div');
+  stats.className = 'hero-stats';
+
+  if (audit.estimated_annual_opportunity) {
+    var oppCard = makeEl('div', { class: 'stat-card stat-card--opp' });
+    oppCard.appendChild(makeEl('div', { class: 'stat-label', style: 'color:var(--green)' }, 'Annual AI Opportunity'));
+    oppCard.appendChild(makeEl('div', { class: 'stat-value', style: 'color:var(--green)' }, audit.estimated_annual_opportunity));
+    stats.appendChild(oppCard);
+  }
+  if (audit.cost_of_inaction_monthly) {
+    var warnCard = makeEl('div', { class: 'stat-card stat-card--warn' });
+    warnCard.appendChild(makeEl('div', { class: 'stat-label', style: 'color:var(--amber)' }, 'Cost of Inaction / Month'));
+    warnCard.appendChild(makeEl('div', { class: 'stat-value', style: 'color:var(--amber)' }, audit.cost_of_inaction_monthly));
+    stats.appendChild(warnCard);
+  }
+  container.appendChild(stats);
+
+  // Company summary
+  if (audit.company_summary) {
+    var sumCard = makeEl('div', { class: 'result-card' });
+    var sumHeader = makeEl('div', { class: 'card-header' });
+    sumHeader.appendChild(makeEl('div', { class: 'card-step-num' }, 'i'));
+    sumHeader.appendChild(makeEl('div', { class: 'card-title' }, 'Company Analysis'));
+    sumCard.appendChild(sumHeader);
+    sumCard.appendChild(makeEl('p', { style: 'font-size:0.85rem;color:var(--text-dim);line-height:1.6' }, audit.company_summary));
+    if (audit.industry) {
+      var indEl = makeEl('div', { style: 'margin-top:12px;font-size:0.78rem;color:var(--text-faint)' });
+      indEl.appendChild(makeEl('strong', { style: 'color:var(--text-muted)' }, 'Industry: '));
+      indEl.appendChild(document.createTextNode(audit.industry));
+      sumCard.appendChild(indEl);
+    }
+    container.appendChild(sumCard);
+  }
+
+  // Readiness scores
+  if (audit.readiness_scores) {
+    var rs = audit.readiness_scores;
+    var scoreCard = makeEl('div', { class: 'result-card' });
+    var scoreHeader = makeEl('div', { class: 'card-header' });
+    scoreHeader.appendChild(makeEl('div', { class: 'card-step-num' }, 'S'));
+    scoreHeader.appendChild(makeEl('div', { class: 'card-title' }, 'AI Readiness: ' + (rs.overall || '?') + '/10'));
+    scoreCard.appendChild(scoreHeader);
+
+    var cats = [
+      ['Digital Infrastructure', rs.digital_infrastructure],
+      ['Data Readiness', rs.data_readiness],
+      ['Process Maturity', rs.process_maturity],
+      ['Team Capability', rs.team_capability],
+      ['Innovation Culture', rs.innovation_culture]
+    ];
+    cats.forEach(function(c) {
+      var wrap = makeEl('div', { class: 'score-bar-wrap' });
+      var row = makeEl('div', { class: 'score-bar-row' });
+      row.appendChild(makeEl('span', { class: 'score-bar-label' }, c[0]));
+      row.appendChild(makeEl('span', { class: 'score-bar-val' }, (c[1] || '?') + '/10'));
+      wrap.appendChild(row);
+      var track = makeEl('div', { class: 'score-bar-track' });
+      var fill = makeEl('div', { class: 'score-bar-fill' });
+      fill.style.width = ((c[1] || 0) * 10) + '%';
+      track.appendChild(fill);
+      wrap.appendChild(track);
+      scoreCard.appendChild(wrap);
+    });
+    container.appendChild(scoreCard);
+  }
+
+  // Audit (manual processes)
+  if (audit.audit) {
+    var a = audit.audit;
+    var auditCard = makeEl('div', { class: 'result-card' });
+    var ah = makeEl('div', { class: 'card-header' });
+    ah.appendChild(makeEl('div', { class: 'card-step-num' }, '1'));
+    ah.appendChild(makeEl('div', { class: 'card-title' }, 'Audit \u2014 Current State'));
+    auditCard.appendChild(ah);
+    if (a.current_state) auditCard.appendChild(makeEl('p', { style: 'font-size:0.85rem;color:var(--text-dim);line-height:1.6;margin-bottom:12px' }, a.current_state));
+    if (a.estimated_annual_waste) {
+      auditCard.appendChild(makeEl('div', { style: 'padding:10px 14px;background:var(--red-bg);border:1px solid var(--red-border);border-radius:8px;font-size:0.82rem;color:var(--red-light);font-weight:700;margin-bottom:14px' }, a.estimated_annual_waste));
+    }
+    if (a.manual_processes) {
+      a.manual_processes.forEach(function(mp) {
+        var chip = makeEl('div', { class: 'tool-chip' });
+        chip.appendChild(makeEl('div', { style: 'font-weight:700;color:#fff;font-size:0.85rem;margin-bottom:4px' }, mp.process));
+        chip.appendChild(makeEl('div', { class: 'tool-meta' }, (mp.estimated_monthly_cost || '') + '/mo \u00b7 AI reduction: ' + (mp.ai_reduction || '')));
+        auditCard.appendChild(chip);
+      });
+    }
+    container.appendChild(auditCard);
+  }
+
+  // Adopt (tools)
+  if (audit.adopt && audit.adopt.tools) {
+    var adoptCard = makeEl('div', { class: 'result-card' });
+    var adh = makeEl('div', { class: 'card-header' });
+    adh.appendChild(makeEl('div', { class: 'card-step-num' }, '2'));
+    adh.appendChild(makeEl('div', { class: 'card-title' }, 'Adopt \u2014 AI Tools'));
+    adoptCard.appendChild(adh);
+    audit.adopt.tools.forEach(function(t) {
+      var chip = makeEl('div', { class: 'tool-chip' });
+      var nameRow = makeEl('div', { class: 'tool-name-row' });
+      nameRow.appendChild(makeEl('strong', { style: 'color:#fff;font-size:0.88rem' }, t.name));
+      nameRow.appendChild(makeEl('span', { class: 'pill ' + (t.impact === 'high' ? 'pill--green' : 'pill--yellow') }, (t.impact || '') + ' impact'));
+      chip.appendChild(nameRow);
+      chip.appendChild(makeEl('div', { style: 'font-size:0.82rem;color:var(--text-dim);margin-top:4px' }, t.use_case));
+      chip.appendChild(makeEl('div', { class: 'tool-meta' }, (t.monthly_cost || '') + ' \u00b7 Payback: ' + (t.payback_period || '') + ' \u00b7 Saves ' + (t.annual_savings || '') + '/yr'));
+      adoptCard.appendChild(chip);
+    });
+    container.appendChild(adoptCard);
+  }
+
+  // Automate (workflows)
+  if (audit.automate && audit.automate.workflows) {
+    var autoCard = makeEl('div', { class: 'result-card' });
+    var auh = makeEl('div', { class: 'card-header' });
+    auh.appendChild(makeEl('div', { class: 'card-step-num' }, '3'));
+    auh.appendChild(makeEl('div', { class: 'card-title' }, 'Automate \u2014 Workflows'));
+    autoCard.appendChild(auh);
+    audit.automate.workflows.forEach(function(w) {
+      var item = makeEl('div', { class: 'workflow-item' });
+      item.appendChild(makeEl('div', { style: 'font-weight:700;color:#fff;font-size:0.85rem;margin-bottom:8px' }, w.process));
+      var arrow = makeEl('div', { class: 'cost-arrow' });
+      arrow.appendChild(makeEl('span', { class: 'cost-box cost-box--before' }, w.current_cost || ''));
+      arrow.appendChild(makeEl('span', { class: 'cost-arrow-icon' }, '\u2192'));
+      arrow.appendChild(makeEl('span', { class: 'cost-box cost-box--after' }, w.automated_cost || ''));
+      item.appendChild(arrow);
+      item.appendChild(makeEl('div', { class: 'tool-meta' }, 'Saves ' + (w.annual_savings || '') + '/yr \u00b7 ' + (w.time_saved || '') + ' freed up'));
+      autoCard.appendChild(item);
+    });
+    container.appendChild(autoCard);
+  }
+
+  // Amplify
+  if (audit.amplify && audit.amplify.opportunities) {
+    var ampCard = makeEl('div', { class: 'result-card' });
+    var amh = makeEl('div', { class: 'card-header' });
+    amh.appendChild(makeEl('div', { class: 'card-step-num' }, '4'));
+    amh.appendChild(makeEl('div', { class: 'card-title' }, 'Amplify \u2014 Revenue'));
+    ampCard.appendChild(amh);
+    audit.amplify.opportunities.forEach(function(o) {
+      var chip = makeEl('div', { class: 'tool-chip' });
+      var nameRow = makeEl('div', { class: 'tool-name-row' });
+      nameRow.appendChild(makeEl('strong', { style: 'color:#fff;font-size:0.88rem' }, o.idea));
+      nameRow.appendChild(makeEl('span', { class: 'pill pill--green' }, o.confidence || ''));
+      chip.appendChild(nameRow);
+      chip.appendChild(makeEl('div', { style: 'font-size:0.82rem;color:var(--text-dim);margin-top:4px' }, o.description));
+      chip.appendChild(makeEl('div', { class: 'tool-meta' }, (o.revenue_potential || '') + ' \u00b7 ' + (o.timeline || '')));
+      ampCard.appendChild(chip);
+    });
+    container.appendChild(ampCard);
+  }
+
+  // ROI
+  if (audit.roi_summary) {
+    var r = audit.roi_summary;
+    var roiCard = makeEl('div', { class: 'result-card result-card--green' });
+    var rh = makeEl('div', { class: 'card-header' });
+    rh.appendChild(makeEl('div', { class: 'card-step-num' }, '$'));
+    rh.appendChild(makeEl('div', { class: 'card-title' }, 'ROI Summary'));
+    roiCard.appendChild(rh);
+
+    var grid = makeEl('div', { class: 'roi-grid' });
+    var inv = makeEl('div');
+    inv.appendChild(makeEl('div', { style: 'font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-ghost);margin-bottom:6px' }, 'Investment'));
+    inv.appendChild(makeEl('div', { style: 'font-size:1.3rem;font-weight:900;color:var(--red-light)' }, r.total_annual_investment || ''));
+    grid.appendChild(inv);
+    grid.appendChild(makeEl('div', { class: 'roi-arrow' }, '\u2192'));
+    var ret = makeEl('div');
+    ret.appendChild(makeEl('div', { style: 'font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-ghost);margin-bottom:6px' }, 'Return'));
+    ret.appendChild(makeEl('div', { style: 'font-size:1.3rem;font-weight:900;color:var(--green)' }, r.total_annual_return || ''));
+    grid.appendChild(ret);
+    roiCard.appendChild(grid);
+
+    var bottom = makeEl('div', { style: 'text-align:center;margin-top:12px' });
+    bottom.appendChild(makeEl('div', { style: 'font-size:clamp(2rem,6vw,3rem);font-weight:900;color:var(--green)' }, (r.roi_multiple || '') + ' ROI'));
+    if (r.payback_period) bottom.appendChild(makeEl('div', { style: 'font-size:0.82rem;color:var(--text-dim);margin-top:4px' }, 'Payback: ' + r.payback_period));
+    roiCard.appendChild(bottom);
+    container.appendChild(roiCard);
+  }
+
+  // +1 Action
+  if (audit.plus_one) {
+    var p1 = audit.plus_one;
+    var p1Card = makeEl('div', { class: 'result-card', style: 'border-color:rgba(74,222,128,0.2);background:rgba(74,222,128,0.04)' });
+    var p1h = makeEl('div', { class: 'card-header' });
+    p1h.appendChild(makeEl('div', { class: 'card-step-num', style: 'background:rgba(74,222,128,0.2);border-color:var(--green)' }, '+1'));
+    p1h.appendChild(makeEl('div', { class: 'card-title' }, 'Quick Win Action'));
+    p1Card.appendChild(p1h);
+    p1Card.appendChild(makeEl('p', { style: 'font-size:0.92rem;font-weight:700;color:#fff;margin-bottom:8px' }, p1.action || ''));
+    if (p1.why) p1Card.appendChild(makeEl('p', { style: 'font-size:0.82rem;color:var(--text-dim);line-height:1.5;margin-bottom:6px' }, p1.why));
+    if (p1.how) {
+      var howEl = makeEl('p', { style: 'font-size:0.78rem;color:var(--text-faint);line-height:1.5' });
+      howEl.appendChild(makeEl('strong', { style: 'color:var(--text-muted)' }, 'How: '));
+      howEl.appendChild(document.createTextNode(p1.how));
+      p1Card.appendChild(howEl);
+    }
+    container.appendChild(p1Card);
+  }
+}
+</script>
+</body>
+</html>
