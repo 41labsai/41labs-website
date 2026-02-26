@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 4+1 Method — Alexander Lee | 41 Labs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green: #4ade80;
+    --green-hover: #22c55e;
+    --dark: #0a0a0a;
+    --dark-card: #141414;
+    --dark-border: #222;
+    --text: #f0f0f0;
+    --text-dim: #888;
+    --text-muted: #555;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    cursor: none;
+  }
+
+  /* Slide container */
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 100px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+    text-align: center;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .slide.exit {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  /* Typography */
+  h1 {
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+
+  h2 {
+    font-size: clamp(32px, 3.5vw, 56px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: clamp(22px, 2.2vw, 36px);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  p, li {
+    font-size: clamp(18px, 1.6vw, 28px);
+    line-height: 1.6;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .green { color: var(--green); }
+  .white { color: var(--text); }
+  .dim { color: var(--text-dim); }
+  .muted { color: var(--text-muted); }
+  .bold { font-weight: 700; }
+  .light { font-weight: 300; }
+
+  .big-number {
+    font-size: clamp(80px, 10vw, 160px);
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 60px;
+    margin: 40px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: clamp(48px, 6vw, 96px);
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: clamp(14px, 1.2vw, 20px);
+    color: var(--text-muted);
+    margin-top: 8px;
+    max-width: 200px;
+  }
+
+  /* Subtitle / tagline */
+  .tagline {
+    font-size: clamp(20px, 2vw, 32px);
+    color: var(--text-dim);
+    font-weight: 300;
+    margin-top: 8px;
+  }
+
+  .source {
+    font-size: clamp(12px, 0.9vw, 16px);
+    color: var(--text-muted);
+    margin-top: 24px;
+    font-style: italic;
+  }
+
+  /* Quote block */
+  .quote {
+    font-size: clamp(24px, 2.8vw, 48px);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+    max-width: 900px;
+    position: relative;
+    padding-left: 30px;
+    text-align: left;
+    border-left: 4px solid var(--green);
+  }
+
+  /* Steps / framework */
+  .steps {
+    display: flex;
+    gap: 32px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .step-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    width: 200px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .step-card.highlighted {
+    border-color: var(--green);
+    box-shadow: 0 0 40px rgba(74, 222, 128, 0.1);
+  }
+
+  .step-number {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .step-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .step-desc {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* The +1 card */
+  .plus-one {
+    background: linear-gradient(135deg, rgba(74,222,128,0.15), rgba(74,222,128,0.05));
+    border: 2px solid var(--green);
+    border-radius: 24px;
+    padding: 40px 60px;
+    margin-top: 20px;
+    max-width: 600px;
+  }
+
+  /* Two column layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    width: 100%;
+    max-width: 1200px;
+    text-align: left;
+    align-items: center;
+  }
+
+  /* Before/After */
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  .ba-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: left;
+  }
+
+  .ba-card.after {
+    border-color: var(--green);
+  }
+
+  .ba-arrow {
+    font-size: 40px;
+    color: var(--green);
+  }
+
+  /* Percentage bar */
+  .pct-bar-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 16px 0;
+  }
+
+  .pct-bar {
+    height: 40px;
+    border-radius: 20px;
+    background: var(--dark-card);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pct-fill {
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg, var(--green), var(--green-hover));
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--dark);
+  }
+
+  .pct-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  /* Tool card */
+  .tool-grid {
+    display: flex;
+    gap: 32px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tool-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    width: 280px;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+
+  .tool-card:hover {
+    border-color: var(--green);
+    transform: translateY(-4px);
+  }
+
+  .tool-emoji {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+
+  .tool-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .tool-price {
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .tool-desc {
+    font-size: 15px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* Interactive prompt */
+  .prompt-box {
+    background: var(--dark-card);
+    border: 1px solid var(--green);
+    border-radius: 16px;
+    padding: 32px 40px;
+    max-width: 800px;
+    text-align: left;
+    font-family: 'Inter', monospace;
+    font-size: clamp(16px, 1.4vw, 22px);
+    line-height: 1.7;
+    color: var(--text);
+    position: relative;
+  }
+
+  .prompt-box::before {
+    content: 'PROMPT';
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--dark);
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.15em;
+  }
+
+  /* Slide counter */
+  .slide-counter {
+    position: fixed;
+    bottom: 24px;
+    right: 32px;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+    z-index: 100;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Progress bar */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--green);
+    transition: width 0.4s ease;
+    z-index: 100;
+  }
+
+  /* Logo */
+  .logo {
+    position: fixed;
+    bottom: 24px;
+    left: 32px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    z-index: 100;
+    letter-spacing: 0.05em;
+  }
+
+  .logo span {
+    color: var(--green);
+  }
+
+  /* CTA slide */
+  .cta-links {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .cta-btn.primary {
+    background: var(--green);
+    color: var(--dark);
+  }
+
+  .cta-btn.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--dark-border);
+  }
+
+  /* Lists */
+  ul.clean {
+    list-style: none;
+    text-align: left;
+    max-width: 800px;
+  }
+
+  ul.clean li {
+    padding: 10px 0;
+    padding-left: 28px;
+    position: relative;
+  }
+
+  ul.clean li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  /* Klarna visual */
+  .timeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 32px 0;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .timeline-item {
+    flex: 1;
+    text-align: center;
+    padding: 24px 16px;
+    position: relative;
+  }
+
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 40px;
+    height: 2px;
+    background: var(--dark-border);
+  }
+
+  .timeline-item:last-child::after {
+    display: none;
+  }
+
+  .timeline-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* Subtle background patterns */
+  .slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(74,222,128,0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Emphasis box */
+  .emphasis {
+    background: linear-gradient(135deg, rgba(74,222,128,0.1), transparent);
+    border-left: 3px solid var(--green);
+    padding: 20px 28px;
+    border-radius: 0 12px 12px 0;
+    text-align: left;
+    max-width: 700px;
+    margin: 20px 0;
+  }
+
+  .emphasis p {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Subtle grid bg for title */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Speaker notes (hidden, for presenter reference) */
+  .notes {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .slide { padding: 30px 24px; }
+    .steps, .tool-grid { flex-direction: column; align-items: center; }
+    .two-col, .before-after { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; gap: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="logo"><span>41</span> Labs</div>
+<div class="slide-counter" id="counter"></div>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide grid-bg active" data-slide="1">
+    <p class="dim light" style="font-size: clamp(14px,1.2vw,18px); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px;">Beyond Runway Masterclass</p>
+    <h1>The <span class="green">4+1</span> Method</h1>
+    <p class="tagline">How Any Business Can Implement AI</p>
+    <div style="margin-top: 48px;">
+      <p style="font-size: clamp(18px,1.5vw,24px); color: var(--text); font-weight: 500;">Alexander Lee</p>
+      <p style="font-size: clamp(14px,1.1vw,18px); color: var(--text-muted); margin-top: 4px;">Founder, 41 Labs &mdash; AI Strategy + Build</p>
+    </div>
+    <div class="notes">Welcome everyone. Brief pause. Let Admond do the intro, then take over.</div>
+  </div>
+
+  <!-- SLIDE 2: Who Am I + The Problem -->
+  <div class="slide" data-slide="2">
+    <h2>I help businesses figure out <span class="green">where AI fits</span>, then I build it for them.</h2>
+    <p style="margin-top: 24px; font-size: clamp(18px,1.4vw,24px); color: var(--text-dim); max-width: 750px; line-height: 1.6;">
+      I've worked with companies across Singapore and the region &mdash; from solo founders to teams of 50+.
+    </p>
+    <p style="margin-top: 24px; font-size: clamp(20px,1.6vw,28px); color: var(--text); font-weight: 500; max-width: 750px;">
+      The #1 question I get: <span class="green">"I know AI is important. But where do I even start?"</span>
+    </p>
+    <p style="margin-top: 24px; font-size: clamp(18px,1.4vw,24px); color: var(--text-dim);">
+      That's what tonight is about.
+    </p>
+    <div class="notes">This is your real introduction. Admond has already given your bio. Now set the context: who you are, what you do, and the ONE question this talk answers. Keep it conversational, 60 seconds max. "The question I get from every founder I meet is the same: I know AI matters, but where do I start? That's exactly what I'll cover tonight."</div>
+  </div>
+
+  <!-- SLIDE 3: The Honest Truth -->
+  <div class="slide" data-slide="3">
+    <h2>Let's be honest.</h2>
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-number">56%</div>
+        <p class="stat-label">of CEOs report zero financial benefit from AI</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">90%</div>
+        <p class="stat-label">of executives say no productivity impact</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">42%</div>
+        <p class="stat-label">of companies abandoned AI initiatives in 2025</p>
+      </div>
+    </div>
+    <p class="source">Sources: PwC 2026 CEO Survey &bull; Fortune/NBER 2026 &bull; Industry reports</p>
+    <div class="notes">Pause after each number. Let it land. "Most companies are doing AI wrong. Tonight I'll show you why — and how not to be one of them."</div>
+  </div>
+
+  <!-- SLIDE 4: Why Most Fail -->
+  <div class="slide" data-slide="4">
+    <h2>Why most companies <span class="green">fail</span> at AI</h2>
+    <div style="margin: 40px 0; max-width: 800px; width: 100%;">
+      <div class="pct-bar-container">
+        <div class="pct-label"><span>Technology</span><span class="green bold">10%</span></div>
+        <div class="pct-bar"><div class="pct-fill" style="width: 10%"></div></div>
+      </div>
+      <div class="pct-bar-container" style="margin-top: 20px;">
+        <div class="pct-label"><span>Data & Infrastructure</span><span class="green bold">20%</span></div>
+        <div class="pct-bar"><div class="pct-fill" style="width: 20%"></div></div>
+      </div>
+      <div class="pct-bar-container" style="margin-top: 20px;">
+        <div class="pct-label"><span>People, Process & Culture</span><span class="green bold">70%</span></div>
+        <div class="pct-bar"><div class="pct-fill" style="width: 70%">70%</div></div>
+      </div>
+    </div>
+    <div class="emphasis">
+      <p>"Most CEOs buy the tool and skip the 70%.<br>That's why they fail."</p>
+    </div>
+    <p class="source">Source: BCG & MIT Sloan Research</p>
+    <div class="notes">BCG's 10-20-70 rule. Point at the 70% bar. "The technology is the easy part. The hard part is getting your people to actually use it and redesigning how you work."</div>
+  </div>
+
+  <!-- SLIDE 5: Two Lenses -->
+  <div class="slide" data-slide="5">
+    <h2>AI does two things for your business</h2>
+    <div class="before-after" style="margin-top: 40px;">
+      <div class="ba-card">
+        <h3 style="font-size: 28px; margin-bottom: 16px;">Save Money<br>& Time</h3>
+        <ul class="clean">
+          <li>Automate repetitive tasks</li>
+          <li>Speed up content creation</li>
+          <li>Reduce manual data entry</li>
+          <li>Auto-transcribe meetings</li>
+        </ul>
+      </div>
+      <div class="ba-arrow" style="font-size: 28px; color: var(--text-muted);">or</div>
+      <div class="ba-card after">
+        <h3 style="font-size: 28px; margin-bottom: 16px;"><span class="green">Make New</span><br>Money</h3>
+        <ul class="clean">
+          <li>24/7 sales bots that qualify leads</li>
+          <li>Personalized marketing at scale</li>
+          <li>New digital products & services</li>
+          <li>Faster client delivery</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top: 32px; font-size: clamp(18px,1.4vw,24px); color: var(--text-dim);">
+      If your AI project doesn't clearly do one of these, <span class="white bold">stop it.</span>
+    </p>
+    <div class="notes">Simple framework: every AI use case falls into one of these two buckets. If it doesn't clearly save money/time or create new revenue, it's not worth doing.</div>
+  </div>
+
+  <!-- SLIDE 6: Introducing 4+1 -->
+  <div class="slide" data-slide="6">
+    <p style="font-size: clamp(14px,1vw,16px); color: var(--green); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin-bottom: 20px;">The Framework</p>
+    <h1 style="font-size: clamp(64px, 8vw, 128px);"><span class="green">4</span><span class="light dim">+</span><span class="green">1</span></h1>
+    <p class="tagline">Four steps. One rule.</p>
+    <p style="margin-top: 24px; font-size: clamp(16px,1.3vw,22px); color: var(--text-dim); max-width: 600px;">
+      This is how we take every client from zero to AI-powered.
+    </p>
+    <div class="notes">Big reveal of the framework. Pause here. "4 steps and 1 unbreakable rule. This is how we've done it for every single client."</div>
+  </div>
+
+  <!-- SLIDE 7: Step 1 - AUDIT -->
+  <div class="slide" data-slide="7">
+    <div class="steps">
+      <div class="step-card highlighted">
+        <div class="step-number">Step 1</div>
+        <div class="step-title">Audit</div>
+        <div class="step-desc">Map your workflows</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 2</div>
+        <div class="step-title">Adopt</div>
+        <div class="step-desc">Use what exists</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 3</div>
+        <div class="step-title">Automate</div>
+        <div class="step-desc">Cut busywork</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 4</div>
+        <div class="step-title">Amplify</div>
+        <div class="step-desc">AI-powered growth</div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; max-width: 700px;">
+      <h3>Where are you bleeding time?</h3>
+      <p style="margin-top: 12px;">I had a client &mdash; a Singapore business owner &mdash; answering the same <span class="green bold">47 WhatsApp messages</span> every night at 11pm instead of being with his family.</p>
+      <p style="margin-top: 16px;">First thing we did? Mapped his entire customer journey. Found 3 bottlenecks. The biggest one: <span class="white bold">WhatsApp.</span></p>
+      <p style="margin-top: 16px; color: var(--text-dim); font-style: italic;">"You can't automate what you don't understand."</p>
+    </div>
+    <div class="notes">"Let me tell you about a real client. A business owner here in Singapore. Every single night, 11pm, still answering 47 WhatsApp messages from customers. The same questions, over and over. Missing dinner, missing bedtime with his kids. When he came to us, the first thing we did was map everything. We found 3 bottlenecks — and the biggest one was WhatsApp." Ask the audience: "What's YOUR version of those 47 messages?"</div>
+  </div>
+
+  <!-- SLIDE 8: Step 2 - ADOPT -->
+  <div class="slide" data-slide="8">
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-number">Step 1</div>
+        <div class="step-title">Audit</div>
+        <div class="step-desc">Map your workflows</div>
+      </div>
+      <div class="step-card highlighted">
+        <div class="step-number">Step 2</div>
+        <div class="step-title">Adopt</div>
+        <div class="step-desc">Use what exists</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 3</div>
+        <div class="step-title">Automate</div>
+        <div class="step-desc">Cut busywork</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 4</div>
+        <div class="step-title">Amplify</div>
+        <div class="step-desc">AI-powered growth</div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; max-width: 700px;">
+      <h3><span class="green">$20/month</span> tools solve 80% of problems</h3>
+      <p style="margin-top: 12px;">Don't build custom until you've exhausted off-the-shelf. ChatGPT, Claude, Gamma, Fireflies &mdash; they're ready right now.</p>
+      <p style="margin-top: 16px; color: var(--text); font-weight: 500; font-size: clamp(18px,1.4vw,24px);">"Don't hire a developer when a $20 subscription will do."</p>
+    </div>
+    <div class="notes">For the client: "We didn't build anything custom at first. We started with existing tools. A ChatGPT prompt to draft responses. Fireflies to transcribe his sales calls. Total cost: $40/month."</div>
+  </div>
+
+  <!-- SLIDE 9: Step 3 - AUTOMATE -->
+  <div class="slide" data-slide="9">
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-number">Step 1</div>
+        <div class="step-title">Audit</div>
+        <div class="step-desc">Map your workflows</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 2</div>
+        <div class="step-title">Adopt</div>
+        <div class="step-desc">Use what exists</div>
+      </div>
+      <div class="step-card highlighted">
+        <div class="step-number">Step 3</div>
+        <div class="step-title">Automate</div>
+        <div class="step-desc">Cut busywork</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 4</div>
+        <div class="step-title">Amplify</div>
+        <div class="step-desc">AI-powered growth</div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; max-width: 700px;">
+      <h3>Connect the dots. Kill the repetition.</h3>
+      <p style="margin-top: 12px;">This is where you save real money. Automate the responses, the follow-ups, the scheduling, the reports.</p>
+      <div class="emphasis" style="margin-top: 24px;">
+        <p><span class="green bold">5.4 hours/week</span> &mdash; average time saved by frequent AI users<br>
+        <span class="green bold">27%</span> save 9+ hours every single week</p>
+      </div>
+    </div>
+    <div class="notes">For the client: "We built a WhatsApp bot that handled the 47 nightly messages automatically. FAQs, appointment booking, lead qualification — all while he sleeps. That's Automate."</div>
+  </div>
+
+  <!-- SLIDE 10: Step 4 - AMPLIFY -->
+  <div class="slide" data-slide="10">
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-number">Step 1</div>
+        <div class="step-title">Audit</div>
+        <div class="step-desc">Map your workflows</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 2</div>
+        <div class="step-title">Adopt</div>
+        <div class="step-desc">Use what exists</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 3</div>
+        <div class="step-title">Automate</div>
+        <div class="step-desc">Cut busywork</div>
+      </div>
+      <div class="step-card highlighted">
+        <div class="step-number">Step 4</div>
+        <div class="step-title">Amplify</div>
+        <div class="step-desc">AI-powered growth</div>
+      </div>
+    </div>
+    <div style="margin-top: 32px; max-width: 700px;">
+      <h3>Now use AI to <span class="green">grow</span></h3>
+      <p style="margin-top: 12px;">This is where you stop saving and start earning. AI-powered sales, personalized customer experiences, new revenue streams.</p>
+      <p style="margin-top: 16px; color: var(--text); font-weight: 500; font-size: clamp(18px,1.4vw,24px);">"The bot doesn't just answer questions. It qualifies leads and books appointments &mdash; at 3am."</p>
+    </div>
+    <div class="notes">For the client: "That WhatsApp bot now generates leads while he sleeps. It qualifies customers, recommends products, and books calls. That's Amplify — AI isn't just saving time anymore, it's making new money."</div>
+  </div>
+
+  <!-- SLIDE 11: The +1 Rule -->
+  <div class="slide" data-slide="11">
+    <h1 style="font-size: clamp(48px, 6vw, 96px);">+<span class="green">1</span></h1>
+    <h2 style="margin-top: 16px;">Start with <span class="green">one</span> process.<br>Not ten.</h2>
+    <div class="plus-one" style="margin-top: 32px;">
+      <p style="font-size: clamp(20px,1.6vw,28px); color: var(--text); font-weight: 500; line-height: 1.6;">
+        The companies that fail at AI try to change <span style="color:#ef4444; font-weight: 700;">everything at once.</span><br><br>
+        The companies that win pick <span class="green bold">one painful problem</span>, solve it, prove it works, then expand.
+      </p>
+    </div>
+    <p style="margin-top: 32px; font-size: clamp(22px,2vw,36px); font-weight: 700;">
+      Look at <span class="green">4</span> areas. Start with <span class="green">1</span>.<br>
+      <span class="dim light" style="font-size: 0.7em;">That's the 41 rule.</span>
+    </p>
+    <div class="notes">"For our client, we started with ONE channel — WhatsApp. Not email, not the website, not social media. Just WhatsApp. We mastered it. Then expanded. The companies that fail? They try to automate 10 things at once and none of them work. Pick one. The one that hurts most."</div>
+  </div>
+
+  <!-- SLIDE 12: Klarna Story -->
+  <div class="slide" data-slide="12">
+    <p style="font-size: clamp(14px,1vw,16px); color: var(--green); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin-bottom: 20px;">A Cautionary Tale</p>
+    <h2>The Klarna Story</h2>
+    <div class="two-col" style="margin-top: 36px;">
+      <div>
+        <h3 style="color: var(--green); margin-bottom: 16px;">The Hype</h3>
+        <ul class="clean">
+          <li><span class="white bold">700</span> agents replaced by AI</li>
+          <li><span class="white bold">2.3M</span> conversations handled</li>
+          <li>Issues resolved in <span class="white bold">2 min</span> vs 11 min</li>
+          <li>Projected <span class="white bold">$40M</span> savings</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: #ef4444; margin-bottom: 16px;">The Reality</h3>
+        <ul class="clean">
+          <li>Customer satisfaction <span style="color:#ef4444; font-weight:700;">dropped</span></li>
+          <li>Responses felt <span style="color:#ef4444; font-weight:700;">robotic</span></li>
+          <li>Started <span style="color:#ef4444; font-weight:700;">rehiring humans</span></li>
+          <li>Shifted to a <span class="white bold">hybrid model</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="emphasis" style="margin-top: 32px;">
+      <p>AI handles <span class="green bold">volume</span>. Humans handle <span class="white bold">value</span>. The winners use both.</p>
+    </div>
+    <p class="source">Sources: Fast Company &bull; Tech.co &bull; Klarna Press</p>
+    <div class="notes">Tell both halves. Pause between the hype and the reality. "The lesson? AI handles volume. Humans handle value. The winners use both." Ask: "Where does YOUR business need volume handling vs. human touch?"</div>
+  </div>
+
+  <!-- SLIDE 13: Pattern Interrupt -->
+  <div class="slide" data-slide="13">
+    <h2>AI can make you <span style="color: #ef4444;">worse</span></h2>
+    <div style="margin: 36px 0; max-width: 800px;">
+      <p style="font-size: clamp(18px,1.5vw,26px); color: var(--text-dim); line-height: 1.7;">
+        Harvard tested 300 executives predicting stock prices.
+      </p>
+      <p style="font-size: clamp(18px,1.5vw,26px); color: var(--text-dim); line-height: 1.7; margin-top: 16px;">
+        Half used <span class="white bold">ChatGPT</span>. Half discussed with <span class="white bold">peers</span>.
+      </p>
+    </div>
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-number" style="color: #ef4444;">+</div>
+        <p class="stat-label" style="font-size: 20px; color: var(--text); max-width: 250px;">ChatGPT group became <strong>more confident</strong></p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" style="color: #ef4444;">-</div>
+        <p class="stat-label" style="font-size: 20px; color: var(--text); max-width: 250px;">But made <strong>worse predictions</strong></p>
+      </div>
+    </div>
+    <div class="emphasis" style="margin-top: 24px;">
+      <p>AI's authoritative voice creates false confidence.<br>Know <span class="green bold">where</span> to use it &mdash; and where <span style="color:#ef4444; font-weight: 700;">not</span> to.</p>
+    </div>
+    <p class="source">Source: Harvard Business Review, July 2025</p>
+    <div class="notes">This is your pattern interrupt. After showing how powerful AI is, hit them with this. "Everything I just showed you can make you WORSE at your job if you use it wrong." Then: "This is why the Audit step matters. Know where AI helps and where it hurts."</div>
+  </div>
+
+  <!-- SLIDE 14: Interactive Exercise -->
+  <div class="slide" data-slide="14">
+    <p style="font-size: clamp(14px,1vw,16px); color: var(--green); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin-bottom: 20px;">Let's Try It &mdash; Right Now</p>
+    <h2>Pull out your phone.</h2>
+    <p style="margin: 16px 0 32px; font-size: clamp(18px,1.4vw,24px); color: var(--text-dim);">Open ChatGPT, Claude, or any AI tool you have. Copy this prompt:</p>
+    <div class="prompt-box">
+      You are my AI Board of Directors &mdash; respond as 5 experts: a CFO, a CMO, a COO, an industry specialist, and a devil's advocate. My company does <span class="green">[WHAT YOU DO]</span>. My biggest challenge is <span class="green">[YOUR #1 PROBLEM]</span>. Each expert: give me ONE specific action I can take this week.
+    </div>
+    <p style="margin-top: 28px; font-size: clamp(20px, 1.6vw, 28px); font-weight: 600;">
+      You have <span class="green">2 minutes</span>. Go.
+    </p>
+    <div class="notes">STOP presenting here. Make everyone do it. Walk around (virtually). After 2 minutes, ask 2-3 people to share what they got. This is the moment the talk goes from passive to electric. The diversity of answers proves the point better than any slide.</div>
+  </div>
+
+  <!-- SLIDE 15: Tools That'll Blow Your Mind -->
+  <div class="slide" data-slide="15">
+    <h2>Three tools you <span class="green">haven't seen yet.</span></h2>
+    <p style="margin-bottom: 32px; color: var(--text-dim);">These didn't exist 12 months ago. They'll change how you think about your business.</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-emoji">&#x1F680;</div>
+        <div class="tool-name">Lovable</div>
+        <div class="tool-price">Free &ndash; $20/month</div>
+        <div class="tool-desc">Describe any app in English. Get a working product in 2 minutes. No code. No developer. $100M revenue in 8 months.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">&#x1F3AC;</div>
+        <div class="tool-name">HeyGen</div>
+        <div class="tool-price">From $29/month</div>
+        <div class="tool-desc">Clone yourself as a video avatar. Record once, then "you" can speak 175+ languages with perfect lip sync. No film crew.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">&#x1F399;</div>
+        <div class="tool-name">NotebookLM</div>
+        <div class="tool-price">Free (Google)</div>
+        <div class="tool-desc">Upload any document. Get two AI podcast hosts discussing it with insights, jokes, and analysis. Turn reports into audio gold.</div>
+      </div>
+    </div>
+    <div class="notes">Point at each card: "This one BUILDS things for you. This one CLONES you. This one THINKS for you." Pause. "And the third one is completely free." Watch the room react.</div>
+  </div>
+
+  <!-- SLIDE 16: Live Demo -->
+  <div class="slide" data-slide="16">
+    <p style="font-size: clamp(14px,1vw,16px); color: var(--green); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin-bottom: 20px;">Live Demo</p>
+    <h2>Let me show you.</h2>
+    <div style="margin: 32px 0; max-width: 700px;">
+      <div style="background: var(--dark-card); border: 1px solid var(--green); border-radius: 16px; padding: 28px 32px; text-align: left; margin-bottom: 20px;">
+        <p style="color: var(--green); font-weight: 600; font-size: 14px; margin-bottom: 8px;">DEMO 1 &mdash; Lovable</p>
+        <p style="color: var(--text-dim);">"Build me a customer feedback portal with star ratings and a dashboard" &rarr; working app in 2 minutes</p>
+      </div>
+      <div style="background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; padding: 28px 32px; text-align: left; margin-bottom: 20px;">
+        <p style="color: var(--green); font-weight: 600; font-size: 14px; margin-bottom: 8px;">DEMO 2 &mdash; HeyGen</p>
+        <p style="color: var(--text-dim);">A pre-recorded video of "me" speaking fluent Mandarin &mdash; with perfect lip sync</p>
+      </div>
+      <div style="background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; padding: 28px 32px; text-align: left; margin-bottom: 20px;">
+        <p style="color: var(--green); font-weight: 600; font-size: 14px; margin-bottom: 8px;">DEMO 3 &mdash; NotebookLM</p>
+        <p style="color: var(--text-dim);">A 50-page report turned into a 10-minute podcast &mdash; two AI hosts discussing it with jokes and insights</p>
+      </div>
+      <div style="background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; padding: 28px 32px; text-align: left;">
+        <p style="color: var(--green); font-weight: 600; font-size: 14px; margin-bottom: 8px;">DEMO 4 &mdash; WhatsApp Bot</p>
+        <p style="color: var(--text-dim);">Live message to a real AI-powered WhatsApp assistant we built &mdash; watch it respond in real-time</p>
+      </div>
+    </div>
+    <p style="color: var(--text-muted); font-size: clamp(16px,1.2vw,20px);">After each demo: <span class="white">"How long would this have taken your team?"</span></p>
+    <div class="notes">Switch away from slides. Demo 1 (Lovable): Take a real business idea from the audience, build a working app in 2 min. Demo 2 (HeyGen): Pre-record yourself, show the Mandarin version. Demo 3 (NotebookLM): Pre-upload a report, play the podcast. Demo 4 (WhatsApp): Message the bot live. After each: "How long would this have taken?"</div>
+  </div>
+
+  <!-- SLIDE 17: The Permission -->
+  <div class="slide" data-slide="17">
+    <div class="quote" style="border-left-color: var(--green); max-width: 800px;">
+      "You don't need an AI strategy.<br>
+      You don't need a consultant.<br><br>
+      You need to open ChatGPT tomorrow morning and use it for <span class="green">one</span> real task.<br><br>
+      That's it. <span class="green">One task. Tomorrow.</span>"
+    </div>
+    <div class="notes">This is the permission-giving moment. Lean in. Make eye contact. Slow down. "Look — most of you are overthinking this. Just start. One task. Tomorrow morning. That's all it takes."</div>
+  </div>
+
+  <!-- SLIDE 18: 4+1 Recap -->
+  <div class="slide" data-slide="18">
+    <h2>Remember the <span class="green">4+1</span></h2>
+    <div class="steps" style="margin-top: 32px;">
+      <div class="step-card">
+        <div class="step-number">Step 1</div>
+        <div class="step-title green">Audit</div>
+        <div class="step-desc">Know where the pain is</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 2</div>
+        <div class="step-title green">Adopt</div>
+        <div class="step-desc">Start with $20/month tools</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 3</div>
+        <div class="step-title green">Automate</div>
+        <div class="step-desc">Cut the busywork (save $)</div>
+      </div>
+      <div class="step-card">
+        <div class="step-number">Step 4</div>
+        <div class="step-title green">Amplify</div>
+        <div class="step-desc">AI-powered growth (make $)</div>
+      </div>
+    </div>
+    <div class="plus-one" style="margin-top: 24px;">
+      <p style="font-size: clamp(20px,1.6vw,28px); font-weight: 600; color: var(--text);">
+        +1: Start with <span class="green">one</span>. Master it. Then expand.
+      </p>
+    </div>
+    <p style="margin-top: 24px; color: var(--text-dim); font-size: clamp(16px,1.3vw,22px);">
+      70% of the work is people, not technology.
+    </p>
+    <div class="notes">Quick recap. Point at each step. "Audit, Adopt, Automate, Amplify. And always — start with one." Then: "Remember, 70% of the work is your people, not the technology."</div>
+  </div>
+
+  <!-- SLIDE 19: The Story Resolution -->
+  <div class="slide" data-slide="19">
+    <p style="font-size: clamp(14px,1vw,16px); color: var(--green); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin-bottom: 20px;">Remember our friend?</p>
+    <div class="quote" style="max-width: 800px;">
+      "He's home by 7pm now. The bot handles 80% of customer messages. Revenue is up. He just hired his second employee."
+    </div>
+    <p style="margin-top: 32px; font-size: clamp(18px,1.5vw,26px); color: var(--text-dim); max-width: 700px;">
+      It started with <span class="green bold">one audit</span>, <span class="green bold">one channel</span>, and <span class="green bold">$20/month</span>.
+    </p>
+    <div class="notes">Return to the opening story. Close the loop. Make it emotional. "Remember the guy answering 47 WhatsApp messages at 11pm? He's home by 7 now." Pause. Let it land.</div>
+  </div>
+
+  <!-- SLIDE 20: CTA -->
+  <div class="slide grid-bg" data-slide="20">
+    <h1 style="font-size: clamp(36px, 4vw, 64px);">Alexander Lee</h1>
+    <p class="tagline" style="margin-bottom: 8px;">Founder, <span class="green">41 Labs</span></p>
+    <p style="color: var(--text-dim); font-size: clamp(16px,1.3vw,22px); max-width: 600px; margin-top: 16px;">
+      We help businesses figure out <span class="white">where AI fits</span>, then we <span class="green">build it</span> for them.
+    </p>
+    <div style="margin-top: 40px; background: var(--dark-card); border: 2px solid var(--green); border-radius: 20px; padding: 32px 44px; max-width: 540px; text-align: center;">
+      <p style="color: var(--green); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Try It Now &mdash; Free</p>
+      <p style="color: var(--text); font-size: 24px; font-weight: 800; margin-bottom: 8px;">Get Your AI Audit in 60 Seconds</p>
+      <p style="color: var(--text-dim); font-size: 16px; margin-bottom: 20px;">Enter your website &mdash; our AI analyzes your business and shows you exactly where to start.</p>
+      <a href="https://41labs.ai/audit" target="_blank" onclick="event.stopPropagation();" style="display: inline-block; background: var(--green); color: var(--dark); font-size: 20px; font-weight: 700; padding: 16px 48px; border-radius: 50px; text-decoration: none; transition: background 0.3s;">41labs.ai/audit &rarr;</a>
+    </div>
+    <div style="margin-top: 24px; background: var(--dark-card); border: 1px solid var(--dark-border); border-radius: 16px; padding: 20px 32px; max-width: 540px;">
+      <p style="color: var(--text-dim); font-size: 15px; margin-bottom: 8px;">Steps 1&ndash;2? The tools are right there.</p>
+      <p style="color: var(--text); font-size: 17px; font-weight: 600;">Steps 3&ndash;4? <span class="green">That's what we build.</span></p>
+    </div>
+    <div style="margin-top: 24px;">
+      <p style="color: var(--text-dim); font-size: 16px;">41labs.ai &nbsp;&bull;&nbsp; LinkedIn: Alexander Lee &nbsp;&bull;&nbsp; alexander@41labs.ai</p>
+    </div>
+    <div class="notes">Soft close. "If you need help with steps 1 and 2, the tools are right there — go use them tomorrow. If you need steps 3 and 4 — the custom builds, the WhatsApp bots, the things that don't come off the shelf — that's what we do at 41 Labs. Happy to chat." Then open to Q&A.</div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+  const total = slides.length;
+
+  function updateCounter() {
+    counter.textContent = `${current + 1} / ${total}`;
+    progress.style.width = `${((current + 1) / total) * 100}%`;
+  }
+
+  function goTo(index) {
+    if (index < 0 || index >= total || index === current) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    setTimeout(() => slides[current === index ? current : (current < index ? current : current)].classList.remove('exit'), 500);
+
+    // Clean up old
+    const old = current;
+    setTimeout(() => { slides[old].classList.remove('exit'); }, 500);
+
+    current = index;
+    slides[current].classList.add('active');
+    updateCounter();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      next();
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      prev();
+    }
+    if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+    // Press 'N' to toggle speaker notes in console
+    if (e.key === 'n' || e.key === 'N') {
+      const notes = slides[current].querySelector('.notes');
+      if (notes) console.log(`%c[NOTES Slide ${current+1}] ${notes.textContent}`, 'color: #4ade80; font-size: 14px;');
+    }
+  });
+
+  // Touch/click navigation
+  document.addEventListener('click', (e) => {
+    if (e.clientX > window.innerWidth / 2) next();
+    else prev();
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+  });
+
+  // Show cursor on mouse move
+  let cursorTimeout;
+  document.addEventListener('mousemove', () => {
+    document.body.style.cursor = 'default';
+    clearTimeout(cursorTimeout);
+    cursorTimeout = setTimeout(() => { document.body.style.cursor = 'none'; }, 2000);
+  });
+
+  updateCounter();
+</script>
+</body>
+</html>
