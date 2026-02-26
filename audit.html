@@ -268,6 +268,23 @@
     transform: none;
   }
 
+  .btn-secondary {
+    padding: 12px 24px;
+    background: transparent;
+    color: var(--green);
+    border: 1.5px solid var(--green-border-strong);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover {
+    background: rgba(74,222,128,0.08);
+    border-color: var(--green);
+  }
+
   .trust-bar {
     display: flex;
     gap: 24px;
@@ -1189,6 +1206,149 @@ function clearNode(node) {
 }
 
 /* ========================================
+   DOWNLOAD REPORT AS HTML
+======================================== */
+function downloadReport(audit, level) {
+  var company = audit.company_summary ? (document.getElementById('company').value.trim() || 'Company') : 'Company';
+  var title = level === 1 ? 'AI Readiness Audit' : 'Deep Dive Strategy Brief';
+
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">';
+  html += '<title>' + title + ' — ' + company + ' | 41 Labs</title>';
+  html += '<style>';
+  html += 'body{font-family:Inter,system-ui,sans-serif;max-width:800px;margin:0 auto;padding:40px 24px;color:#1a1a1a;line-height:1.6}';
+  html += 'h1{font-size:1.8rem;margin-bottom:4px}h2{font-size:1.2rem;margin-top:32px;color:#111;border-bottom:2px solid #4ade80;padding-bottom:6px}';
+  html += 'h3{font-size:1rem;margin-top:20px;color:#333}';
+  html += '.badge{display:inline-block;background:#4ade80;color:#000;font-weight:700;font-size:0.75rem;padding:3px 10px;border-radius:20px;margin-bottom:12px}';
+  html += '.stat{font-size:1.6rem;font-weight:900;color:#16a34a;margin:8px 0}';
+  html += 'table{width:100%;border-collapse:collapse;margin:12px 0}th,td{text-align:left;padding:8px 12px;border:1px solid #e5e5e5;font-size:0.85rem}';
+  html += 'th{background:#f5f5f5;font-weight:700}';
+  html += '.footer{margin-top:48px;padding-top:16px;border-top:1px solid #e5e5e5;font-size:0.75rem;color:#999;text-align:center}';
+  html += '@media print{body{padding:20px}}</style></head><body>';
+
+  html += '<div class="badge">41 Labs \u00b7 4+1 Method</div>';
+  html += '<h1>' + title + '</h1>';
+  html += '<p style="color:#666;margin-bottom:24px">Prepared for ' + company + ' \u00b7 ' + new Date().toLocaleDateString() + '</p>';
+
+  if (audit.company_summary) {
+    html += '<h2>Company Overview</h2><p>' + audit.company_summary + '</p>';
+    html += '<p><strong>Industry:</strong> ' + (audit.industry || 'N/A') + '</p>';
+  }
+
+  if (audit.estimated_annual_opportunity) {
+    html += '<h2>Opportunity Summary</h2>';
+    html += '<p class="stat">' + audit.estimated_annual_opportunity + '</p>';
+    html += '<p>Estimated annual AI opportunity</p>';
+    if (audit.cost_of_inaction_monthly) html += '<p><strong>Cost of inaction:</strong> ' + audit.cost_of_inaction_monthly + '/month</p>';
+  }
+
+  if (audit.readiness_scores) {
+    var rs = audit.readiness_scores;
+    html += '<h2>AI Readiness Scores</h2>';
+    html += '<table><tr><th>Category</th><th>Score</th></tr>';
+    html += '<tr><td>Overall</td><td><strong>' + (rs.overall || 'N/A') + '/10</strong></td></tr>';
+    html += '<tr><td>Digital Infrastructure</td><td>' + (rs.digital_infrastructure || 'N/A') + '/10</td></tr>';
+    html += '<tr><td>Data Readiness</td><td>' + (rs.data_readiness || 'N/A') + '/10</td></tr>';
+    html += '<tr><td>Process Maturity</td><td>' + (rs.process_maturity || 'N/A') + '/10</td></tr>';
+    html += '<tr><td>Team Capability</td><td>' + (rs.team_capability || 'N/A') + '/10</td></tr>';
+    html += '<tr><td>Innovation Culture</td><td>' + (rs.innovation_culture || 'N/A') + '/10</td></tr>';
+    html += '</table>';
+  }
+
+  if (audit.audit) {
+    var a = audit.audit;
+    html += '<h2>Current State Audit</h2>';
+    if (a.current_state) html += '<p>' + a.current_state + '</p>';
+    if (a.estimated_annual_waste) html += '<p><strong>Estimated waste:</strong> ' + a.estimated_annual_waste + '</p>';
+
+    if (a.manual_processes && a.manual_processes.length) {
+      html += '<h3>Manual Processes</h3><table><tr><th>Process</th><th>Monthly Cost</th><th>AI Reduction</th></tr>';
+      for (var i = 0; i < a.manual_processes.length; i++) {
+        var mp = a.manual_processes[i];
+        html += '<tr><td>' + mp.process + '</td><td>' + mp.estimated_monthly_cost + '</td><td>' + mp.ai_reduction + '</td></tr>';
+      }
+      html += '</table>';
+    }
+  }
+
+  if (audit.adopt && audit.adopt.tools) {
+    html += '<h2>Recommended AI Tools</h2><table><tr><th>Tool</th><th>Use Case</th><th>Cost</th><th>Annual Savings</th></tr>';
+    for (var i = 0; i < audit.adopt.tools.length; i++) {
+      var t = audit.adopt.tools[i];
+      html += '<tr><td>' + t.name + '</td><td>' + t.use_case + '</td><td>' + t.monthly_cost + '</td><td>' + (t.annual_savings || 'N/A') + '</td></tr>';
+    }
+    html += '</table>';
+  }
+
+  if (audit.automate && audit.automate.workflows) {
+    html += '<h2>Automation Workflows</h2><table><tr><th>Process</th><th>Current Cost</th><th>Automated Cost</th><th>Annual Savings</th></tr>';
+    for (var i = 0; i < audit.automate.workflows.length; i++) {
+      var w = audit.automate.workflows[i];
+      html += '<tr><td>' + w.process + '</td><td>' + w.current_cost + '</td><td>' + w.automated_cost + '</td><td>' + (w.annual_savings || 'N/A') + '</td></tr>';
+    }
+    html += '</table>';
+  }
+
+  if (audit.amplify && audit.amplify.opportunities) {
+    html += '<h2>Revenue Amplification</h2><table><tr><th>Opportunity</th><th>Revenue Potential</th><th>Confidence</th><th>Timeline</th></tr>';
+    for (var i = 0; i < audit.amplify.opportunities.length; i++) {
+      var o = audit.amplify.opportunities[i];
+      html += '<tr><td>' + o.idea + '</td><td>' + o.revenue_potential + '</td><td>' + o.confidence + '</td><td>' + o.timeline + '</td></tr>';
+    }
+    html += '</table>';
+  }
+
+  if (audit.roi_summary) {
+    var r = audit.roi_summary;
+    html += '<h2>ROI Summary</h2>';
+    html += '<table><tr><th>Metric</th><th>Value</th></tr>';
+    html += '<tr><td>Total Annual Investment</td><td>' + (r.total_annual_investment || 'N/A') + '</td></tr>';
+    html += '<tr><td>Total Annual Return</td><td>' + (r.total_annual_return || 'N/A') + '</td></tr>';
+    html += '<tr><td>ROI Multiple</td><td><strong>' + (r.roi_multiple || 'N/A') + '</strong></td></tr>';
+    html += '<tr><td>Payback Period</td><td>' + (r.payback_period || 'N/A') + '</td></tr>';
+    html += '</table>';
+  }
+
+  if (audit.plus_one) {
+    html += '<h2>+1 Quick Win Action</h2>';
+    html += '<p><strong>' + audit.plus_one.action + '</strong></p>';
+    if (audit.plus_one.why) html += '<p>' + audit.plus_one.why + '</p>';
+    if (audit.plus_one.how) html += '<p><em>How:</em> ' + audit.plus_one.how + '</p>';
+  }
+
+  // Level 2 specific sections
+  if (audit.competitive_analysis || audit.competitive_intelligence) {
+    var ci = audit.competitive_analysis || audit.competitive_intelligence;
+    html += '<h2>Competitive Intelligence</h2>';
+    if (typeof ci === 'string') html += '<p>' + ci + '</p>';
+    else if (ci.summary) html += '<p>' + ci.summary + '</p>';
+  }
+  if (audit.implementation_roadmap || audit.ninety_day_roadmap) {
+    html += '<h2>Implementation Roadmap</h2>';
+    var road = audit.implementation_roadmap || audit.ninety_day_roadmap;
+    if (typeof road === 'string') html += '<p>' + road + '</p>';
+    else if (Array.isArray(road)) {
+      for (var i = 0; i < road.length; i++) {
+        html += '<h3>' + (road[i].phase || road[i].title || 'Phase ' + (i+1)) + '</h3>';
+        html += '<p>' + (road[i].description || road[i].actions || JSON.stringify(road[i])) + '</p>';
+      }
+    }
+  }
+
+  html += '<div class="footer">Generated by 41 Labs AI Audit \u00b7 41labs.ai \u00b7 ' + new Date().toISOString().split('T')[0] + '</div>';
+  html += '</body></html>';
+
+  var blob = new Blob([html], { type: 'text/html' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = '41Labs-AI-Audit-' + company.replace(/[^a-zA-Z0-9]/g, '-') + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ========================================
    HYPERSPACE WARP EFFECT
 ======================================== */
 function createHyperspace(canvasId) {
@@ -1965,18 +2125,51 @@ function renderLevel1(audit) {
   roiCard.appendChild(roiBottom);
   container.appendChild(roiCard);
 
-  // ---- 5f: Level 2 CTA Card ----
-  var ctaCard = el('div', { className: 'result-card result-card--premium', style: { textAlign: 'center', padding: '36px 28px' } });
-  ctaCard.appendChild(textEl('div', 'Deep Dive Available', { style: { fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--green)', marginBottom: '12px' } }));
-  ctaCard.appendChild(textEl('h2', 'Want the full strategy brief?', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '10px' } }));
-  ctaCard.appendChild(textEl('p', 'Unlock competitive intelligence, 90-day roadmap, priority matrix, and budget allocation \u2014 personalized to your business.', { style: { fontSize: '0.9rem', color: 'var(--text-dim)', lineHeight: '1.6', marginBottom: '24px', maxWidth: '440px', marginLeft: 'auto', marginRight: 'auto' } }));
+  // ---- Download button ----
+  var dlRow = el('div', { style: { textAlign: 'center', margin: '20px 0' } });
+  var dlBtn = el('button', {
+    className: 'btn-secondary',
+    style: { display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', fontSize: '0.85rem' },
+    onclick: function() { downloadReport(audit, 1); }
+  });
+  dlBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Report';
+  dlRow.appendChild(dlBtn);
+  container.appendChild(dlRow);
+
+  // ---- 5f: Level 2 CTA Card with locked preview ----
+  var ctaCard = el('div', { className: 'result-card result-card--premium', style: { padding: '36px 28px', overflow: 'hidden' } });
+  ctaCard.appendChild(textEl('div', 'Your Full Strategy Brief is Ready', { style: { fontSize: '0.68rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--green)', marginBottom: '12px', textAlign: 'center' } }));
+  ctaCard.appendChild(textEl('h2', 'Unlock your complete AI roadmap', { style: { fontSize: '1.4rem', fontWeight: '900', color: '#fff', marginBottom: '16px', textAlign: 'center' } }));
+
+  // Locked preview items
+  var previewGrid = el('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', marginBottom: '24px' } });
+  var lockedItems = [
+    { icon: '\uD83D\uDD12', title: 'Competitive Intel', desc: 'How you rank vs. industry leaders' },
+    { icon: '\uD83D\uDD12', title: '90-Day Roadmap', desc: 'Week-by-week implementation plan' },
+    { icon: '\uD83D\uDD12', title: 'Priority Matrix', desc: 'What to build first for max ROI' },
+    { icon: '\uD83D\uDD12', title: 'Budget Allocation', desc: 'Exact $ breakdown per initiative' },
+    { icon: '\uD83D\uDD12', title: 'Risk Assessment', desc: 'What could go wrong + mitigation' },
+    { icon: '\uD83D\uDD12', title: 'Your #1 Bottleneck Fix', desc: 'Custom solution for your pain point' }
+  ];
+  for (var li = 0; li < lockedItems.length; li++) {
+    var item = el('div', { style: { padding: '14px', borderRadius: '12px', background: 'rgba(74,222,128,0.04)', border: '1px solid rgba(74,222,128,0.1)' } });
+    item.appendChild(textEl('div', lockedItems[li].icon + ' ' + lockedItems[li].title, { style: { fontSize: '0.82rem', fontWeight: '700', color: '#fff', marginBottom: '4px' } }));
+    item.appendChild(textEl('div', lockedItems[li].desc, { style: { fontSize: '0.72rem', color: 'var(--text-dim)', lineHeight: '1.3' } }));
+    previewGrid.appendChild(item);
+  }
+  ctaCard.appendChild(previewGrid);
+
+  ctaCard.appendChild(textEl('p', 'Answer 5 quick questions to personalize your strategy. Takes 30 seconds.', { style: { fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center', marginBottom: '20px' } }));
 
   var ctaBtn = el('button', {
     className: 'btn-primary',
-    style: { width: 'auto', padding: '16px 40px', display: 'inline-block' },
+    style: { width: 'auto', padding: '16px 40px', display: 'block', margin: '0 auto' },
     onclick: function() { showLevel2Form(); }
-  }, 'Get Your Deep Dive \u2014 Free');
+  }, 'Unlock Deep Dive \u2014 Free');
   ctaCard.appendChild(ctaBtn);
+
+  ctaCard.appendChild(textEl('div', 'No credit card. No sales call. Just your personalized AI strategy.', { style: { fontSize: '0.7rem', color: 'var(--text-ghost)', textAlign: 'center', marginTop: '12px' } }));
+
   container.appendChild(ctaCard);
 
   // Powered by
@@ -2004,27 +2197,33 @@ function showLevel2Form() {
   phoneRow.appendChild(el('input', { type: 'tel', id: 'l2phone', placeholder: '+1 (555) 000-0000' }));
   card.appendChild(phoneRow);
 
+  // Helper: build select with placeholder
+  function buildSelect(id, placeholder, opts) {
+    var sel = el('select', { id: id });
+    var ph = document.createElement('option');
+    ph.value = '';
+    ph.textContent = placeholder;
+    ph.disabled = true;
+    ph.selected = true;
+    ph.hidden = true;
+    sel.appendChild(ph);
+    for (var i = 0; i < opts.length; i++) {
+      sel.appendChild(textEl('option', opts[i], { value: opts[i] }));
+    }
+    return sel;
+  }
+
   // Role + Team Size
   var row1 = el('div', { className: 'form-row-half form-row' });
 
   var roleWrap = el('div');
   roleWrap.appendChild(textEl('label', 'Your Role', { 'for': 'l2role' }));
-  var roleSel = el('select', { id: 'l2role' });
-  var roleOpts = ['Founder/CEO', 'COO/Operations', 'CTO/Tech', 'Marketing Lead', 'Other'];
-  for (var i = 0; i < roleOpts.length; i++) {
-    roleSel.appendChild(textEl('option', roleOpts[i], { value: roleOpts[i] }));
-  }
-  roleWrap.appendChild(roleSel);
+  roleWrap.appendChild(buildSelect('l2role', 'Select your role...', ['Founder/CEO', 'COO/Operations', 'CTO/Tech', 'Marketing Lead', 'Other']));
   row1.appendChild(roleWrap);
 
   var teamWrap = el('div');
   teamWrap.appendChild(textEl('label', 'Team Size', { 'for': 'l2team' }));
-  var teamSel = el('select', { id: 'l2team' });
-  var teamOpts = ['1-5', '6-20', '21-50', '51-200', '200+'];
-  for (var i = 0; i < teamOpts.length; i++) {
-    teamSel.appendChild(textEl('option', teamOpts[i], { value: teamOpts[i] }));
-  }
-  teamWrap.appendChild(teamSel);
+  teamWrap.appendChild(buildSelect('l2team', 'Select team size...', ['1-5', '6-20', '21-50', '51-200', '200+']));
   row1.appendChild(teamWrap);
   card.appendChild(row1);
 
@@ -2033,40 +2232,25 @@ function showLevel2Form() {
 
   var revWrap = el('div');
   revWrap.appendChild(textEl('label', 'Annual Revenue', { 'for': 'l2revenue' }));
-  var revSel = el('select', { id: 'l2revenue' });
-  var revOpts = ['Pre-revenue', '<$500K', '$500K-$2M', '$2M-$10M', '$10M+'];
-  for (var i = 0; i < revOpts.length; i++) {
-    revSel.appendChild(textEl('option', revOpts[i], { value: revOpts[i] }));
-  }
-  revWrap.appendChild(revSel);
+  revWrap.appendChild(buildSelect('l2revenue', 'Select range...', ['Pre-revenue', '<$500K', '$500K-$2M', '$2M-$10M', '$10M+']));
   row2.appendChild(revWrap);
 
   var spendWrap = el('div');
   spendWrap.appendChild(textEl('label', 'Monthly Tools Spend', { 'for': 'l2spend' }));
-  var spendSel = el('select', { id: 'l2spend' });
-  var spendOpts = ['<$500', '$500-$2K', '$2K-$10K', '$10K+'];
-  for (var i = 0; i < spendOpts.length; i++) {
-    spendSel.appendChild(textEl('option', spendOpts[i], { value: spendOpts[i] }));
-  }
-  spendWrap.appendChild(spendSel);
+  spendWrap.appendChild(buildSelect('l2spend', 'Select range...', ['<$500', '$500-$2K', '$2K-$10K', '$10K+']));
   row2.appendChild(spendWrap);
   card.appendChild(row2);
 
   // Bottleneck
   var bnRow = el('div', { className: 'form-row' });
   bnRow.appendChild(textEl('label', 'Biggest Operational Bottleneck'));
-  bnRow.appendChild(el('textarea', { id: 'l2bottleneck', placeholder: 'What takes the most time in your business?', style: { minHeight: '90px' } }));
+  bnRow.appendChild(el('textarea', { id: 'l2bottleneck', placeholder: 'e.g. "We spend 10+ hours/week on manual data entry and client follow-ups"', style: { minHeight: '90px' } }));
   card.appendChild(bnRow);
 
   // AI Experience
   var aiRow = el('div', { className: 'form-row' });
   aiRow.appendChild(textEl('label', 'AI Experience', { 'for': 'l2aiexp' }));
-  var aiSel = el('select', { id: 'l2aiexp' });
-  var aiOpts = ['Using AI actively', 'Tried a few tools', "Haven't started yet"];
-  for (var i = 0; i < aiOpts.length; i++) {
-    aiSel.appendChild(textEl('option', aiOpts[i], { value: aiOpts[i] }));
-  }
-  aiRow.appendChild(aiSel);
+  aiRow.appendChild(buildSelect('l2aiexp', 'Select your experience...', ['Using AI actively', 'Tried a few tools', "Haven't started yet"]));
   card.appendChild(aiRow);
 
   // Consent checkbox
@@ -2123,8 +2307,33 @@ async function runDeepDive() {
     errEl.classList.add('active');
     return;
   }
+  if (!role) {
+    errEl.textContent = 'Please select your role.';
+    errEl.classList.add('active');
+    return;
+  }
+  if (!team) {
+    errEl.textContent = 'Please select your team size.';
+    errEl.classList.add('active');
+    return;
+  }
+  if (!revenue) {
+    errEl.textContent = 'Please select your annual revenue range.';
+    errEl.classList.add('active');
+    return;
+  }
+  if (!spend) {
+    errEl.textContent = 'Please select your monthly tools spend.';
+    errEl.classList.add('active');
+    return;
+  }
   if (!bottleneck) {
     errEl.textContent = 'Please describe your biggest operational bottleneck.';
+    errEl.classList.add('active');
+    return;
+  }
+  if (!aiExp) {
+    errEl.textContent = 'Please select your AI experience level.';
     errEl.classList.add('active');
     return;
   }
@@ -2502,6 +2711,17 @@ function renderLevel2(deepAudit) {
   }
 
   container.appendChild(riskCard);
+
+  // ---- Download button ----
+  var dlRow2 = el('div', { style: { textAlign: 'center', margin: '20px 0' } });
+  var dlBtn2 = el('button', {
+    className: 'btn-secondary',
+    style: { display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', fontSize: '0.85rem' },
+    onclick: function() { downloadReport(deepAudit, 2); }
+  });
+  dlBtn2.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Full Report';
+  dlRow2.appendChild(dlBtn2);
+  container.appendChild(dlRow2);
 
   // ---- 8h: Final CTA ----
   var finalCta = el('div', { className: 'final-cta' });
