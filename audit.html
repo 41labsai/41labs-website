@@ -285,14 +285,15 @@
 
   .trust-icon { color: var(--green); font-size: 0.85rem; }
 
-  /* ===== LOADING STATE — HYPERSPACE ===== */
+  /* ===== LOADING STATE — FULL-SCREEN HYPERSPACE ===== */
   .loading-container {
     display: none;
-    margin-top: 36px;
-    position: relative;
-    border-radius: var(--radius-xl);
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
     overflow: hidden;
-    min-height: 420px;
   }
 
   .loading-container.active { display: block; }
@@ -308,30 +309,39 @@
   .loading-overlay {
     position: relative;
     z-index: 1;
-    padding: 40px 28px;
-    background: radial-gradient(ellipse at center, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.75) 70%, rgba(5,5,5,0.92) 100%);
-    min-height: 420px;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding: 40px 28px;
+    background: radial-gradient(ellipse at center, rgba(5,5,5,0.15) 0%, rgba(5,5,5,0.5) 50%, rgba(5,5,5,0.85) 100%);
+  }
+
+  .loading-inner {
+    max-width: 480px;
+    width: 100%;
   }
 
   .loading-title {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #fff;
     margin-bottom: 6px;
     text-shadow: 0 0 20px rgba(74,222,128,0.3);
   }
   .loading-subtitle {
-    font-size: 0.8rem;
-    color: var(--text-ghost);
-    margin-bottom: 24px;
+    font-size: 0.85rem;
+    color: var(--green);
+    margin-bottom: 28px;
     min-height: 1.2em;
+    font-weight: 500;
   }
   .loading-subtitle .status-text {
     display: inline-block;
     animation: fadeInStatus 0.5s ease;
+    color: var(--green);
   }
   @keyframes fadeInStatus {
     from { opacity: 0; transform: translateY(4px); }
@@ -917,6 +927,36 @@
   .wa-btn:active { transform: scale(0.98); }
 
   /* ===== ERROR ===== */
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .consent-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--green);
+    cursor: pointer;
+  }
+  .consent-row label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+  .consent-row label a {
+    color: var(--green);
+    text-decoration: underline;
+  }
+
   .error-msg {
     display: none;
     margin-top: 16px;
@@ -936,7 +976,8 @@
     .hero { padding-top: 72px; padding-bottom: 40px; }
     .page-container { padding: 0 16px; }
     .form-card, .result-card, .bottleneck-card { padding: 20px 18px; }
-    .loading-overlay { padding: 24px 18px; min-height: 360px; }
+    .loading-overlay { padding: 24px 18px; }
+    .loading-title { font-size: 1.15rem; }
     .hero-stats { grid-template-columns: 1fr; }
     .roi-grid { grid-template-columns: 1fr; gap: 8px; }
     .roi-arrow { transform: rotate(90deg); }
@@ -1019,12 +1060,14 @@
     <div class="loading-container" id="l1Loading">
       <canvas class="hyperspace-canvas" id="l1Hyperspace"></canvas>
       <div class="loading-overlay">
-        <div class="loading-title">Analyzing your business...</div>
-        <div class="loading-subtitle" id="l1Subtitle">This typically takes 20-30 seconds</div>
-        <div class="loading-steps" id="l1Steps"></div>
-        <div class="loading-progress">
-          <div class="progress-bar-bg"><div class="progress-bar-fill" id="l1ProgressBar"></div></div>
-          <div class="progress-pct" id="l1ProgressPct">0%</div>
+        <div class="loading-inner">
+          <div class="loading-title">Analyzing your business...</div>
+          <div class="loading-subtitle" id="l1Subtitle">This typically takes 20-30 seconds</div>
+          <div class="loading-steps" id="l1Steps"></div>
+          <div class="loading-progress">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="l1ProgressBar"></div></div>
+            <div class="progress-pct" id="l1ProgressPct">0%</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1039,12 +1082,14 @@
     <div class="loading-container" id="l2Loading">
       <canvas class="hyperspace-canvas" id="l2Hyperspace"></canvas>
       <div class="loading-overlay">
-        <div class="loading-title">Building your strategy brief...</div>
-        <div class="loading-subtitle" id="l2Subtitle">Deep analysis takes 30-60 seconds</div>
-        <div class="loading-steps" id="l2Steps"></div>
-        <div class="loading-progress">
-          <div class="progress-bar-bg"><div class="progress-bar-fill" id="l2ProgressBar"></div></div>
-          <div class="progress-pct" id="l2ProgressPct">0%</div>
+        <div class="loading-inner">
+          <div class="loading-title">Building your strategy brief...</div>
+          <div class="loading-subtitle" id="l2Subtitle">Deep analysis takes 30-60 seconds</div>
+          <div class="loading-steps" id="l2Steps"></div>
+          <div class="loading-progress">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="l2ProgressBar"></div></div>
+            <div class="progress-pct" id="l2ProgressPct">0%</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2024,6 +2069,15 @@ function showLevel2Form() {
   aiRow.appendChild(aiSel);
   card.appendChild(aiRow);
 
+  // Consent checkbox
+  var consentRow = el('div', { className: 'consent-row' });
+  consentRow.appendChild(el('input', { type: 'checkbox', id: 'l2consent' }));
+  var consentLabel = document.createElement('label');
+  consentLabel.setAttribute('for', 'l2consent');
+  consentLabel.innerHTML = 'I agree to be contacted by 41 Labs regarding my audit results. We respect your privacy and will never share your information with third parties.';
+  consentRow.appendChild(consentLabel);
+  card.appendChild(consentRow);
+
   // Submit button
   var submitBtn = el('button', {
     className: 'btn-primary',
@@ -2051,6 +2105,7 @@ async function runDeepDive() {
   var spend = document.getElementById('l2spend').value;
   var bottleneck = document.getElementById('l2bottleneck').value.trim();
   var aiExp = document.getElementById('l2aiexp').value;
+  var consent = document.getElementById('l2consent').checked;
   var errEl = document.getElementById('l2ErrorMsg');
   var btn = document.getElementById('btnDeepDive');
 
@@ -2061,8 +2116,20 @@ async function runDeepDive() {
     errEl.classList.add('active');
     return;
   }
+  // Phone validation: must be at least 7 digits (strip non-digits to check)
+  var phoneDigits = phone.replace(/[^0-9]/g, '');
+  if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+    errEl.textContent = 'Please enter a valid phone number (7-15 digits).';
+    errEl.classList.add('active');
+    return;
+  }
   if (!bottleneck) {
     errEl.textContent = 'Please describe your biggest operational bottleneck.';
+    errEl.classList.add('active');
+    return;
+  }
+  if (!consent) {
+    errEl.textContent = 'Please agree to be contacted to receive your results.';
     errEl.classList.add('active');
     return;
   }
