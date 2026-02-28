@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VQQ49H8N1L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-VQQ49H8N1L');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WQJF7DK7');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free AI Readiness Audit for Business | 60-Second Assessment — 41 Labs</title>
@@ -1115,6 +1129,9 @@
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQJF7DK7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- NAV -->
 <nav>
@@ -1212,6 +1229,35 @@
 
     <!-- LEVEL 2 RESULTS -->
     <div class="l2-results-section" id="l2Results"></div>
+  </div>
+
+  <!-- SEO CONTENT — crawlable by search engines, hidden after audit runs -->
+  <div id="seoContent" style="max-width:800px;margin:60px auto;padding:0 24px;">
+    <h2 style="font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px;">What is the 41 Labs AI Readiness Audit?</h2>
+    <p style="color:#999;line-height:1.7;margin-bottom:24px;">The 41 Labs AI Readiness Audit is a free, AI-powered assessment that analyzes your business in 60 seconds. Using our proprietary <strong style="color:#fff;">4+1 Method</strong> — Audit, Adopt, Automate, Amplify, plus your Quick Win — we evaluate your company across five dimensions: digital infrastructure, data readiness, process maturity, team capability, and innovation culture.</p>
+
+    <h2 style="font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px;">What You Get</h2>
+    <ul style="color:#999;line-height:1.8;padding-left:20px;margin-bottom:24px;">
+      <li><strong style="color:#ccc;">AI Readiness Score</strong> — Your overall rating out of 10, benchmarked against your industry</li>
+      <li><strong style="color:#ccc;">Current State Audit</strong> — Manual processes costing you money, quantified with dollar figures</li>
+      <li><strong style="color:#ccc;">AI Tool Recommendations</strong> — Specific tools to adopt with costs and expected ROI</li>
+      <li><strong style="color:#ccc;">Automation Workflows</strong> — Processes you can automate today with annual savings estimates</li>
+      <li><strong style="color:#ccc;">Revenue Opportunities</strong> — New revenue streams AI can unlock for your business</li>
+      <li><strong style="color:#ccc;">+1 Quick Win</strong> — One action you can take this week to see immediate results</li>
+      <li><strong style="color:#ccc;">Downloadable PDF Report</strong> — Professional report you can share with your team</li>
+    </ul>
+
+    <h2 style="font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px;">Who Is This For?</h2>
+    <p style="color:#999;line-height:1.7;margin-bottom:24px;">Business owners, CEOs, COOs, and operations leaders across Southeast Asia — from startups to enterprises. Our audit works for companies in logistics, insurance, real estate, professional services, education, healthcare, manufacturing, and more. Whether you're in Singapore, Malaysia, Thailand, Indonesia, Vietnam, or the Philippines, get a personalized AI roadmap tailored to your market.</p>
+
+    <h2 style="font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px;">Level 2: Deep Dive Strategy Brief</h2>
+    <p style="color:#999;line-height:1.7;margin-bottom:24px;">After your initial audit, unlock the Deep Dive Strategy Brief for a comprehensive implementation playbook. This includes competitive intelligence on what industry leaders are doing with AI, a 90-day implementation roadmap with specific tools and costs, priority matrix, budget allocation recommendations, your biggest bottleneck solved in detail, and a full risk assessment with cost-of-inaction analysis.</p>
+
+    <h3 style="font-size:1.1rem;font-weight:700;color:#ccc;margin-bottom:10px;">Frequently Asked Questions</h3>
+    <p style="color:#999;line-height:1.7;margin-bottom:8px;"><strong style="color:#ccc;">How much does the AI audit cost?</strong> It's completely free. No login required, no credit card, no catch.</p>
+    <p style="color:#999;line-height:1.7;margin-bottom:8px;"><strong style="color:#ccc;">How long does it take?</strong> Level 1 takes about 60 seconds. Level 2 Deep Dive takes 30-60 seconds more.</p>
+    <p style="color:#999;line-height:1.7;margin-bottom:8px;"><strong style="color:#ccc;">Is my data secure?</strong> We don't store your website data. Your email is only used to deliver results.</p>
+    <p style="color:#999;line-height:1.7;margin-bottom:24px;"><strong style="color:#ccc;">What countries do you serve?</strong> 41 Labs is based in Singapore and serves businesses across Southeast Asia and globally.</p>
   </div>
 </div>
 
@@ -1843,6 +1889,13 @@ async function runAudit() {
   var errorEl = document.getElementById('errorMsg');
   var btn = document.getElementById('btnAudit');
 
+  // GA4 conversion event
+  if (typeof gtag === 'function') gtag('event', 'audit_started', { event_category: 'engagement', event_label: companyVal || urlVal });
+
+  // Hide SEO content once audit starts
+  var seoEl = document.getElementById('seoContent');
+  if (seoEl) seoEl.style.display = 'none';
+
   errorEl.classList.remove('active');
 
   if (!urlVal) {
@@ -1925,6 +1978,9 @@ async function runAudit() {
    RENDER LEVEL 1
 ======================================== */
 function renderLevel1(audit) {
+  // GA4 conversion event
+  if (typeof gtag === 'function') gtag('event', 'audit_completed', { event_category: 'conversion', event_label: 'level_1', value: audit.readiness_scores ? audit.readiness_scores.overall : 0 });
+
   var container = document.getElementById('l1Results');
   clearNode(container);
 

@@ -6,9 +6,17 @@
   <!-- Homepage -->
   <url>
     <loc>https://41labs.ai/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <!-- Free AI Audit Tool -->
+  <url>
+    <loc>https://41labs.ai/audit</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
   </url>
 
   <!-- Case Studies Listing -->
