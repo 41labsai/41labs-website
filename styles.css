@@ -5157,6 +5157,199 @@ a {
 }
 
 /* ===================================
+   FREE AI AUDIT SECTION
+   =================================== */
+.audit-section {
+    padding: 80px 0;
+    background: linear-gradient(180deg, #050505 0%, #0a1a10 50%, #050505 100%);
+    position: relative;
+    overflow: hidden;
+}
+.audit-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(74,222,128,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+.audit-cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+.audit-badge {
+    display: inline-block;
+    background: rgba(74,222,128,0.1);
+    color: #4ade80;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(74,222,128,0.2);
+    margin-bottom: 20px;
+}
+.audit-cta-content h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: #fff;
+}
+.audit-cta-content > p {
+    font-size: 1.05rem;
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+.audit-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+.audit-feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: #ccc;
+}
+.audit-start-btn {
+    font-size: 1.05rem !important;
+    padding: 16px 36px !important;
+}
+.audit-note {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 12px;
+}
+
+/* Audit Preview Card */
+.audit-preview-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.audit-preview-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.audit-preview-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ef4444;
+}
+.audit-preview-dot.y { background: #eab308; }
+.audit-preview-dot.g { background: #4ade80; }
+.audit-preview-title {
+    margin-left: 8px;
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 600;
+}
+.audit-preview-body {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.audit-score-ring {
+    margin-bottom: 4px;
+}
+.audit-preview-metrics {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.audit-metric-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: #999;
+}
+.audit-metric-row span:first-child {
+    width: 130px;
+    flex-shrink: 0;
+}
+.audit-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.audit-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    border-radius: 3px;
+    transition: width 1.5s ease;
+}
+.audit-metric-val {
+    width: 28px;
+    text-align: right;
+    font-weight: 700;
+    color: #fff;
+    font-size: 0.8rem;
+}
+.audit-preview-savings {
+    width: 100%;
+    background: rgba(74,222,128,0.08);
+    border: 1px solid rgba(74,222,128,0.15);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.audit-savings-label {
+    font-size: 0.75rem;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.audit-savings-value {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #4ade80;
+}
+
+@media (max-width: 768px) {
+    .audit-cta-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .audit-cta-content h2 {
+        font-size: 1.6rem;
+    }
+    .audit-preview-card {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+    .audit-metric-row span:first-child {
+        width: 100px;
+        font-size: 0.7rem;
+    }
+}
+
+/* ===================================
    LOCATION GRANT SECTION
    =================================== */
 .location-grant {
