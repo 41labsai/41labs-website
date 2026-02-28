@@ -18,6 +18,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/logo-icon.png">
 <link rel="canonical" href="https://41labs.ai/audit">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
 <style>
   :root {
     --bg: #050505;
@@ -1316,36 +1317,151 @@ function downloadReport(audit, level) {
   }
 
   // Level 2 specific sections
-  if (audit.competitive_analysis || audit.competitive_intelligence) {
-    var ci = audit.competitive_analysis || audit.competitive_intelligence;
+  if (audit.competitive_intelligence || audit.competitive_analysis) {
+    var ci = audit.competitive_intelligence || audit.competitive_analysis;
     html += '<h2>Competitive Intelligence</h2>';
-    if (typeof ci === 'string') html += '<p>' + ci + '</p>';
-    else if (ci.summary) html += '<p>' + ci.summary + '</p>';
+    if (typeof ci === 'string') { html += '<p>' + ci + '</p>'; }
+    else {
+      if (ci.industry_ai_trends && ci.industry_ai_trends.length) {
+        html += '<h3>Industry AI Trends</h3><ol>';
+        for (var i = 0; i < ci.industry_ai_trends.length; i++) html += '<li>' + ci.industry_ai_trends[i] + '</li>';
+        html += '</ol>';
+      }
+      if (ci.what_leaders_do) html += '<h3>What Leaders Do</h3><p>' + ci.what_leaders_do + '</p>';
+      if (ci.their_gap) html += '<h3>Your Gap</h3><p style="padding:10px;background:#fffbeb;border-left:3px solid #f59e0b;border-radius:4px">' + ci.their_gap + '</p>';
+      if (ci.summary) html += '<p>' + ci.summary + '</p>';
+    }
   }
+
   if (audit.implementation_roadmap || audit.ninety_day_roadmap) {
-    html += '<h2>Implementation Roadmap</h2>';
+    html += '<h2>90-Day Implementation Roadmap</h2>';
     var road = audit.implementation_roadmap || audit.ninety_day_roadmap;
-    if (typeof road === 'string') html += '<p>' + road + '</p>';
+    if (typeof road === 'string') { html += '<p>' + road + '</p>'; }
     else if (Array.isArray(road)) {
       for (var i = 0; i < road.length; i++) {
         html += '<h3>' + (road[i].phase || road[i].title || 'Phase ' + (i+1)) + '</h3>';
-        html += '<p>' + (road[i].description || road[i].actions || JSON.stringify(road[i])) + '</p>';
+        html += '<p>' + (road[i].description || (road[i].actions ? road[i].actions.join(', ') : JSON.stringify(road[i]))) + '</p>';
+      }
+    } else {
+      var phases = ['phase_1','phase_2','phase_3','phase_4'];
+      for (var i = 0; i < phases.length; i++) {
+        var ph = road[phases[i]];
+        if (!ph) continue;
+        html += '<h3>' + (ph.title || 'Phase ' + (i+1)) + '</h3>';
+        if (ph.actions && ph.actions.length) {
+          html += '<ul>';
+          for (var a = 0; a < ph.actions.length; a++) html += '<li>' + ph.actions[a] + '</li>';
+          html += '</ul>';
+        }
+        var meta = [];
+        if (ph.investment) meta.push('<strong>Investment:</strong> ' + ph.investment);
+        if (ph.expected_savings || ph.expected_monthly_savings) meta.push('<strong>Savings:</strong> ' + (ph.expected_savings || ph.expected_monthly_savings));
+        if (ph.expected_revenue || ph.expected_monthly_revenue) meta.push('<strong>Revenue:</strong> ' + (ph.expected_revenue || ph.expected_monthly_revenue));
+        if (ph.cumulative_savings || ph.cumulative_impact) meta.push('<strong>Cumulative:</strong> ' + (ph.cumulative_savings || ph.cumulative_impact));
+        if (meta.length) html += '<p>' + meta.join(' &bull; ') + '</p>';
       }
     }
+  }
+
+  if (audit.priority_matrix && audit.priority_matrix.length) {
+    html += '<h2>Priority Matrix</h2>';
+    var quadLabels = { do_first: 'Do First (High Impact, Low Effort)', plan_carefully: 'Plan Carefully (High Impact, High Effort)', delegate: 'Quick Wins (Medium Impact, Low Effort)', skip: 'Reconsider (Low Impact, High Effort)' };
+    var grouped = {};
+    for (var i = 0; i < audit.priority_matrix.length; i++) {
+      var q = audit.priority_matrix[i].quadrant || 'do_first';
+      if (q === 'reconsider') q = 'skip';
+      if (!grouped[q]) grouped[q] = [];
+      grouped[q].push(audit.priority_matrix[i].item || '');
+    }
+    for (var key in quadLabels) {
+      if (grouped[key] && grouped[key].length) {
+        html += '<h3>' + quadLabels[key] + '</h3><ul>';
+        for (var i = 0; i < grouped[key].length; i++) html += '<li>' + grouped[key][i] + '</li>';
+        html += '</ul>';
+      }
+    }
+  }
+
+  if (audit.budget_allocation) {
+    var ba = audit.budget_allocation;
+    html += '<h2>Budget Allocation</h2>';
+    if (ba.recommended_monthly_budget) html += '<p class="stat">' + ba.recommended_monthly_budget + '/month</p>';
+    if (ba.breakdown && ba.breakdown.length) {
+      html += '<table><tr><th>Category</th><th>Amount</th><th>%</th></tr>';
+      for (var i = 0; i < ba.breakdown.length; i++) {
+        html += '<tr><td>' + (ba.breakdown[i].category || '') + '</td><td>' + (ba.breakdown[i].amount || '') + '</td><td>' + (ba.breakdown[i].percentage || 0) + '%</td></tr>';
+      }
+      html += '</table>';
+    }
+  }
+
+  if (audit.bottleneck_solution || audit.bottleneck_analysis) {
+    var bn = audit.bottleneck_solution || audit.bottleneck_analysis;
+    html += '<h2>Your Bottleneck — Solved</h2>';
+    if (bn.problem) html += '<p style="padding:10px;background:#fef2f2;border-left:3px solid #ef4444;border-radius:4px"><strong>The Problem:</strong> ' + bn.problem + '</p>';
+    if (bn.root_cause) html += '<p><strong>Root Cause:</strong> ' + bn.root_cause + '</p>';
+    if (bn.solution) html += '<p><strong>The Solution:</strong> ' + bn.solution + '</p>';
+    var bnSteps = bn.steps || bn.implementation_steps || [];
+    if (bnSteps.length) {
+      html += '<h3>Implementation Steps</h3><ol>';
+      for (var i = 0; i < bnSteps.length; i++) html += '<li>' + bnSteps[i] + '</li>';
+      html += '</ol>';
+    }
+    if (bn.tools_needed && bn.tools_needed.length) {
+      html += '<p><strong>Tools Needed:</strong> ' + bn.tools_needed.join(', ') + '</p>';
+    }
+    var bnMeta = [];
+    if (bn.implementation_timeline || bn.estimated_time_to_implement) bnMeta.push('<strong>Timeline:</strong> ' + (bn.implementation_timeline || bn.estimated_time_to_implement));
+    if (bn.estimated_savings || bn.estimated_monthly_savings) bnMeta.push('<strong>Monthly Savings:</strong> ' + (bn.estimated_savings || bn.estimated_monthly_savings));
+    if (bn.confidence_level) bnMeta.push('<strong>Confidence:</strong> ' + bn.confidence_level);
+    if (bnMeta.length) html += '<p>' + bnMeta.join(' &bull; ') + '</p>';
+  }
+
+  if (audit.risk_assessment) {
+    var ra = audit.risk_assessment;
+    html += '<h2>Risk Assessment</h2>';
+    if (ra.if_you_act) html += '<h3 style="color:#16a34a">If You Act</h3><p>' + ra.if_you_act + '</p>';
+    if (ra.if_you_dont) html += '<h3 style="color:#ef4444">If You Don\'t</h3><p>' + ra.if_you_dont + '</p>';
+    if (ra.biggest_risk) html += '<p style="padding:10px;background:#fffbeb;border-left:3px solid #f59e0b;border-radius:4px"><strong>Biggest Risk:</strong> ' + ra.biggest_risk + '</p>';
   }
 
   html += '<div class="footer">Generated by 41 Labs AI Audit \u00b7 41labs.ai \u00b7 ' + new Date().toISOString().split('T')[0] + '</div>';
   html += '</body></html>';
 
-  var blob = new Blob([html], { type: 'text/html' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = '41Labs-AI-Audit-' + company.replace(/[^a-zA-Z0-9]/g, '-') + '.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  var filename = '41Labs-AI-Audit-' + company.replace(/[^a-zA-Z0-9]/g, '-');
+
+  // Render HTML into a hidden container for html2pdf
+  var temp = document.createElement('div');
+  temp.innerHTML = html;
+  temp.style.position = 'fixed';
+  temp.style.left = '-9999px';
+  temp.style.top = '0';
+  temp.style.width = '800px';
+  temp.style.background = '#fff';
+  document.body.appendChild(temp);
+
+  html2pdf().set({
+    margin: [10, 12, 10, 12],
+    filename: filename + '.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  }).from(temp).save().then(function() {
+    document.body.removeChild(temp);
+  }).catch(function() {
+    document.body.removeChild(temp);
+    // Fallback to HTML download if PDF fails
+    var blob = new Blob([html], { type: 'text/html' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
 }
 
 /* ========================================
@@ -2717,7 +2833,13 @@ function renderLevel2(deepAudit) {
   var dlBtn2 = el('button', {
     className: 'btn-secondary',
     style: { display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px', fontSize: '0.85rem' },
-    onclick: function() { downloadReport(deepAudit, 2); }
+    onclick: function() {
+      // Merge Level 1 + Level 2 data so download has everything
+      var merged = {};
+      if (level1AuditData) { for (var k in level1AuditData) merged[k] = level1AuditData[k]; }
+      for (var k in deepAudit) merged[k] = deepAudit[k];
+      downloadReport(merged, 2);
+    }
   });
   dlBtn2.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Full Report';
   dlRow2.appendChild(dlBtn2);
