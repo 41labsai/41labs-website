@@ -615,22 +615,31 @@ a {
 .nav-dropdown-wrap {
     position: relative;
 }
+/* Invisible bridge so hover doesn't break crossing the gap */
+.nav-dropdown-wrap::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 16px;
+}
 .nav-dropdown {
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 12px);
     left: 50%;
-    transform: translateX(-50%) translateY(4px);
-    background: rgba(255, 255, 255, 0.95);
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     padding: 6px 0;
-    min-width: 200px;
+    min-width: 210px;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     z-index: 1001;
 }
@@ -638,12 +647,11 @@ a {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
 }
 .nav-dropdown a {
     display: block;
-    padding: 8px 16px;
-    font-size: 0.82rem;
+    padding: 9px 18px;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     transition: color 0.15s, background 0.15s;
     text-decoration: none;
