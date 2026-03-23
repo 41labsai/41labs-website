@@ -1365,9 +1365,24 @@ a {
     box-shadow: var(--shadow);
 }
 
-.post-card a {
+.post-card a,
+.post-card-link-wrap {
     display: block;
     height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-card .read-more {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent-dark);
+}
+
+.post-card:hover .read-more {
+    text-decoration: underline;
 }
 
 .post-card-image {

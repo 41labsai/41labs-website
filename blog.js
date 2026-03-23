@@ -69,37 +69,21 @@ async function loadMarkdownPost(slug) {
     return null;
 }
 
-// Render blog posts grid
-function renderPosts(posts, container) {
-    if (!container) return;
-
-    if (posts.length === 0) {
-        document.getElementById('empty-state').style.display = 'block';
-        container.innerHTML = '';
-        return;
-    }
-
-    document.getElementById('empty-state').style.display = 'none';
-
-    container.innerHTML = posts.map(post => `
-        <article class="post-card" data-category="${post.category}">
-            <a href="post.html#${post.slug}">
-                ${post.image ? `<div class="post-card-image"><img src="${post.image}" alt="${post.title}" loading="lazy"></div>` : ''}
-                <div class="post-card-content">
-                    <div class="post-card-meta">
-                        <span class="post-card-category">${formatCategory(post.category)}</span>
-                        <span class="post-card-date">${formatDate(post.date)}</span>
-                    </div>
-                    <h2 class="post-card-title">${post.title}</h2>
-                    <p class="post-card-excerpt">${post.excerpt}</p>
-                    <div class="post-card-footer">
-                        <span class="post-card-read-time">${post.readTime}</span>
-                        <span class="post-card-link">Read more →</span>
-                    </div>
-                </div>
-            </a>
-        </article>
-    `).join('');
+// Filter static post cards by category
+function filterStaticPosts(category) {
+    const cards = document.querySelectorAll('#posts-grid .post-card');
+    let visible = 0;
+    cards.forEach(card => {
+        const cardCategory = card.dataset.category || '';
+        if (category === 'all' || cardCategory === category) {
+            card.style.display = '';
+            visible++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    const emptyState = document.getElementById('empty-state');
+    if (emptyState) emptyState.style.display = visible === 0 ? 'block' : 'none';
 }
 
 // Load individual post page
@@ -258,18 +242,14 @@ function formatDate(dateString) {
 
 // Initialize blog page
 document.addEventListener('DOMContentLoaded', async function() {
-    await loadPostsIndex();
-
     const postsGrid = document.getElementById('posts-grid');
     if (postsGrid) {
-        renderPosts(postsData, postsGrid);
-
-        // Filter buttons
+        // Filter buttons work on static HTML cards
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                filterPosts(this.dataset.category);
+                filterStaticPosts(this.dataset.category);
             });
         });
     }
