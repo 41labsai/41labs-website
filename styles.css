@@ -1255,6 +1255,25 @@ a {
     color: var(--text-primary);
 }
 
+.footer-industries {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.footer-industries strong {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+.footer-industries a {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+.footer-industries a:hover {
+    color: var(--primary);
+}
+
 .footer-bottom {
     padding-top: 24px;
     border-top: 1px solid #ddd;
