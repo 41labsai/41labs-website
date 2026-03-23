@@ -27,11 +27,7 @@
   status = 200
   force = true
 
-# Redirect for clean URLs (optional)
-[[redirects]]
-  from = "/blog/*"
-  to = "/post.html?slug=:splat"
-  status = 200
+# Blog articles are static HTML files in /blog/ — no redirect needed
 
 # Headers for SEO
 [[headers]]
