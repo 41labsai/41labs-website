@@ -206,6 +206,24 @@
     }
     </script>
 
+    <!-- Person Schema — Founder (GEO: 3x more likely to appear in AI answers) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Alexander Lee",
+        "jobTitle": "Founder & CEO",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "41 Labs",
+            "url": "https://41labs.ai"
+        },
+        "url": "https://linkedin.com/in/leejunweialexander",
+        "sameAs": ["https://linkedin.com/in/leejunweialexander"],
+        "knowsAbout": ["Artificial Intelligence", "Business Automation", "AI Strategy", "AI Integration", "Custom AI Systems"]
+    }
+    </script>
+
     <link rel="stylesheet" href="styles.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -338,7 +356,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Results from companies like yours</p>
             </div>
             <div class="testimonials-grid" id="testimonials-grid">
-                <!-- Loaded dynamically from testimonials.json -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"41 Labs transformed our quoting process completely. What used to take our team 3 hours now takes 5 minutes. The accuracy is remarkable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JT</div>
+                        <div class="testimonial-info">
+                            <strong>James Tan</strong>
+                            <span>COO, Professional Services Firm</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Finally, an AI solution that actually understands our complex product catalog. No more hallucinations, no more wrong answers to customers."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SL</div>
+                        <div class="testimonial-info">
+                            <strong>Sarah Lee</strong>
+                            <span>Head of Operations, Trading Platform</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The team at 41 Labs didn't just build us a tool &mdash; they understood our business first. That's rare in this space."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MR</div>
+                        <div class="testimonial-info">
+                            <strong>Michael Reyes</strong>
+                            <span>Founder, EdTech Startup</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -949,35 +1002,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <script src="script.js"></script>
     <script>
-        // Load testimonials dynamically
-        async function loadTestimonials() {
-            try {
-                const response = await fetch('testimonials.json');
-                const data = await response.json();
-                const grid = document.getElementById('testimonials-grid');
-
-                if (data.testimonials && data.testimonials.length > 0) {
-                    grid.innerHTML = data.testimonials.map(t => `
-                        <div class="testimonial-card">
-                            <div class="testimonial-content">
-                                <p>"${t.quote}"</p>
-                            </div>
-                            <div class="testimonial-author">
-                                <div class="testimonial-avatar">${t.initials}</div>
-                                <div class="testimonial-info">
-                                    <strong>${t.name}</strong>
-                                    <span>${t.role}, ${t.company}</span>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            } catch (e) {
-                console.error('Error loading testimonials:', e);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadTestimonials);
+        // Testimonials are now static HTML — no JS loading needed
     </script>
 </body>
 </html>

@@ -51,6 +51,18 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
+# OpenAI's dedicated search crawler (CRITICAL for ChatGPT search citations)
+User-agent: OAI-SearchBot
+Allow: /
+
+# ChatGPT browsing mode
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic training crawler
+User-agent: anthropic-ai
+Allow: /
+
 # ===========================================
 # Standard Search Engines
 # ===========================================

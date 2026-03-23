@@ -1,0 +1,52 @@
+# 41 Labs — AI Integration for Businesses in Singapore
+
+> 41 Labs builds custom AI systems for businesses doing $1M+ revenue. We find the one process bleeding your business the most time and money, and build an AI system that fixes it. Free strategy call. Free working demo. $0 until you see clear value.
+
+## About
+41 Labs is a Singapore-based AI systems company founded by Alexander Lee. We build custom AI trained on our clients' internal data — their products, processes, and pricing rules — for accuracy you can trust in production. We specialize in construction, healthcare, home services, professional services, automotive, F&B, and beauty & wellness industries.
+
+## Services
+- AI Strategy & Consulting: Free 30-minute strategy call to map workflows and find highest-ROI AI opportunities
+- Custom AI System Development: Quoting engines, dispatch systems, document processing, customer service bots, internal knowledge bases
+- Free Working Demo: We build a prototype using your actual business data before any commitment
+- End-to-End Delivery: Strategy to deployed production system in 4-8 weeks
+- Ongoing Support: Maintenance, iteration, and team training after deployment
+
+## Industries
+- Construction & Renovation — AI quoting systems that cut quote generation from 3 hours to 5 minutes
+- Healthcare & Clinics — 24/7 patient Q&A bots, automated appointment reminders, intake processing
+- Home Services — AI scheduling, dispatch, and invoicing for plumbing, aircon, electrical, cleaning
+- Professional Services — Document analysis, client onboarding, internal knowledge bases for accounting, legal, consulting
+- Automotive & Tow Truck — AI dispatch, driver coordination, automated invoicing, 24/7 call handling
+- F&B & Restaurants — Demand forecasting, reservation management, menu Q&A bots
+- Beauty & Wellness — 24/7 booking assistant, no-show reminders, client preference tracking
+
+## Real Client Results
+- Avenue Engineering: AI-powered quoting system — reduced quote generation from hours to minutes
+- 365 Tow: AI dispatch and invoicing system for roadside assistance operations
+
+## Key Pages
+- [Homepage](https://41labs.ai/)
+- [AI for Construction](https://41labs.ai/industries/construction)
+- [AI for Healthcare](https://41labs.ai/industries/healthcare)
+- [AI for Home Services](https://41labs.ai/industries/home-services)
+- [AI for Professional Services](https://41labs.ai/industries/professional-services)
+- [AI for Automotive](https://41labs.ai/industries/automotive)
+- [AI for F&B](https://41labs.ai/industries/fnb)
+- [AI for Beauty & Wellness](https://41labs.ai/industries/beauty-wellness)
+- [About](https://41labs.ai/about)
+- [Case Studies](https://41labs.ai/case-studies)
+- [Free AI Audit](https://41labs.ai/audit)
+
+## How It Works
+1. Free 30-minute AI strategy call with the founder — we map your workflows and identify highest-ROI opportunities
+2. Free working demo built with your actual business data — see the results before committing
+3. Production system deployed in 4-8 weeks — you see progress weekly
+4. Ongoing support — maintenance, iteration, and team training until it runs smoothly
+
+## Contact
+- Website: https://41labs.ai
+- Book a call: https://cal.com/41labs
+- Location: Singapore
+- LinkedIn: https://linkedin.com/company/fortyonelabs
+- Founder: Alexander Lee (https://linkedin.com/in/leejunweialexander)
