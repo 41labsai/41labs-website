@@ -1,0 +1,145 @@
+# Page snapshot
+
+```yaml
+- main [ref=e2]:
+  - heading "Index of new website/" [level=1] [ref=e4]:
+    - text: Index of
+    - link "new website/" [ref=e5] [cursor=pointer]:
+      - /url: /
+  - list [ref=e6]:
+    - listitem [ref=e7]:
+      - link ".claude/" [ref=e8] [cursor=pointer]:
+        - /url: \.claude/
+    - listitem [ref=e9]:
+      - link ".gitignore" [ref=e10] [cursor=pointer]:
+        - /url: \.gitignore
+    - listitem [ref=e11]:
+      - link "404.html" [ref=e12] [cursor=pointer]:
+        - /url: \404.html
+    - listitem [ref=e13]:
+      - link "CHANGELOG.md" [ref=e14] [cursor=pointer]:
+        - /url: \CHANGELOG.md
+    - listitem [ref=e15]:
+      - link "CMS-SETUP.md" [ref=e16] [cursor=pointer]:
+        - /url: \CMS-SETUP.md
+    - listitem [ref=e17]:
+      - link "README.md" [ref=e18] [cursor=pointer]:
+        - /url: \README.md
+    - listitem [ref=e19]:
+      - link "_redirects" [ref=e20] [cursor=pointer]:
+        - /url: \_redirects
+    - listitem [ref=e21]:
+      - link "about.html" [ref=e22] [cursor=pointer]:
+        - /url: \about.html
+    - listitem [ref=e23]:
+      - link "admin/" [ref=e24] [cursor=pointer]:
+        - /url: \admin/
+    - listitem [ref=e25]:
+      - link "blog.html" [ref=e26] [cursor=pointer]:
+        - /url: \blog.html
+    - listitem [ref=e27]:
+      - link "blog.js" [ref=e28] [cursor=pointer]:
+        - /url: \blog.js
+    - listitem [ref=e29]:
+      - link "case-studies.html" [ref=e30] [cursor=pointer]:
+        - /url: \case-studies.html
+    - listitem [ref=e31]:
+      - link "case-studies.json" [ref=e32] [cursor=pointer]:
+        - /url: \case-studies.json
+    - listitem [ref=e33]:
+      - link "case-study.html" [ref=e34] [cursor=pointer]:
+        - /url: \case-study.html
+    - listitem [ref=e35]:
+      - link "feed.xml" [ref=e36] [cursor=pointer]:
+        - /url: \feed.xml
+    - listitem [ref=e37]:
+      - link "founder-photo.jpg" [ref=e38] [cursor=pointer]:
+        - /url: \founder-photo.jpg
+    - listitem [ref=e39]:
+      - link "functions/" [ref=e40] [cursor=pointer]:
+        - /url: \functions/
+    - listitem [ref=e41]:
+      - link "guide/" [ref=e42] [cursor=pointer]:
+        - /url: \guide/
+    - listitem [ref=e43]:
+      - link "index.html" [ref=e44] [cursor=pointer]:
+        - /url: \index.html
+    - listitem [ref=e45]:
+      - link "locations/" [ref=e46] [cursor=pointer]:
+        - /url: \locations/
+    - listitem [ref=e47]:
+      - link "logo-full.png" [ref=e48] [cursor=pointer]:
+        - /url: \logo-full.png
+    - listitem [ref=e49]:
+      - link "logo-icon.png" [ref=e50] [cursor=pointer]:
+        - /url: \logo-icon.png
+    - listitem [ref=e51]:
+      - link "logos/" [ref=e52] [cursor=pointer]:
+        - /url: \logos/
+    - listitem [ref=e53]:
+      - link "netlify.toml" [ref=e54] [cursor=pointer]:
+        - /url: \netlify.toml
+    - listitem [ref=e55]:
+      - link "node_modules/" [ref=e56] [cursor=pointer]:
+        - /url: \node_modules/
+    - listitem [ref=e57]:
+      - link "package-lock.json" [ref=e58] [cursor=pointer]:
+        - /url: \package-lock.json
+    - listitem [ref=e59]:
+      - link "package.json" [ref=e60] [cursor=pointer]:
+        - /url: \package.json
+    - listitem [ref=e61]:
+      - link "playwright.config.ts" [ref=e62] [cursor=pointer]:
+        - /url: \playwright.config.ts
+    - listitem [ref=e63]:
+      - link "post.html" [ref=e64] [cursor=pointer]:
+        - /url: \post.html
+    - listitem [ref=e65]:
+      - link "posts-index.json" [ref=e66] [cursor=pointer]:
+        - /url: \posts-index.json
+    - listitem [ref=e67]:
+      - link "posts.json" [ref=e68] [cursor=pointer]:
+        - /url: \posts.json
+    - listitem [ref=e69]:
+      - link "posts/" [ref=e70] [cursor=pointer]:
+        - /url: \posts/
+    - listitem [ref=e71]:
+      - link "privacy.html" [ref=e72] [cursor=pointer]:
+        - /url: \privacy.html
+    - listitem [ref=e73]:
+      - link "process.html" [ref=e74] [cursor=pointer]:
+        - /url: \process.html
+    - listitem [ref=e75]:
+      - link "robots.txt" [ref=e76] [cursor=pointer]:
+        - /url: \robots.txt
+    - listitem [ref=e77]:
+      - link "script.js" [ref=e78] [cursor=pointer]:
+        - /url: \script.js
+    - listitem [ref=e79]:
+      - link "serve.json" [ref=e80] [cursor=pointer]:
+        - /url: \serve.json
+    - listitem [ref=e81]:
+      - link "services/" [ref=e82] [cursor=pointer]:
+        - /url: \services/
+    - listitem [ref=e83]:
+      - link "sitemap.xml" [ref=e84] [cursor=pointer]:
+        - /url: \sitemap.xml
+    - listitem [ref=e85]:
+      - link "styles.css" [ref=e86] [cursor=pointer]:
+        - /url: \styles.css
+    - listitem [ref=e87]:
+      - link "terms.html" [ref=e88] [cursor=pointer]:
+        - /url: \terms.html
+    - listitem [ref=e89]:
+      - link "test-results/" [ref=e90] [cursor=pointer]:
+        - /url: \test-results/
+    - listitem [ref=e91]:
+      - link "testimonials.json" [ref=e92] [cursor=pointer]:
+        - /url: \testimonials.json
+    - listitem [ref=e93]:
+      - link "tests/" [ref=e94] [cursor=pointer]:
+        - /url: \tests/
+    - listitem [ref=e95]:
+      - link "uploads/" [ref=e96] [cursor=pointer]:
+        - /url: \uploads/
+```

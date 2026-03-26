@@ -1,0 +1,29 @@
+{
+  "name": "new-website",
+  "version": "1.0.0",
+  "description": "Custom AI systems for revenue and operations.",
+  "main": "blog.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "serve": "serve -l 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/41Labs/41labs-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/41Labs/41labs-website/issues"
+  },
+  "homepage": "https://github.com/41Labs/41labs-website#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.0",
+    "serve": "^14.2.5"
+  }
+}
