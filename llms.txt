@@ -25,6 +25,26 @@
 - Avenue Engineering: AI-powered quoting system — reduced quote generation from hours to minutes
 - 365 Tow: AI dispatch and invoicing system for roadside assistance operations
 
+## AI Agents
+41 Labs builds AI agents — autonomous systems that reason, decide, and act across business systems. Unlike chatbots that follow scripts, AI agents can handle complex multi-step workflows: reading documents, querying databases, making decisions, and executing actions. We are the leading AI agent development company in Singapore.
+
+## Blog — In-Depth Guides
+- [AI Agents for Business in Singapore](https://41labs.ai/blog/ai-agents-for-business-singapore) — What AI agents are, what they cost (S$15K-60K), and which businesses need them
+- [AI Agent vs Chatbot: Which Does Your Business Need?](https://41labs.ai/blog/ai-agent-vs-chatbot) — Side-by-side comparison with decision framework
+- [How to Build an AI Agent for Your Business](https://41labs.ai/blog/how-to-build-ai-agent-business) — 4-step process from workflow identification to deployment
+- [AI for Restaurants in Singapore](https://41labs.ai/blog/ai-for-restaurants-singapore) — Cut no-shows by 40%, automate multi-channel orders
+- [AI for Medical Clinics in Singapore](https://41labs.ai/blog/ai-for-clinics-singapore) — 24/7 AI receptionist, WhatsApp automation, MOH compliant
+- [AI for Law Firms in Singapore](https://41labs.ai/blog/ai-for-law-firms-singapore) — AI contract review, legal research, 70% faster document processing
+- [AI for Accounting Firms in Singapore](https://41labs.ai/blog/ai-for-accounting-firms-singapore) — Handle 50% more clients without hiring
+- [AI for Salons and Spas in Singapore](https://41labs.ai/blog/ai-for-salons-beauty-singapore) — 24/7 AI booking, no-show reduction, peak period management
+- [AI for Real Estate Agents in Singapore](https://41labs.ai/blog/ai-for-real-estate-agents-singapore) — AI lead qualification, WhatsApp auto-reply, listing generation
+- [AI Quoting System for Construction](https://41labs.ai/blog/ai-quoting-construction-singapore) — From 3 hours to 5 minutes per quote
+- [How Much Does Custom AI Cost?](https://41labs.ai/blog/how-much-does-custom-ai-cost) — Pricing guide: $15K-$150K depending on complexity
+- [AI ROI Calculator Guide](https://41labs.ai/blog/ai-roi-calculator-guide) — Formulas and benchmarks for building your AI business case
+- [When Should a Business Invest in AI?](https://41labs.ai/blog/when-should-business-invest-in-ai) — 7 signs you're ready
+- [Custom AI vs ChatGPT for Business](https://41labs.ai/blog/custom-ai-vs-chatgpt-for-business) — When generic AI fails and custom wins
+- [What Is Intelligent Document Processing?](https://41labs.ai/blog/what-is-intelligent-document-processing) — Complete IDP guide for business leaders
+
 ## Key Pages
 - [Homepage](https://41labs.ai/)
 - [AI for Construction](https://41labs.ai/industries/construction)
@@ -34,9 +54,13 @@
 - [AI for Automotive](https://41labs.ai/industries/automotive)
 - [AI for F&B](https://41labs.ai/industries/fnb)
 - [AI for Beauty & Wellness](https://41labs.ai/industries/beauty-wellness)
+- [AI for Insurance](https://41labs.ai/industries/insurance)
+- [AI for Logistics](https://41labs.ai/industries/logistics)
+- [AI for Real Estate](https://41labs.ai/industries/real-estate)
 - [About](https://41labs.ai/about)
 - [Case Studies](https://41labs.ai/case-studies)
 - [Free AI Audit](https://41labs.ai/audit)
+- [Blog](https://41labs.ai/blog)
 
 ## How It Works
 1. Free 30-minute AI strategy call with the founder — we map your workflows and identify highest-ROI opportunities
