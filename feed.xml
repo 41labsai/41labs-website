@@ -8,7 +8,7 @@
     <link>https://41labs.ai/blog</link>
     <description>Practical insights on AI systems, automation, and operational efficiency for B2B businesses in Southeast Asia.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Feb 2026 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 04 Apr 2026 07:46:29 GMT</lastBuildDate>
     <atom:link href="https://41labs.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://41labs.ai/logo-full.png</url>
@@ -17,110 +17,140 @@
     </image>
 
     <item>
-      <title>EDG Grant for AI Automation in Singapore: Complete 2026 Guide</title>
-      <link>https://41labs.ai/post?slug=edg-grant-ai-automation-singapore</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=edg-grant-ai-automation-singapore</guid>
-      <pubDate>Wed, 18 Feb 2026 00:00:00 +0800</pubDate>
+      <title>AI Agent vs Chatbot: What's the Difference and Which Does Your Business Need?</title>
+      <link>https://41labs.ai/blog/ai-agent-vs-chatbot</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-agent-vs-chatbot</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>Everything Singapore businesses need to know about using the Enterprise Development Grant (EDG) to fund AI and innovation projects in 2026 — eligibility, application process, and how to maximise funding.</description>
+      <description>Chatbots answer questions. AI agents take actions. Here's the real difference between AI chatbots and AI agents — and how to decide which one your Singapore business actually needs.</description>
     </item>
 
     <item>
-      <title>What Is Agentic AI? A Practical Business Guide</title>
-      <link>https://41labs.ai/post?slug=what-is-agentic-ai-business-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=what-is-agentic-ai-business-guide</guid>
-      <pubDate>Tue, 17 Feb 2026 00:00:00 +0800</pubDate>
+      <title>AI Agents for Business in Singapore: What They Are, What They Cost, and Who Needs One</title>
+      <link>https://41labs.ai/blog/ai-agents-for-business-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-agents-for-business-singapore</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>Agentic AI systems can plan, reason, and execute multi-step tasks autonomously. Here's what business leaders need to know about this emerging technology and how it differs from traditional AI.</description>
+      <description>AI agents go beyond chatbots — they reason, decide, and act across your business systems. Here's what AI agents actually do, what they cost in Singapore, and which businesses benefit most.</description>
     </item>
 
     <item>
-      <title>AI Automation Cost in Singapore: 2026 Pricing Guide</title>
-      <link>https://41labs.ai/post?slug=ai-automation-cost-singapore-pricing-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-automation-cost-singapore-pricing-guide</guid>
-      <pubDate>Mon, 16 Feb 2026 00:00:00 +0800</pubDate>
+      <title>AI for Accounting Firms in Singapore: Handle 50% More Clients Without Hiring</title>
+      <link>https://41labs.ai/blog/ai-for-accounting-firms-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-for-accounting-firms-singapore</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>A detailed breakdown of AI automation costs in Singapore for 2026 — from simple chatbots to complex enterprise systems, with real pricing data and budget planning tips.</description>
+      <description>70% of Singapore SMEs already use some AI accounting tools. Here's how accounting firms are using AI to automate bookkeeping, GST filing, and bank reconciliation — and handling 50% more clients without adding headcount.</description>
     </item>
 
     <item>
-      <title>Custom AI vs Off-the-Shelf Solutions: How to Choose</title>
-      <link>https://41labs.ai/post?slug=custom-ai-vs-off-the-shelf-solutions</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=custom-ai-vs-off-the-shelf-solutions</guid>
-      <pubDate>Sun, 15 Feb 2026 00:00:00 +0800</pubDate>
+      <title>AI for Medical Clinics in Singapore: Automate Appointments, Cut No-Shows, Stay Compliant</title>
+      <link>https://41labs.ai/blog/ai-for-clinics-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-for-clinics-singapore</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>Custom-built AI delivers better results for complex workflows, but off-the-shelf tools work fine for standard tasks. Here's a framework for deciding which approach fits your business.</description>
+      <description>How Singapore clinics use AI to handle appointment booking 24/7, reduce no-shows, automate patient follow-ups, and stay MOH compliant — without hiring extra reception staff.</description>
     </item>
 
     <item>
-      <title>AI for Freight Forwarding: Automating Quote Generation</title>
-      <link>https://41labs.ai/post?slug=ai-freight-forwarding-quote-automation</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-freight-forwarding-quote-automation</guid>
-      <pubDate>Sat, 14 Feb 2026 00:00:00 +0800</pubDate>
-      <dc:creator>Alexander Lee</dc:creator>
-      <category>Case Studies</category>
-      <description>How AI is transforming freight forwarding operations by automating quote generation, customs documentation, and rate calculations — reducing turnaround from hours to minutes.</description>
-    </item>
-
-    <item>
-      <title>AI Claims Processing for Singapore Insurance Companies</title>
-      <link>https://41labs.ai/post?slug=ai-claims-processing-singapore-insurance</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-claims-processing-singapore-insurance</guid>
-      <pubDate>Fri, 13 Feb 2026 00:00:00 +0800</pubDate>
-      <dc:creator>Alexander Lee</dc:creator>
-      <category>Case Studies</category>
-      <description>How AI-powered claims processing is helping Singapore insurers reduce processing time by 80% while improving accuracy and compliance with MAS regulations.</description>
-    </item>
-
-    <item>
-      <title>RPA vs AI Automation: What's the Difference and Which Do You Need?</title>
-      <link>https://41labs.ai/post?slug=rpa-vs-ai-automation-difference</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=rpa-vs-ai-automation-difference</guid>
-      <pubDate>Thu, 12 Feb 2026 00:00:00 +0800</pubDate>
+      <title>How Singapore Law Firms Use AI to Review Contracts and Cut Research Time by 70%</title>
+      <link>https://41labs.ai/blog/ai-for-law-firms-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-for-law-firms-singapore</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>RPA follows rules; AI makes decisions. Understanding the difference is critical for choosing the right automation approach. Here's a clear comparison with real-world examples.</description>
+      <description>Singapore law firms are using AI for contract review, legal research, and document summarisation. Here's what works, what doesn't, and how small firms can start without enterprise budgets.</description>
     </item>
 
     <item>
-      <title>AI and PDPA Compliance in Singapore: What Businesses Need to Know</title>
-      <link>https://41labs.ai/post?slug=ai-pdpa-compliance-singapore</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-pdpa-compliance-singapore</guid>
-      <pubDate>Wed, 11 Feb 2026 00:00:00 +0800</pubDate>
+      <title>AI for Singapore Property Agents: Qualify Leads, Auto-Reply on WhatsApp, Close Faster</title>
+      <link>https://41labs.ai/blog/ai-for-real-estate-agents-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-for-real-estate-agents-singapore</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>Deploying AI while staying compliant with Singapore's PDPA requires careful planning. Here's what businesses need to know about data protection, consent, and AI governance.</description>
+      <description>Singapore property agents who respond within 5 minutes win 80% more deals. AI tools auto-qualify leads, reply on WhatsApp instantly, and generate property listings — so you focus on closing, not admin.</description>
     </item>
 
     <item>
-      <title>When Should a Business Invest in AI Automation? 7 Signs You're Ready</title>
-      <link>https://41labs.ai/post?slug=when-should-business-invest-in-ai</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=when-should-business-invest-in-ai</guid>
-      <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <title>AI for Restaurants in Singapore: Cut No-Shows, Automate Orders, Fill More Tables</title>
+      <link>https://41labs.ai/blog/ai-for-restaurants-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-for-restaurants-singapore</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>Not every business needs AI right now. Here are 7 clear signs that indicate your company is ready to benefit from AI automation — and when to wait.</description>
+      <description>How Singapore restaurants use AI to reduce no-shows by 40%, automate multi-channel orders, and handle peak-hour demand without hiring more staff.</description>
     </item>
 
     <item>
-      <title>What Is Intelligent Document Processing (IDP)? Complete Guide</title>
-      <link>https://41labs.ai/post?slug=what-is-intelligent-document-processing</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=what-is-intelligent-document-processing</guid>
-      <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <title>AI Booking Systems for Salons and Spas in Singapore: 24/7 Appointments, Zero Missed Calls</title>
+      <link>https://41labs.ai/blog/ai-for-salons-beauty-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-for-salons-beauty-singapore</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>Intelligent Document Processing uses AI to extract, classify, and validate data from documents automatically. Here's how IDP works, what it costs, and whether your business needs it.</description>
+      <description>Singapore salon owners miss bookings every time they're with a client. AI booking systems handle calls, WhatsApp messages, and appointments 24/7 — reducing no-shows by up to 30%.</description>
+    </item>
+
+    <item>
+      <title>How to Build an AI Agent for Your Business (Without a Technical Team)</title>
+      <link>https://41labs.ai/blog/how-to-build-ai-agent-business</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/how-to-build-ai-agent-business</guid>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>You don't need an engineering team to deploy an AI agent. Here's the practical 4-step process for building a custom AI agent for your business — from identifying the right workflow to production deployment.</description>
+    </item>
+
+    <item>
+      <title>How AI Quoting Systems Save Construction Companies 3 Hours Per Quote</title>
+      <link>https://41labs.ai/blog/ai-quoting-construction-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-quoting-construction-singapore</guid>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>AI quoting systems help construction companies in Singapore cut quote turnaround from hours to minutes. Learn how automated BOQ extraction and supplier pricing deliver 3+ hours of savings per quote.</description>
+    </item>
+
+    <item>
+      <title>AI Dispatch for Tow Truck Companies: How 365 Tow Automated 3am Calls</title>
+      <link>https://41labs.ai/blog/ai-dispatch-tow-truck</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-dispatch-tow-truck</guid>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>AI dispatch systems help tow truck companies automate driver coordination, 24/7 call handling, and invoicing. See how 365 Tow cut response times by 40% with AI-powered dispatch from 41 Labs.</description>
+    </item>
+
+    <item>
+      <title>AI Scheduling &amp; Dispatch for Home Service Businesses in Singapore</title>
+      <link>https://41labs.ai/blog/ai-scheduling-home-services-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-scheduling-home-services-singapore</guid>
+      <pubDate>Sun, 08 Mar 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>AI scheduling systems help home service businesses in Singapore automate booking, dispatch, invoicing, and follow-ups. Replace WhatsApp chaos with intelligent automation that scales.</description>
+    </item>
+
+    <item>
+      <title>AI for Small Business: What SMBs Need to Know Before Investing</title>
+      <link>https://41labs.ai/blog/ai-for-small-business-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-for-small-business-guide</guid>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>AI isn't just for enterprises anymore. Here's what small and medium businesses need to know about AI automation — costs, use cases, and how to start without breaking the budget.</description>
     </item>
 
     <item>
       <title>AI Implementation Timeline: What to Expect from Start to Deployment</title>
-      <link>https://41labs.ai/post?slug=ai-implementation-timeline</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-implementation-timeline</guid>
-      <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/ai-implementation-timeline</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-implementation-timeline</guid>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Custom AI projects typically take 6-16 weeks from kickoff to production. Here's a detailed breakdown of each phase and what happens at every stage.</description>
@@ -128,9 +158,9 @@
 
     <item>
       <title>AI ROI Calculator: How to Measure and Predict AI Automation Returns</title>
-      <link>https://41labs.ai/post?slug=ai-roi-calculator-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-roi-calculator-guide</guid>
-      <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/ai-roi-calculator-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-roi-calculator-guide</guid>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Calculate the real ROI of AI automation before you invest. This guide provides formulas, benchmarks, and a framework for building your AI business case.</description>
@@ -138,29 +168,39 @@
 
     <item>
       <title>Is Your Business AI-Ready? 10-Point Assessment Checklist</title>
-      <link>https://41labs.ai/post?slug=is-your-business-ai-ready</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=is-your-business-ai-ready</guid>
-      <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/is-your-business-ai-ready</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/is-your-business-ai-ready</guid>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Take this 10-point assessment to determine if your business is ready for AI automation. Score yourself and get specific recommendations based on your results.</description>
     </item>
 
     <item>
-      <title>AI for Small Business: What SMBs Need to Know Before Investing</title>
-      <link>https://41labs.ai/post?slug=ai-for-small-business-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-for-small-business-guide</guid>
-      <pubDate>Fri, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <title>What Is Intelligent Document Processing (IDP)? Complete Guide</title>
+      <link>https://41labs.ai/blog/what-is-intelligent-document-processing</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/what-is-intelligent-document-processing</guid>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
-      <description>AI isn't just for enterprises anymore. Here's what small and medium businesses need to know about AI automation — costs, use cases, and how to start without breaking the budget.</description>
+      <description>Intelligent Document Processing uses AI to extract, classify, and validate data from documents automatically. Here's how IDP works, what it costs, and whether your business needs it.</description>
+    </item>
+
+    <item>
+      <title>When Should a Business Invest in AI Automation? 7 Signs You're Ready</title>
+      <link>https://41labs.ai/blog/when-should-business-invest-in-ai</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/when-should-business-invest-in-ai</guid>
+      <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Not every business needs AI right now. Here are 7 clear signs that indicate your company is ready to benefit from AI automation — and when to wait.</description>
     </item>
 
     <item>
       <title>What Is AI Quote Automation? A Complete Guide for B2B Companies</title>
-      <link>https://41labs.ai/post?slug=what-is-ai-quote-automation</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=what-is-ai-quote-automation</guid>
-      <pubDate>Thu, 06 Feb 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/what-is-ai-quote-automation</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/what-is-ai-quote-automation</guid>
+      <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>AI quote automation uses artificial intelligence to generate accurate quotes in minutes instead of hours. Learn how it works, who it's for, and what results to expect.</description>
@@ -168,9 +208,9 @@
 
     <item>
       <title>How Much Does Custom AI Cost? Pricing Guide for B2B Companies</title>
-      <link>https://41labs.ai/post?slug=how-much-does-custom-ai-cost</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=how-much-does-custom-ai-cost</guid>
-      <pubDate>Wed, 05 Feb 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/how-much-does-custom-ai-cost</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/how-much-does-custom-ai-cost</guid>
+      <pubDate>Thu, 05 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Custom AI projects typically cost $15,000-$150,000 depending on complexity. Here's a detailed breakdown of what drives AI pricing and how to budget for your project.</description>
@@ -178,9 +218,9 @@
 
     <item>
       <title>Custom AI vs ChatGPT for Business: When to Use Each</title>
-      <link>https://41labs.ai/post?slug=custom-ai-vs-chatgpt-for-business</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=custom-ai-vs-chatgpt-for-business</guid>
-      <pubDate>Tue, 04 Feb 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/custom-ai-vs-chatgpt-for-business</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/custom-ai-vs-chatgpt-for-business</guid>
+      <pubDate>Wed, 04 Feb 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>ChatGPT is great for general tasks, but custom AI delivers 10x better results for specific business processes. Here's when to use each and why.</description>
@@ -188,9 +228,9 @@
 
     <item>
       <title>AI Automation in Southeast Asia: 2026 Trends and Opportunities</title>
-      <link>https://41labs.ai/post?slug=ai-automation-southeast-asia-2026-trends</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-automation-southeast-asia-2026-trends</guid>
-      <pubDate>Tue, 28 Jan 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/ai-automation-southeast-asia-2026-trends</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-automation-southeast-asia-2026-trends</guid>
+      <pubDate>Wed, 28 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Southeast Asia is experiencing an AI revolution. From Singapore to Indonesia, businesses are adopting automation at unprecedented rates. Here's what's driving the change and where the opportunities lie.</description>
@@ -198,9 +238,9 @@
 
     <item>
       <title>How to Choose an AI Vendor: A Practical Guide for Business Leaders</title>
-      <link>https://41labs.ai/post?slug=how-to-choose-ai-vendor-guide</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=how-to-choose-ai-vendor-guide</guid>
-      <pubDate>Sun, 26 Jan 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/how-to-choose-ai-vendor-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/how-to-choose-ai-vendor-guide</guid>
+      <pubDate>Mon, 26 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>The AI vendor landscape is crowded and confusing. Here's how to cut through the noise and find a partner who will actually deliver results for your business.</description>
@@ -208,39 +248,39 @@
 
     <item>
       <title>The ROI of AI Automation: Real Numbers from Real Projects</title>
-      <link>https://41labs.ai/post?slug=roi-of-ai-automation-real-numbers</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=roi-of-ai-automation-real-numbers</guid>
-      <pubDate>Fri, 24 Jan 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/roi-of-ai-automation-real-numbers</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/roi-of-ai-automation-real-numbers</guid>
+      <pubDate>Sat, 24 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
-      <category>Case Studies</category>
+      <category>Insights</category>
       <description>AI ROI can be transformative — but only with the right projects. Here's what realistic returns look like, based on actual implementations we've done.</description>
     </item>
 
     <item>
       <title>Why Generic AI Tools Fail Complex Businesses</title>
-      <link>https://41labs.ai/post?slug=why-generic-ai-fails-complex-businesses</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=why-generic-ai-fails-complex-businesses</guid>
-      <pubDate>Wed, 22 Jan 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/why-generic-ai-fails-complex-businesses</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/why-generic-ai-fails-complex-businesses</guid>
+      <pubDate>Thu, 22 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
-      <category>AI Systems</category>
+      <category>Insights</category>
       <description>ChatGPT and off-the-shelf AI tools promise the world. But when you're dealing with complex products, internal data, and high-stakes decisions, they fall short. Here's why — and what actually works.</description>
     </item>
 
     <item>
       <title>From Hours to Minutes: Automating Quote Generation with AI</title>
-      <link>https://41labs.ai/post?slug=from-hours-to-minutes-quote-generation</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=from-hours-to-minutes-quote-generation</guid>
-      <pubDate>Mon, 20 Jan 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/from-hours-to-minutes-quote-generation</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/from-hours-to-minutes-quote-generation</guid>
+      <pubDate>Tue, 20 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
-      <category>Case Studies</category>
+      <category>Insights</category>
       <description>How we helped a professional services firm cut their quoting time from 3 hours to 5 minutes — without sacrificing accuracy or losing the human touch.</description>
     </item>
 
     <item>
       <title>Is Your Business Ready for AI? A Practical Checklist</title>
-      <link>https://41labs.ai/post?slug=ai-readiness-checklist-for-operations</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=ai-readiness-checklist-for-operations</guid>
-      <pubDate>Wed, 15 Jan 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/ai-readiness-checklist-for-operations</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-readiness-checklist-for-operations</guid>
+      <pubDate>Thu, 15 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Not every business is ready for AI. Here's how to assess whether you're in a position to actually benefit from custom AI systems — and what to fix first if you're not.</description>
@@ -248,9 +288,9 @@
 
     <item>
       <title>5 Signs Your Business Needs AI Automation (Not Just Better Software)</title>
-      <link>https://41labs.ai/post?slug=5-signs-business-needs-ai-automation</link>
-      <guid isPermaLink="true">https://41labs.ai/post?slug=5-signs-business-needs-ai-automation</guid>
-      <pubDate>Fri, 10 Jan 2026 00:00:00 GMT</pubDate>
+      <link>https://41labs.ai/blog/5-signs-business-needs-ai-automation</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/5-signs-business-needs-ai-automation</guid>
+      <pubDate>Sat, 10 Jan 2026 00:00:00 GMT</pubDate>
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Traditional software automates simple tasks. AI automates complex ones. Here's how to know which you actually need.</description>
