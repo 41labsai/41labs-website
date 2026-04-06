@@ -42,16 +42,6 @@ if (fs.existsSync(svcDir)) {
   }
 }
 
-// Niche pages
-const nicheDir = path.join(__dirname, 'niches');
-if (fs.existsSync(nicheDir)) {
-  const nicheFiles = fs.readdirSync(nicheDir).filter(f => f.endsWith('.html'));
-  for (const file of nicheFiles) {
-    const slug = file.replace('.html', '');
-    urls.push({ loc: `https://41labs.ai/niches/${slug}`, priority: '0.9', changefreq: 'monthly' });
-  }
-}
-
 // Location pages
 const locDir = path.join(__dirname, 'locations');
 if (fs.existsSync(locDir)) {

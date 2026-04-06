@@ -42,3 +42,4 @@ uploads/*.mp4
 *secret*
 *.pem
 *.key
+.vercel
