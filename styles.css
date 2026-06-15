@@ -5608,3 +5608,15 @@ img.logo-img,
     max-width: none !important;
     object-fit: contain !important;
 }
+
+/* Logo pill — keep the dark logo readable on transparent/dark headers (matches the menu pill) */
+.navbar .logo {
+    background: #ffffff;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    padding: 4px 20px;
+    border-radius: 100px;
+    line-height: 0;
+}
+@media (max-width: 640px) {
+    .navbar .logo { padding: 2px 14px; }
+}
