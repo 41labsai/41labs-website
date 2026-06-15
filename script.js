@@ -237,6 +237,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.section').forEach(section => {
+        // Leave above-the-fold sections visible immediately so they don't gate LCP.
+        // Only below-the-fold sections get the fade-up on scroll.
+        const rect = section.getBoundingClientRect();
+        if (rect.top < (window.innerHeight || 800) - 60) {
+            sectionObserver.observe(section);
+            return;
+        }
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
         section.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
