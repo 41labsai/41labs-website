@@ -1,0 +1,7 @@
+.playwright-mcp
+playwright-report
+test-results
+tests
+docs
+*.cjs
+*.md
