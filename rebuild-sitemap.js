@@ -22,6 +22,14 @@ for (const file of blogFiles) {
   urls.push({ loc: `https://41labs.ai/blog/${slug}`, priority: '0.8', changefreq: 'monthly' });
 }
 
+// Commercial GEO/AEO landing pages (root-level)
+const landingPages = ['ai-automation-agency-singapore', 'ai-development-company-singapore', 'ai-sales-agent-singapore'];
+for (const slug of landingPages) {
+  if (fs.existsSync(path.join(__dirname, slug + '.html'))) {
+    urls.push({ loc: `https://41labs.ai/${slug}`, priority: '0.9', changefreq: 'monthly' });
+  }
+}
+
 // Case study pages
 const csDir = path.join(__dirname, 'case-studies');
 if (fs.existsSync(csDir)) {
