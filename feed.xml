@@ -8,7 +8,7 @@
     <link>https://41labs.ai/blog</link>
     <description>Practical insights on AI systems, automation, and operational efficiency for B2B businesses in Southeast Asia.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jun 2026 03:24:21 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 04:33:53 GMT</lastBuildDate>
     <atom:link href="https://41labs.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://41labs.ai/logo-full.png</url>
@@ -24,6 +24,26 @@
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>Should you hire an AI agency, build an in-house AI team, or use a freelance developer? An honest Singapore comparison of cost, speed, risk, and ownership — with a clear decision guide.</description>
+    </item>
+
+    <item>
+      <title>AI Is the New Distribution Channel: How to Get Recommended by ChatGPT (2026)</title>
+      <link>https://41labs.ai/blog/ai-new-distribution-channel</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-new-distribution-channel</guid>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Your customers are asking ChatGPT and Perplexity for recommendations instead of Googling. If AI doesn't know your business, you're invisible. How the new distribution channel works — and how to be the one it recommends.</description>
+    </item>
+
+    <item>
+      <title>India vs Vietnam: Why SaaS Founders Get Singapore Wrong (2026)</title>
+      <link>https://41labs.ai/blog/saas-founders-entering-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/saas-founders-entering-singapore</guid>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Indian founders overestimate speed. Vietnamese founders underestimate positioning. Both assume their home playbook works in Singapore — it doesn't. What actually works when entering the Singapore/ASEAN market.</description>
     </item>
 
     <item>
