@@ -62,7 +62,10 @@
         .event-card .when { color:var(--muted,#888); font-size:13px; margin-bottom:12px; }
         .event-card p { margin:0; color:#bbb; font-size:0.95rem; line-height:1.6; }
         .member-card { max-width:760px; margin:0 auto; background:var(--card,#161616); border:1px solid rgba(74,222,128,0.2); border-radius:16px; padding:32px; text-align:center; }
-        .member-card .saia-logo { font-weight:800; font-size:2rem; letter-spacing:1px; background:linear-gradient(90deg,#3b9dff,#1f6bff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .logo-chip { background:#fff; border-radius:12px; padding:12px 18px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:14px; box-shadow:0 2px 14px rgba(0,0,0,0.18); }
+        .logo-chip img { height:34px; width:auto; display:block; }
+        .logo-chip--lg { padding:20px 30px; }
+        .logo-chip--lg img { height:80px; }
     </style>
 </head>
 <body>
@@ -117,9 +120,8 @@
         <div class="container">
             <div class="section-header"><h2>Member &amp; Partner</h2></div>
             <div class="member-card">
-                <div class="saia-logo">SAIA</div>
-                <p style="margin:6px 0 0;font-weight:600;">Singapore A.I. Association</p>
-                <p style="color:#bbb;margin-top:14px;">41 Labs is a member of the Singapore A.I. Association (SAIA) and a technology partner in its AI Discovery Clinics — helping Singapore businesses understand and adopt AI.</p>
+                <div class="logo-chip logo-chip--lg"><img src="/logos/saia.png" alt="Singapore A.I. Association (SAIA) logo"></div>
+                <p style="color:#bbb;margin-top:18px;">41 Labs is a member of the Singapore A.I. Association (SAIA) and a technology partner in its AI Discovery Clinics — helping Singapore businesses understand and adopt AI.</p>
             </div>
         </div>
     </section>
@@ -130,24 +132,28 @@
             <div class="section-header"><h2>Where You'll Find Us</h2><p>Events we've taken part in</p></div>
             <div class="events-grid">
                 <div class="event-card">
+                    <div class="logo-chip"><img src="/logos/nrf.jpg" alt="NRF Big Show APAC 2026 logo" loading="lazy"></div>
                     <span class="role">Exhibitor</span>
                     <h3>NRF Big Show APAC 2026</h3>
                     <div class="when">June 2026 · Singapore</div>
                     <p>We ran a live demo at Asia-Pacific's largest retail event — paste your store URL and watch an AI sales agent built on your real catalogue answer customers in real time.</p>
                 </div>
                 <div class="event-card">
+                    <div class="logo-chip"><img src="/logos/saia.png" alt="Singapore A.I. Association logo" loading="lazy"></div>
                     <span class="role">Tech Partner</span>
                     <h3>SAIA AI Discovery Clinic</h3>
                     <div class="when">May–June 2026 · Singapore</div>
                     <p>As a Singapore A.I. Association tech partner, we joined the AI Discovery Clinics to show business owners, hands-on, where AI delivers real ROI in their operations.</p>
                 </div>
                 <div class="event-card">
+                    <div class="logo-chip"><img src="/logos/superai.jpg" alt="SuperAI conference logo" loading="lazy"></div>
                     <span class="role">In Attendance</span>
                     <h3>SuperAI 2026</h3>
                     <div class="when">June 2026 · Singapore</div>
                     <p>We joined the AI community at SuperAI, one of Asia's largest AI gatherings, to track where AI search and agents are taking business — and bring it back to our clients.</p>
                 </div>
                 <div class="event-card">
+                    <div class="logo-chip"><img src="/logos/stripe.png" alt="Stripe logo" loading="lazy"></div>
                     <span class="role">Community</span>
                     <h3>Stripe Events</h3>
                     <div class="when">2026 · Singapore</div>
