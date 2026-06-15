@@ -22,6 +22,16 @@ for (const file of blogFiles) {
   urls.push({ loc: `https://41labs.ai/blog/${slug}`, priority: '0.8', changefreq: 'monthly' });
 }
 
+// Case study pages
+const csDir = path.join(__dirname, 'case-studies');
+if (fs.existsSync(csDir)) {
+  const csFiles = fs.readdirSync(csDir).filter(f => f.endsWith('.html') && f !== 'index.html');
+  for (const file of csFiles) {
+    const slug = file.replace('.html', '');
+    urls.push({ loc: `https://41labs.ai/case-studies/${slug}`, priority: '0.8', changefreq: 'monthly' });
+  }
+}
+
 // Industry pages
 const indDir = path.join(__dirname, 'industries');
 if (fs.existsSync(indDir)) {

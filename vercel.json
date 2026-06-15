@@ -1,6 +1,34 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/post",
+      "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }],
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/case-study",
+      "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[^&]+)" }],
+      "destination": "/case-studies/:slug",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/wp-admin/:path*", "destination": "/api/410" },
+    { "source": "/wp-admin", "destination": "/api/410" },
+    { "source": "/wp-content/:path*", "destination": "/api/410" },
+    { "source": "/wp-includes/:path*", "destination": "/api/410" },
+    { "source": "/wp-json/:path*", "destination": "/api/410" },
+    { "source": "/wp-login.php", "destination": "/api/410" },
+    { "source": "/xmlrpc.php", "destination": "/api/410" },
+    { "source": "/category/:path*", "destination": "/api/410" },
+    { "source": "/tag/:path*", "destination": "/api/410" },
+    { "source": "/author/:path*", "destination": "/api/410" },
+    { "source": "/feed/:path*", "destination": "/api/410" },
+    { "source": "/feed", "destination": "/api/410" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
