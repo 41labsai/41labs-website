@@ -8,13 +8,33 @@
     <link>https://41labs.ai/blog</link>
     <description>Practical insights on AI systems, automation, and operational efficiency for B2B businesses in Southeast Asia.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Apr 2026 07:46:29 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 03:24:21 GMT</lastBuildDate>
     <atom:link href="https://41labs.ai/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://41labs.ai/logo-full.png</url>
       <title>41 Labs Blog</title>
       <link>https://41labs.ai</link>
     </image>
+
+    <item>
+      <title>AI Agency vs In-House Team vs Freelance Developer: Which to Hire? (2026)</title>
+      <link>https://41labs.ai/blog/ai-agency-vs-in-house-vs-freelance</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-agency-vs-in-house-vs-freelance</guid>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Should you hire an AI agency, build an in-house AI team, or use a freelance developer? An honest Singapore comparison of cost, speed, risk, and ownership — with a clear decision guide.</description>
+    </item>
+
+    <item>
+      <title>Best AI Companies in Singapore 2026: Honest Comparison for SMEs</title>
+      <link>https://41labs.ai/blog/best-ai-companies-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/best-ai-companies-singapore</guid>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Honest comparison of the top AI companies in Singapore for 2026. Compare Wiz.AI, Tangentia, Brew Interactive, 41 Labs, and more by use case, budget, and fit.</description>
+    </item>
 
     <item>
       <title>AI Agent vs Chatbot: What's the Difference and Which Does Your Business Need?</title>
@@ -134,6 +154,86 @@
       <dc:creator>Alexander Lee</dc:creator>
       <category>Insights</category>
       <description>AI scheduling systems help home service businesses in Singapore automate booking, dispatch, invoicing, and follow-ups. Replace WhatsApp chaos with intelligent automation that scales.</description>
+    </item>
+
+    <item>
+      <title>EDG Grant for AI Automation: How Singapore Businesses Get Up to 70% Funding</title>
+      <link>https://41labs.ai/blog/edg-grant-ai-automation-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/edg-grant-ai-automation-singapore</guid>
+      <pubDate>Wed, 18 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Singapore businesses can get up to 50% funding (up to 70% for qualifying SMEs) for AI and innovation projects through the Enterprise Development Grant (EDG). Here's how the grant works, what qualifies, and how to apply.</description>
+    </item>
+
+    <item>
+      <title>What is Agentic AI? A Business Leader's Guide (2026)</title>
+      <link>https://41labs.ai/blog/what-is-agentic-ai-business-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/what-is-agentic-ai-business-guide</guid>
+      <pubDate>Tue, 17 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Agentic AI represents the next evolution beyond chatbots — AI that autonomously plans, decides, and acts. Here's what business leaders need to know about deploying AI agents in 2026.</description>
+    </item>
+
+    <item>
+      <title>AI Automation Cost in Singapore: Complete Pricing Guide (2026)</title>
+      <link>https://41labs.ai/blog/ai-automation-cost-singapore-pricing-guide</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-automation-cost-singapore-pricing-guide</guid>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>How much does AI automation cost in Singapore? From S$10K entry-level projects to S$150K+ enterprise systems, here's a complete breakdown of AI pricing in the Singapore market.</description>
+    </item>
+
+    <item>
+      <title>Custom AI vs Off-the-Shelf Solutions: Which Saves More Money?</title>
+      <link>https://41labs.ai/blog/custom-ai-vs-off-the-shelf-solutions</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/custom-ai-vs-off-the-shelf-solutions</guid>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Off-the-shelf AI is cheaper upfront but custom AI delivers 2-3x stronger ROI. Here's a head-to-head comparison to help you decide which approach saves more money long term.</description>
+    </item>
+
+    <item>
+      <title>How AI Automates Freight Forwarding Quotes (85% Faster)</title>
+      <link>https://41labs.ai/blog/ai-freight-forwarding-quote-automation</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-freight-forwarding-quote-automation</guid>
+      <pubDate>Sat, 14 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Freight forwarders spend 2-4 hours per RFQ manually. AI automation cuts that by 85%, enabling teams to handle 4x more quotes with fewer errors. Here's how it works.</description>
+    </item>
+
+    <item>
+      <title>AI Claims Processing: A Guide for Singapore Insurers</title>
+      <link>https://41labs.ai/blog/ai-claims-processing-singapore-insurance</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-claims-processing-singapore-insurance</guid>
+      <pubDate>Fri, 13 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>AI is transforming insurance claims processing — reducing turnaround from days to hours with 70% faster processing and 85% less manual review. Here's how Singapore insurers can implement it.</description>
+    </item>
+
+    <item>
+      <title>RPA vs AI Automation: What's the Difference and Which Do You Need?</title>
+      <link>https://41labs.ai/blog/rpa-vs-ai-automation-difference</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/rpa-vs-ai-automation-difference</guid>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>RPA follows scripts. AI learns patterns. Here's a clear comparison of Robotic Process Automation vs AI automation — when to use each, and when to combine them.</description>
+    </item>
+
+    <item>
+      <title>AI and PDPA Compliance in Singapore: What Businesses Need to Know</title>
+      <link>https://41labs.ai/blog/ai-pdpa-compliance-singapore</link>
+      <guid isPermaLink="true">https://41labs.ai/blog/ai-pdpa-compliance-singapore</guid>
+      <pubDate>Wed, 11 Feb 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Alexander Lee</dc:creator>
+      <category>Insights</category>
+      <description>Deploying AI in Singapore requires PDPA compliance. Here's what businesses need to know about data protection obligations, the PDPC's AI guidelines, and how to build compliant AI systems.</description>
     </item>
 
     <item>
