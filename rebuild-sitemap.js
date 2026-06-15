@@ -29,6 +29,10 @@ for (const slug of landingPages) {
     urls.push({ loc: `https://41labs.ai/${slug}`, priority: '0.9', changefreq: 'monthly' });
   }
 }
+// Pillar hub page
+if (fs.existsSync(path.join(__dirname, 'ai-guide-singapore.html'))) {
+  urls.push({ loc: 'https://41labs.ai/ai-guide-singapore', priority: '0.9', changefreq: 'monthly' });
+}
 
 // Case study pages
 const csDir = path.join(__dirname, 'case-studies');
