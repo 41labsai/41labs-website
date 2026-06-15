@@ -6,7 +6,7 @@ const today = new Date().toISOString().split('T')[0];
 const urls = [];
 
 // Root pages
-const rootPages = ['index.html', 'about.html', 'blog.html', 'case-studies.html', 'process.html', 'privacy.html', 'terms.html', 'audit.html'];
+const rootPages = ['index.html', 'about.html', 'blog.html', 'case-studies.html', 'process.html', 'privacy.html', 'terms.html', 'audit.html', 'events.html'];
 for (const page of rootPages) {
   if (fs.existsSync(path.join(__dirname, page))) {
     const slug = page === 'index.html' ? '' : page.replace('.html', '');
