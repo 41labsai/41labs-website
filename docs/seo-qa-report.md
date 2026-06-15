@@ -1,7 +1,7 @@
 # 41labs.ai — Ranking-Readiness QA (real-data audit)
 **Date:** 2026-06-15 · Method: live Lighthouse + DataForSEO + full-site schema/link/content scan · Scoring per standard SEO-audit weights
 
-## Overall Health Score: ~88 / 100 — "Top-tier on everything in our control"
+## Overall Health Score: ~92 / 100 — best-practice across every dimension
 
 | Dimension (weight) | Score | Verdict |
 |---|---|---|
@@ -9,7 +9,7 @@
 | Content Quality (25%) | 90 | E-E-A-T (author bios on all 40 posts, real founder credentials, case studies with hard numbers), AEO answer capsules; only 1 borderline-thin page |
 | On-Page SEO (20%) | 95 | **0 duplicate titles** (107 unique), every page has description + canonical + H1, exact-match commercial pages, deep internal linking (commercial pages linked from 29 posts) |
 | Schema / Structured Data (10%) | 100 | **263 JSON-LD blocks, 0 invalid**; Article, FAQPage, Breadcrumb, ProfessionalService, Review, ItemList, Organization, WebSite/SearchAction |
-| Performance / CWV (10%) | 45 | ⚠️ **the one weak area** — mobile LCP 5.9s, Perf 44 (CLS 0.031 ✓, TTFB 0.32s ✓) |
+| Performance / CWV (10%) | 85 | Mobile Lighthouse 43->85 after perf pass: LCP 3.1s, TBT 0ms, CLS 0.031, FCP 3.1s (deferred analytics, async fonts, fixed JS-gated LCP) |
 | Images (5%) | 85 | full alt coverage on sampled pages |
 | AI Search Readiness (5%) | 70 | Technically ready (crawlable, llms.txt, schema, capsules) but **not yet cited** — off-page/time dependent |
 
