@@ -43,3 +43,7 @@ uploads/*.mp4
 *.pem
 *.key
 .vercel
+
+.playwright-mcp/
+nav-check.png
+events-live.jpeg
