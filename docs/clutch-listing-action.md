@@ -80,7 +80,27 @@ be a real, identifiable person — so these come from your **actual named client
 From your Clutch dashboard, use "Request a Review" to send Clutch's official link, OR send the warm message
 below first to get a yes, then trigger the Clutch request.
 
-### Review-request message (send via WhatsApp/email, personalise the brackets)
+### Ready-to-send message #1 — Logistics / freight client (customs build)
+> Hi [First name], it's Alexander from 41 Labs.
+>
+> I was reviewing what we built for [Company] this week — the AI that reads your customs and shipping docs and flags errors before they turn into penalties — and the numbers still stop me: customs clearance down from 4 hours to 45 minutes, documentation errors down 85%, and the penalty bills basically gone. By our last count that's around S$180K a year back in your pocket.
+>
+> A lot of logistics owners here are still drowning in manual paperwork and eating penalty costs they think are just the cost of doing business. A few honest words from someone who actually fixed it would land harder than anything I could say about us.
+>
+> Would you do a short Clutch review? About 10 minutes — Clutch just calls or emails to verify it's really you. If you can, mention where you were before, what we built, and that one number — the S$180K, or 4 hours down to 45 minutes — because the specifics are what make the next owner believe it.
+>
+> Here's the link: [CLUTCH_REVIEW_LINK]. No pressure at all, and thank you genuinely for trusting us with it. — Alexander, 41 Labs · +65 8512 3273
+
+### Ready-to-send message #2 — Real estate / property management client
+> Hi [First name], it's Alexander from 41 Labs.
+>
+> I was looking back at what we built for [Company] — the AI handling tenant requests, lease renewals, and vendor coordination — and I keep coming back to one thing: you went from maxed-out at 200 units to running 500, without adding a single hire. Tenant response dropped from a day to 15 minutes, and renewals are up 22%.
+>
+> A lot of property managers here are stuck exactly where you were — every new unit means more admin and eventually another headcount. Hearing how you broke that ceiling, from you rather than from me, would mean a lot to the next owner weighing it up.
+>
+> Would you leave a short Clutch review? About 10 minutes — Clutch just verifies it's really you by call or email. If you can, mention where you were before, what we built, and that jump from 200 to 500 units with no new staff. Here's the link: [CLUTCH_REVIEW_LINK]. No pressure, and thank you for trusting us with it. — Alexander, 41 Labs · +65 8512 3273
+
+### Generic template (for any other client)
 > Hi [First name], it's Alexander from 41 Labs.
 >
 > I was looking back at what we built for [Company] — [the specific thing, e.g. "the AI that drafts your quotes from your own pricing"] — and I keep coming back to one number: [the specific result, e.g. "you went from a day per quote to about 15 minutes"]. That still makes me smile.
