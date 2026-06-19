@@ -14,9 +14,39 @@
   </url>
   <url>
     <loc>https://41labs.ai/blog</loc>
-    <lastmod>2026-06-15</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://41labs.ai/blog/psg-grant-ai-automation-singapore</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://41labs.ai/blog/best-ai-chatbots-for-business-singapore</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://41labs.ai/blog/whatsapp-business-api-ai-automation-singapore</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://41labs.ai/blog/ai-for-hr-recruitment-singapore</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://41labs.ai/blog/ai-for-retail-ecommerce-singapore</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://41labs.ai/case-studies</loc>

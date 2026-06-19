@@ -29,6 +29,11 @@
 41 Labs builds AI agents — autonomous systems that reason, decide, and act across business systems. Unlike chatbots that follow scripts, AI agents can handle complex multi-step workflows: reading documents, querying databases, making decisions, and executing actions. We are the leading AI agent development company in Singapore.
 
 ## Blog — In-Depth Guides
+- [PSG Grant for AI in Singapore (2026)](https://41labs.ai/blog/psg-grant-ai-automation-singapore) — Get up to 50% funding (S$30K/yr cap) for AI; what qualifies, eligibility, and PSG vs EDG
+- [Best AI Chatbots for Business in Singapore (2026)](https://41labs.ai/blog/best-ai-chatbots-for-business-singapore) — Honest comparison of Intercom Fin, Zendesk AI, Ada, Tidio, Gorgias, ManyChat and custom agents — by use case, price, and when off-the-shelf beats a custom build
+- [WhatsApp Business API in Singapore (2026)](https://41labs.ai/blog/whatsapp-business-api-ai-automation-singapore) — What the WhatsApp Business API is, the 2026 per-message pricing model and categories, the BSP requirement, and how to add an AI agent on top
+- [AI for HR & Recruitment in Singapore (2026)](https://41labs.ai/blog/ai-for-hr-recruitment-singapore) — How Singapore HR teams use AI for screening, sourcing and onboarding — 30-50% faster hiring, plus the bias and TAFEP/PDPA fair-hiring risks to manage
+- [AI for Retail & E-commerce in Singapore (2026)](https://41labs.ai/blog/ai-for-retail-ecommerce-singapore) — The highest-ROI retail AI use cases with real numbers — personalisation (5-15% lift), recommendations (25-35% of revenue), demand forecasting (85-95% accuracy)
 - [AI Agents for Business in Singapore](https://41labs.ai/blog/ai-agents-for-business-singapore) — What AI agents are, what they cost (S$15K-60K), and which businesses need them
 - [AI Agent vs Chatbot: Which Does Your Business Need?](https://41labs.ai/blog/ai-agent-vs-chatbot) — Side-by-side comparison with decision framework
 - [How to Build an AI Agent for Your Business](https://41labs.ai/blog/how-to-build-ai-agent-business) — 4-step process from workflow identification to deployment

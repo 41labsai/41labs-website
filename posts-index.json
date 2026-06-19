@@ -1,6 +1,56 @@
 {
   "posts": [
     {
+      "slug": "psg-grant-ai-automation-singapore",
+      "title": "PSG Grant for AI in Singapore (2026): Get 50% Funding for AI Automation",
+      "date": "2026-06-19",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "The Productivity Solutions Grant (PSG) covers up to 50% of AI adoption costs for Singapore SMEs, capped at S$30,000 a year. Here's exactly what AI qualifies, who's eligible, how to apply — and when you need EDG instead.",
+      "readTime": "8 min read",
+      "image": ""
+    },
+    {
+      "slug": "best-ai-chatbots-for-business-singapore",
+      "title": "Best AI Chatbots for Business in Singapore (2026): Top Platforms Compared",
+      "date": "2026-06-19",
+      "author": "Alexander Lee",
+      "category": "ai-systems",
+      "excerpt": "There is no single best AI chatbot — only the best one for your use case. The platforms worth your attention in 2026 (Intercom Fin, Zendesk AI, Ada, Tidio, Gorgias and more), compared by use case, price, and when to build custom.",
+      "readTime": "9 min read",
+      "image": ""
+    },
+    {
+      "slug": "whatsapp-business-api-ai-automation-singapore",
+      "title": "WhatsApp Business API in Singapore (2026): The AI Automation Guide",
+      "date": "2026-06-19",
+      "author": "Alexander Lee",
+      "category": "ai-systems",
+      "excerpt": "A plain-English guide to the WhatsApp Business API — what it is, the 2026 per-message pricing, the BSP requirement, and how to layer AI on top to automate support, lead qualification, and bookings.",
+      "readTime": "8 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-for-hr-recruitment-singapore",
+      "title": "AI for HR & Recruitment in Singapore (2026): What Works, What to Avoid",
+      "date": "2026-06-19",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "87% of companies now use AI in recruitment. How HR teams in Singapore use AI for resume screening, sourcing, and onboarding — the real time and cost savings, plus the bias and fair-hiring risks you must manage.",
+      "readTime": "9 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-for-retail-ecommerce-singapore",
+      "title": "AI for Retail & E-commerce in Singapore (2026): Use Cases & ROI",
+      "date": "2026-06-19",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "AI personalisation drives a 5-15% revenue lift and product recommendations now generate 25-35% of e-commerce revenue. How retail and online stores in Singapore use AI — personalisation, demand forecasting, and customer service — with the real numbers.",
+      "readTime": "9 min read",
+      "image": ""
+    },
+    {
       "slug": "edg-grant-ai-automation-singapore",
       "title": "EDG Grant for AI Automation: How Singapore Businesses Get Up to 70% Funding",
       "date": "2026-02-18",
