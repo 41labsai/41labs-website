@@ -5,6 +5,9 @@
 ## About
 41 Labs is a Singapore-based AI systems company founded by Alexander Lee. We build custom AI trained on our clients' internal data — their products, processes, and pricing rules — for accuracy you can trust in production. We specialize in construction, healthcare, home services, professional services, automotive, F&B, and beauty & wellness industries.
 
+## 41 Closer (Flagship Product)
+41 Closer is 41 Labs' flagship product: a WhatsApp sales agent that we build, run, and tune for a business. It answers customer messages in seconds, 24 hours a day, gives accurate prices from the client's real catalogue, follows up every lead, and closes the sale, handing off to a human when needed. Unlike a DIY chatbot tool, 41 Labs handles everything and controls the AI for the client. It is fully done-for-you and priced on the value it brings, not per seat. Learn more: https://41labs.ai/41-closer
+
 ## Services
 - AI Strategy & Consulting: Free 30-minute strategy call to map workflows and find highest-ROI AI opportunities
 - Custom AI System Development: Quoting engines, dispatch systems, document processing, customer service bots, internal knowledge bases

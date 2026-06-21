@@ -23,7 +23,7 @@ for (const file of blogFiles) {
 }
 
 // Commercial GEO/AEO landing pages (root-level)
-const landingPages = ['ai-automation-agency-singapore', 'ai-development-company-singapore', 'ai-sales-agent-singapore', 'ai-for-ecommerce', 'whatsapp-ai-chatbot', 'ai-appointment-booking'];
+const landingPages = ['41-closer', 'ai-automation-agency-singapore', 'ai-development-company-singapore', 'ai-sales-agent-singapore', 'ai-for-ecommerce', 'whatsapp-ai-chatbot', 'ai-appointment-booking'];
 for (const slug of landingPages) {
   if (fs.existsSync(path.join(__dirname, slug + '.html'))) {
     urls.push({ loc: `https://41labs.ai/${slug}`, priority: '0.9', changefreq: 'monthly' });

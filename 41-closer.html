@@ -55,6 +55,46 @@
     }
     </script>
 
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is 41 Closer?",
+                "acceptedAnswer": { "@type": "Answer", "text": "41 Closer is a WhatsApp sales agent built and run by 41 Labs. It answers your customers in seconds, day or night, gives prices from your real catalogue, follows up every lead, and closes the sale. We build it, run it, and tune it for you." }
+            },
+            {
+                "@type": "Question",
+                "name": "How is 41 Closer different from a chatbot?",
+                "acceptedAnswer": { "@type": "Answer", "text": "A chatbot follows a script and gives generic answers. 41 Closer is built on your real products and prices, holds a natural conversation, and is controlled and tuned by the 41 Labs team. You do not manage it. We do." }
+            },
+            {
+                "@type": "Question",
+                "name": "Do I have to set it up myself?",
+                "acceptedAnswer": { "@type": "Answer", "text": "No. We handle everything. You send us your products, prices, and how you sell. We build the agent, connect WhatsApp, set up payment, and run it. You do nothing." }
+            },
+            {
+                "@type": "Question",
+                "name": "Does 41 Closer work on WhatsApp?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. It runs natively on WhatsApp, where most Singapore customers prefer to buy, and it can also run on your website." }
+            },
+            {
+                "@type": "Question",
+                "name": "Does a human ever take over?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. When a customer needs a person, or the agent is unsure, it hands the conversation to your team with full context. You stay in control." }
+            },
+            {
+                "@type": "Question",
+                "name": "What does 41 Closer cost?",
+                "acceptedAnswer": { "@type": "Answer", "text": "We price on the value it brings, not by the seat. We look at what your missed and slow replies cost today and set a price that is small next to the revenue it brings back. Eligible Singapore companies can offset a large part of the cost with the EDG grant." }
+            }
+        ]
+    }
+    </script>
+
     <style>
         /* ===== 41 Closer page styles (built on site tokens) ===== */
         .clo-dark { background: var(--bg-dark); color: #fff; }
@@ -207,6 +247,54 @@
         </div>
     </header>
 
+    <!-- TRUST / PARTNERS -->
+    <style>
+        .clo-trust { background:#fff; border-bottom:1px solid var(--border-color); padding:46px 0; }
+        .clo-trust-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:44px; }
+        .clo-trust-label { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-light); margin-bottom:16px; }
+        .clo-trust-items { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+        .clo-logo { height:24px; width:auto; opacity:0.62; filter:grayscale(1); transition:var(--transition); }
+        .clo-logo:hover { opacity:1; filter:grayscale(0); }
+        .clo-wordmark { font-weight:700; font-size:1.05rem; color:var(--text-secondary); letter-spacing:-0.02em; }
+        .clo-trust-seen { margin-top:34px; padding-top:30px; border-top:1px solid var(--border-color); }
+        .clo-logo-img { height:40px; width:auto; opacity:0.85; filter:grayscale(1); transition:var(--transition); border-radius:6px; }
+        .clo-logo-img:hover { opacity:1; filter:grayscale(0); }
+        @media (max-width:860px){ .clo-trust-grid{ grid-template-columns:1fr; gap:28px; } }
+    </style>
+    <section class="clo-trust clo-light">
+        <div class="clo-wrap">
+            <div class="clo-trust-grid">
+                <div>
+                    <span class="clo-trust-label">Takes secure payment through</span>
+                    <div class="clo-trust-items">
+                        <img src="/logos/stripe.svg" alt="Stripe" class="clo-logo" style="height:30px;">
+                        <span class="clo-wordmark">Airwallex</span>
+                        <span class="clo-wordmark">HitPay</span>
+                        <img src="/logos/visa.svg" alt="Visa" class="clo-logo" style="height:20px;">
+                        <img src="/logos/mastercard.svg" alt="Mastercard" class="clo-logo" style="height:30px;">
+                    </div>
+                </div>
+                <div>
+                    <span class="clo-trust-label">Built on</span>
+                    <div class="clo-trust-items">
+                        <img src="/logos/whatsapp.svg" alt="WhatsApp" class="clo-logo" style="height:26px;">
+                        <span class="clo-wordmark">WhatsApp</span>
+                        <img src="/logos/anthropic.svg" alt="Anthropic Claude" class="clo-logo" style="height:22px;">
+                        <span class="clo-wordmark">Claude</span>
+                    </div>
+                </div>
+            </div>
+            <div class="clo-trust-seen">
+                <span class="clo-trust-label">Seen at and member of</span>
+                <div class="clo-trust-items">
+                    <img src="/logos/nrf.jpg" alt="NRF Big Show APAC" class="clo-logo-img">
+                    <img src="/logos/saia.png" alt="Singapore A.I. Association" class="clo-logo-img">
+                    <img src="/logos/superai.jpg" alt="SuperAI" class="clo-logo-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- PROBLEM -->
     <section class="clo-section clo-white clo-light">
         <div class="clo-wrap clo-narrow">
@@ -246,6 +334,41 @@
             </div>
 
             <p class="clo-kicker">More replies. More follow ups. More sales. You do nothing.<br><span class="clo-accent">We build it, we run it, we tune it.</span></p>
+        </div>
+    </section>
+
+    <!-- DIFFERENTIATION -->
+    <style>
+        .clo-diff-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+        .clo-diff-card { background:#fff; border:1px solid var(--border-color); border-radius:var(--border-radius); padding:32px; box-shadow:var(--shadow); }
+        .clo-diff-num { width:44px; height:44px; border-radius:12px; background:var(--bg-dark); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.1rem; margin-bottom:18px; }
+        .clo-diff-card h3 { font-size:1.2rem; font-weight:800; margin:0 0 12px; }
+        .clo-diff-card p { color:var(--text-secondary); line-height:1.6; margin:0; }
+        @media (max-width:860px){ .clo-diff-cards{ grid-template-columns:1fr; } }
+    </style>
+    <section class="clo-section clo-light">
+        <div class="clo-wrap">
+            <span class="clo-eyebrow" style="color:var(--accent-dark);">Why we are different</span>
+            <h2 class="clo-h2">You do not manage the AI. We do.</h2>
+            <p class="clo-lead clo-narrow">Most AI tools drop a chatbot in your lap and wish you luck. You set it up, you fix it when it breaks, you fight with settings you do not understand. That is not us. We are the team that builds it, runs it, and controls it for you.</p>
+            <div class="clo-diff-cards">
+                <div class="clo-diff-card">
+                    <div class="clo-diff-num">1</div>
+                    <h3>We handle everything</h3>
+                    <p>Send us your products, your prices, and how you like to sell. We build the agent, connect WhatsApp, set up payment, and write every reply. You do nothing.</p>
+                </div>
+                <div class="clo-diff-card">
+                    <div class="clo-diff-num">2</div>
+                    <h3>We control the AI</h3>
+                    <p>Our experts write and tune the agent, set the guardrails, and watch real conversations. It stays on brand, on script, and on price. No rogue answers, because we own it.</p>
+                </div>
+                <div class="clo-diff-card">
+                    <div class="clo-diff-num">3</div>
+                    <h3>We own the result</h3>
+                    <p>This is not a tool you are left to figure out. We are your AI team. If it can sell better, we make it better, every week. You just take the sales.</p>
+                </div>
+            </div>
+            <p class="clo-kicker" style="color:var(--text-primary);">You get the sales. <span class="clo-accent">We carry the AI.</span></p>
         </div>
     </section>
 
@@ -418,6 +541,52 @@
         })();
     </script>
 
+    <!-- MORE RESULTS + GUARANTEES -->
+    <style>
+        .clo-cs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; }
+        .clo-cs { display:block; background:#fff; border:1px solid var(--border-color); border-radius:var(--border-radius-sm); padding:24px; text-decoration:none; color:var(--text-primary); box-shadow:var(--shadow); transition:var(--transition); }
+        .clo-cs:hover { transform:translateY(-3px); box-shadow:var(--shadow-hover); }
+        .clo-cs b { display:block; font-size:1.05rem; font-weight:800; margin-bottom:6px; line-height:1.3; }
+        .clo-cs span { color:var(--text-secondary); font-size:0.9rem; }
+        .clo-cs em { display:block; margin-top:14px; color:var(--accent-dark); font-style:normal; font-weight:700; font-size:0.9rem; }
+        .clo-badges { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:48px; }
+        .clo-badge { text-align:center; padding:26px 16px; background:#fff; border:1px solid var(--border-color); border-radius:var(--border-radius-sm); }
+        .clo-badge svg { width:26px; height:26px; color:var(--accent-dark); margin-bottom:12px; }
+        .clo-badge b { display:block; font-size:0.98rem; font-weight:800; margin-bottom:4px; }
+        .clo-badge span { color:var(--text-secondary); font-size:0.82rem; line-height:1.4; }
+        @media (max-width:860px){ .clo-cs-grid{ grid-template-columns:1fr; } .clo-badges{ grid-template-columns:1fr 1fr; } }
+    </style>
+    <section class="clo-section clo-white clo-light">
+        <div class="clo-wrap">
+            <span class="clo-eyebrow" style="color:var(--accent-dark);">More results from 41 Labs</span>
+            <h2 class="clo-h2">We have done this across industries.</h2>
+            <p class="clo-lead clo-narrow">41 Closer is one of the systems we build. Here is what the same team has done for other businesses.</p>
+            <div class="clo-cs-grid">
+                <a class="clo-cs" href="/case-studies/quote-automation-professional-services"><b>Quotes in 5 minutes, not 3 hours</b><span>Professional services</span><em>Read the story</em></a>
+                <a class="clo-cs" href="/case-studies/ai-freight-forwarding-customs-clearance"><b>Customs clearance 70% faster</b><span>Freight forwarding</span><em>Read the story</em></a>
+                <a class="clo-cs" href="/case-studies/ai-real-estate-property-management"><b>200 to 500 units, same team</b><span>Property management</span><em>Read the story</em></a>
+            </div>
+            <div class="clo-badges">
+                <div class="clo-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.3-7-10a7 7 0 0 1 14 0c0 5.7-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+                    <b>Singapore based</b><span>A local team you can call. Singapore timezone.</span>
+                </div>
+                <div class="clo-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                    <b>Your data stays private</b><span>Your catalogue and customers are yours. Never shared.</span>
+                </div>
+                <div class="clo-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+                    <b>Human backup, always</b><span>It hands real cases to your team with full context.</span>
+                </div>
+                <div class="clo-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                    <b>It pays for itself</b><span>If the numbers do not work for you, we do not proceed.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- WHO IT IS FOR -->
     <section class="clo-section clo-white clo-light">
         <div class="clo-wrap">
@@ -464,6 +633,31 @@
                 <p>41 Closer fixes that one thing completely. It answers every message, every hour, and follows up until the customer buys or says no. We build it for you, run it, and keep making it better. You do not lift a finger.</p>
                 <p>If you do real business on WhatsApp, message the agent and see for yourself. If it impresses you, message me. We will see if we are a fit.</p>
                 <p class="clo-sign">Alexander Lee<span>Founder, 41 Labs</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <style>
+        .clo-faq { margin-top:32px; }
+        .clo-faq-item { border-bottom:1px solid var(--border-color); padding:6px 0; }
+        .clo-faq-item summary { cursor:pointer; list-style:none; padding:18px 0; font-size:1.1rem; font-weight:700; color:var(--text-primary); display:flex; justify-content:space-between; align-items:center; gap:16px; }
+        .clo-faq-item summary::-webkit-details-marker { display:none; }
+        .clo-faq-item summary::after { content:"+"; color:var(--accent-dark); font-weight:800; font-size:1.4rem; flex:0 0 auto; }
+        .clo-faq-item[open] summary::after { content:"\2212"; }
+        .clo-faq-item p { margin:0 0 18px; color:var(--text-secondary); line-height:1.65; max-width:660px; }
+    </style>
+    <section class="clo-section clo-white clo-light">
+        <div class="clo-wrap clo-narrow">
+            <span class="clo-eyebrow" style="color:var(--accent-dark);">Questions</span>
+            <h2 class="clo-h2">Straight answers.</h2>
+            <div class="clo-faq">
+                <details class="clo-faq-item" open><summary>What is 41 Closer?</summary><p>41 Closer is a WhatsApp sales agent built and run by 41 Labs. It answers your customers in seconds, day or night, gives prices from your real catalogue, follows up every lead, and closes the sale. We build it, run it, and tune it for you.</p></details>
+                <details class="clo-faq-item"><summary>How is it different from a chatbot?</summary><p>A chatbot follows a script and gives generic answers. 41 Closer is built on your real products and prices, holds a natural conversation, and is controlled and tuned by our team. You do not manage it. We do.</p></details>
+                <details class="clo-faq-item"><summary>Do I have to set it up myself?</summary><p>No. We handle everything. You send us your products, prices, and how you sell. We build the agent, connect WhatsApp, set up payment, and run it. You do nothing.</p></details>
+                <details class="clo-faq-item"><summary>Does it work on WhatsApp?</summary><p>Yes. It runs natively on WhatsApp, where most Singapore customers prefer to buy, and it can also run on your website.</p></details>
+                <details class="clo-faq-item"><summary>Does a human ever take over?</summary><p>Yes. When a customer needs a person, or the agent is unsure, it hands the conversation to your team with full context. You stay in control.</p></details>
+                <details class="clo-faq-item"><summary>What does it cost?</summary><p>We price on the value it brings, not by the seat. We look at what your missed and slow replies cost today and set a price that is small next to the revenue it brings back. Eligible Singapore companies can offset a large part of the cost with the EDG grant.</p></details>
             </div>
         </div>
     </section>
