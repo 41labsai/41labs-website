@@ -227,9 +227,12 @@
 
     <!-- HERO -->
     <header class="clo-dark clo-hero">
+        <div class="clo-aurora" aria-hidden="true"></div>
+        <div class="clo-grid" aria-hidden="true"></div>
         <div class="clo-wrap">
             <div class="clo-hero-grid">
                 <div>
+                    <span class="clo-live"><i></i> Online now</span>
                     <span class="clo-eyebrow">41 Closer</span>
                     <h1 class="clo-h1">Your sales team stops at 5pm.<br><span class="clo-accent">Your customers don't.</span></h1>
                     <p class="clo-lead">Nights, weekends, public holidays. 41 Closer answers every WhatsApp message in seconds, follows up every lead, and closes the sale while your team is off. You do nothing. You make more money.</p>
@@ -256,6 +259,7 @@
         .clo-logo { height:24px; width:auto; opacity:0.62; filter:grayscale(1); transition:var(--transition); }
         .clo-logo:hover { opacity:1; filter:grayscale(0); }
         .clo-wordmark { font-weight:700; font-size:1.05rem; color:var(--text-secondary); letter-spacing:-0.02em; }
+        .clo-ai { display:inline-flex; align-items:center; gap:8px; }
         .clo-trust-seen { margin-top:34px; padding-top:30px; border-top:1px solid var(--border-color); }
         .clo-logo-img { height:40px; width:auto; opacity:0.85; filter:grayscale(1); transition:var(--transition); border-radius:6px; }
         .clo-logo-img:hover { opacity:1; filter:grayscale(0); }
@@ -275,18 +279,19 @@
                     </div>
                 </div>
                 <div>
-                    <span class="clo-trust-label">Built on</span>
+                    <span class="clo-trust-label">Powered by the best AI models</span>
                     <div class="clo-trust-items">
-                        <img src="/logos/whatsapp.svg" alt="WhatsApp" class="clo-logo" style="height:26px;">
-                        <span class="clo-wordmark">WhatsApp</span>
-                        <img src="/logos/anthropic.svg" alt="Anthropic Claude" class="clo-logo" style="height:22px;">
-                        <span class="clo-wordmark">Claude</span>
+                        <span class="clo-ai"><span class="clo-wordmark">ChatGPT</span></span>
+                        <span class="clo-ai"><img src="/logos/anthropic.svg" alt="Claude" class="clo-logo" style="height:20px;"><span class="clo-wordmark">Claude</span></span>
+                        <span class="clo-ai"><img src="/logos/googlegemini.svg" alt="Google Gemini" class="clo-logo" style="height:20px;"><span class="clo-wordmark">Gemini</span></span>
+                        <span class="clo-ai"><img src="/logos/deepseek.svg" alt="DeepSeek" class="clo-logo" style="height:20px;"><span class="clo-wordmark">DeepSeek</span></span>
                     </div>
                 </div>
             </div>
             <div class="clo-trust-seen">
-                <span class="clo-trust-label">Seen at and member of</span>
+                <span class="clo-trust-label">Runs on WhatsApp &middot; Seen at and member of</span>
                 <div class="clo-trust-items">
+                    <img src="/logos/whatsapp.svg" alt="WhatsApp" class="clo-logo" style="height:30px;">
                     <img src="/logos/nrf.jpg" alt="NRF Big Show APAC" class="clo-logo-img">
                     <img src="/logos/saia.png" alt="Singapore A.I. Association" class="clo-logo-img">
                     <img src="/logos/superai.jpg" alt="SuperAI" class="clo-logo-img">
@@ -724,6 +729,66 @@
             </div>
         </div>
     </footer>
+
+    <!-- Motion layer -->
+    <style>
+        @media (prefers-reduced-motion: no-preference){
+            .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .8s cubic-bezier(0.16,1,0.3,1);}
+            .reveal.in{opacity:1;transform:none;}
+            .clo-hero .clo-live,.clo-hero .clo-eyebrow,.clo-hero h1,.clo-hero .clo-lead,.clo-hero .clo-btn-xl,.clo-hero .clo-hero-note{opacity:0;animation:cloRise .85s cubic-bezier(0.16,1,0.3,1) both;}
+            .clo-hero .clo-live{animation-delay:.05s;}
+            .clo-hero .clo-eyebrow{animation-delay:.12s;}
+            .clo-hero h1{animation-delay:.2s;}
+            .clo-hero .clo-lead{animation-delay:.34s;}
+            .clo-hero .clo-btn-xl{animation-delay:.48s;}
+            .clo-hero .clo-hero-note{animation-delay:.58s;}
+            .clo-hero-qr{opacity:0;animation:cloRise 1s cubic-bezier(0.16,1,0.3,1) .42s both;}
+            @keyframes cloRise{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
+            .clo-chat.clo-anim-ready .clo-bubble{opacity:0;}
+            .clo-chat.clo-anim-ready.play .clo-bubble{animation:cloPop .5s cubic-bezier(0.16,1,0.3,1) both;}
+            .clo-chat.clo-anim-ready.play .clo-bubble:nth-child(1){animation-delay:.15s;}
+            .clo-chat.clo-anim-ready.play .clo-bubble:nth-child(2){animation-delay:.9s;}
+            .clo-chat.clo-anim-ready.play .clo-bubble:nth-child(3){animation-delay:1.6s;}
+            .clo-chat.clo-anim-ready.play .clo-bubble:nth-child(4){animation-delay:2.3s;}
+            @keyframes cloPop{from{opacity:0;transform:translateY(12px) scale(.97);}to{opacity:1;transform:none;}}
+        }
+        .clo-hero{position:relative;overflow:hidden;}
+        .clo-hero .clo-wrap{position:relative;z-index:2;}
+        .clo-aurora{position:absolute;inset:-25%;z-index:0;pointer-events:none;background:radial-gradient(38% 38% at 18% 28%,rgba(74,222,128,.20),transparent 70%),radial-gradient(32% 32% at 82% 22%,rgba(74,222,128,.12),transparent 70%),radial-gradient(40% 40% at 70% 82%,rgba(34,197,94,.12),transparent 70%);filter:blur(26px);animation:cloAurora 20s ease-in-out infinite alternate;}
+        @keyframes cloAurora{0%{transform:translate(0,0) scale(1);}50%{transform:translate(3%,-2%) scale(1.08);}100%{transform:translate(-2%,2%) scale(1.05);}}
+        .clo-grid{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.6;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:radial-gradient(72% 64% at 50% 38%,#000 28%,transparent 82%);mask-image:radial-gradient(72% 64% at 50% 38%,#000 28%,transparent 82%);}
+        .clo-live{display:inline-flex;align-items:center;gap:9px;font-size:.82rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:18px;}
+        .clo-live i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:cloPulse 2s infinite;}
+        @keyframes cloPulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.55);}70%{box-shadow:0 0 0 11px rgba(74,222,128,0);}100%{box-shadow:0 0 0 0 rgba(74,222,128,0);}}
+        .clo-btn-xl::after{content:"\2192";transition:transform .25s ease;}
+        .clo-btn-xl:hover::after{transform:translateX(4px);}
+        .clo-diff-card,.clo-stat,.clo-chartcard{transition:transform .3s cubic-bezier(0.16,1,0.3,1),box-shadow .3s ease;}
+        .clo-diff-card:hover,.clo-stat:hover,.clo-chartcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);}
+    </style>
+    <script>
+        (function(){
+            if(!('IntersectionObserver' in window)) return;
+            if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var sel = '.clo-section .clo-eyebrow,.clo-section h2,.clo-section .clo-lead,.clo-story,.clo-diff-card,.clo-stat,.clo-cs,.clo-badge,.clo-vs,.clo-faq,.clo-example,.clo-chartcard,.clo-qr-card,.clo-founder,.clo-fit,.clo-kicker,.clo-counters,.clo-trust-grid,.clo-trust-seen';
+            var els = [].slice.call(document.querySelectorAll(sel));
+            els.forEach(function(el){ el.classList.add('reveal'); });
+            var io = new IntersectionObserver(function(entries){
+                entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            els.forEach(function(el){ io.observe(el); });
+            ['.clo-diff-cards','.clo-stats','.clo-cs-grid','.clo-badges'].forEach(function(g){
+                document.querySelectorAll(g).forEach(function(group){
+                    [].slice.call(group.children).forEach(function(c,i){ c.style.transitionDelay = (i*0.08)+'s'; });
+                });
+            });
+            var chat = document.querySelector('.clo-chat');
+            if(chat){
+                chat.classList.add('clo-anim-ready');
+                var cio = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ chat.classList.add('play'); cio.disconnect(); } }); }, { threshold: 0.45 });
+                cio.observe(chat);
+            }
+        })();
+    </script>
 
     <script src="script.js" defer></script>
 </body>
