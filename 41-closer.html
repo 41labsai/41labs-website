@@ -286,6 +286,138 @@
         </div>
     </section>
 
+    <!-- IMPACT IN NUMBERS -->
+    <style>
+        .clo-impact .clo-counters { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin:40px 0 48px; }
+        .clo-impact .clo-count { text-align:center; padding:24px 16px; border:1px solid rgba(255,255,255,0.1); border-radius:var(--border-radius-sm); background:rgba(255,255,255,0.03); }
+        .clo-impact .clo-count b { display:block; font-size:clamp(2.2rem,5vw,3.2rem); font-weight:800; letter-spacing:-0.02em; line-height:1; color:#fff; margin-bottom:10px; }
+        .clo-impact .clo-count span { color:rgba(255,255,255,0.6); font-size:0.92rem; line-height:1.4; }
+        .clo-charts { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+        .clo-chartcard { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:var(--border-radius); padding:30px; }
+        .clo-chartcard h3 { font-size:1.15rem; font-weight:800; margin:0 0 6px; color:#fff; }
+        .clo-chartcard p { color:rgba(255,255,255,0.62); font-size:0.95rem; line-height:1.5; margin:0; }
+        /* Ring */
+        .clo-ring-wrap { display:flex; align-items:center; gap:24px; margin:22px 0 18px; }
+        .clo-ring { position:relative; width:150px; height:150px; flex:0 0 150px; }
+        .clo-ring svg { transform:rotate(-90deg); }
+        .clo-ring .track { fill:none; stroke:rgba(255,255,255,0.1); stroke-width:16; }
+        .clo-ring .val { fill:none; stroke:var(--accent); stroke-width:16; stroke-linecap:round; stroke-dasharray:527.8; stroke-dashoffset:527.8; transition:stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1); }
+        .clo-anim .clo-ring .val { stroke-dashoffset:385.3; }
+        .clo-ring .clo-ring-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(0); }
+        .clo-ring .clo-ring-center b { font-size:1.8rem; font-weight:800; color:#fff; line-height:1; }
+        .clo-ring .clo-ring-center small { color:rgba(255,255,255,0.55); font-size:0.72rem; margin-top:4px; }
+        /* Bars */
+        .clo-bar-row { margin:16px 0; }
+        .clo-bar-row .clo-bar-label { display:flex; justify-content:space-between; font-size:0.9rem; color:rgba(255,255,255,0.75); margin-bottom:8px; }
+        .clo-bar-track { height:14px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden; }
+        .clo-bar-fill { height:100%; border-radius:999px; width:0; transition:width 1.3s cubic-bezier(0.4,0,0.2,1); }
+        .clo-bar-fill.them { background:#e0a82e; }
+        .clo-bar-fill.us { background:var(--accent); }
+        .clo-anim .clo-bar-fill.them { width:96%; }
+        .clo-anim .clo-bar-fill.us { width:4%; }
+        /* Revenue example */
+        .clo-example { background:rgba(74,222,128,0.06); border:1px solid rgba(74,222,128,0.25); border-radius:var(--border-radius); padding:34px; margin-top:24px; }
+        .clo-example .clo-tag { display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); border:1px solid rgba(74,222,128,0.4); border-radius:999px; padding:4px 12px; margin-bottom:16px; }
+        .clo-example p { color:rgba(255,255,255,0.82); font-size:1.05rem; line-height:1.6; margin:0 0 22px; max-width:680px; }
+        .clo-ex-bars { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:end; max-width:520px; }
+        .clo-ex-bar .clo-ex-track { height:150px; display:flex; align-items:flex-end; }
+        .clo-ex-bar .clo-ex-fill { width:100%; border-radius:12px 12px 0 0; height:0; transition:height 1.4s cubic-bezier(0.4,0,0.2,1); display:flex; align-items:flex-start; justify-content:center; padding-top:12px; font-weight:800; color:#06230f; }
+        .clo-ex-bar .clo-ex-fill.today { background:rgba(255,255,255,0.18); color:#fff; }
+        .clo-ex-bar .clo-ex-fill.closer { background:var(--accent); }
+        .clo-anim .clo-ex-bar .clo-ex-fill.today { height:40%; }
+        .clo-anim .clo-ex-bar .clo-ex-fill.closer { height:100%; }
+        .clo-ex-bar .clo-ex-cap { text-align:center; color:rgba(255,255,255,0.7); font-size:0.9rem; margin-top:10px; }
+        .clo-ex-note { color:rgba(255,255,255,0.5); font-size:0.85rem; margin:22px 0 0; }
+        @media (max-width:860px){ .clo-impact .clo-counters{ grid-template-columns:1fr; } .clo-charts{ grid-template-columns:1fr; } }
+    </style>
+    <section class="clo-section clo-dark clo-impact">
+        <div class="clo-wrap">
+            <span class="clo-eyebrow">The impact</span>
+            <h2 class="clo-h2">The numbers your team cannot hit.</h2>
+            <p class="clo-lead clo-narrow">Your team is good. They are also human. They sleep, they take weekends, they go on leave. Here is what changes when something covers the rest.</p>
+
+            <div class="clo-counters">
+                <div class="clo-count"><b data-count="168">0</b><span>hours a week it works. Your team covers about 45.</span></div>
+                <div class="clo-count"><b data-count="5" data-suffix="s">0</b><span>to reply to a customer, any hour of any day.</span></div>
+                <div class="clo-count"><b data-count="0">0</b><span>leads left sitting without an answer.</span></div>
+            </div>
+
+            <div class="clo-charts">
+                <div class="clo-chartcard">
+                    <h3>Open all week, not a quarter of it.</h3>
+                    <div class="clo-ring-wrap">
+                        <div class="clo-ring">
+                            <svg width="150" height="150" viewBox="0 0 184 184">
+                                <circle class="track" cx="92" cy="92" r="84"></circle>
+                                <circle class="val" cx="92" cy="92" r="84"></circle>
+                            </svg>
+                            <div class="clo-ring-center"><b>27%</b><small>your team</small></div>
+                        </div>
+                        <p>A week is 168 hours. Your team covers about 45 of them. That is roughly a quarter. 41 Closer covers the other three quarters too.</p>
+                    </div>
+                </div>
+                <div class="clo-chartcard">
+                    <h3>Replies in seconds, not hours.</h3>
+                    <div class="clo-bar-row">
+                        <div class="clo-bar-label"><span>Your team</span><span>up to hours</span></div>
+                        <div class="clo-bar-track"><div class="clo-bar-fill them"></div></div>
+                    </div>
+                    <div class="clo-bar-row">
+                        <div class="clo-bar-label"><span>41 Closer</span><span>5 seconds</span></div>
+                        <div class="clo-bar-track"><div class="clo-bar-fill us"></div></div>
+                    </div>
+                    <p style="margin-top:18px;">The buyer almost always goes with whoever answers first. 41 Closer is always first.</p>
+                </div>
+            </div>
+
+            <div class="clo-example">
+                <span class="clo-tag">Example</span>
+                <p>Say 10 buyers message you after hours each week, and an order is worth $2,000. Today you reach maybe 5 of them in time. 41 Closer reaches all 10 in 5 seconds. That is 5 more orders a week you used to lose. About $40,000 a month, back in your pocket.</p>
+                <div class="clo-ex-bars">
+                    <div class="clo-ex-bar">
+                        <div class="clo-ex-track"><div class="clo-ex-fill today">5</div></div>
+                        <div class="clo-ex-cap">Reached today</div>
+                    </div>
+                    <div class="clo-ex-bar">
+                        <div class="clo-ex-track"><div class="clo-ex-fill closer">10</div></div>
+                        <div class="clo-ex-cap">Reached with 41 Closer</div>
+                    </div>
+                </div>
+                <p class="clo-ex-note">Example only. We run your real numbers before we build anything.</p>
+            </div>
+        </div>
+    </section>
+    <script>
+        (function(){
+            function countUp(el){
+                var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+                var suffix = el.getAttribute('data-suffix') || '';
+                var dur = 1200, start = null;
+                function step(ts){
+                    if(!start) start = ts;
+                    var p = Math.min((ts - start) / dur, 1);
+                    var eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = Math.floor(eased * target).toLocaleString() + suffix;
+                    if(p < 1){ requestAnimationFrame(step); } else { el.textContent = target.toLocaleString() + suffix; }
+                }
+                requestAnimationFrame(step);
+            }
+            var sec = document.querySelector('.clo-impact');
+            if(!sec) return;
+            if(!('IntersectionObserver' in window)){ sec.classList.add('clo-anim'); sec.querySelectorAll('[data-count]').forEach(countUp); return; }
+            var io = new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if(e.isIntersecting){
+                        sec.classList.add('clo-anim');
+                        sec.querySelectorAll('[data-count]').forEach(countUp);
+                        io.disconnect();
+                    }
+                });
+            }, { threshold: 0.25 });
+            io.observe(sec);
+        })();
+    </script>
+
     <!-- WHO IT IS FOR -->
     <section class="clo-section clo-white clo-light">
         <div class="clo-wrap">
