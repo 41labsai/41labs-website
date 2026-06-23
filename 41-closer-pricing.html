@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>41 Closer | Close More Deals on WhatsApp. We Build It and Run It.</title>
-    <meta name="description" content="You're losing sales on WhatsApp. 41 Closer answers every message, quotes your prices, and closes the deal day and night. We build it and run it for you. From $690 a month. Live in 48 hours.">
+    <title>41 Closer | The AI Closer for WhatsApp. It Closes, It Doesn't Just Chat.</title>
+    <meta name="description" content="Meet the AI Closer. Not a chatbot that answers questions, but a WhatsApp AI sales agent that closes the deal and takes payment, day and night. We build it and run it for you. From $690 a month. Live in 48 hours.">
     <meta name="keywords" content="41 Closer, WhatsApp AI sales agent, close more deals WhatsApp, AI sales rep Singapore, done for you WhatsApp sales">
     <meta name="author" content="41 Labs">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -55,7 +55,7 @@
         "@context": "https://schema.org",
         "@type": "Product",
         "name": "41 Closer",
-        "description": "A WhatsApp sales agent that answers every message, quotes your prices, and closes the deal day and night. Built and run for you by 41 Labs. Live in 48 hours.",
+        "description": "41 Closer is the AI Closer for WhatsApp. Not a chatbot that answers questions, but an AI that closes the deal and takes payment, day and night. A done-for-you WhatsApp AI sales agent built and run by 41 Labs. Live in 48 hours.",
         "brand": { "@type": "Brand", "name": "41 Labs" },
         "offers": {
             "@type": "AggregateOffer",
@@ -267,6 +267,19 @@
         .clo-case p { color:rgba(255,255,255,.86); font-size:1.16rem; line-height:1.6; margin:18px 0 0; }
         .clo-case-by { color:rgba(255,255,255,.5) !important; font-size:.92rem !important; margin-top:18px !important; }
 
+        /* Category compare (chatbot / agent / closer) */
+        .clo-cats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:46px; text-align:left; }
+        .clo-cat { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:22px; padding:30px 28px; transition: var(--transition); }
+        .clo-cat h3 { font-size:1.12rem; font-weight:800; color:rgba(255,255,255,.66); margin:0 0 18px; }
+        .clo-cat ul { list-style:none; padding:0; margin:0; }
+        .clo-cat li { padding:11px 0 11px 28px; position:relative; color:rgba(255,255,255,.6); font-size:.98rem; line-height:1.45; border-top:1px solid rgba(255,255,255,.07); }
+        .clo-cat li:first-child { border-top:none; }
+        .clo-cat li::before { content:"\2014"; position:absolute; left:0; color:rgba(255,255,255,.32); }
+        .clo-cat.win { background:linear-gradient(180deg,rgba(74,222,128,.13),rgba(255,255,255,.03)); border-color:rgba(74,222,128,.55); box-shadow:0 22px 64px rgba(34,197,94,.24); transform:scale(1.03); }
+        .clo-cat.win h3 { color:var(--accent); }
+        .clo-cat.win li { color:#fff; font-weight:600; }
+        .clo-cat.win li::before { content:"\2713"; color:var(--accent); font-weight:800; }
+
         /* Examples (mini chats) */
         .clo-ex { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:48px; text-align:left; }
         .clo-ex-card { background:#0b141a; border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:24px; box-shadow:0 20px 50px rgba(0,0,0,.18); display:flex; flex-direction:column; transition: var(--transition); }
@@ -288,7 +301,8 @@
         @media (max-width: 900px) {
             .clo-hero-grid, .clo-final-grid { grid-template-columns: 1fr; gap: 40px; }
             .clo-hero-qr, .clo-phone { order: -1; }
-            .clo-tiers, .clo-steps, .clo-safe, .clo-costs, .clo-vs { grid-template-columns: 1fr; }
+            .clo-tiers, .clo-steps, .clo-safe, .clo-costs, .clo-vs, .clo-cats, .clo-ex { grid-template-columns: 1fr; }
+            .clo-cat.win { transform:none; }
             .clo-stats { grid-template-columns: 1fr 1fr; }
             .clo-tier.featured { transform:none; } .clo-tier.featured:hover { transform:translateY(-8px); }
             .clo-section { padding: 76px 0; }
@@ -340,6 +354,7 @@
             <div class="clo-hero-grid">
                 <div>
                     <span class="clo-live"><i></i> Closing deals right now</span>
+                    <span class="clo-eyebrow" style="display:block;">The AI Closer &middot; not a chatbot</span>
                     <h1 class="clo-h1">It closes the deal<br><span class="clo-grad">while you sleep.</span></h1>
                     <p class="clo-lead">A customer messages your WhatsApp at 2am. Nobody answers. They buy somewhere else. That sale is gone, every single night. 41 Closer answers in seconds, quotes your price, and takes the payment. We build it. We run it. You wake up to the money.</p>
                     <a class="clo-btn-xl" href="#plans">See the price</a>
@@ -396,6 +411,42 @@
                 <img src="/logos/nrf.jpg" alt="NRF Big Show APAC" class="clo-logos-img">
                 <img src="/logos/saia.png" alt="Singapore A.I. Association" class="clo-logos-img">
                 <img src="/logos/superai.jpg" alt="SuperAI" class="clo-logos-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORY: chatbots vs closers -->
+    <section class="clo-section clo-deep">
+        <div class="clo-orb g" style="width:520px;height:520px;top:-180px;left:-140px;opacity:.3;"></div>
+        <div class="clo-wrap clo-center">
+            <span class="clo-eyebrow">A new kind of AI</span>
+            <h2 class="clo-h2">Chatbots answer. <span class="clo-grad">Closers sell.</span></h2>
+            <p class="clo-lead clo-narrow" style="margin-left:auto;margin-right:auto;color:rgba(255,255,255,.78);">Every other AI tool was built to answer questions and save money on support. 41 Closer was built to do the opposite. It closes the sale and makes you money. It is not a chatbot. It is a Closer.</p>
+            <div class="clo-cats">
+                <div class="clo-cat">
+                    <h3>A chatbot</h3>
+                    <ul>
+                        <li>Answers FAQs</li>
+                        <li>Follows a script and breaks off it</li>
+                        <li>You build it and babysit it</li>
+                    </ul>
+                </div>
+                <div class="clo-cat">
+                    <h3>An AI agent</h3>
+                    <ul>
+                        <li>Assists and captures a lead</li>
+                        <li>Then a human chases it for days</li>
+                        <li>Software you have to run</li>
+                    </ul>
+                </div>
+                <div class="clo-cat win">
+                    <h3>The AI Closer</h3>
+                    <ul>
+                        <li>Has the real conversation</li>
+                        <li>Closes the deal and takes payment</li>
+                        <li>We build it and run it for you</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
