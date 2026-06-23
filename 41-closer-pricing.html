@@ -86,7 +86,9 @@
             { "@type": "Question", "name": "What languages does it speak?", "acceptedAnswer": { "@type": "Answer", "text": "English and the way Singapore really chats, including a mix of languages. We tune it to sound like your business." } },
             { "@type": "Question", "name": "How fast is it live?", "acceptedAnswer": { "@type": "Answer", "text": "48 hours. You send your product list, we build it, connect WhatsApp, and switch it on." } },
             { "@type": "Question", "name": "Can I cancel, and is my data safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes to both. Plans are month to month with no lock-in. You own the agent and everything it learns, and we never share or sell your data." } },
-            { "@type": "Question", "name": "What if it doesn't work?", "acceptedAnswer": { "@type": "Answer", "text": "You watch it sell your own products first, for free, before you pay. And in your first month, if it does not bring in sales you would have missed, that month is free." } }
+            { "@type": "Question", "name": "What if it doesn't work?", "acceptedAnswer": { "@type": "Answer", "text": "You watch it sell your own products first, for free, before you pay. And in your first month, if it does not bring in sales you would have missed, that month is free." } },
+            { "@type": "Question", "name": "How is this different from a normal chatbot?", "acceptedAnswer": { "@type": "Answer", "text": "A chatbot follows a script and gives generic answers. 41 Closer reasons through the conversation, quotes from your real prices, and is trained on your products. It does not go off the rails, because our team sets the guardrails and watches it. You do not manage it. We do." } },
+            { "@type": "Question", "name": "Does a real person ever step in?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. When a chat gets tricky or the customer wants a human, it hands the conversation to your team with the full history. You never lose a customer to a wrong answer." } }
         ]
     }
     </script>
@@ -245,6 +247,37 @@
         .clo-faq-item[open] summary::after { content:"\2212"; }
         .clo-faq-item p { color: var(--text-secondary); line-height:1.65; margin:14px 0 0; font-size:1.02rem; }
 
+        /* Logos band (light) */
+        .clo-logos-band { background:#fff; border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); padding:52px 0; }
+        .clo-logos-label { display:block; text-align:center; font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color: var(--text-light); margin:0 0 18px; }
+        .clo-logos-row { display:flex; align-items:center; justify-content:center; gap:32px; flex-wrap:wrap; margin:0 auto 38px; }
+        .clo-logos-row:last-child { margin-bottom:0; }
+        .clo-logos-row img { height:26px; width:auto; opacity:.6; filter:grayscale(1); transition: var(--transition); }
+        .clo-logos-row img:hover { opacity:1; filter:none; }
+        .clo-logos-row .wm { font-weight:700; font-size:1.06rem; color: var(--text-secondary); letter-spacing:-.01em; }
+        .clo-logos-row .ai { display:inline-flex; align-items:center; gap:8px; }
+        .clo-logos-img { height:42px; width:auto; opacity:.78; filter:grayscale(1); border-radius:6px; transition: var(--transition); }
+        .clo-logos-img:hover { opacity:1; filter:none; }
+
+        /* Proof case card (dark card on light) */
+        .clo-case { max-width:720px; margin:44px auto 0; background:linear-gradient(180deg,#0e1a12,#0c1310); border:1px solid rgba(74,222,128,.32); border-radius:28px; padding:46px 44px; box-shadow:0 30px 80px rgba(34,197,94,.22); text-align:left; }
+        .clo-case-badge { display:inline-block; font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); background:rgba(74,222,128,.12); border:1px solid rgba(74,222,128,.3); padding:6px 14px; border-radius:999px; margin-bottom:22px; }
+        .clo-case-num { font-size:clamp(2.8rem,6.5vw,4rem); font-weight:900; letter-spacing:-.03em; line-height:1; background:linear-gradient(120deg,#fff,#86efac); -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .clo-case-num span { font-size:1.1rem; font-weight:700; -webkit-text-fill-color:rgba(255,255,255,.55); color:rgba(255,255,255,.55); margin-left:8px; }
+        .clo-case p { color:rgba(255,255,255,.86); font-size:1.16rem; line-height:1.6; margin:18px 0 0; }
+        .clo-case-by { color:rgba(255,255,255,.5) !important; font-size:.92rem !important; margin-top:18px !important; }
+
+        /* Examples (mini chats) */
+        .clo-ex { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:48px; text-align:left; }
+        .clo-ex-card { background:#0b141a; border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:24px; box-shadow:0 20px 50px rgba(0,0,0,.18); display:flex; flex-direction:column; transition: var(--transition); }
+        .clo-ex-card:hover { transform:translateY(-6px); box-shadow:0 28px 70px rgba(0,0,0,.28); }
+        .clo-ex-tag { font-size:.72rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
+        .clo-ex-chat { display:flex; flex-direction:column; gap:8px; flex:1; }
+        .clo-ex-b { max-width:90%; padding:9px 13px; border-radius:13px; font-size:.88rem; line-height:1.4; color:#e9edef; }
+        .clo-ex-b.in { background:#202c33; align-self:flex-start; border-top-left-radius:4px; }
+        .clo-ex-b.out { background:#005c4b; align-self:flex-end; border-top-right-radius:4px; }
+        .clo-ex-out { margin-top:18px; align-self:flex-start; display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,#22c55e,#4ade80); color:#06220f; font-weight:800; font-size:.86rem; padding:9px 15px; border-radius:999px; box-shadow:0 8px 24px rgba(74,222,128,.35); }
+
         /* QR + final */
         .clo-qr-card { background:#fff; border-radius: var(--border-radius); padding: 26px; text-align:center; box-shadow: var(--shadow-hover); }
         .clo-qr-card img { width: 100%; max-width: 220px; height:auto; display:block; margin: 0 auto 14px; border-radius: 12px; }
@@ -339,6 +372,34 @@
         </div>
     </header>
 
+    <!-- LOGOS / CREDIBILITY -->
+    <section class="clo-logos-band">
+        <div class="clo-wrap">
+            <span class="clo-logos-label">Powered by the best AI models, not just one</span>
+            <div class="clo-logos-row">
+                <span class="ai"><span class="wm">ChatGPT</span></span>
+                <span class="ai"><img src="/logos/anthropic.svg" alt="Claude"><span class="wm">Claude</span></span>
+                <span class="ai"><img src="/logos/googlegemini.svg" alt="Google Gemini" style="height:22px;"><span class="wm">Gemini</span></span>
+                <span class="ai"><img src="/logos/deepseek.svg" alt="DeepSeek" style="height:22px;"><span class="wm">DeepSeek</span></span>
+            </div>
+            <span class="clo-logos-label">Takes secure payment through</span>
+            <div class="clo-logos-row">
+                <img src="/logos/stripe.svg" alt="Stripe" style="height:30px;">
+                <span class="wm">Airwallex</span>
+                <span class="wm">HitPay</span>
+                <img src="/logos/visa.svg" alt="Visa" style="height:20px;">
+                <img src="/logos/mastercard.svg" alt="Mastercard" style="height:30px;">
+            </div>
+            <span class="clo-logos-label">Runs on WhatsApp &middot; Seen at and member of</span>
+            <div class="clo-logos-row">
+                <img src="/logos/whatsapp.svg" alt="WhatsApp" style="height:30px;">
+                <img src="/logos/nrf.jpg" alt="NRF Big Show APAC" class="clo-logos-img">
+                <img src="/logos/saia.png" alt="Singapore A.I. Association" class="clo-logos-img">
+                <img src="/logos/superai.jpg" alt="SuperAI" class="clo-logos-img">
+            </div>
+        </div>
+    </section>
+
     <!-- SHOCK STATS -->
     <section class="clo-section--tight clo-dark">
         <div class="clo-wrap">
@@ -398,6 +459,60 @@
                     <p>We watch real chats and keep it sharp every week. You never touch it. You just get more closed deals.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="clo-section clo-white clo-light">
+        <div class="clo-wrap clo-center">
+            <span class="clo-eyebrow">Not a demo</span>
+            <h2 class="clo-h2">It's already closing real money.</h2>
+            <p class="clo-lead clo-narrow" style="margin-left:auto;margin-right:auto;">This is not a science project. It is running a real business today.</p>
+            <div class="clo-case">
+                <span class="clo-case-badge">Real client &middot; kept private</span>
+                <div class="clo-case-num">42,000<span>products it quotes from</span></div>
+                <p>A Singapore industrial supplier runs over <strong style="color:#fff;">$300,000 a month</strong> through 41 Closer. It quotes live from 42,000 products, replies in seconds day and night, and our team only steps in for the tricky ones. It does not go off script, because we set the guardrails and watch it.</p>
+                <p class="clo-case-by">Built and run by 41 Labs, Singapore. Client kept private on request.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXAMPLES -->
+    <section class="clo-section clo-light">
+        <div class="clo-wrap clo-center">
+            <span class="clo-eyebrow">See it in action</span>
+            <h2 class="clo-h2">It doesn't just chat. It closes.</h2>
+            <p class="clo-lead clo-narrow" style="margin-left:auto;margin-right:auto;">Here is how it handles the messages you're getting right now, in your business.</p>
+            <div class="clo-ex">
+                <div class="clo-ex-card">
+                    <span class="clo-ex-tag">Distributor &middot; 2:15am</span>
+                    <div class="clo-ex-chat">
+                        <div class="clo-ex-b in">Got 200 units of the 12mm bolts? Need them this week.</div>
+                        <div class="clo-ex-b out">Yes, 200 in stock. $2,400 the lot, ships today. Want me to lock it in?</div>
+                        <div class="clo-ex-b in">Do it.</div>
+                    </div>
+                    <span class="clo-ex-out">&#10003; Closed &middot; $2,400</span>
+                </div>
+                <div class="clo-ex-card">
+                    <span class="clo-ex-tag">Retail &middot; saved a cold lead</span>
+                    <div class="clo-ex-chat">
+                        <div class="clo-ex-b in">How much for the leather sofa?</div>
+                        <div class="clo-ex-b out">It's $1,890 with free delivery this week. Want me to hold one for you?</div>
+                        <div class="clo-ex-b in">Yes please, hold it.</div>
+                    </div>
+                    <span class="clo-ex-out">&#10003; Saved the sale &middot; $1,890</span>
+                </div>
+                <div class="clo-ex-card">
+                    <span class="clo-ex-tag">Services &middot; books and takes payment</span>
+                    <div class="clo-ex-chat">
+                        <div class="clo-ex-b in">Any slots this Saturday?</div>
+                        <div class="clo-ex-b out">Yes, 2pm Saturday is open. A $50 deposit holds it. Pay here &#128073;</div>
+                        <div class="clo-ex-b in">Paid. See you then.</div>
+                    </div>
+                    <span class="clo-ex-out">&#10003; Booked + paid &middot; Sat 2pm</span>
+                </div>
+            </div>
+            <p class="clo-lead clo-narrow" style="margin:34px auto 0;font-size:1.05rem;">Whatever your customers ask, it answers, quotes, and pushes for the close. <a href="https://wa.me/6580124848?text=Hi%2C%20can%20you%20show%20me%2041%20Closer%20handling%20my%20kind%20of%20customer%3F" target="_blank" rel="noopener" style="color:var(--accent-dark);font-weight:700;">Try it on your own products &rarr;</a></p>
         </div>
     </section>
 
@@ -508,9 +623,11 @@
             <div class="clo-faq">
                 <details class="clo-faq-item" open><summary>What does it cost?</summary><p>From $690 a month, plus a one-time build fee from $4,800. Pay monthly by card or bank transfer and cancel any time. Pay for the year and get two months free.</p></details>
                 <details class="clo-faq-item"><summary>What is the build fee for, and why is Pro's higher?</summary><p>The build fee is a one-time cost to set it up. We train it on your products and prices, give it your way of talking, connect WhatsApp and payment, and switch it on. Pro is higher because we also clean and load your full catalogue for you. The monthly fee is for running it and keeping it sharp.</p></details>
+                <details class="clo-faq-item"><summary>How is this different from a normal chatbot?</summary><p>A chatbot follows a script and gives generic answers. 41 Closer reasons through the conversation, quotes from your real prices, and is trained on your products. It does not go off the rails, because our team sets the guardrails and watches it. You do not manage it. We do.</p></details>
                 <details class="clo-faq-item"><summary>What do I need to give you?</summary><p>A list of your products and prices, and a bit about how you sell. That is it. We do everything else.</p></details>
                 <details class="clo-faq-item"><summary>What happens if I get more chats than my plan?</summary><p>Nothing bad. We just add more, and we tell you before you hit the limit. No shock bills, ever.</p></details>
                 <details class="clo-faq-item"><summary>Does it use my own WhatsApp number?</summary><p>Yes. It runs on your business WhatsApp. Your customers see your brand, not ours.</p></details>
+                <details class="clo-faq-item"><summary>Does a real person ever step in?</summary><p>Yes. When a chat gets tricky or the customer wants a human, it hands the conversation to your team with the full history. You never lose a customer to a wrong answer.</p></details>
                 <details class="clo-faq-item"><summary>What languages does it speak?</summary><p>English and the way Singapore really chats, including a mix of languages. We tune it to sound like your business.</p></details>
                 <details class="clo-faq-item"><summary>How fast is it live?</summary><p>48 hours. You send your product list, we build it, connect WhatsApp, and switch it on.</p></details>
                 <details class="clo-faq-item"><summary>Can I cancel, and is my data safe?</summary><p>Yes to both. Plans are month to month with no lock-in. You own the agent and everything it learns, and we never share or sell your data.</p></details>
