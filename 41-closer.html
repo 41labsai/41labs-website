@@ -270,7 +270,9 @@
         /* Category compare (chatbot / agent / closer) */
         .clo-cats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:46px; text-align:left; }
         .clo-cat { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:22px; padding:30px 28px; transition: var(--transition); }
-        .clo-cat h3 { font-size:1.12rem; font-weight:800; color:rgba(255,255,255,.66); margin:0 0 18px; }
+        .clo-cat h3 { font-size:1.12rem; font-weight:800; color:rgba(255,255,255,.66); margin:0 0 3px; }
+        .clo-cat-sub { font-size:.9rem; font-weight:700; color:rgba(255,255,255,.38); margin:0 0 20px; }
+        .clo-cat.win .clo-cat-sub { color:var(--accent); }
         .clo-cat ul { list-style:none; padding:0; margin:0; }
         .clo-cat li { padding:11px 0 11px 28px; position:relative; color:rgba(255,255,255,.6); font-size:.98rem; line-height:1.45; border-top:1px solid rgba(255,255,255,.07); }
         .clo-cat li:first-child { border-top:none; }
@@ -433,25 +435,28 @@
             <div class="clo-cats">
                 <div class="clo-cat">
                     <h3>A chatbot</h3>
+                    <p class="clo-cat-sub">All talk.</p>
                     <ul>
-                        <li>Answers FAQs</li>
-                        <li>Follows a script and breaks off it</li>
+                        <li>Answers FAQs and nothing more</li>
+                        <li>Makes you $0</li>
                         <li>You build it and babysit it</li>
                     </ul>
                 </div>
                 <div class="clo-cat">
                     <h3>An AI agent</h3>
+                    <p class="clo-cat-sub">Half the job.</p>
                     <ul>
-                        <li>Assists and captures a lead</li>
-                        <li>Then a human chases it for days</li>
-                        <li>Software you have to run</li>
+                        <li>Collects the lead, then stops</li>
+                        <li>Leaves the selling to you</li>
+                        <li>You run the software</li>
                     </ul>
                 </div>
                 <div class="clo-cat win">
                     <h3>The AI Closer</h3>
+                    <p class="clo-cat-sub">Gets you paid.</p>
                     <ul>
-                        <li>Has the real conversation</li>
                         <li>Closes the deal and takes payment</li>
+                        <li>Puts money in your account</li>
                         <li>We build it and run it for you</li>
                     </ul>
                 </div>
