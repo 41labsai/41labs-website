@@ -33,7 +33,7 @@ function getNav(prefix) {
                 <li><a href="${prefix}blog.html">Blog</a></li>
                 <li><a href="${prefix}index.html#faq">FAQ</a></li>
             </ul>
-            <a href="https://wa.me/6585123273?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener" class="btn btn-primary nav-cta">WhatsApp Us</a>
+            <a href="https://wa.me/6580124848?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener" class="btn btn-primary nav-cta">WhatsApp Us</a>
             <button class="mobile-menu-btn" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -58,7 +58,7 @@ function getFooter(prefix) {
                 </div>
                 <div class="footer-links">
                     <a href="${prefix}index.html#what-we-do">What We Do</a>
-                    <a href="https://wa.me/6585123273?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener">WhatsApp Us</a>
+                    <a href="https://wa.me/6580124848?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener">WhatsApp Us</a>
                     <a href="${prefix}case-studies.html">Case Studies</a>
                     <a href="${prefix}about.html">About</a>
                     <a href="${prefix}blog.html">Blog</a>

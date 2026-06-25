@@ -335,7 +335,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../index.html#faq">FAQ</a></li>
             </ul>
-            <a href="https://wa.me/6585123273?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener" class="btn btn-primary nav-cta">WhatsApp Us</a>
+            <a href="https://wa.me/6580124848?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener" class="btn btn-primary nav-cta">WhatsApp Us</a>
             <button class="mobile-menu-btn" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -388,7 +388,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Every business has operations that could run faster, cheaper, and more accurately with AI. The question is which ones — and whether the ROI justifies the investment. <strong>Book a free strategy call with 41 Labs.</strong> We will audit your current workflows and show you exactly where AI delivers the highest impact.</p>
 
                 <p style="margin-top: 32px;">
-                    <a href="https://wa.me/6585123273?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" class="btn btn-primary btn-large" target="_blank" rel="noopener">Book Your Free Strategy Call</a>
+                    <a href="https://wa.me/6580124848?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" class="btn btn-primary btn-large" target="_blank" rel="noopener">Book Your Free Strategy Call</a>
                 </p>
             </div>
 
@@ -416,7 +416,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="cta-content">
                 <h2>Ready to implement AI in your business?</h2>
                 <p>Book a discovery call. We'll show you exactly where AI can drive impact.</p>
-                <a href="https://wa.me/6585123273?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" class="btn btn-primary btn-large" target="_blank" rel="noopener">Book Your Discovery Call</a>
+                <a href="https://wa.me/6580124848?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" class="btn btn-primary btn-large" target="_blank" rel="noopener">Book Your Discovery Call</a>
             </div>
         </div>
     </section>
@@ -435,7 +435,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <div class="footer-links">
                     <a href="../index.html#what-we-do">What We Do</a>
-                    <a href="https://wa.me/6585123273?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener">WhatsApp Us</a>
+                    <a href="https://wa.me/6580124848?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F" target="_blank" rel="noopener">WhatsApp Us</a>
                     <a href="../case-studies.html">Case Studies</a>
                     <a href="../about.html">About</a>
                     <a href="../privacy.html">Privacy</a>

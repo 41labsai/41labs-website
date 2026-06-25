@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
     (function() {
         var btn = document.createElement('a');
-        btn.href = 'https://wa.me/6585123273?text=Hi%20Alexander%2C%20I%27m%20interested%20in%20AI%20automation%20for%20my%20business.%20Can%20we%20chat%3F';
+        btn.href = 'https://wa.me/6580124848?text=Hi%2041%20Labs%21%20I%27m%20exploring%20AI%20for%20my%20business%20and%20not%20sure%20where%20to%20start.';
         btn.target = '_blank';
         btn.rel = 'noopener';
         btn.setAttribute('aria-label', 'WhatsApp us');
