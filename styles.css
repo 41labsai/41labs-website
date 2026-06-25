@@ -5624,7 +5624,9 @@ img.logo-img,
 
 
 /* 41 Closer flagship nav pill (prominent) */
-.nav-links a.nav-flagship{background:linear-gradient(135deg,#4ade80 0%,#22c55e 100%);color:#06220f;font-weight:800;padding:9px 20px;border-radius:999px;box-shadow:0 4px 18px rgba(74,222,128,.5);white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease;animation:navFlagPulse 2.6s ease-in-out infinite;}
+.nav-links a.nav-flagship{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#4ade80 0%,#22c55e 100%);color:#06220f;font-weight:800;font-size:1.02rem;padding:11px 24px;border-radius:999px;box-shadow:0 4px 18px rgba(74,222,128,.5);white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease;animation:navFlagPulse 2.6s ease-in-out infinite;}
+.nav-links a.nav-flagship::after{content:"\2192";font-weight:800;transition:transform .2s ease;}
 .nav-links a.nav-flagship:hover{transform:translateY(-1px) scale(1.05);color:#06220f;box-shadow:0 8px 30px rgba(74,222,128,.72);}
+.nav-links a.nav-flagship:hover::after{transform:translateX(3px);}
 @keyframes navFlagPulse{0%,100%{box-shadow:0 4px 16px rgba(74,222,128,.45);}50%{box-shadow:0 6px 28px rgba(74,222,128,.85);}}
 @media (prefers-reduced-motion: reduce){.nav-links a.nav-flagship{animation:none;}}
