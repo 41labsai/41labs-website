@@ -43,7 +43,7 @@ zeros.length ? bad(`stat(s) render as zero: ${zeros.join(', ')}`) : ok(`stats sh
 
 console.log('WhatsApp:');
 home.includes('wa-float') ? ok('homepage has floating WhatsApp button') : bad('homepage missing floating WhatsApp button');
-home.includes('wa.me/6585123273') ? ok('homepage links company number') : bad('homepage missing company WhatsApp link');
+home.includes('wa.me/6580124848') ? ok('homepage links company number') : bad('homepage missing company WhatsApp link');
 let off = [];
 (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const fp = path.join(d, e.name); if (e.isDirectory()) { if (['node_modules', '.vercel', '.git'].includes(e.name)) continue; walk(fp); } else if (e.name.endsWith('.html') && fs.readFileSync(fp, 'utf-8').includes('6597848886')) off.push(path.relative(ROOT, fp)); } })(ROOT);
 off.length ? bad(`deprecated number in: ${off.join(', ')}`) : ok('deprecated number purged sitewide');

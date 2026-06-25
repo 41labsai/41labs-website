@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 /**
- * inject-whatsapp.cjs — standardize the company WhatsApp number to 6585123273 and add a
- * clear floating WhatsApp button (idempotent) to every public page that lacks one.
+ * inject-whatsapp.cjs — standardize the company WhatsApp number to 6580124848 (the 41 Closer
+ * bot line — all public WhatsApp routes to the bot) and add a clear floating WhatsApp button
+ * (idempotent) to every public page that lacks one.
  */
 const fs = require('fs');
 const path = require('path');
 const ROOT = __dirname;
-const WA = '6585123273';
-const OLD = ['6597848886'];
+const WA = '6580124848';
+const OLD = ['6597848886', '6585123273'];
 const HREF = `https://wa.me/${WA}?text=` + encodeURIComponent("Hi 41 Labs, I'd like to talk about AI for my business.");
 
 const EXCLUDE = new Set(['admin.html', 'dashboard.html', 'brandbook.html', '404.html', 'post.html', 'case-study.html']);
