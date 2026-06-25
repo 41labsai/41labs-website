@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>41 Labs Partner Program | Earn 20% Upfront + 10% Recurring on Every Deal You Refer</title>
-    <meta name="description" content="Refer your clients to 41 Labs AI products and get paid. 20% of the first invoice, plus 10% of every monthly payment for a year. We close it, we build it, we run it. Built for marketing agencies, consultants, and freelancers.">
+    <title>41 Labs Partner Program | Earn 20% + 10% on AI Deals You Refer</title>
+    <meta name="description" content="Refer clients to 41 Labs AI products and get paid. 20% of the first invoice plus 10% recurring for a year. We close, build, and run it. Zero delivery work.">
     <meta name="keywords" content="41 Labs partner program, AI affiliate program, agency referral program Singapore, refer AI deals, recurring commission AI, AI referral partner">
     <meta name="author" content="41 Labs">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -12,7 +12,7 @@
 
     <!-- Meta Pixel (paste your Pixel ID below to activate) -->
     <script>
-        window.FB_PIXEL_ID = 'REPLACE_WITH_PIXEL_ID';
+        window.FB_PIXEL_ID = '24659272643698089';
         (function(){
             if(!window.FB_PIXEL_ID || window.FB_PIXEL_ID === 'REPLACE_WITH_PIXEL_ID') return;
             !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -136,7 +136,7 @@
         .clo-cats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:46px; text-align:left; }
         .clo-cat { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:22px; padding:30px 28px; transition: var(--transition); }
         .clo-cat h3 { font-size:1.12rem; font-weight:800; color:rgba(255,255,255,.66); margin:0 0 3px; }
-        .clo-cat-sub { font-size:.9rem; font-weight:700; color:rgba(255,255,255,.38); margin:0 0 20px; }
+        .clo-cat-sub { font-size:.9rem; font-weight:700; color:rgba(255,255,255,.55); margin:0 0 20px; }
         .clo-cat.win .clo-cat-sub { color:var(--accent); }
         .clo-cat ul { list-style:none; padding:0; margin:0; }
         .clo-cat li { padding:11px 0 11px 28px; position:relative; color:rgba(255,255,255,.6); font-size:.98rem; line-height:1.45; border-top:1px solid rgba(255,255,255,.07); }
@@ -170,7 +170,7 @@
         .clo-tier-cta.primary:hover { transform: translateY(-2px); box-shadow:0 16px 46px rgba(74,222,128,.55); }
         .clo-tier-cta.ghost { background:rgba(255,255,255,.06); color:#fff; border:1.5px solid rgba(255,255,255,.18); }
         .clo-tier-cta.ghost:hover { border-color: var(--accent); color: var(--accent); }
-        .clo-tiers-note { text-align:center; color: rgba(255,255,255,.45); font-size:.92rem; margin-top:24px; max-width:760px; margin-left:auto; margin-right:auto; line-height:1.5; }
+        .clo-tiers-note { text-align:center; color: rgba(255,255,255,.62); font-size:.92rem; margin-top:24px; max-width:760px; margin-left:auto; margin-right:auto; line-height:1.5; }
 
         /* Who does what */
         .clo-safe { display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-top:48px; text-align:left; }
@@ -271,7 +271,7 @@
         .pp-out-total { margin-top:14px; padding-top:20px; border-top:2px solid rgba(74,222,128,.3); text-align:center; }
         .pp-out-total .lbl { display:block; font-size:.8rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
         .pp-out-total .big { font-size:clamp(2.6rem,6vw,3.6rem); font-weight:900; letter-spacing:-.03em; line-height:1; background:linear-gradient(120deg,#fff,#86efac); -webkit-background-clip:text; background-clip:text; color:transparent; }
-        .pp-calc-foot { color:rgba(255,255,255,.45); font-size:.86rem; margin:22px 0 0; line-height:1.5; }
+        .pp-calc-foot { color:rgba(255,255,255,.62); font-size:.86rem; margin:22px 0 0; line-height:1.5; }
 
         /* ===== Apply form ===== */
         .pp-apply { max-width:620px; margin:44px auto 0; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:28px; padding:40px 42px; text-align:left; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
@@ -335,6 +335,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- HERO -->
     <header class="clo-deep clo-hero">
         <div class="clo-aurora" aria-hidden="true"></div>
@@ -522,14 +523,14 @@
                         </div>
                         <div class="pp-field">
                             <div class="pp-field-label">Which plan they take</div>
-                            <div class="pp-toggle" id="pp-plan">
+                            <div class="pp-toggle" id="pp-plan" role="group" aria-label="Which plan the client takes">
                                 <button data-plan="min">41 Closer Minimum</button>
                                 <button data-plan="pro" class="on">41 Closer Pro</button>
                             </div>
                         </div>
                         <div class="pp-field">
                             <div class="pp-field-label">Clients you refer in a year <span class="v" id="pp-n-label">5</span></div>
-                            <input type="range" min="1" max="20" value="5" class="pp-range" id="pp-n">
+                            <input type="range" min="1" max="20" value="5" class="pp-range" id="pp-n" aria-label="Number of clients you refer in a year">
                         </div>
                     </div>
                     <div class="pp-out">
@@ -740,6 +741,8 @@
             </form>
         </div>
     </section>
+
+    </main>
 
     <footer class="footer">
         <div class="container">
