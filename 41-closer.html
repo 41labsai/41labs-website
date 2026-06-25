@@ -12,7 +12,7 @@
 
     <!-- Meta Pixel (paste your Pixel ID below to activate) -->
     <script>
-        window.FB_PIXEL_ID = 'REPLACE_WITH_PIXEL_ID';
+        window.FB_PIXEL_ID = '24659272643698089';
         (function(){
             if(!window.FB_PIXEL_ID || window.FB_PIXEL_ID === 'REPLACE_WITH_PIXEL_ID') return;
             !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -266,6 +266,9 @@
         .clo-case-num span { font-size:1.1rem; font-weight:700; -webkit-text-fill-color:rgba(255,255,255,.55); color:rgba(255,255,255,.55); margin-left:8px; }
         .clo-case p { color:rgba(255,255,255,.86); font-size:1.16rem; line-height:1.6; margin:18px 0 0; }
         .clo-case-by { color:rgba(255,255,255,.5) !important; font-size:.92rem !important; margin-top:18px !important; }
+        /* ROI story (proof lead) */
+        .clo-roi-story { max-width:760px; margin:34px auto 0; font-size:clamp(1.4rem,3.2vw,2rem); font-weight:800; line-height:1.4; letter-spacing:-.01em; color:var(--text-primary); }
+        .clo-roi-story b { color:var(--accent-dark); }
 
         /* Category compare (chatbot / agent / closer) */
         .clo-cats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:46px; text-align:left; }
@@ -345,7 +348,7 @@
                 </li>
                 <li><a href="/41-closer">41 Closer</a></li>
                 <li><a href="/41-closer#plans">Pricing</a></li>
-                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="/partners">Partners</a></li><li><a href="case-studies.html">Case Studies</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="/events">Events</a></li>
@@ -396,6 +399,15 @@
             </div>
         </div>
     </header>
+
+    <!-- SPEED -->
+    <section class="clo-section--tight clo-deep">
+        <div class="clo-orb g" style="width:480px;height:480px;top:-160px;right:-120px;opacity:.3;"></div>
+        <div class="clo-wrap clo-center">
+            <h2 class="clo-h2"><span class="clo-grad">75%</span> of deals go to whoever replies first.</h2>
+            <p class="clo-lead clo-narrow" style="margin-left:auto;margin-right:auto;color:rgba(255,255,255,.8);">Speed is the whole game. 41 Closer replies in seconds, every time, day or night. So the deal is yours, not the competitor who answered while you were asleep.</p>
+        </div>
+    </section>
 
     <!-- LOGOS / CREDIBILITY -->
     <section class="clo-logos-band">
@@ -531,7 +543,8 @@
         <div class="clo-wrap clo-center">
             <span class="clo-eyebrow">Not a demo</span>
             <h2 class="clo-h2">It's already closing real money.</h2>
-            <p class="clo-lead clo-narrow" style="margin-left:auto;margin-right:auto;">This is not a science project. It is running a real business today.</p>
+            <p class="clo-roi-story">One client was doing <b>$60,000 a month</b>. We added speed. The next month, <b>$80,000</b>. They paid us about <b>$4,000</b>. They made <b>$20,000</b> more.</p>
+            <p class="clo-lead clo-narrow" style="margin:24px auto 0;">That is the whole point. This is not a science project. It is running real businesses today.</p>
             <div class="clo-case">
                 <span class="clo-case-badge">Real client &middot; measured, not marketing</span>
                 <div class="clo-case-num">64.1%<span>of the chats it handles end in a sale</span></div>
@@ -751,6 +764,7 @@
                     <a href="/41-closer">41 Closer</a>
                     <a href="/41-closer#plans">Pricing</a>
                     <a href="index.html#what-we-do">What We Do</a>
+                    <a href="/partners">Partner Program</a>
                     <a href="case-studies.html">Case Studies</a>
                     <a href="about.html">About</a>
                     <a href="blog.html">Blog</a>
