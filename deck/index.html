@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex,follow" />
+<title>41 Labs · Custom AI Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#07080a; --accent:#4ade80; --accent-2:#22c55e;
+    --grad:linear-gradient(118deg,#9af5b8 0%,#4ade80 42%,#22c55e 70%,#11b3a0 100%);
+    --glass:rgba(255,255,255,.035); --glass-2:rgba(255,255,255,.06);
+    --line:rgba(255,255,255,.09); --ink-2:rgba(255,255,255,.62); --ink-3:rgba(255,255,255,.42);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:100vw;height:100vh;overflow:hidden;background:var(--bg);color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;}
+  body{cursor:default;} body:fullscreen,body:-webkit-full-screen{cursor:none;}
+  .stage{position:relative;width:100vw;height:100vh;}
+  /* atmosphere: animated gradient mesh */
+  .stage::before{content:'';position:fixed;inset:-20%;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(38vw 38vw at 18% 22%, rgba(74,222,128,.16), transparent 60%),
+      radial-gradient(34vw 34vw at 82% 78%, rgba(17,179,160,.14), transparent 60%),
+      radial-gradient(30vw 30vw at 70% 12%, rgba(34,197,94,.10), transparent 62%);
+    filter:blur(28px); animation:mesh 30s ease-in-out infinite alternate;}
+  @keyframes mesh{0%{transform:translate(0,0) scale(1);}100%{transform:translate(-3%,2%) scale(1.12);}}
+  /* grid + grain + vignette */
+  .stage::after{content:'';position:fixed;inset:0;z-index:41;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+      radial-gradient(120% 120% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%);
+    background-size:64px 64px,64px 64px,100% 100%;}
+  .grain{position:fixed;inset:0;z-index:42;pointer-events:none;opacity:.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:8.5vh 6.5vw 7.5vh;opacity:0;transition:opacity .9s ease-in-out;pointer-events:none;z-index:1;}
+  .slide.active{opacity:1;}
+
+  /* entrance */
+  .anim{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+  .slide.active .anim{opacity:1;transform:none;}
+  .slide.active .d1{transition-delay:.06s}.slide.active .d2{transition-delay:.16s}.slide.active .d3{transition-delay:.26s}
+  .slide.active .d4{transition-delay:.36s}.slide.active .d5{transition-delay:.46s}.slide.active .d6{transition-delay:.56s}
+  .slide.active .d7{transition-delay:.66s}.slide.active .d8{transition-delay:.76s}
+
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05);}
+
+  /* slide anatomy */
+  .eyebrow{display:inline-flex;align-items:center;gap:.7em;font-family:'JetBrains Mono',monospace;font-size:clamp(11px,1vw,16px);letter-spacing:.34em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  .eyebrow::before{content:'';width:26px;height:2px;background:var(--grad);}
+  .action-title{font-size:clamp(30px,3.6vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.06;max-width:1660px;margin-top:clamp(12px,1.8vh,22px);}
+  .body{position:relative;z-index:1;margin-top:clamp(26px,4.4vh,56px);}
+  .slide-foot{position:absolute;left:6.5vw;right:6.5vw;bottom:3vh;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:clamp(10px,.78vw,13px);letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase;z-index:3;}
+  .slide-foot .src{max-width:72%;}
+
+  /* COVER */
+  .slide-cover{justify-content:center;}
+  .cover-stack{position:relative;z-index:2;display:flex;flex-direction:column;gap:clamp(16px,2.4vh,32px);}
+  .slide-cover .brand-mark{height:clamp(100px,11vh,168px);width:auto;align-self:flex-start;filter:drop-shadow(0 0 48px rgba(74,222,128,.4));}
+  .cover-title{font-size:clamp(44px,6vw,128px);font-weight:900;letter-spacing:-.04em;line-height:.98;max-width:1640px;}
+  .cover-sub{font-size:clamp(19px,1.85vw,34px);color:var(--ink-2);font-weight:400;max-width:1120px;line-height:1.35;}
+  .cover-meta{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,1.05vw,17px);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);margin-top:clamp(4px,1vh,12px);}
+  .cover-meta .dot{color:var(--accent);margin:0 .6em;}
+
+  /* PILLARS */
+  .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,30px);}
+  .pillar{padding:clamp(24px,3.2vh,46px) clamp(22px,2vw,38px);display:flex;flex-direction:column;gap:clamp(8px,1.2vh,16px);position:relative;overflow:hidden;}
+  .pillar::after{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:var(--grad);opacity:.85;}
+  .pillar-num{font-family:'JetBrains Mono',monospace;font-size:clamp(13px,1.05vw,17px);color:var(--accent);font-weight:700;letter-spacing:.12em;}
+  .pillar-h{font-size:clamp(26px,2.5vw,46px);font-weight:800;letter-spacing:-.02em;}
+  .pillar-p{font-size:clamp(16px,1.25vw,22px);color:var(--ink-2);line-height:1.42;}
+
+  /* TRACK RECORD */
+  .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,38px);}
+  .proof-stat{padding-left:clamp(14px,1.2vw,24px);border-left:2px solid transparent;border-image:var(--grad) 1;}
+  .proof-number{font-size:clamp(46px,5.6vw,116px);font-weight:900;line-height:.92;letter-spacing:-.045em;font-variant-numeric:tabular-nums;}
+  .proof-label{font-size:clamp(15px,1.25vw,23px);color:var(--ink-2);margin-top:1.3vh;line-height:1.25;}
+  .compare{margin-top:clamp(26px,4vh,54px);display:flex;flex-direction:column;gap:clamp(12px,1.8vh,22px);max-width:1500px;}
+  .cmp-row{display:grid;grid-template-columns:clamp(150px,15vw,260px) 1fr auto;gap:clamp(14px,1.5vw,28px);align-items:center;}
+  .cmp-label{font-size:clamp(15px,1.3vw,24px);color:#fff;font-weight:600;}
+  .cmp-label .sm{display:block;font-family:'JetBrains Mono',monospace;font-size:clamp(11px,.85vw,14px);color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-top:2px;}
+  .bar-track{height:clamp(12px,1.7vh,22px);background:rgba(255,255,255,.05);border-radius:999px;overflow:hidden;}
+  .bar-fill{height:100%;width:0;border-radius:999px;background:var(--grad);transition:width 1.3s cubic-bezier(.2,.85,.2,1);box-shadow:0 0 24px rgba(74,222,128,.4);}
+  .bar-fill.muted{background:rgba(255,255,255,.18);box-shadow:none;}
+  .cmp-val{font-size:clamp(20px,1.9vw,36px);font-weight:800;letter-spacing:-.02em;min-width:clamp(70px,6vw,120px);text-align:right;}
+
+  /* FLAGSHIP */
+  .flag-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,3.4vw,72px);align-items:center;}
+  .flag-lead{font-size:clamp(19px,1.8vw,33px);color:var(--ink-2);line-height:1.42;font-weight:400;}
+  .flag-lead b{color:#fff;font-weight:700;} .flag-lead .accent{color:var(--accent);font-weight:700;}
+  .flag-steps{margin-top:clamp(16px,2.2vh,30px);display:flex;gap:clamp(8px,.9vw,16px);flex-wrap:wrap;}
+  .flag-chip{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,.98vw,16px);color:rgba(255,255,255,.82);padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02);}
+  .flag-chip b{color:var(--accent);}
+  /* phone */
+  .phone-wrap{display:flex;justify-content:center;align-items:center;}
+  .phone{height:clamp(420px,59vh,580px);aspect-ratio:9/18.6;width:auto;background:#0b141a;border-radius:42px;border:9px solid #15171b;position:relative;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 2px rgba(255,255,255,.04),0 0 80px rgba(74,222,128,.18);}
+  .wa-head{background:#1f2c34;display:flex;align-items:center;gap:11px;padding:14px 16px 12px;}
+  .wa-av{width:34px;height:34px;border-radius:999px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;color:#06281a;font-size:15px;}
+  .wa-name{font-size:14px;font-weight:700;color:#e9edef;line-height:1.1;}
+  .wa-status{font-size:11px;color:#9fe7bd;}
+  .wa-body{position:absolute;top:58px;bottom:0;left:0;right:0;background:#0b141a;padding:12px 11px;display:flex;flex-direction:column;gap:6px;background-image:radial-gradient(rgba(255,255,255,.018) 1px,transparent 1px);background-size:18px 18px;}
+  .wa-day{align-self:center;background:rgba(255,255,255,.06);color:#cfe9da;font-size:10px;letter-spacing:.08em;padding:4px 10px;border-radius:8px;font-family:'JetBrains Mono',monospace;}
+  .bub{max-width:80%;padding:6px 10px 5px;border-radius:11px;font-size:12.5px;line-height:1.3;color:#e9edef;position:relative;box-shadow:0 1px 1px rgba(0,0,0,.25);}
+  .bub .t{font-size:10px;color:rgba(255,255,255,.5);margin-left:9px;float:right;position:relative;top:5px;}
+  .bub.in{align-self:flex-start;background:#1f2c34;border-top-left-radius:3px;}
+  .bub.out{align-self:flex-end;background:#005c4b;border-top-right-radius:3px;}
+  .bub .tick{color:#5bd6ff;}
+  .pay{align-self:flex-end;background:#005c4b;border-radius:11px;border-top-right-radius:3px;padding:9px;max-width:82%;}
+  .pay-card{background:rgba(0,0,0,.22);border-radius:9px;padding:10px;display:flex;flex-direction:column;gap:8px;}
+  .pay-top{font-size:11px;color:#cfe9da;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;}
+  .pay-btn{background:var(--grad);color:#06281a;font-weight:800;font-size:13px;text-align:center;padding:8px;border-radius:7px;}
+  .wa-paid{align-self:center;background:rgba(74,222,128,.16);border:1px solid rgba(74,222,128,.4);color:#aef5c8;font-size:11px;font-weight:600;padding:6px 12px;border-radius:999px;}
+  /* chat sequential reveal */
+  .chat-b{opacity:0;transform:translateY(12px) scale(.95);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1);}
+  .slide.active .chat-b{opacity:1;transform:none;}
+  .slide.active .c1{transition-delay:.5s}.slide.active .c2{transition-delay:1.0s}.slide.active .c3{transition-delay:1.5s}
+  .slide.active .c4{transition-delay:2.0s}.slide.active .c5{transition-delay:2.6s}.slide.active .c6{transition-delay:3.2s}
+  .slide.active .c7{transition-delay:3.9s}
+
+  /* CASE GRID */
+  .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.5vw,26px);}
+  .case-card{padding:clamp(18px,2.4vh,34px) clamp(18px,1.7vw,30px);display:flex;flex-direction:column;gap:clamp(6px,.9vh,12px);position:relative;overflow:hidden;}
+  .case-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad);}
+  .case-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+  .case-ind{font-size:clamp(16px,1.35vw,24px);font-weight:700;letter-spacing:-.01em;}
+  .case-loc{font-family:'JetBrains Mono',monospace;font-size:clamp(10px,.8vw,13px);letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase;}
+  .case-metric{font-size:clamp(26px,2.5vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1;margin-top:4px;}
+  .case-desc{font-size:clamp(13px,1.05vw,18px);color:var(--ink-2);line-height:1.35;margin-top:auto;}
+
+  /* DEEP DIVE */
+  .dd-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,3.4vw,72px);align-items:start;}
+  .dd-block{margin-bottom:clamp(16px,2.4vh,30px);}
+  .dd-label{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,1vw,16px);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:clamp(8px,1.1vh,14px);}
+  .dd-block p{font-size:clamp(16px,1.3vw,24px);color:var(--ink-2);line-height:1.44;}
+  .dd-hero{font-size:clamp(56px,6.5vw,128px);font-weight:900;letter-spacing:-.045em;line-height:.9;}
+  .dd-hero-sub{font-size:clamp(15px,1.3vw,24px);color:var(--ink-2);margin-top:6px;margin-bottom:clamp(22px,3vh,38px);}
+  .dd-bars{display:flex;flex-direction:column;gap:clamp(14px,2vh,26px);}
+  .dd-bar-row .dd-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+  .dd-bar-name{font-size:clamp(14px,1.15vw,21px);font-weight:600;color:#fff;}
+  .dd-bar-val{font-size:clamp(15px,1.3vw,24px);font-weight:800;letter-spacing:-.02em;}
+  .dd-quote{margin-top:clamp(22px,3vh,40px);border-left:3px solid;border-image:var(--grad) 1;padding-left:clamp(16px,1.5vw,26px);max-width:1500px;}
+  .dd-quote p{font-size:clamp(17px,1.6vw,30px);font-weight:500;color:#fff;line-height:1.34;letter-spacing:-.01em;}
+  .dd-quote .who{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,1vw,16px);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-top:clamp(8px,1.2vh,14px);}
+  /* deep-dive slides are dense: tighten so content clears the pinned footer */
+  .slide:has(.dd-grid){padding-bottom:11vh;}
+  .slide:has(.dd-grid) .body{margin-top:clamp(14px,2.2vh,28px);}
+  .slide:has(.dd-grid) .action-title{font-size:clamp(26px,3vw,50px);}
+  .slide:has(.dd-grid) .dd-block{margin-bottom:clamp(10px,1.5vh,18px);}
+  .slide:has(.dd-grid) .dd-block p{font-size:clamp(15px,1.18vw,21px);line-height:1.38;}
+  .slide:has(.dd-grid) .dd-hero{font-size:clamp(46px,5.4vw,104px);}
+  .slide:has(.dd-grid) .dd-hero-sub{margin-bottom:clamp(14px,2vh,26px);}
+  .slide:has(.dd-grid) .dd-quote{margin-top:clamp(10px,1.6vh,22px);}
+
+  /* TESTIMONIALS */
+  .quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,32px);}
+  .quote-card{padding:clamp(24px,3vh,42px) clamp(22px,2vw,34px);display:flex;flex-direction:column;gap:clamp(14px,1.8vh,22px);}
+  .quote-text{font-size:clamp(17px,1.45vw,27px);color:#fff;line-height:1.38;font-weight:500;letter-spacing:-.01em;flex:1;}
+  .quote-who{display:flex;align-items:center;gap:12px;}
+  .quote-av{width:clamp(38px,3vw,52px);height:clamp(38px,3vw,52px);border-radius:999px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:800;color:#06281a;font-size:clamp(15px,1.2vw,20px);flex-shrink:0;}
+  .quote-name{font-size:clamp(14px,1.1vw,19px);font-weight:700;color:#fff;line-height:1.1;}
+  .quote-tag{font-family:'JetBrains Mono',monospace;font-size:clamp(11px,.85vw,14px);letter-spacing:.08em;color:var(--accent);text-transform:uppercase;margin-top:3px;}
+
+  /* ENGAGEMENT */
+  .model-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.4vw,26px);position:relative;}
+  .model-step{padding:clamp(22px,2.8vh,40px) clamp(18px,1.6vw,30px);display:flex;flex-direction:column;gap:clamp(8px,1.1vh,14px);position:relative;overflow:hidden;}
+  .model-step::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad);}
+  .model-when{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,1vw,16px);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;}
+  .model-h{font-size:clamp(20px,1.8vw,33px);font-weight:800;letter-spacing:-.02em;line-height:1.1;}
+  .model-p{font-size:clamp(14px,1.12vw,20px);color:var(--ink-2);line-height:1.4;}
+  .model-guarantee{margin-top:clamp(22px,3.2vh,44px);font-size:clamp(20px,1.9vw,38px);font-weight:600;color:#fff;letter-spacing:-.015em;}
+  .model-guarantee .accent{color:var(--accent);font-weight:800;}
+
+  /* CLOSER */
+  .slide-closer{align-items:center;justify-content:center;text-align:center;}
+  .closer-stack{display:flex;flex-direction:column;align-items:center;gap:clamp(20px,2.8vh,40px);position:relative;z-index:2;}
+  .slide-closer .brand-mark{height:clamp(110px,12vh,196px);filter:drop-shadow(0 0 48px rgba(74,222,128,.42));}
+  .closer-headline{font-size:clamp(42px,5.2vw,108px);font-weight:900;letter-spacing:-.04em;line-height:1;}
+  .bigqr-img{width:clamp(200px,22vh,310px);height:auto;background:#fff;padding:clamp(14px,1.6vh,22px);border-radius:22px;box-shadow:0 0 0 4px rgba(74,222,128,.2),0 0 90px 0 rgba(74,222,128,.4);animation:qrPulse 2.8s ease-in-out infinite;}
+  @keyframes qrPulse{0%,100%{box-shadow:0 0 0 4px rgba(74,222,128,.2),0 0 90px 0 rgba(74,222,128,.35);}50%{box-shadow:0 0 0 10px rgba(74,222,128,.1),0 0 130px 0 rgba(74,222,128,.6);}}
+  .cta-line{display:inline-flex;align-items:center;gap:.5em;padding:clamp(14px,1.6vh,20px) clamp(28px,3vw,48px);font-size:clamp(22px,2.1vw,42px);font-weight:600;color:#06281a;border-radius:999px;background:var(--grad);white-space:nowrap;box-shadow:0 0 50px rgba(74,222,128,.4);animation:ctaBreathe 2.6s ease-in-out infinite;}
+  .cta-line .arrow{font-weight:800;animation:arrowSlide 1.4s cubic-bezier(.45,0,.55,1) infinite;}
+  @keyframes ctaBreathe{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(74,222,128,.35);}50%{transform:scale(1.03);box-shadow:0 0 90px rgba(74,222,128,.6);}}
+  @keyframes arrowSlide{0%{transform:translateX(0);}50%{transform:translateX(10px);}100%{transform:translateX(0);}}
+  .url-line{font-family:'JetBrains Mono',monospace;font-size:clamp(13px,1.05vw,17px);letter-spacing:.3em;color:rgba(74,222,128,.78);text-transform:lowercase;}
+
+  .progress{position:fixed;bottom:1.3vh;left:0;right:0;z-index:30;display:flex;justify-content:center;gap:8px;pointer-events:none;}
+  .progress .dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.16);transition:all .5s;}
+  .progress .dot.active{width:26px;background:var(--accent);box-shadow:0 0 12px rgba(74,222,128,.7);}
+  .fs-hint{position:absolute;bottom:.5vh;left:1vw;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:rgba(255,255,255,.16);z-index:20;text-transform:uppercase;}
+  body:fullscreen .fs-hint,body:-webkit-full-screen .fs-hint{display:none;}
+  @media(max-width:980px){.pillar-grid,.proof-grid,.quote-grid,.model-flow,.dd-grid,.flag-cols,.case-grid{grid-template-columns:1fr;}}
+
+  /* ---------- MOBILE / PORTRAIT: fixed slideshow becomes a scrollable stack ---------- */
+  @media (max-width:820px), (orientation:portrait){
+    html,body{height:auto;min-height:100%;overflow-x:hidden;overflow-y:auto;}
+    .stage{height:auto;}
+    .stage::before,.stage::after,.grain{position:fixed;}
+    .slide{position:relative;inset:auto;opacity:1;height:auto;min-height:100svh;justify-content:center;
+      padding:13vh 7vw 11vh;border-bottom:1px solid var(--line);}
+    .slide .anim,.slide .chat-b{opacity:1 !important;transform:none !important;}
+    .action-title{font-size:clamp(27px,7.4vw,40px);max-width:none;}
+    .cover-title{font-size:clamp(38px,10.5vw,60px);}
+    .cover-sub{font-size:clamp(16px,4.5vw,22px);}
+    .body{margin-top:clamp(20px,4vh,32px);}
+    .proof-grid{grid-template-columns:1fr 1fr;gap:20px 16px;}
+    .proof-number{font-size:clamp(40px,12vw,64px);}
+    .case-grid,.cmp-row{grid-template-columns:1fr;}
+    .cmp-row{gap:7px;} .cmp-val{text-align:left;}
+    .flag-cols{gap:26px;}
+    .phone{height:auto;width:min(82vw,340px);aspect-ratio:9/18.6;margin:6px auto 0;}
+    .dd-hero{font-size:clamp(52px,15vw,96px);}
+    .model-guarantee,.proof-note{font-size:clamp(18px,5vw,28px);}
+    .slide-foot{position:relative;left:auto;right:auto;bottom:auto;margin-top:26px;flex-wrap:wrap;gap:8px;justify-content:flex-start;}
+    .progress,.fs-hint{display:none;}
+  }
+</style>
+</head>
+<body onclick="handleClick(event)">
+<div class="grain"></div>
+<div class="stage">
+
+  <!-- 01 COVER -->
+  <section class="slide slide-cover active" data-duration="8000">
+    <div class="cover-stack">
+      <img class="brand-mark anim d1" src="/deck/assets/41labs-logo-white.png" alt="41 Labs" />
+      <h1 class="cover-title anim d2">Custom AI that turns<br />manual work into <span class="grad-text">measured results.</span></h1>
+      <p class="cover-sub anim d3">We design, build, and run AI for businesses across Southeast Asia. Then we prove it on your own data, before you pay.</p>
+      <div class="cover-meta anim d4">41 Labs <span class="dot">·</span> Singapore <span class="dot">·</span> Operating across SEA since 2024</div>
+    </div>
+  </section>
+
+  <!-- 02 WHAT WE DO -->
+  <section class="slide" data-duration="10000">
+    <div class="eyebrow anim d1">What we do</div>
+    <h2 class="action-title anim d2">We build and run custom AI that <span class="grad-text">pays for itself.</span></h2>
+    <div class="body">
+      <div class="pillar-grid">
+        <div class="pillar glass anim d3"><div class="pillar-num">01 — BUILD</div><div class="pillar-h">On your data</div><div class="pillar-p">Custom systems trained on your real operations, not generic templates. Live in weeks.</div></div>
+        <div class="pillar glass anim d4"><div class="pillar-num">02 — RUN</div><div class="pillar-h">We operate it</div><div class="pillar-p">We don't hand you software and leave. We run it in production and keep improving it.</div></div>
+        <div class="pillar glass anim d5"><div class="pillar-num">03 — GUARANTEE</div><div class="pillar-h">You see it first</div><div class="pillar-p">A working prototype on your data before you pay a cent. If it doesn't deliver, you walk away.</div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="src">41 Labs — Custom AI Systems</span><span>02 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 03 TRACK RECORD -->
+  <section class="slide" data-duration="11000">
+    <div class="eyebrow anim d1">Track record</div>
+    <h2 class="action-title anim d2">80% of AI projects never reach production. <span class="grad-text">None of ours have failed.</span></h2>
+    <div class="body">
+      <div class="proof-grid">
+        <div class="proof-stat anim d3"><div class="proof-number grad-text" data-prefix="$" data-to="2" data-suffix="M+">$2M+</div><div class="proof-label">saved and earned for clients</div></div>
+        <div class="proof-stat anim d4"><div class="proof-number grad-text" data-to="50" data-suffix="+">50+</div><div class="proof-label">AI projects delivered</div></div>
+        <div class="proof-stat anim d5"><div class="proof-number grad-text" data-to="100" data-suffix="%">100%</div><div class="proof-label">production success rate</div></div>
+        <div class="proof-stat anim d6"><div class="proof-number grad-text" data-to="100" data-suffix="%">100%</div><div class="proof-label">client retention</div></div>
+      </div>
+      <div class="compare anim d7">
+        <div class="cmp-row"><div class="cmp-label">Industry<span class="sm">AI to production</span></div><div class="bar-track"><div class="bar-fill muted" data-w="20%"></div></div><div class="cmp-val" style="color:var(--ink-3)">~20%</div></div>
+        <div class="cmp-row"><div class="cmp-label">41 Labs<span class="sm">AI to production</span></div><div class="bar-track"><div class="bar-fill" data-w="100%"></div></div><div class="cmp-val grad-text">100%</div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="src">Source: 41 Labs engagements, 2024–2026 · industry failure rate: RAND, 2024</span><span>03 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 04 FLAGSHIP -->
+  <section class="slide" data-duration="16000">
+    <div class="eyebrow anim d1">Flagship product</div>
+    <h2 class="action-title anim d2">41 Closer turns WhatsApp into a salesforce that <span class="grad-text">closes while you sleep.</span></h2>
+    <div class="body">
+      <div class="flag-cols">
+        <div>
+          <p class="flag-lead anim d3">A customer messages your WhatsApp at 2am. Nobody answers. <b>They buy somewhere else.</b> That sale is gone, every single night.</p>
+          <p class="flag-lead anim d4" style="margin-top:1.1em">41 Closer answers in seconds, quotes your price, and <span class="accent">takes the payment.</span> We build it. We run it. You wake up to the money.</p>
+          <div class="flag-steps anim d5">
+            <span class="flag-chip"><b>1.</b> You send your products</span>
+            <span class="flag-chip"><b>2.</b> We build it</span>
+            <span class="flag-chip"><b>3.</b> We run it, you close more</span>
+          </div>
+        </div>
+        <div class="phone-wrap anim d5">
+          <div class="phone">
+            <div class="wa-head"><div class="wa-av">S</div><div><div class="wa-name">Your Store</div><div class="wa-status">online · replies instantly</div></div></div>
+            <div class="wa-body">
+              <div class="wa-day chat-b c1">TODAY · 2:14 AM</div>
+              <div class="bub in chat-b c1">Hi, is the espresso machine in stock?<span class="t">2:14</span></div>
+              <div class="bub out chat-b c2">Yes, 12 in stock. Want me to hold one for you?<span class="t">2:14 <span class="tick">&check;&check;</span></span></div>
+              <div class="bub in chat-b c3">How much?<span class="t">2:15</span></div>
+              <div class="bub out chat-b c4">$249, with free delivery this week. Want a payment link?<span class="t">2:15 <span class="tick">&check;&check;</span></span></div>
+              <div class="bub in chat-b c5">Yes please<span class="t">2:15</span></div>
+              <div class="pay chat-b c6"><div class="pay-card"><div class="pay-top">SECURE CHECKOUT · $249.00</div><div class="pay-btn">Pay $249</div></div></div>
+              <div class="wa-paid chat-b c7">&check; Paid · Order #4821 confirmed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="src">41 Closer — done-for-you WhatsApp AI sales agent · from $690/mo · 41labs.ai/41-closer</span><span>04 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 05 CASE GRID -->
+  <section class="slide" data-duration="13000">
+    <div class="eyebrow anim d1">Selected work</div>
+    <h2 class="action-title anim d2">The same playbook, proven across <span class="grad-text">seven industries and three countries.</span></h2>
+    <div class="body">
+      <div class="case-grid">
+        <div class="case-card glass anim d3"><div class="case-top"><div class="case-ind">Logistics &amp; Freight</div><div class="case-loc">SG</div></div><div class="case-metric grad-text">$180K saved</div><div class="case-desc">Customs clearance cut 70%. Documentation errors down 85%.</div></div>
+        <div class="case-card glass anim d4"><div class="case-top"><div class="case-ind">Insurance</div><div class="case-loc">TH</div></div><div class="case-metric grad-text">5 days → same day</div><div class="case-desc">Claims triaged and assessed by AI. Operating costs down 35%.</div></div>
+        <div class="case-card glass anim d5"><div class="case-top"><div class="case-ind">Real Estate</div><div class="case-loc">SG</div></div><div class="case-metric grad-text">200 → 500 units</div><div class="case-desc">Portfolio scaled 2.5×. Zero additional headcount.</div></div>
+        <div class="case-card glass anim d6"><div class="case-top"><div class="case-ind">Education</div><div class="case-loc">ID</div></div><div class="case-metric grad-text">+45% enrolment</div><div class="case-desc">Inquiry response from 48 hours to 5 minutes.</div></div>
+        <div class="case-card glass anim d7"><div class="case-top"><div class="case-ind">Professional Services</div><div class="case-loc">SG</div></div><div class="case-metric grad-text">3 hrs → 5 min</div><div class="case-desc">Quote generation across CRM, ERP, and pricing. Capacity +35%.</div></div>
+        <div class="case-card glass anim d8"><div class="case-top"><div class="case-ind">Climate &amp; ESG</div><div class="case-loc">SG</div></div><div class="case-metric grad-text">10× volume</div><div class="case-desc">Carbon-credit documents processed in minutes, at 99.2% accuracy.</div></div>
+        <div class="case-card glass anim d8"><div class="case-top"><div class="case-ind">Fresh Food Distribution</div><div class="case-loc">SG</div></div><div class="case-metric grad-text">0 re-keying</div><div class="case-desc">Orders from WhatsApp, voice notes &amp; photos — all captured into one clean order book by 41 Closer.</div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="src">Source: 41 Labs client engagements. Clients anonymised by agreement.</span><span>05 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 06 DEEP DIVE -->
+  <section class="slide" data-duration="13000">
+    <div class="eyebrow anim d1">Case study · Logistics &amp; Freight · Singapore</div>
+    <h2 class="action-title anim d2">We cut customs clearance 70% and erased <span class="grad-text">$180K in annual penalties.</span></h2>
+    <div class="body">
+      <div class="dd-grid">
+        <div>
+          <div class="dd-block anim d3"><div class="dd-label">Situation</div><p>200+ shipments a week across ASEAN. 3–4 documentation errors weekly, each costing $2K–$8K. Total bleed: over $15K a month.</p></div>
+          <div class="dd-block anim d4"><div class="dd-label">Approach</div><p>AI reads every shipping document, auto-classifies HS codes from 18 months of their own data, and cross-validates the full file before submission.</p></div>
+        </div>
+        <div>
+          <div class="anim d5"><div class="dd-hero grad-text" data-prefix="$" data-to="180" data-suffix="K+">$180K+</div><div class="dd-hero-sub">saved every year, penalties effectively eliminated</div></div>
+          <div class="dd-bars">
+            <div class="dd-bar-row anim d6"><div class="dd-bar-top"><span class="dd-bar-name">Customs clearance time</span><span class="dd-bar-val grad-text">4h → 45m</span></div><div class="bar-track"><div class="bar-fill muted" data-w="100%" style="position:relative"></div></div><div class="bar-track" style="margin-top:7px"><div class="bar-fill" data-w="19%"></div></div></div>
+            <div class="dd-bar-row anim d7"><div class="dd-bar-top"><span class="dd-bar-name">Documentation errors</span><span class="dd-bar-val grad-text">−85%</span></div><div class="bar-track"><div class="bar-fill muted" data-w="100%"></div></div><div class="bar-track" style="margin-top:7px"><div class="bar-fill" data-w="15%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dd-quote anim d8"><p>"The AI catches errors our experienced staff would miss. Our clearance times are now the fastest in our network."</p><div class="who">Wei Lin · Operations Director</div></div>
+    </div>
+    <div class="slide-foot"><span class="src">Source: 41 Labs engagement, Singapore freight forwarder · first 90 days</span><span>06 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 07 DEEP DIVE · FRESH FOOD DISTRIBUTION + 41 CLOSER -->
+  <section class="slide" data-duration="13000">
+    <div class="eyebrow anim d1">Case study · Fresh Food Distribution · Singapore</div>
+    <h2 class="action-title anim d2">Orders arrive by text, voice note, and photo. 41 Closer reads them all and books every one — with <span class="grad-text">zero re-typing.</span></h2>
+    <div class="body">
+      <div class="dd-grid">
+        <div>
+          <div class="dd-block anim d3"><div class="dd-label">Situation</div><p>A wholesale food distributor takes ~100 orders a day across WhatsApp text, voice notes, photos of handwritten chits, and phone calls — for ~80 recurring buyers and ~20 products. Staff re-type every order into the ERP by hand. The same order entered two and three times.</p></div>
+          <div class="dd-block anim d4"><div class="dd-label">Approach</div><p>41 Closer sits on every channel. It reads the text, transcribes the voice notes, and reads the photos — turning all of it into clean order lines. At the warehouse, AI vision reads the product and the scale weight from a single photo. One order book, straight into the ERP.</p></div>
+        </div>
+        <div>
+          <div class="anim d5"><div class="dd-hero grad-text" data-prefix="≥" data-to="90" data-suffix="%">≥90%</div><div class="dd-hero-sub">weight &amp; product accuracy — guaranteed within 90 days, or we keep working free until it's met</div></div>
+          <div class="dd-bars">
+            <div class="dd-bar-row anim d6"><div class="dd-bar-top"><span class="dd-bar-name">Order channels</span><span class="dd-bar-val grad-text">4 → 1</span></div><div class="bar-track"><div class="bar-fill muted" data-w="100%"></div></div><div class="bar-track" style="margin-top:7px"><div class="bar-fill" data-w="25%"></div></div></div>
+            <div class="dd-bar-row anim d7"><div class="dd-bar-top"><span class="dd-bar-name">Manual re-keying</span><span class="dd-bar-val grad-text">eliminated</span></div><div class="bar-track"><div class="bar-fill muted" data-w="100%"></div></div><div class="bar-track" style="margin-top:7px"><div class="bar-fill" data-w="4%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dd-quote anim d8"><p>"We've got a whole stack of workflows lined up for this one."</p><div class="who">Operations Lead · Fresh Food Distributor, SG</div></div>
+    </div>
+    <div class="slide-foot"><span class="src">Source: 41 Labs engagement · Singapore food wholesaler</span><span>07 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 08 TESTIMONIALS -->
+  <section class="slide" data-duration="12000">
+    <div class="eyebrow anim d1">In their words</div>
+    <h2 class="action-title anim d2">Leaders who handed us the work they <span class="grad-text">couldn't scale.</span></h2>
+    <div class="body">
+      <div class="quote-grid">
+        <div class="quote-card glass anim d3"><div class="quote-text">"What used to take our team 3 hours now takes 5 minutes. The accuracy is remarkable."</div><div class="quote-who"><div class="quote-av">JT</div><div><div class="quote-name">James Tan</div><div class="quote-tag">COO · Professional Services</div></div></div></div>
+        <div class="quote-card glass anim d4"><div class="quote-text">"Our claims team went from drowning in paperwork to focusing on the cases that actually need their expertise."</div><div class="quote-who"><div class="quote-av">PS</div><div><div class="quote-name">Priya Sharma</div><div class="quote-tag">VP Operations · Insurance, TH</div></div></div></div>
+        <div class="quote-card glass anim d5"><div class="quote-text">"We more than doubled our portfolio without hiring a single additional person."</div><div class="quote-who"><div class="quote-av">DC</div><div><div class="quote-name">David Chen</div><div class="quote-tag">Managing Director · Real Estate</div></div></div></div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="src">Source: 41 Labs client testimonials. Titles verified; companies anonymised by agreement.</span><span>08 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 09 ENGAGEMENT -->
+  <section class="slide" data-duration="12000">
+    <div class="eyebrow anim d1">How we work</div>
+    <h2 class="action-title anim d2">You see it work on your own data <span class="grad-text">before you pay a cent.</span></h2>
+    <div class="body">
+      <div class="model-flow">
+        <div class="model-step glass anim d3"><div class="model-when">Week 0–2</div><div class="model-h">Free prototype</div><div class="model-p">A working system built on your real data. No card needed.</div></div>
+        <div class="model-step glass anim d4"><div class="model-when">Week 3–8</div><div class="model-h">Deploy to production</div><div class="model-p">We ship it into your operations and integrate your systems.</div></div>
+        <div class="model-step glass anim d5"><div class="model-when">Ongoing</div><div class="model-h">We run it for you</div><div class="model-p">We operate and improve the system. You do nothing.</div></div>
+        <div class="model-step glass anim d6"><div class="model-when">Eligible SG</div><div class="model-h">EDG covers 50%</div><div class="model-p">We help you apply for the government grant on qualifying builds.</div></div>
+      </div>
+      <p class="model-guarantee anim d7">First month free if it doesn't bring in sales you'd have missed. <span class="accent">Walk away anytime. No strings.</span></p>
+    </div>
+    <div class="slide-foot"><span class="src">EDG = Enterprise Development Grant (Enterprise Singapore). Subject to approval.</span><span>09 / 10 · Confidential</span></div>
+  </section>
+
+  <!-- 10 CLOSER -->
+  <section class="slide slide-closer" data-duration="14000">
+    <div class="closer-stack">
+      <img class="brand-mark anim d1" src="/deck/assets/41labs-logo-white.png" alt="41 Labs" />
+      <h1 class="closer-headline anim d2">Let's prove it on <span class="grad-text">your data.</span></h1>
+      <img id="closerqr-img" class="bigqr-img anim d3" alt="Scan to start" />
+      <div class="cta-line anim d4">Scan to get your free prototype <span class="arrow">&rarr;</span></div>
+      <div class="url-line anim d5">41labs.ai</div>
+    </div>
+  </section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="fs-hint">F fullscreen &middot; &larr; &rarr; nav &middot; 1&ndash;9 jump &middot; P pause</div>
+
+<script>
+  const WA_URL=`https://wa.me/6580124848?text=${encodeURIComponent("Hi 41 Labs, show me what AI you'd build for my business.")}`;
+  const cq=document.getElementById('closerqr-img');
+  if(cq) cq.src=`https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(WA_URL)}&size=700x700&format=png&margin=8&color=0a0a0a&bgcolor=ffffff&qzone=2`;
+
+  const slides=document.querySelectorAll('.slide');
+  let current=0,timer=null,paused=false;
+  const progress=document.getElementById('progress');
+  slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');progress.appendChild(d);});
+  const dots=progress.querySelectorAll('.dot');
+  function easeOut(t){return 1-Math.pow(1-t,3);}
+  function runCountUps(el){el.querySelectorAll('[data-to]').forEach(n=>{const to=parseFloat(n.dataset.to),pre=n.dataset.prefix||'',suf=n.dataset.suffix||'',dur=1300,start=performance.now();function f(now){const p=Math.min((now-start)/dur,1);n.textContent=pre+Math.round(to*easeOut(p))+suf;if(p<1)requestAnimationFrame(f);}n.textContent=pre+'0'+suf;requestAnimationFrame(f);});}
+  function runBars(el){el.querySelectorAll('[data-w]').forEach(b=>{b.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>{b.style.width=b.dataset.w;}));});}
+  function resetBars(el){el.querySelectorAll('[data-w]').forEach(b=>b.style.width='0');}
+  function setActive(i){resetBars(slides[current]);slides[current].classList.remove('active');dots[current].classList.remove('active');current=(i+slides.length)%slides.length;slides[current].classList.add('active');dots[current].classList.add('active');runCountUps(slides[current]);runBars(slides[current]);}
+  function scheduleNext(){clearTimeout(timer);if(paused)return;const d=parseInt(slides[current].dataset.duration,10)||10000;timer=setTimeout(()=>{setActive(current+1);scheduleNext();},d);}
+  function goTo(i){setActive(i);scheduleNext();}
+  function enterFullscreen(){const el=document.documentElement;if(el.requestFullscreen)el.requestFullscreen();else if(el.webkitRequestFullscreen)el.webkitRequestFullscreen();}
+  const isMobile=window.matchMedia('(max-width:820px),(orientation:portrait)').matches;
+  function handleClick(e){if(isMobile)return;const fs=!!(document.fullscreenElement||document.webkitFullscreenElement);if(!fs)enterFullscreen();if(e.clientX<window.innerWidth*0.3)goTo(current-1);else goTo(current+1);}
+  function togglePause(){paused=!paused;if(paused){clearTimeout(timer);timer=null;}else scheduleNext();}
+  document.addEventListener('keydown',(e)=>{if(e.key==='f'||e.key==='F')enterFullscreen();if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(current+1);}if(e.key==='ArrowLeft')goTo(current-1);if(e.key==='p'||e.key==='P')togglePause();if(e.key>='1'&&e.key<='9'){const idx=parseInt(e.key,10)-1;if(idx<slides.length)goTo(idx);}if(e.key==='Home')goTo(0);if(e.key==='End')goTo(slides.length-1);});
+  if(isMobile){
+    // scrollable stack: reveal everything, fill bars + numbers, no auto-advance
+    document.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w;});
+    document.querySelectorAll('[data-to]').forEach(n=>{n.textContent=(n.dataset.prefix||'')+n.dataset.to+(n.dataset.suffix||'');});
+  }else{
+    runCountUps(slides[0]);runBars(slides[0]);scheduleNext();
+    if('wakeLock' in navigator){navigator.wakeLock.request('screen').catch(()=>{});}
+  }
+</script>
+</body>
+</html>
