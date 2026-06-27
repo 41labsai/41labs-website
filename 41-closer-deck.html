@@ -16,297 +16,479 @@
     <link rel="apple-touch-icon" href="logo-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap">
     <style>
         :root{
-            --accent:#4ade80; --accent-dark:#22c55e; --dark:#0c0d10; --dark2:#121419;
-            --bg:#f5f5f7; --text:#1a1a1a; --text2:#6b6b6b; --text-light:#9a9a9a;
-            --border:rgba(0,0,0,.07); --radius:24px; --shadow:0 10px 40px rgba(0,0,0,.10); --shadow-hard:0 24px 70px rgba(0,0,0,.5);
+            --accent:#4ade80; --accent-dark:#22c55e; --accent-lite:#86efac;
+            --dark:#08090c; --panel:#0f1216;
+            --bg:#f4f5f3; --text:#14161a; --text2:#5f6670; --text-light:#9aa0a8;
+            --red:#ef5350; --redlite:#ff8a80; --border:rgba(0,0,0,.08); --radius:24px;
+            --shadow:0 14px 50px rgba(20,30,24,.12); --shadow-hard:0 24px 70px rgba(0,0,0,.5);
+            --mono:'JetBrains Mono',ui-monospace,monospace;
         }
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
-        body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:var(--text);background:var(--dark);overflow-x:hidden;}
+        body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:var(--text);background:var(--dark);overflow-x:hidden;font-feature-settings:"ss01","cv01","tnum";}
         .deck{height:100vh;overflow-y:scroll;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
         .g3>*,.g2>*,.g4>*{min-width:0;}
         .ex .b{overflow-wrap:anywhere;}
         .deck::-webkit-scrollbar{display:none;} .deck{-ms-overflow-style:none;scrollbar-width:none;}
-        .slide{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:80px 28px;position:relative;overflow:hidden;}
-        .inner{max-width:1080px;width:100%;margin:0 auto;position:relative;z-index:2;}
+        .slide{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:96px 30px;position:relative;overflow:hidden;}
+        .inner{max-width:1140px;width:100%;margin:0 auto;position:relative;z-index:2;}
         .center{text-align:center;}
 
-        /* themes */
-        .dark{background:radial-gradient(120% 90% at 50% -10%,#1c2128 0%,var(--dark) 60%);color:#fff;}
-        .light{background:var(--bg);color:var(--text);}
-        .white{background:#fff;color:var(--text);}
+        /* ============ THEMES — atmospheric depth, not flat fills ============ */
+        .dark{
+            color:#fff;
+            background:
+              radial-gradient(80% 60% at 18% 12%, rgba(74,222,128,.10), transparent 60%),
+              radial-gradient(70% 70% at 88% 88%, rgba(34,197,94,.08), transparent 60%),
+              radial-gradient(120% 120% at 50% 0%, #14181d 0%, #0a0c0f 55%, #07080a 100%);
+        }
+        .light{color:var(--text);background:radial-gradient(90% 80% at 50% -10%, #ffffff 0%, var(--bg) 65%);}
+        .white{color:var(--text);background:#fff;}
 
-        .eyebrow{display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;}
-        .light .eyebrow,.white .eyebrow{color:var(--accent-dark);}
-        h1{font-size:clamp(2.4rem,5.2vw,3.9rem);font-weight:900;line-height:1.02;letter-spacing:-.035em;margin-bottom:24px;overflow-wrap:break-word;}
-        h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:22px;overflow-wrap:break-word;}
-        .lead{font-size:clamp(1.15rem,2.3vw,1.5rem);line-height:1.55;color:rgba(255,255,255,.78);max-width:760px;}
+        /* hairline top/bottom frame on dark slides for a "report" feel */
+        .dark .inner::before{content:"";position:absolute;left:0;right:0;top:-30px;height:1px;background:linear-gradient(90deg,transparent,rgba(74,222,128,.25),transparent);opacity:0;transition:opacity 1s .3s;}
+        .dark.in .inner::before{opacity:1;}
+
+        /* film grain overlay */
+        .grain{position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+        /* top scroll-progress bar */
+        .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;background:linear-gradient(90deg,var(--accent-dark),var(--accent),var(--accent-lite));box-shadow:0 0 14px rgba(74,222,128,.6);transition:width .15s linear;}
+
+        /* aurora orb (slow drift) */
+        .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.5;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(74,222,128,.55),transparent 70%);}
+        .orb.r{background:radial-gradient(circle,rgba(239,83,80,.45),transparent 70%);}
+        .orb.drift{animation:drift 16s ease-in-out infinite alternate;}
+        @keyframes drift{0%{transform:translate(0,0) scale(1);}100%{transform:translate(40px,30px) scale(1.12);}}
+
+        /* ============ TYPE ============ */
+        .stag{position:absolute;top:34px;left:34px;z-index:4;font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(150,150,160,.5);}
+        .light .stag,.white .stag{color:rgba(0,0,0,.3);}
+        .stag b{color:var(--accent);} .light .stag b,.white .stag b{color:var(--accent-dark);}
+
+        .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.76rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
+        .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.6;}
+        .light .eyebrow,.white .eyebrow{color:var(--accent-dark);} .light .eyebrow::before,.white .eyebrow::before{background:var(--accent-dark);}
+        h1{font-size:clamp(2.8rem,6.4vw,5.2rem);font-weight:900;line-height:.98;letter-spacing:-.04em;margin-bottom:26px;overflow-wrap:break-word;}
+        h2{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:900;line-height:1.03;letter-spacing:-.032em;margin-bottom:22px;overflow-wrap:break-word;}
+        .lead{font-size:clamp(1.12rem,2.1vw,1.45rem);line-height:1.55;color:rgba(255,255,255,.74);max-width:820px;}
         .center .lead{margin-left:auto;margin-right:auto;}
         .light .lead,.white .lead{color:var(--text2);}
-        .grad{background:linear-gradient(110deg,#4ade80,#86efac 45%,#22c55e);-webkit-background-clip:text;background-clip:text;color:transparent;}
-        .big{font-size:clamp(4rem,14vw,9rem);font-weight:900;letter-spacing:-.04em;line-height:.9;}
+        .grad{background:linear-gradient(105deg,#4ade80,#bbf7d0 50%,#22c55e);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        .gradr{background:linear-gradient(105deg,#ff8a80,#ef5350);-webkit-background-clip:text;background-clip:text;color:transparent;}
         .muted{color:var(--text-light);font-weight:600;}
 
-        .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(74,222,128,.5),transparent 70%);}
-
-        /* grids */
-        .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;text-align:left;}
-        .g2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px;text-align:left;}
-        .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:46px;}
-        .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:30px 28px;}
+        /* ============ GRIDS / CARDS ============ */
+        .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:42px;text-align:left;}
+        .g2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px;text-align:left;}
+        .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px;}
+        .card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:28px 26px;transition:transform .3s,box-shadow .3s;}
         .white .card,.light .card{background:#fff;border-color:var(--border);box-shadow:var(--shadow);}
-        .card h3{font-size:1.25rem;font-weight:800;margin-bottom:12px;}
-        .card p{color:rgba(255,255,255,.66);line-height:1.55;font-size:1rem;}
+        .card:hover{transform:translateY(-4px);}
+        .card h3{font-size:1.2rem;font-weight:800;margin-bottom:11px;letter-spacing:-.01em;}
+        .card p{color:rgba(255,255,255,.66);line-height:1.5;font-size:.98rem;}
         .white .card p,.light .card p{color:var(--text2);}
-        .num{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;margin-bottom:18px;}
-        .light .num,.white .num{background:linear-gradient(135deg,var(--dark),#2a2a2a);}
+        .num{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#1c2229,#10141a);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.15rem;margin-bottom:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);}
+        .light .num,.white .num{background:linear-gradient(135deg,#161a1f,#2a2f36);}
+        .num.x{background:rgba(239,83,80,.13);color:#ef5350;} .light .num.x,.white .num.x{background:rgba(239,83,80,.1);color:#d63d39;}
 
-        /* category */
-        .cat ul{list-style:none;}
-        .cat li{padding:9px 0 9px 26px;position:relative;color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.08);line-height:1.4;}
-        .cat li:first-child{border-top:none;} .cat li::before{content:"\2014";position:absolute;left:0;color:rgba(255,255,255,.3);}
-        .cat .sub{font-size:.9rem;font-weight:700;color:rgba(255,255,255,.4);margin:-4px 0 16px;}
-        .card.win{background:linear-gradient(180deg,rgba(74,222,128,.13),rgba(255,255,255,.03));border-color:rgba(74,222,128,.55);box-shadow:0 22px 64px rgba(34,197,94,.24);}
-        .card.win h3,.card.win .sub{color:var(--accent);} .card.win li{color:#fff;font-weight:600;} .card.win li::before{content:"\2713";color:var(--accent);}
+        .src{margin-top:30px;font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:rgba(255,255,255,.32);line-height:1.7;}
+        .light .src,.white .src{color:rgba(0,0,0,.34);}
+        .src b{color:rgba(255,255,255,.5);font-weight:700;} .light .src b,.white .src b{color:rgba(0,0,0,.5);}
 
-        /* stats */
-        .stat b{display:block;font-size:clamp(2.4rem,5vw,3.6rem);font-weight:900;letter-spacing:-.03em;line-height:1;background:linear-gradient(120deg,#fff,#86efac);-webkit-background-clip:text;background-clip:text;color:transparent;}
-        .stat span{display:block;color:rgba(255,255,255,.66);margin-top:12px;font-size:.95rem;line-height:1.35;}
-        .stat{padding:28px 18px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);text-align:center;}
+        /* ============ STAT TILES — glass + gradient-light border ============ */
+        .stat{position:relative;padding:30px 18px;border-radius:20px;text-align:center;
+            background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
+            border:1px solid transparent;
+            box-shadow:0 12px 40px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.06);
+            transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;}
+        .stat::before{content:"";position:absolute;inset:0;border-radius:20px;padding:1px;
+            background:linear-gradient(150deg,rgba(74,222,128,.55),rgba(74,222,128,.07) 55%,transparent);
+            -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+            -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+        .stat:hover{transform:translateY(-5px);box-shadow:0 22px 56px rgba(0,0,0,.42),0 0 36px rgba(74,222,128,.16);}
+        .stat.lossbox::before{background:linear-gradient(150deg,rgba(239,83,80,.5),rgba(239,83,80,.06) 55%,transparent);}
+        .stat b{display:block;font-size:clamp(2.5rem,5.2vw,3.7rem);font-weight:900;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums;
+            background:linear-gradient(125deg,#fff,#86efac);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        .stat b.loss{background:linear-gradient(125deg,#fff,#ff8a80);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        .stat b.plain{background:linear-gradient(125deg,#fff,#cfd6dc);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        .stat span{display:block;color:rgba(255,255,255,.64);margin-top:13px;font-size:.94rem;line-height:1.35;}
 
-        /* chat examples */
-        .ex{background:#0b141a;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;display:flex;flex-direction:column;}
-        .ex .tag{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+        /* ============ CATEGORY TABLE ============ */
+        .ctab{margin-top:38px;border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;text-align:left;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+        .ctab .row{display:grid;grid-template-columns:1fr 1fr;}
+        .ctab .row+.row{border-top:1px solid rgba(255,255,255,.07);}
+        .ctab .c{padding:16px 26px;font-size:1.02rem;line-height:1.4;}
+        .ctab .c.l{color:rgba(255,255,255,.48);border-right:1px solid rgba(255,255,255,.07);}
+        .ctab .c.r{color:#fff;font-weight:700;}
+        .ctab .c.r::before{content:"\2713  ";color:var(--accent);font-weight:900;}
+        .ctab .head .c{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding-top:17px;padding-bottom:17px;}
+        .ctab .head .c.l{color:rgba(255,255,255,.38);} .ctab .head .c.r{color:var(--accent);}
+        .ctab .head .c.r::before{content:"";}
+        .ctab .head{background:rgba(255,255,255,.025);}
+
+        /* ============ CHAT EXAMPLES ============ */
+        .ex{background:linear-gradient(180deg,#0d1620,#0a1118);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;display:flex;flex-direction:column;box-shadow:0 18px 50px rgba(0,0,0,.18);transition:transform .3s;}
+        .ex:hover{transform:translateY(-4px);}
+        .ex .tag{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
         .ex .b{max-width:90%;padding:9px 13px;border-radius:13px;font-size:.86rem;line-height:1.4;color:#e9edef;margin-bottom:7px;}
         .ex .b.in{background:#202c33;align-self:flex-start;border-top-left-radius:4px;}
-        .ex .b.out{background:#005c4b;align-self:flex-end;border-top-right-radius:4px;}
-        .ex .out-pill{margin-top:14px;align-self:flex-start;background:linear-gradient(135deg,#22c55e,#4ade80);color:#06220f;font-weight:800;font-size:.82rem;padding:8px 14px;border-radius:999px;}
+        .ex .b.out{background:#075e54;align-self:flex-end;border-top-right-radius:4px;}
+        .ex .out-pill{margin-top:14px;align-self:flex-start;background:linear-gradient(135deg,#22c55e,#4ade80);color:#06220f;font-weight:800;font-size:.82rem;padding:8px 14px;border-radius:999px;box-shadow:0 6px 20px rgba(74,222,128,.35);}
 
-        /* pricing */
-        .tier{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:30px 26px;text-align:left;position:relative;}
-        .tier.pop{border-color:rgba(74,222,128,.55);box-shadow:0 22px 64px rgba(34,197,94,.22);}
-        .tier .badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#06220f;font-weight:900;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:999px;}
-        .tier .name{font-size:1.2rem;font-weight:800;margin-bottom:8px;}
-        .tier .price{font-size:2.4rem;font-weight:900;letter-spacing:-.02em;} .tier .price small{font-size:1rem;color:rgba(255,255,255,.5);font-weight:600;}
-        .tier .meta{font-size:.86rem;color:rgba(255,255,255,.55);margin:6px 0 16px;}
-        .tier ul{list-style:none;} .tier li{padding:7px 0 7px 24px;position:relative;color:rgba(255,255,255,.85);font-size:.94rem;line-height:1.4;} .tier li::before{content:"\2713";position:absolute;left:0;color:var(--accent);font-weight:800;}
+        /* ============ BAR CHART (animated) ============ */
+        .bars{margin-top:8px;display:flex;flex-direction:column;gap:18px;}
+        .barrow{display:grid;grid-template-columns:128px 1fr;align-items:center;gap:18px;}
+        .barrow .blab{font-weight:700;font-size:.98rem;color:rgba(255,255,255,.78);text-align:right;font-family:var(--mono);letter-spacing:.04em;}
+        .bartrack{position:relative;background:rgba(255,255,255,.04);border-radius:13px;border:1px solid rgba(255,255,255,.06);}
+        .bar{height:58px;border-radius:12px;display:flex;align-items:center;padding:0 20px;font-weight:900;font-size:1.32rem;color:#fff;position:relative;width:0;transition:width 1.3s cubic-bezier(.2,.8,.2,1);font-variant-numeric:tabular-nums;}
+        .bar.before{background:rgba(255,255,255,.14);}
+        .bar.after{background:linear-gradient(90deg,#16a34a,#4ade80);color:#052b14;box-shadow:0 8px 30px rgba(74,222,128,.35);}
+        .slide.in .bar.before{width:60%;}
+        .slide.in .bar.after{width:80%;transition-delay:.25s;}
+        .bar .delta{position:absolute;right:-104px;font-size:.95rem;font-weight:800;color:var(--accent);white-space:nowrap;opacity:0;transition:opacity .5s 1.2s;}
+        .slide.in .bar .delta{opacity:1;}
+
+        /* ============ COST STACK ============ */
+        .stack{margin-top:8px;display:flex;flex-direction:column;gap:11px;text-align:left;}
+        .srow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;padding:14px 20px;border-radius:14px;background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);}
+        .srow .sl{color:var(--text);font-size:1rem;line-height:1.3;}
+        .srow .sv{font-weight:900;font-size:1.12rem;color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums;}
+        .srow.tot{background:rgba(239,83,80,.07);border-color:rgba(239,83,80,.3);} .srow.tot .sv{color:#d63d39;}
+
+        /* offer inclusions + bonuses */
+        .olist{list-style:none;margin-top:16px;}
+        .olist li{padding:6px 0 6px 28px;position:relative;font-size:1.02rem;line-height:1.4;color:var(--text);}
+        .olist li::before{content:"\2713";position:absolute;left:0;color:var(--accent-dark);font-weight:900;}
+        .bonusband{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:.98rem;font-weight:700;color:var(--text);line-height:1.6;}
+        .bonusband .g{color:var(--accent-dark);}
+
+        /* guarantee cards */
+        .guar{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px;text-align:left;}
+        .gcard{position:relative;background:linear-gradient(180deg,rgba(74,222,128,.08),rgba(255,255,255,.02));border:1px solid transparent;border-radius:22px;padding:30px 28px;box-shadow:0 16px 50px rgba(0,0,0,.3);}
+        .gcard::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1px;background:linear-gradient(150deg,rgba(74,222,128,.6),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+        .gcard .gi{width:44px;height:44px;border-radius:13px;background:rgba(74,222,128,.16);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;margin-bottom:16px;}
+        .gcard h3{font-size:1.25rem;font-weight:800;margin-bottom:10px;}
+        .gcard p{color:rgba(255,255,255,.72);line-height:1.5;font-size:1rem;}
+
+        /* big emphasis money line */
+        .moneyline{margin-top:30px;font-size:clamp(1.35rem,2.8vw,1.95rem);font-weight:800;line-height:1.35;color:#fff;max-width:920px;margin-left:auto;margin-right:auto;letter-spacing:-.015em;}
+
+        /* founder quote */
+        .fq{margin-top:28px;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.55;color:rgba(255,255,255,.82);max-width:860px;margin-left:auto;margin-right:auto;font-style:italic;}
+        .fq b{color:#fff;font-weight:800;font-style:normal;}
+
+        /* ============ PRICING ============ */
+        .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;align-items:stretch;}
+        .tier{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018));border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:30px 28px;text-align:left;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;box-shadow:0 14px 44px rgba(0,0,0,.3);}
+        .tier:hover{transform:translateY(-5px);}
+        .tier.pop{border:1px solid transparent;background:linear-gradient(180deg,rgba(74,222,128,.13),rgba(255,255,255,.02));box-shadow:0 26px 70px rgba(34,197,94,.26);transform:scale(1.05);}
+        .tier.pop:hover{transform:scale(1.05) translateY(-5px);}
+        .tier.pop::before{content:"";position:absolute;inset:0;border-radius:22px;padding:1.5px;background:linear-gradient(160deg,var(--accent),rgba(74,222,128,.2) 60%,transparent);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+        .tier .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#22c55e,#4ade80);color:#06220f;font-weight:900;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:999px;box-shadow:0 8px 22px rgba(74,222,128,.45);}
+        .tier .name{font-size:1.18rem;font-weight:800;margin-bottom:8px;}
+        .tier .price{font-size:2.6rem;font-weight:900;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;} .tier .price small{font-size:1rem;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:0;}
+        .tier .meta{font-family:var(--mono);font-size:.78rem;color:rgba(255,255,255,.5);margin:10px 0 18px;letter-spacing:.02em;}
+        .tier ul{list-style:none;} .tier li{padding:7px 0 7px 26px;position:relative;color:rgba(255,255,255,.86);font-size:.94rem;line-height:1.4;} .tier li::before{content:"\2713";position:absolute;left:0;color:var(--accent);font-weight:800;}
 
         /* logos */
-        .logos{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:center;justify-content:center;margin-top:14px;}
-        .logos img{height:24px;opacity:.6;filter:grayscale(1);} .light .logos img{filter:grayscale(1);}
-        .logos .wm{font-weight:700;font-size:1.05rem;color:var(--text2);}
-        .logos-img{height:40px;border-radius:6px;opacity:.8;filter:grayscale(1);}
-        .label{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text-light);margin:26px 0 6px;}
-
-        /* founder */
-        .founder{max-width:740px;margin:0 auto;text-align:left;}
-        .founder p{font-size:clamp(1.15rem,2.2vw,1.4rem);line-height:1.6;color:#fff;margin-bottom:16px;}
-        .founder .sign{font-weight:800;margin-top:20px;} .founder .sign span{display:block;font-weight:500;color:rgba(255,255,255,.6);font-size:.95rem;}
+        .logos{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;justify-content:center;margin-top:14px;}
+        .logos img{height:22px;opacity:.5;filter:grayscale(1) brightness(1.6);}
+        .logos .wm{font-weight:700;font-size:1rem;color:rgba(255,255,255,.55);}
+        .logos-img{height:36px;border-radius:6px;opacity:.7;filter:grayscale(1);}
+        .label{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--text-light);margin:26px 0 6px;}
 
         /* buttons */
-        .btn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#06220f;font-weight:800;font-size:1.06rem;padding:17px 32px;border-radius:999px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease;box-shadow:0 10px 36px rgba(74,222,128,.4);}
-        .btn:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(74,222,128,.55);}
-        .btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.25);box-shadow:none;}
-        .cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:32px;}
-        .qr{background:#fff;border-radius:20px;padding:18px;display:inline-block;box-shadow:var(--shadow-hard);}
-        .qr img{width:160px;height:160px;display:block;border-radius:10px;}
+        .btn{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,#22c55e,#4ade80);color:#06220f;font-weight:800;font-size:1.06rem;padding:17px 34px;border-radius:999px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease;box-shadow:0 12px 40px rgba(74,222,128,.42);}
+        .btn:hover{transform:translateY(-3px);box-shadow:0 18px 54px rgba(74,222,128,.6);}
+        .btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.22);box-shadow:none;}
+        .btn.ghost:hover{border-color:var(--accent);box-shadow:0 0 24px rgba(74,222,128,.2);}
+        .cta-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:34px;}
+        .qr{background:#fff;border-radius:20px;padding:16px;display:inline-block;box-shadow:0 0 0 1px rgba(74,222,128,.25),0 24px 60px rgba(0,0,0,.5);}
+        .qr img{width:148px;height:148px;display:block;border-radius:10px;}
 
         /* persistent UI */
-        .deck-logo{position:fixed;top:22px;left:26px;z-index:30;}
-        .deck-logo img{height:34px;}
-        .deck-count{position:fixed;bottom:22px;right:26px;z-index:30;font-size:.85rem;font-weight:700;color:rgba(150,150,160,.8);background:rgba(0,0,0,.25);padding:6px 12px;border-radius:999px;backdrop-filter:blur(6px);}
-        .deck-cta{position:fixed;bottom:20px;left:26px;z-index:30;background:var(--accent);color:#06220f;font-weight:800;font-size:.9rem;padding:11px 18px;border-radius:999px;text-decoration:none;box-shadow:0 8px 26px rgba(74,222,128,.4);transition:transform .2s;}
+        .deck-logo{position:fixed;top:24px;right:30px;z-index:30;} .deck-logo img{height:28px;opacity:.85;}
+        .deck-count{position:fixed;bottom:24px;right:30px;z-index:30;font-family:var(--mono);font-size:.78rem;font-weight:700;color:rgba(150,150,160,.8);background:rgba(0,0,0,.3);padding:6px 13px;border-radius:999px;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);}
+        .deck-cta{position:fixed;bottom:22px;left:30px;z-index:30;background:linear-gradient(135deg,#22c55e,#4ade80);color:#06220f;font-weight:800;font-size:.9rem;padding:11px 19px;border-radius:999px;text-decoration:none;box-shadow:0 10px 30px rgba(74,222,128,.45);transition:transform .2s;}
         .deck-cta:hover{transform:translateY(-2px);}
-        .hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.4);font-size:.85rem;font-weight:600;animation:bob 2s ease-in-out infinite;}
-        @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+        .hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.4);font-size:.82rem;font-weight:600;font-family:var(--mono);letter-spacing:.06em;animation:bob 2s ease-in-out infinite;}
+        @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
 
-        @media (max-width:820px){
-            .g3,.g2{grid-template-columns:1fr;} .g4{grid-template-columns:1fr 1fr;}
-            .slide{padding:84px 20px;} .deck-cta{display:none;}
+        /* progress rail */
+        .rail{position:fixed;top:50%;left:20px;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:10px;}
+        .rail button{width:7px;height:7px;border-radius:50%;border:none;padding:0;cursor:pointer;background:rgba(150,150,160,.32);transition:all .3s;}
+        .rail button.on{background:var(--accent);height:22px;border-radius:6px;box-shadow:0 0 12px rgba(74,222,128,.7);}
+
+        /* scroll reveal */
+        .slide .inner>*{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+        .slide.in .inner>*{opacity:1;transform:none;}
+        .slide.in .inner>*:nth-child(2){transition-delay:.08s;}
+        .slide.in .inner>*:nth-child(3){transition-delay:.16s;}
+        .slide.in .inner>*:nth-child(4){transition-delay:.24s;}
+        .slide.in .inner>*:nth-child(5){transition-delay:.32s;}
+        @media (prefers-reduced-motion:reduce){.slide .inner>*,.bar,.orb.drift{opacity:1!important;transform:none!important;transition:none!important;animation:none!important;}.slide.in .bar.before{width:60%;}.slide.in .bar.after{width:80%;}}
+
+        @media (max-width:860px){
+            /* tall slides must not be clipped: grow with content, snap only near edges, use small-viewport height (no address-bar jump) */
+            .deck{scroll-snap-type:y proximity;}
+            .slide{min-height:100vh;min-height:100svh;padding:84px 18px 60px;align-items:flex-start;}
+            .g3,.g2,.guar,.pricing{grid-template-columns:1fr;} .g4{grid-template-columns:1fr 1fr;gap:14px;}
+            .tier.pop{transform:none;margin:10px 0;} .tier.pop:hover{transform:translateY(-5px);}
+            .deck-cta,.rail,.deck-logo{display:none;}
+            .barrow{grid-template-columns:84px 1fr;gap:12px;} .bar{font-size:1.1rem;padding:0 14px;} .bar .delta{position:static;display:block;margin-top:5px;opacity:1;}
+            .stag{font-size:.56rem;left:18px;top:26px;} .eyebrow{margin-bottom:18px;}
+            .stat{padding:24px 14px;} .stat b{font-size:clamp(2.2rem,11vw,3rem);}
+            .ctab .c{padding:13px 16px;font-size:.94rem;}
+            .moneyline{font-size:1.25rem;} .hint{display:none;}
+        }
+        @media (max-width:430px){ .g4{grid-template-columns:1fr;} }
+
+        /* ============ PRINT / PDF — one slide per landscape page ============ */
+        @media print{
+            @page{ size:1280px 800px; margin:0; }
+            html,body{height:auto;overflow:visible;background:#08090c;}
+            .deck{height:auto;overflow:visible;scroll-snap-type:none;}
+            .grain,.progress,.rail,.deck-count,.deck-cta,.deck-logo,.hint{display:none!important;}
+            .slide{min-height:0;height:800px;width:1280px;page-break-after:always;break-after:page;scroll-snap-align:none;padding:54px 64px;overflow:hidden;align-items:center;}
+            .slide:last-child{page-break-after:auto;break-after:auto;}
+            .slide .inner>*{opacity:1!important;transform:none!important;}
+            .dark .inner::before{opacity:1!important;}
+            .orb{animation:none!important;}
+            .tier.pop{transform:none!important;}
+            .slide.in .bar.before{width:60%!important;} .slide.in .bar.after{width:80%!important;}
+            .bar,.slide .inner>*{transition:none!important;}
+            *{ -webkit-print-color-adjust:exact!important; print-color-adjust:exact!important; }
         }
     </style>
 </head>
 <body>
+    <div class="grain"></div>
+    <div class="progress" id="prog"></div>
     <a class="deck-logo" href="https://41labs.ai/41-closer"><img src="logo-full.png" alt="41 Labs"></a>
     <a class="deck-cta" href="https://wa.me/6580124848?text=Hi%2C%20I%20saw%20the%2041%20Closer%20deck.%20Can%20you%20show%20me%20how%20it%20would%20handle%20my%20customers%3F" target="_blank" rel="noopener">Try it on WhatsApp</a>
-    <div class="deck-count"><span id="cur">1</span> / <span id="tot">13</span></div>
+    <div class="deck-count"><span id="cur">1</span> / <span id="tot">12</span></div>
+    <div class="rail" id="rail"></div>
 
     <div class="deck" id="deck">
 
         <!-- 1 COVER -->
-        <section class="slide dark center">
-            <div class="orb" style="width:560px;height:560px;top:-180px;right:-120px;"></div>
+        <section class="slide dark center" data-tag="41 Closer · Overview">
+            <div class="orb drift" style="width:620px;height:620px;top:-200px;right:-120px;"></div>
+            <div class="orb drift" style="width:420px;height:420px;bottom:-160px;left:-100px;opacity:.3;animation-delay:-8s;"></div>
             <div class="inner">
                 <span class="eyebrow">41 Labs · The AI Closer</span>
                 <h1>It closes the deal<br><span class="grad">while you sleep.</span></h1>
                 <p class="lead">A done-for-you WhatsApp sales agent that answers in seconds, quotes your prices, and takes the payment. Day and night. We build it and run it for you.</p>
-                <p class="muted" style="margin-top:26px;">41labs.ai/41-closer</p>
+                <p class="src" style="margin-top:32px;color:rgba(255,255,255,.46);"><b>Trusted in production</b> &nbsp;·&nbsp; ~$300,000/month in live WhatsApp sales &nbsp;·&nbsp; 42,000-product catalogue &nbsp;·&nbsp; Singapore</p>
             </div>
-            <div class="hint">Scroll, or use your arrow keys ↓</div>
+            <div class="hint">scroll &nbsp;↓&nbsp; or use arrow keys</div>
         </section>
 
-        <!-- 2 THE SHIFT -->
-        <section class="slide dark center">
-            <div class="orb" style="width:480px;height:480px;bottom:-160px;left:-120px;opacity:.3;"></div>
+        <!-- 2 CLARIFY (C) -->
+        <section class="slide white center" data-tag="Why you're here">
+            <div class="stag" style="color:rgba(0,0,0,.3);"><b style="color:var(--accent-dark);">Clarify</b> · The real problem</div>
             <div class="inner">
-                <span class="eyebrow">The new rule of selling</span>
-                <h2><span class="grad">75%</span> of deals go to<br>whoever replies first.</h2>
-                <p class="lead">Your customers buy on WhatsApp now, and they expect an answer this minute. Whoever replies first usually wins the deal. Most businesses reply too slow, and that sale is gone.</p>
+                <span class="eyebrow">Let's name it</span>
+                <h2>You don't have a traffic problem.<br>You have a <span class="grad">reply problem.</span></h2>
+                <p class="lead">People already message you. They ask your prices on WhatsApp every day. The hard part isn't getting noticed. It's that too many of those chats go cold before anyone answers, and you never find out which deals you lost. What you want is simple: every message answered, every real buyer closed, without putting another person on a phone all day.</p>
             </div>
         </section>
 
-        <!-- 3 THE COST -->
-        <section class="slide white center">
+        <!-- 3 THE LEAK -->
+        <section class="slide dark center" data-tag="The cost of slow">
+            <div class="stag"><b>Label</b> · The leak</div>
+            <div class="orb r drift" style="width:540px;height:540px;top:-170px;left:-120px;opacity:.4;"></div>
             <div class="inner">
-                <span class="eyebrow">The cost of slow</span>
-                <h2>Every slow reply is <span class="grad">money walking out.</span></h2>
-                <div class="g2" style="text-align:left;margin-top:44px;">
-                    <div class="card">
-                        <h3 style="color:#c0392b;">Today, without it</h3>
-                        <p style="font-size:1.08rem;line-height:1.7;">A lead messages at 11pm. You reply at 9am. They're gone. Your team gets busy, messages pile up, deals slip. Fast buyers go to whoever answers first. Not you.</p>
-                    </div>
-                    <div class="card" style="border-color:rgba(74,222,128,.4);box-shadow:0 20px 60px rgba(34,197,94,.16);">
-                        <h3 style="color:var(--accent-dark);">With 41 Closer</h3>
-                        <p style="font-size:1.08rem;line-height:1.7;color:var(--text);">It replies in seconds, any hour. Quotes your prices and pushes for the sale. Closes deals while you sleep. You wake up to new orders.</p>
-                    </div>
+                <span class="eyebrow" style="color:#ff8a80;">The cost of slow</span>
+                <h2>Miss 5 deals a week.<br><span class="gradr">That's $20,000 a month, gone.</span></h2>
+                <p class="lead">Not lost on price. Lost because nobody answered in time, and the buyer went to whoever did. Most owners never even see this number.</p>
+                <div class="g3" style="margin-top:38px;">
+                    <div class="stat"><b class="plain" data-val="5">5</b><span>after-hours enquiries a week go cold</span></div>
+                    <div class="stat"><b class="plain" data-val="1000" data-pre="× $">× $1,000</b><span>a typical order, give or take</span></div>
+                    <div class="stat lossbox"><b class="loss" data-val="20" data-pre="= $" data-suf="k">= $20k</b><span>walking out the door every month</span></div>
+                </div>
+                <p class="src"><b>Run it on your own numbers:</b> missed chats a week × your average order. The leak is almost always bigger than you think, because the lost sale never shows up in your reports.</p>
+            </div>
+        </section>
+
+        <!-- 4 OVERVIEW (O) -->
+        <section class="slide white center" data-tag="Why you keep losing it">
+            <div class="stag" style="color:rgba(0,0,0,.3);"><b style="color:var(--accent-dark);">Overview</b> · Why it keeps happening</div>
+            <div class="inner">
+                <span class="eyebrow">You've tried to close this gap</span>
+                <h2>You've tried to fix this.<br>The <span class="grad">11pm deal still slips.</span></h2>
+                <p class="lead">A lead messages at 11pm. You reply at 9am. They already bought from whoever answered first. Here is why the usual fixes don't close that gap:</p>
+                <div class="g3" style="margin-top:34px;">
+                    <div class="card"><div class="num x">✕</div><h3>You hired a salesperson</h3><p>$4,000+ a month, sleeps eight hours a night, and walks out with half your playbook. Still nobody on WhatsApp at 11pm.</p></div>
+                    <div class="card"><div class="num x">✕</div><h3>You added a chatbot</h3><p>It answers FAQs and annoys buyers. It can't quote your real prices or push for the sale, so the deal still stalls.</p></div>
+                    <div class="card"><div class="num x">✕</div><h3>You told the team "be faster"</h3><p>They already are, when they're awake and not slammed. Willpower doesn't cover nights, weekends, and the lunch rush.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- 4 CATEGORY -->
-        <section class="slide dark center">
+        <!-- 5 CATEGORY -->
+        <section class="slide dark center" data-tag="A different category">
+            <div class="stag"><b>Overview</b> · Chatbots vs Closers</div>
             <div class="inner">
                 <span class="eyebrow">A new kind of AI</span>
-                <h2>Chatbots answer. <span class="grad">Closers sell.</span></h2>
-                <p class="lead">Every other AI tool was built to answer questions. 41 Closer was built to close the sale and take payment. It is not a chatbot.</p>
-                <div class="g3 cat">
-                    <div class="card"><h3>A chatbot</h3><p class="sub">All talk.</p><ul><li>Answers FAQs and nothing more</li><li>Makes you $0</li><li>You build it and babysit it</li></ul></div>
-                    <div class="card"><h3>An AI agent</h3><p class="sub">Half the job.</p><ul><li>Collects the lead, then stops</li><li>Leaves the selling to you</li><li>You run the software</li></ul></div>
-                    <div class="card win"><h3>The AI Closer</h3><p class="sub">Gets you paid.</p><ul><li>Closes the deal and takes payment</li><li>Puts money in your account</li><li>We build it and run it for you</li></ul></div>
+                <h2>Chatbots cost you money. <span class="grad">Closers make it.</span></h2>
+                <p class="lead">Every other AI tool was built to answer questions. 41 Closer was built to close the sale and take payment. The difference shows up in your bank account.</p>
+                <div class="ctab">
+                    <div class="row head"><div class="c l">A chatbot</div><div class="c r">41 Closer</div></div>
+                    <div class="row"><div class="c l">Answers FAQs, then stalls. Makes you $0.</div><div class="c r">Closes the deal and takes the payment</div></div>
+                    <div class="row"><div class="c l">Generic, off-the-shelf answers</div><div class="c r">Trained on your catalogue and your prices</div></div>
+                    <div class="row"><div class="c l">You build it and babysit it</div><div class="c r">We build it, run it, and tune it for you</div></div>
                 </div>
             </div>
         </section>
 
-        <!-- 5 WHAT IT IS -->
-        <section class="slide light center">
-            <div class="inner">
-                <span class="eyebrow">What it is</span>
-                <h2>A salesperson that lives in your WhatsApp.</h2>
-                <p class="lead">We build it on your real catalogue and your prices, connect it to your own WhatsApp number, run it, and tune it every week. It reasons through a real conversation, stays on brand, and hands off to your team the moment it is unsure. You never touch a dashboard.</p>
-            </div>
-        </section>
-
-        <!-- 6 HOW IT WORKS -->
-        <section class="slide dark center">
-            <div class="inner">
-                <span class="eyebrow">How it works</span>
-                <h2>You send a list. We do the rest.</h2>
-                <div class="g3">
-                    <div class="card"><div class="num">1</div><h3>You send your products</h3><p>A list of your products and prices, and a bit about how you sell. That is the only work on your side.</p></div>
-                    <div class="card"><div class="num">2</div><h3>We build it</h3><p>Trained on your prices, given your voice, connected to your WhatsApp and payment. Live in 48 hours.</p></div>
-                    <div class="card"><div class="num">3</div><h3>We run it. You close more.</h3><p>We watch real chats and keep it sharp every week. You never touch it. You just get more closed deals.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7 IN ACTION -->
-        <section class="slide white center">
+        <!-- 6 SELL — in action -->
+        <section class="slide white center" data-tag="See it close">
+            <div class="stag" style="color:rgba(0,0,0,.3);"><b style="color:var(--accent-dark);">Sell</b> · See it close</div>
             <div class="inner">
                 <span class="eyebrow">See it in action</span>
-                <h2>It doesn't just chat. It closes.</h2>
+                <h2>It doesn't just chat. <span class="grad">It closes.</span></h2>
                 <div class="g3">
                     <div class="ex"><span class="tag">Distributor · 2:15am</span><span class="b in">Got 200 units? Need them Friday.</span><span class="b out">Yes, 200 in stock. $2,400 the lot, ships today. Lock it in?</span><span class="b in">Do it.</span><span class="out-pill">✓ Closed · $2,400</span></div>
                     <div class="ex"><span class="tag">Retail · cold lead</span><span class="b in">How much for the leather sofa?</span><span class="b out">$1,890, free delivery this week. Hold one for you?</span><span class="b in">Yes please.</span><span class="out-pill">✓ Saved the sale · $1,890</span></div>
                     <div class="ex"><span class="tag">Services · takes payment</span><span class="b in">Any slots Saturday?</span><span class="b out">2pm is open. $50 deposit holds it. Pay here 👉</span><span class="b in">Paid.</span><span class="out-pill">✓ Booked + paid</span></div>
                 </div>
+                <p class="src" style="color:rgba(0,0,0,.34);">Illustrative conversations, built from real patterns 41 Closer handles in production.</p>
             </div>
         </section>
 
-        <!-- 8 PROOF -->
-        <section class="slide dark center">
-            <div class="orb" style="width:520px;height:520px;top:-160px;left:-120px;opacity:.3;"></div>
+        <!-- 7 SELL — proof (HERO) -->
+        <section class="slide dark center" data-tag="Proof in production">
+            <div class="stag"><b>Sell</b> · The receipts</div>
+            <div class="orb drift" style="width:560px;height:560px;top:-170px;left:-120px;opacity:.34;"></div>
             <div class="inner">
                 <span class="eyebrow">Real client · measured, not marketing</span>
-                <h2>It's already closing <span class="grad">real money.</span></h2>
-                <p class="lead" style="font-weight:800;color:#fff;max-width:820px;">One client was doing $60,000 a month. We added speed. The next month, $80,000. That's $20,000 more, every month.</p>
-                <div class="g4" style="margin-top:40px;">
-                    <div class="stat"><b>64.1%</b><span>of chats it handles end in a sale</span></div>
-                    <div class="stat"><b>$300k</b><span>a month run through it</span></div>
-                    <div class="stat"><b>42,000</b><span>products it quotes from live</span></div>
+                <h2>Same products. Same team.<br><span class="grad">+$20,000 a month.</span></h2>
+                <div class="bars">
+                    <div class="barrow"><div class="blab">Before</div><div class="bartrack"><div class="bar before">$60,000 / mo</div></div></div>
+                    <div class="barrow"><div class="blab">After speed</div><div class="bartrack"><div class="bar after">$80,000 / mo<span class="delta">▲ +$20k every month</span></div></div></div>
+                </div>
+                <p class="moneyline">That's a <span class="grad">$240,000-a-year</span> swing. Nothing changed but the speed of the reply.</p>
+                <div class="g4" style="margin-top:34px;">
+                    <div class="stat"><b data-val="64" data-suf="%">64%</b><span>of chats it handles end in a sale</span></div>
+                    <div class="stat"><b data-val="300" data-pre="$" data-suf="k">$300k</b><span>a month run through it</span></div>
+                    <div class="stat"><b data-val="42000">42,000</b><span>products it quotes from live</span></div>
                     <div class="stat"><b>24/7</b><span>never sleeps, sick, or quits</span></div>
                 </div>
+                <p class="src">A Singapore industrial supplier, kept anonymous. We added speed to the exact same catalogue and team. The next month's revenue is what changed.</p>
             </div>
         </section>
 
-        <!-- 9 WHAT YOU GET -->
-        <section class="slide light center">
+        <!-- 8 EXPLAIN — the offer -->
+        <section class="slide light center" data-tag="The offer">
+            <div class="stag" style="color:rgba(0,0,0,.3);"><b style="color:var(--accent-dark);">Explain</b> · The offer</div>
             <div class="inner">
-                <span class="eyebrow">What you get</span>
-                <h2>A whole sales hire, run for you.</h2>
-                <div class="g3" style="margin-top:40px;">
-                    <div class="card"><p style="font-size:1.05rem;line-height:1.9;color:var(--text);">✓ Answers every message 24/7<br>✓ Quotes from your real prices<br>✓ Takes payment right in the chat</p></div>
-                    <div class="card"><p style="font-size:1.05rem;line-height:1.9;color:var(--text);">✓ Runs on your own WhatsApp number<br>✓ Human oversight and escalation<br>✓ Live conversation dashboard</p></div>
-                    <div class="card"><p style="font-size:1.05rem;line-height:1.9;color:var(--text);">✓ Brand-voice tuning<br>✓ We tune it every week<br>✓ Live in 48 hours</p></div>
+                <span class="eyebrow">The offer</span>
+                <h2>Tens of thousands to do it yourself.<br><span class="grad">Or from $690 a month.</span></h2>
+                <div class="g2" style="margin-top:30px;align-items:stretch;">
+                    <div>
+                        <div class="label" style="color:var(--text2);">Build and run it yourself</div>
+                        <div class="stack">
+                            <div class="srow"><div class="sl">A 24/7 WhatsApp rep (3 shifts)</div><div class="sv">$7,500/mo</div></div>
+                            <div class="srow"><div class="sl">A custom AI agent from an agency</div><div class="sv">$25k–$85k</div></div>
+                            <div class="srow"><div class="sl">An engineer to run and tune it</div><div class="sv">$8,000+/mo</div></div>
+                            <div class="srow tot"><div class="sl" style="font-weight:800;">What it really costs</div><div class="sv">Tens of thousands</div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="label" style="color:var(--accent-dark);">Done for you by 41 Labs</div>
+                        <div class="card" style="background:linear-gradient(180deg,rgba(74,222,128,.14),#fff);border-color:var(--accent);box-shadow:0 26px 66px rgba(34,197,94,.22);padding:30px 28px;">
+                            <div style="font-size:2.6rem;font-weight:900;letter-spacing:-.03em;color:var(--text);">from $690<span style="font-size:1.05rem;color:var(--text2);font-weight:700;">/mo</span></div>
+                            <div style="font-size:1.02rem;font-weight:800;color:var(--accent-dark);margin-top:4px;">$4,800 one-time build · AI usage included</div>
+                            <ul class="olist">
+                                <li>Built on your catalogue and your prices</li>
+                                <li>Done-for-you setup (we handle Meta + WhatsApp)</li>
+                                <li>We run it and tune it every week</li>
+                                <li>Live in 48 hours. You never touch it.</li>
+                            </ul>
+                            <div class="bonusband">Free with every build: <span class="g">the Missed-Sale Audit</span>, <span class="g">the Stump-It Demo</span>, and a <span class="g">30-day money-back guarantee.</span></div>
+                        </div>
+                    </div>
                 </div>
+                <p class="moneyline" style="color:var(--text);">All you do is send a product list. <span class="grad">One $2,400 order it catches at 2am covers the whole month.</span></p>
             </div>
         </section>
 
-        <!-- 10 PRICING -->
-        <section class="slide dark center">
+        <!-- 9 EXPLAIN — the guarantee -->
+        <section class="slide dark center" data-tag="You risk nothing">
+            <div class="stag"><b>Explain</b> · You risk nothing</div>
+            <div class="orb drift" style="width:500px;height:500px;top:-160px;right:-120px;opacity:.3;"></div>
+            <div class="inner">
+                <span class="eyebrow">You risk nothing</span>
+                <h2>See it sell your products.<br><span class="grad">Then pay.</span></h2>
+                <div class="guar">
+                    <div class="gcard"><div class="gi">①</div><h3>Watch it work first</h3><p>We point it at your own products and you try to break it. You see it sell, from your real catalogue, before you put a card down. No contract to find out.</p></div>
+                    <div class="gcard"><div class="gi">②</div><h3>30 days, or it's free</h3><p>In your first month, if it doesn't catch the after-hours sales you'd have missed, that month is on us. Cancel any time. You own everything it learns.</p></div>
+                </div>
+                <p class="moneyline">Want your number first? We'll read last month of your WhatsApp and show you, <span class="grad">in dollars,</span> exactly what slipped. Free.</p>
+                <p class="src">We build and tune each closer by hand, so we take on only <b>5 new businesses a month.</b></p>
+            </div>
+        </section>
+
+        <!-- 10 EXPLAIN — pricing -->
+        <section class="slide dark center" data-tag="Pricing">
+            <div class="stag"><b>Explain</b> · Pricing</div>
+            <div class="orb drift" style="width:480px;height:480px;bottom:-160px;left:-110px;opacity:.26;animation-delay:-5s;"></div>
             <div class="inner">
                 <span class="eyebrow">Simple pricing</span>
                 <h2>One build, then we run it for you.</h2>
-                <p class="lead">Two costs: a one-time build, then a monthly plan with the AI usage included. Cancel any time. Singapore companies can use the EDG grant.</p>
-                <div class="g3" style="margin-top:50px;">
-                    <div class="tier"><div class="name">Minimum</div><div class="price">$690<small>/mo</small></div><div class="meta">$4,800 build · up to 350 chats/mo</div><ul><li>One WhatsApp number</li><li>Trained on your prices</li><li>Human oversight + escalation</li><li>Monthly report</li></ul></div>
-                    <div class="tier pop"><span class="badge">Most popular</span><div class="name">Pro</div><div class="price">$1,490<small>/mo</small></div><div class="meta">$9,600 build (incl. data) · up to 1,000 chats/mo</div><ul><li>Everything in Minimum</li><li>Takes payment in chat</li><li>Named account manager</li><li>Monthly tuning</li></ul></div>
+                <p class="lead">A one-time build, then a monthly plan with the AI usage included. Cancel any time. Singapore companies can use the EDG grant.</p>
+                <div class="pricing">
+                    <div class="tier"><div class="name">Minimum</div><div class="price"><span data-val="690" data-pre="$">$690</span><small>/mo</small></div><div class="meta">$4,800 build · up to 350 chats/mo</div><ul><li>One WhatsApp number</li><li>Trained on your prices</li><li>Human oversight + escalation</li><li>Monthly report</li></ul></div>
+                    <div class="tier pop"><span class="badge">Most popular</span><div class="name">Pro</div><div class="price"><span data-val="1490" data-pre="$">$1,490</span><small>/mo</small></div><div class="meta">$9,600 build (incl. data) · up to 1,000 chats/mo</div><ul><li>Everything in Minimum</li><li>Takes payment in chat</li><li>Named account manager</li><li>Monthly tuning</li></ul></div>
                     <div class="tier"><div class="name">Enterprise</div><div class="price">Let's talk</div><div class="meta">Built and priced for you</div><ul><li>Everything in Pro</li><li>Multiple numbers + brands</li><li>Dedicated strategist + SLA</li><li>All integrations</li></ul></div>
                 </div>
             </div>
         </section>
 
-        <!-- 11 TRUST -->
-        <section class="slide white center">
+        <!-- 11 REINFORCE — track record -->
+        <section class="slide dark center" data-tag="Track record">
+            <div class="stag"><b>Reinforce</b> · This isn't our first one</div>
+            <div class="orb drift" style="width:500px;height:500px;bottom:-160px;right:-120px;opacity:.3;"></div>
             <div class="inner">
-                <span class="eyebrow">Why us</span>
-                <h2>Built on the best, run by people.</h2>
-                <span class="label">Powered by the best AI models</span>
-                <div class="logos"><span class="wm">ChatGPT</span><img src="/logos/anthropic.svg" alt="Claude"><span class="wm">Claude</span><img src="/logos/googlegemini.svg" alt="Gemini" style="height:20px;"><span class="wm">Gemini</span><img src="/logos/deepseek.svg" alt="DeepSeek" style="height:20px;"><span class="wm">DeepSeek</span></div>
-                <span class="label">Takes secure payment through</span>
-                <div class="logos"><img src="/logos/stripe.svg" alt="Stripe" style="height:28px;"><span class="wm">Airwallex</span><span class="wm">HitPay</span><img src="/logos/visa.svg" alt="Visa" style="height:18px;"><img src="/logos/mastercard.svg" alt="Mastercard" style="height:28px;"></div>
-                <span class="label">Seen at and member of</span>
-                <div class="logos"><img src="/logos/whatsapp.svg" alt="WhatsApp" style="height:26px;"><img src="/logos/nrf.jpg" alt="NRF Big Show APAC" class="logos-img"><img src="/logos/saia.png" alt="Singapore A.I. Association" class="logos-img"><img src="/logos/superai.jpg" alt="SuperAI" class="logos-img"></div>
-            </div>
-        </section>
-
-        <!-- 12 FOUNDER -->
-        <section class="slide dark center">
-            <div class="inner">
-                <span class="eyebrow">From the founder</span>
-                <div class="founder">
-                    <p>I built 41 Labs because I watched good businesses lose sales for one silly reason. The customer messaged, and nobody answered in time. The product was right. The price was right. They just replied too slow.</p>
-                    <p>41 Closer fixes that one thing completely. It answers every message, every hour, and follows up until the customer buys or says no. We build it, run it, and keep making it better. You do not lift a finger.</p>
-                    <p class="sign">Alexander Lee<span>Founder, 41 Labs</span></p>
+                <span class="eyebrow">This isn't our first one</span>
+                <h2><span class="grad">$2,000,000+</span> made and saved<br>for clients.</h2>
+                <div class="g4">
+                    <div class="stat"><b data-val="2" data-pre="$" data-suf="M+">$2M+</b><span>made and saved across the systems we've shipped</span></div>
+                    <div class="stat"><b data-val="15" data-suf="+">15+</b><span>AI systems live in production since 2024</span></div>
+                    <div class="stat"><b data-val="100" data-suf="%">100%</b><span>of them still running today</span></div>
+                    <div class="stat"><b data-val="64" data-suf="%">64%</b><span>of handled chats end in a sale</span></div>
+                </div>
+                <p class="fq">"I built this because I watched good businesses lose sales for one silly reason: nobody answered in time. 41 Closer fixes that one thing completely." <b>— Alexander Lee, Founder</b></p>
+                <div class="logos">
+                    <span class="wm">ChatGPT</span><span class="wm">Claude</span><span class="wm">Gemini</span>
+                    <img src="/logos/stripe.svg" alt="Stripe" style="height:22px;">
+                    <img src="/logos/whatsapp.svg" alt="WhatsApp" style="height:20px;">
+                    <img src="/logos/nrf.jpg" alt="NRF Big Show APAC" class="logos-img">
+                    <img src="/logos/saia.png" alt="Singapore A.I. Association" class="logos-img">
+                    <img src="/logos/superai.jpg" alt="SuperAI" class="logos-img">
                 </div>
             </div>
         </section>
 
-        <!-- 13 CTA -->
-        <section class="slide dark center">
-            <div class="orb" style="width:560px;height:560px;top:-180px;right:-140px;"></div>
+        <!-- 12 REINFORCE — CTA -->
+        <section class="slide dark center" data-tag="Next step">
+            <div class="stag"><b>Reinforce</b> · Next step</div>
+            <div class="orb drift" style="width:600px;height:600px;top:-190px;right:-140px;"></div>
             <div class="inner">
                 <span class="eyebrow">See for yourself</span>
                 <h2>Watch it sell your products.<br><span class="grad">Then decide.</span></h2>
                 <p class="lead">Message the live agent on WhatsApp and ask it anything your customers ask. We build in 48 hours, run it for you, and you can cancel any time.</p>
                 <div class="cta-row">
                     <a class="btn" href="https://wa.me/6580124848?text=Hi%2C%20I%20saw%20the%2041%20Closer%20deck.%20Can%20you%20show%20me%20how%20it%20would%20handle%20my%20customers%3F" target="_blank" rel="noopener">Chat with it now</a>
-                    <a class="btn ghost" href="mailto:alexander@41labs.ai?subject=41%20Closer">Book a call</a>
                 </div>
-                <div style="margin-top:40px;"><div class="qr"><img src="41-closer-qr.png" alt="Scan to chat with 41 Closer"></div></div>
-                <p class="muted" style="margin-top:20px;">41labs.ai/41-closer · alexander@41labs.ai · Singapore</p>
+                <div style="margin-top:38px;"><div class="qr"><img src="41-closer-qr.png" alt="Scan to chat with 41 Closer"></div></div>
+                <p class="muted" style="margin-top:20px;font-family:var(--mono);font-size:.8rem;letter-spacing:.04em;">41labs.ai/41-closer · alexander@41labs.ai · Singapore</p>
             </div>
         </section>
 
@@ -316,15 +498,53 @@
         (function(){
             var deck=document.getElementById('deck');
             var slides=[].slice.call(document.querySelectorAll('.slide'));
+            var prog=document.getElementById('prog');
             document.getElementById('tot').textContent=slides.length;
             var cur=document.getElementById('cur');
-            // update counter on scroll
+            var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // progress rail dots
+            var rail=document.getElementById('rail');
+            slides.forEach(function(s,i){
+                var b=document.createElement('button');
+                b.title=(s.dataset.tag||('Slide '+(i+1)));
+                b.addEventListener('click',function(){go(i);});
+                rail.appendChild(b);
+            });
+            var dots=[].slice.call(rail.children);
+            function setActive(i){ cur.textContent=i+1; dots.forEach(function(d,j){d.classList.toggle('on',j===i);}); }
+
+            // count-up
+            function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+            function countUp(el){
+                if(el.dataset.done) return; el.dataset.done='1';
+                var val=parseFloat(el.dataset.val), pre=el.dataset.pre||'', suf=el.dataset.suf||'';
+                if(reduce){ el.textContent=pre+fmt(val)+suf; return; }
+                var dur=1300, t0=null;
+                function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
+                    el.textContent=pre+fmt(val*e)+suf; if(p<1) requestAnimationFrame(step); }
+                requestAnimationFrame(step);
+            }
+
             if('IntersectionObserver' in window){
                 var io=new IntersectionObserver(function(es){
-                    es.forEach(function(e){ if(e.isIntersecting){ cur.textContent=slides.indexOf(e.target)+1; } });
-                },{root:deck,threshold:0.55});
+                    es.forEach(function(e){
+                        if(e.isIntersecting){
+                            e.target.classList.add('in');
+                            e.target.querySelectorAll('[data-val]').forEach(countUp);
+                            if(e.intersectionRatio>0.55) setActive(slides.indexOf(e.target));
+                        }
+                    });
+                },{root:deck,threshold:[0.15,0.55]});
                 slides.forEach(function(s){io.observe(s);});
-            }
+            } else { slides.forEach(function(s){s.classList.add('in');s.querySelectorAll('[data-val]').forEach(countUp);}); setActive(0); }
+
+            // scroll progress bar
+            deck.addEventListener('scroll',function(){
+                var max=deck.scrollHeight-deck.clientHeight;
+                prog.style.width=(max>0?(deck.scrollTop/max*100):0)+'%';
+            },{passive:true});
+
             // keyboard nav
             function idx(){ var st=deck.scrollTop, h=deck.clientHeight; return Math.round(st/h); }
             function go(n){ n=Math.max(0,Math.min(slides.length-1,n)); slides[n].scrollIntoView({behavior:'smooth'}); }
@@ -334,6 +554,17 @@
                 else if(e.key==='Home'){ e.preventDefault(); go(0); }
                 else if(e.key==='End'){ e.preventDefault(); go(slides.length-1); }
             });
+
+            // print / PDF: reveal every slide and snap all numbers to final value
+            function finalize(){
+                slides.forEach(function(s){ s.classList.add('in'); });
+                document.querySelectorAll('[data-val]').forEach(function(el){
+                    var val=parseFloat(el.dataset.val),pre=el.dataset.pre||'',suf=el.dataset.suf||'';
+                    el.textContent=pre+fmt(val)+suf; el.dataset.done='1';
+                });
+            }
+            if(location.search.indexOf('print')>-1) finalize();
+            window.addEventListener('beforeprint', finalize);
         })();
     </script>
 </body>
