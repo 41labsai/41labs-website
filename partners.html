@@ -899,6 +899,12 @@
                 var btn = form.querySelector('button[type="submit"]');
                 var msg = document.getElementById('pp-form-msg');
                 btn.textContent = 'Sending...';
+                // Also create the partner record in Twenty CRM (server-side, best-effort)
+                try {
+                    var fd = new FormData(form), payload = {};
+                    fd.forEach(function(v,k){ payload[k] = v; });
+                    fetch('/api/partner-apply', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(payload) }).catch(function(){});
+                } catch(e){}
                 fetch(form.action, { method:'POST', body: new FormData(form), headers:{ 'Accept':'application/json' } })
                 .then(function(r){
                     if(r.ok){
