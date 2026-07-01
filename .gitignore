@@ -47,3 +47,7 @@ uploads/*.mp4
 .playwright-mcp/
 nav-check.png
 events-live.jpeg
+
+# Playwright test output (generated — should not be committed)
+test-results/
+playwright-report/
