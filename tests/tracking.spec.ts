@@ -97,6 +97,30 @@ test('generic .btn CTA fires cta_click but menu toggle does not', async ({ page 
   expect(all.filter((e) => e.name === 'cta_click').length).toBe(1);
 });
 
+test('GA config is queued before any event (first-interaction conversion clicks are not dropped)', async ({ page }) => {
+  // Simulate the failure case: a visitor whose VERY FIRST interaction is a
+  // WhatsApp click. If config lands after the event in dataLayer, GA4 drops it.
+  await page.evaluate(() => {
+    const a = document.createElement('a');
+    a.href = 'https://wa.me/6580124848?text=hi';
+    a.textContent = 'Chat with 41 Closer';
+    a.addEventListener('click', (e) => e.preventDefault());
+    document.body.appendChild(a);
+    a.click();
+  });
+  const order = await page.evaluate(() => {
+    const dl: any[] = (window as any).dataLayer || [];
+    let configIdx = -1, eventIdx = -1;
+    dl.forEach((item, i) => {
+      if (item && item[0] === 'config' && item[1] === 'G-VQQ49H8N1L' && configIdx === -1) configIdx = i;
+      if (item && item[0] === 'event' && eventIdx === -1) eventIdx = i;
+    });
+    return { configIdx, eventIdx };
+  });
+  expect(order.configIdx, 'GA config must be present in dataLayer').toBeGreaterThanOrEqual(0);
+  expect(order.eventIdx, 'first event must come AFTER config').toBeGreaterThan(order.configIdx);
+});
+
 test('form submit fires form_submit', async ({ page }) => {
   await page.evaluate(() => {
     const f = document.createElement('form');

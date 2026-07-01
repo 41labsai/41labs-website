@@ -14,6 +14,17 @@
         window.gtag = function () { window.dataLayer.push(arguments); };
     }
 
+    // Queue GA config at LOAD time so it always precedes click events. Before
+    // this, a visitor whose very first interaction was a conversion click had
+    // the event pushed to dataLayer ahead of the deferred loader's config, so
+    // GA4 dropped it — which is why whatsapp_click barely registered. We send
+    // no page_view here (the deferred loader still sends exactly one) and use
+    // beacon transport so events survive the tab backgrounding when WhatsApp
+    // opens. This queues only — it does NOT load gtag.js early (CWV preserved).
+    var GA_MEASUREMENT_ID = 'G-VQQ49H8N1L';
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false, transport_type: 'beacon' });
+
     function track(name, params) {
         try { window.gtag('event', name, params || {}); } catch (e) {}
     }
