@@ -84,6 +84,27 @@ Singapore businesses: We help you apply for the Enterprise Development Grant (ED
 
 ---
 
+## 🎯 AI-CITATION PRIORITY — do these first (data-driven, 2026-07-01)
+
+**Why this list exists:** A live audit shows 41labs.ai is cited by just **7 referring domains**; the agency ChatGPT names first for "best AI company in Singapore" (techtiqsolutions.com) has **565**. AI engines (ChatGPT, Perplexity, Gemini) build their "best AI company in Singapore" answers by reading B2B directories and "best-of" listicles — and we currently score **0/5** (invisible) on those queries. Getting listed on the sources below is the fastest route into the AI answer set. Order = impact on AI citations × ease.
+
+| # | Directory | Why it moves the needle | Details |
+|---|---|---|---|
+| 1 | **Clutch.co** | Already sends us ~37 sessions/mo; AI listicles cite it heavily | §1 below |
+| 2 | **GoodFirms** | Cited by the SG competitors AI recommends | §2 below |
+| 3 | **bestinsingapore.co** | SG "best-of" listicle AI pulls from — competitors listed, we're not | reuse Master Info |
+| 4 | **techreviewer.co** | B2B dev-firm directory linking to competitors, not us | reuse Master Info |
+| 5 | **topitfirms.co** | IT-firm ranking directory competitors sit on | reuse Master Info |
+| 6 | **Crunchbase** | Dofollow link, feeds the entity/knowledge graph | §3 below |
+| 7 | **e27** | SEA startup authority — strong for regional AI answers | §4 below |
+| 8 | **G2** | DA 90+ category authority | §6 below |
+| 9 | **DesignRush / Sortlist** | Agency directories that surface in "best AI agency" answers | reuse Master Info |
+| 10 | **softwaredevelopmentcompany.com / listmysoftware.com** | Low-effort B2B citations competitors already have | reuse Master Info |
+
+**Goal: 7 → 30+ referring domains.** Re-run the AI-citation check monthly to watch 0/5 climb. Copy-paste fields for the numbered ones are below; for the rest, reuse Master Company Info + the Long Description.
+
+---
+
 ## 1. CLUTCH.CO — FREE, HIGH PRIORITY
 
 **Go to:** https://clutch.co/get-listed
