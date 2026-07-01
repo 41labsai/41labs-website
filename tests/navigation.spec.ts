@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Navigation', () => {
+  // Desktop nav is hidden behind the hamburger on small screens, so pin these
+  // to a desktop viewport (the Mobile Navigation block below covers small screens).
+  test.use({ viewport: { width: 1440, height: 900 } });
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
@@ -10,48 +14,38 @@ test.describe('Navigation', () => {
     await expect(logo).toBeVisible();
   });
 
-  test('should have navigation links', async ({ page }) => {
-    const navLinks = page.locator('.nav-links a');
+  test('should have top-level navigation items', async ({ page }) => {
+    const nav = page.locator('.nav-links');
 
-    await expect(navLinks.nth(0)).toContainText('What We Do');
-    await expect(navLinks.nth(1)).toContainText('Case Studies');
-    await expect(navLinks.nth(2)).toContainText('About');
-    await expect(navLinks.nth(3)).toContainText('Blog');
-    await expect(navLinks.nth(4)).toContainText('FAQ');
+    await expect(nav.getByRole('link', { name: '41 Closer' })).toBeVisible();
+    await expect(nav.locator('.nav-dropdown-trigger', { hasText: 'Solutions' })).toBeVisible();
+    await expect(nav.locator('.nav-dropdown-trigger', { hasText: 'Industries' })).toBeVisible();
+    await expect(nav.getByRole('link', { name: 'Case Studies' })).toBeVisible();
+    await expect(nav.getByRole('link', { name: 'Events' })).toBeVisible();
   });
 
-  test('should have Book a Call CTA in navbar', async ({ page }) => {
+  test('should have WhatsApp CTA in navbar', async ({ page }) => {
     const navCta = page.locator('.nav-cta');
     await expect(navCta).toBeVisible();
-    await expect(navCta).toContainText('Book a Call');
+    await expect(navCta).toContainText('WhatsApp');
+    await expect(navCta).toHaveAttribute('href', /wa\.me/);
+    await expect(navCta).toHaveAttribute('target', '_blank');
   });
 
-  test('should scroll to section when clicking nav link', async ({ page }) => {
-    await page.click('.nav-links a[href="#what-we-do"]');
-
-    // Wait for scroll
-    await page.waitForTimeout(500);
-
-    const section = page.locator('#what-we-do');
-    await expect(section).toBeInViewport();
+  test('flagship "41 Closer" nav link points to the Closer page', async ({ page }) => {
+    const closer = page.locator('.nav-links').getByRole('link', { name: '41 Closer' });
+    await expect(closer).toHaveAttribute('href', /41-closer/);
   });
 
-  test('should scroll to FAQ section', async ({ page }) => {
-    await page.click('.nav-links a[href="#faq"]');
-
-    await page.waitForTimeout(500);
-
-    const faqSection = page.locator('#faq');
-    await expect(faqSection).toBeInViewport();
+  test('Case Studies nav link navigates to the case studies page', async ({ page }) => {
+    await page.locator('.nav-links').getByRole('link', { name: 'Case Studies' }).click();
+    await expect(page).toHaveURL(/case-studies/);
   });
 
-  test('should scroll to booking section when clicking CTA', async ({ page }) => {
-    await page.click('.nav-cta');
-
-    await page.waitForTimeout(500);
-
-    const bookSection = page.locator('#book-call');
-    await expect(bookSection).toBeInViewport();
+  test('key homepage sections are present', async ({ page }) => {
+    await expect(page.locator('#what-we-do')).toBeAttached();
+    await expect(page.locator('#faq')).toBeAttached();
+    await expect(page.locator('#book-call')).toBeAttached();
   });
 });
 

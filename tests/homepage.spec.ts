@@ -12,7 +12,7 @@ test.describe('Homepage', () => {
   test('should display hero section with main heading', async ({ page }) => {
     const heroHeading = page.locator('.hero h1');
     await expect(heroHeading).toBeVisible();
-    await expect(heroHeading).toContainText('Stop losing revenue to manual processes');
+    await expect(heroHeading).toContainText('Outpace your competitors');
   });
 
   test('should display hero CTA button', async ({ page }) => {
@@ -26,7 +26,7 @@ test.describe('Homepage', () => {
     await expect(statsSection).toBeVisible();
 
     const statItems = page.locator('.stat-item');
-    await expect(statItems).toHaveCount(3);
+    await expect(statItems).toHaveCount(4);
   });
 
   test('should display problem cards', async ({ page }) => {

@@ -98,19 +98,20 @@ test.describe('Contact Form', () => {
 });
 
 test.describe('CTA Buttons', () => {
-  test('should have working booking link in hero', async ({ page }) => {
+  test('hero primary CTA opens WhatsApp in a new tab', async ({ page }) => {
     await page.goto('/');
 
     const heroCtaLink = page.locator('.hero-cta .btn-primary');
-    await expect(heroCtaLink).toHaveAttribute('href', '#book-call');
+    await expect(heroCtaLink).toHaveAttribute('href', /wa\.me/);
+    await expect(heroCtaLink).toHaveAttribute('target', '_blank');
   });
 
-  test('should have external calendar link in CTA section', async ({ page }) => {
+  test('CTA-section primary button opens WhatsApp in a new tab', async ({ page }) => {
     await page.goto('/');
     await page.locator('#book-call').scrollIntoViewIfNeeded();
 
-    const calendarLink = page.locator('.cta-content .btn-primary');
-    await expect(calendarLink).toHaveAttribute('href', /calendar\.app\.google/);
-    await expect(calendarLink).toHaveAttribute('target', '_blank');
+    const ctaLink = page.locator('.cta-content .btn-primary');
+    await expect(ctaLink).toHaveAttribute('href', /wa\.me/);
+    await expect(ctaLink).toHaveAttribute('target', '_blank');
   });
 });
