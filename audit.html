@@ -1158,12 +1158,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="form-row-half form-row">
         <div>
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Alex Tan">
+        </div>
+        <div>
           <label for="company">Company Name</label>
           <input type="text" id="company" placeholder="Acme Corp">
         </div>
+      </div>
+
+      <div class="form-row-half form-row">
         <div>
           <label for="email">Your Email</label>
           <input type="email" id="email" placeholder="you@company.com" required>
+        </div>
+        <div>
+          <label for="whatsapp">WhatsApp <span style="color:var(--text-ghost);font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <input type="tel" id="whatsapp" placeholder="+65 9123 4567">
         </div>
       </div>
 
@@ -1180,7 +1191,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="trust-bar">
         <div class="trust-item"><span class="trust-icon">&#9889;</span> 60-second analysis</div>
-        <div class="trust-item"><span class="trust-icon">&#128274;</span> We don't store your data</div>
+        <div class="trust-item"><span class="trust-icon">&#128274;</span> Private &amp; PDPA-safe</div>
         <div class="trust-item"><span class="trust-icon">&#9733;</span> Powered by Claude AI</div>
       </div>
     </div>
@@ -1252,7 +1263,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h3 style="font-size:1.1rem;font-weight:700;color:#ccc;margin-bottom:10px;">Frequently Asked Questions</h3>
     <p style="color:#999;line-height:1.7;margin-bottom:8px;"><strong style="color:#ccc;">How much does the AI audit cost?</strong> It's completely free. No login required, no credit card, no catch.</p>
     <p style="color:#999;line-height:1.7;margin-bottom:8px;"><strong style="color:#ccc;">How long does it take?</strong> Level 1 takes about 60 seconds. Level 2 Deep Dive takes 30-60 seconds more.</p>
-    <p style="color:#999;line-height:1.7;margin-bottom:8px;"><strong style="color:#ccc;">Is my data secure?</strong> We don't store your website data. Your email is only used to deliver results.</p>
+    <p style="color:#999;line-height:1.7;margin-bottom:8px;"><strong style="color:#ccc;">Is my data secure?</strong> Yes. We keep your details private and PDPA-compliant, and use them only to send your results and follow up. We never sell your data.</p>
     <p style="color:#999;line-height:1.7;margin-bottom:24px;"><strong style="color:#ccc;">What countries do you serve?</strong> 41 Labs is based in Singapore and serves businesses across Southeast Asia and globally.</p>
   </div>
 </div>
@@ -1893,6 +1904,8 @@ async function runAudit() {
   var emailVal = document.getElementById('email').value.trim();
   var companyVal = document.getElementById('company').value.trim();
   var descVal = document.getElementById('description').value.trim();
+  var nameVal = document.getElementById('name').value.trim();
+  var whatsappVal = document.getElementById('whatsapp').value.trim();
   var errorEl = document.getElementById('errorMsg');
   var btn = document.getElementById('btnAudit');
 
@@ -1915,6 +1928,22 @@ async function runAudit() {
     errorEl.classList.add('active');
     return;
   }
+
+  // Capture the lead into CRM immediately, independent of the analysis, so it is never lost.
+  try {
+    fetch('/api/audit-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: nameVal,
+        email: emailVal,
+        phone: whatsappVal,
+        company: companyVal,
+        url: urlVal.indexOf('http') === 0 ? urlVal : 'https://' + urlVal
+      })
+    }).catch(function () {});
+  } catch (e) {}
+  if (typeof gtag === 'function') gtag('event', 'generate_lead', { event_category: 'conversion', event_label: companyVal || urlVal });
 
   document.getElementById('formCard').style.display = 'none';
   var loading = document.getElementById('l1Loading');
@@ -2444,6 +2473,17 @@ function renderLevel1(audit) {
     onclick: function() { showLevel2Form(); }
   }, 'Unlock Deep Dive \u2014 Free');
   ctaCard.appendChild(ctaBtn);
+
+  // Primary next step at peak intent: message us on WhatsApp with context pre-filled.
+  var waCompany = document.getElementById('company').value.trim() || 'my company';
+  var waBtn = document.createElement('a');
+  waBtn.href = 'https://wa.me/6580124848?text=' + encodeURIComponent('Hi 41 Labs, I just ran the AI audit for ' + waCompany + '. What would you build first?');
+  waBtn.target = '_blank';
+  waBtn.rel = 'noopener';
+  waBtn.className = 'btn-primary';
+  waBtn.style.cssText = 'width:auto;padding:14px 34px;display:block;margin:14px auto 0;text-decoration:none;text-align:center;background:#25D366;border-color:#25D366;color:#062916;';
+  waBtn.textContent = 'Message us your results on WhatsApp';
+  ctaCard.appendChild(waBtn);
 
   ctaCard.appendChild(textEl('div', 'No credit card. No sales call. Just your personalized AI strategy.', { style: { fontSize: '0.7rem', color: 'var(--text-ghost)', textAlign: 'center', marginTop: '12px' } }));
 
