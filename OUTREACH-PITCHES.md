@@ -98,3 +98,55 @@ Best,
 Alexander Lee
 Founder, 41 Labs
 ```
+
+---
+
+# Batch 2 — AI-citation displacement targets (added 2026-07-02)
+
+These are the sources the AI answers for "best AI company Singapore" are actually built from
+(per the 2026-07-01 AI-citation audit). Getting named here = fastest path off 0/5.
+
+**STATUS 2026-07-02:** Gmail drafts created and sitting in alexander@41labs.ai Drafts folder for:
+1. Finyki → hello@finyki.com (draft ready)
+2. bestinsingapore.co → support@bestinsingapore.co (draft ready, pitch #1 above)
+3. softwareoutsourcing.com → inquiry@softwareoutsourcing.com (draft ready, pitch #2 above)
+
+**Open Gmail → Drafts → review → Send.** Follow up once after 5 business days.
+
+---
+
+## 4. Voltade — no public email, use site contact form
+**Route:** https://voltade.com contact form. They publish SG AI vendor comparisons that AI engines cite.
+
+```
+Hi team,
+
+Your comparison content on AI vendors in Singapore shows up when business
+owners here research options. Useful stuff.
+
+I would like to suggest 41 Labs as an addition. We build custom AI systems
+for Singapore SMEs, trained on the client's own data and processes.
+
+Concrete proof:
+- 50+ AI systems delivered, all still in production
+- One client's quote turnaround cut from about 3 hours to 4 minutes
+- Free working demo before any commitment
+- EDG grant support, up to 50 percent of cost covered
+
+Our page is https://41labs.ai. Happy to send whatever profile info you need.
+
+Alexander Lee
+Founder, 41 Labs
+alexander@41labs.ai
+```
+
+## 5. Software Outsourcing Journal — domain check failed 2026-07-02
+softwareoutsourcingjournal.com did not resolve. Re-verify the exact site AI cites
+(may be a different domain) before pitching. Do not send blind.
+
+## 6. Directory claims (no pitch needed — claim + fill from DIRECTORY-PROFILES.md)
+- DesignRush: https://www.designrush.com/agency/profile — free profile claim
+- GoodFirms: https://www.goodfirms.co/get-listed — free listing
+- ensun: https://ensun.io — company profile
+- Clutch: complete profile + drive 5 verified client reviews (currently 1 review, #18)
+- Crunchbase: verify/complete the correct 41 Labs SG entry (do NOT merge with US 41labsllc.com namesake)
