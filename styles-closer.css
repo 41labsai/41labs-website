@@ -266,5 +266,6 @@
 .closer-inject .ci-note { font-size:1.02rem; line-height:1.55; color:rgba(255,255,255,.85); margin:0 0 22px; }
 .closer-inject .ci-note b { color:#fff; }
 .closer-inject .clo-ex-card { margin:0; }
-.closer-inject a.clo-btn-xl { text-decoration:none; }
+.closer-inject a.clo-btn-xl { text-decoration:none; color:#06220f; }
+.closer-inject a.clo-btn-xl:hover { color:#06220f; }
 @media (max-width:720px){ .closer-inject { padding:30px 24px 34px; } .closer-inject .ci-grid { grid-template-columns:1fr; gap:24px; } }
