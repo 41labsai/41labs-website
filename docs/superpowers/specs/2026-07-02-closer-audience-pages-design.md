@@ -1,0 +1,95 @@
+# 41 Closer — Audience Pages — Design Spec
+
+**Date:** 2026-07-02
+**Owner:** Alexander (41 Labs)
+**Status:** Approved design, building flagship #1 as reference
+**Related:** `2026-06-21-41closer-flagship-page-design.md` (the `/41-closer` flagship), `memory/project_41closer_icp.md` (canonical ICP)
+
+## Goal
+
+Give each 41 Closer ICP audience a page that speaks directly to that one trade — their words, their scenarios, their numbers, their objection — so a supplier, a renovation firm, or an aircon boss lands and thinks "that's me," then messages the agent on WhatsApp. Conversion pages, not SEO essays.
+
+## Decisions locked (with Alexander)
+
+1. **Hybrid coverage.** Build a NEW page only for an audience with no page today. For an audience that already has an industry page, inject a focused "41 Closer — is this you?" block instead of a whole new page.
+2. **3 flagships first.** Nail the template on the 3 highest-value audiences, review, then scale to the rest.
+3. **I research and write everything.** No dependency on Alexander for copy. Numbers I cannot verify are flagged inline for his gut-check, never presented as fact.
+4. **WhatsApp mockups are the entire visual system.** No stock photography. Custom WhatsApp threads (built from the existing `clo-*` chat components) carry every page, in each trade's language.
+
+## The 3 flagships (first pass)
+
+| # | Audience | Mechanism | File |
+|---|---|---|---|
+| 1 | Product suppliers / distributors (the ACH type) | NEW page | `industries/ai-for-suppliers-distributors-singapore.html` |
+| 2 | Renovation / contractors | inject block | existing `industries/ai-for-renovation-contractors-singapore.html` |
+| 3 | Aircon / servicing | inject block | existing `industries/ai-for-hvac-aircon-singapore.html` |
+
+Flagship #1 is net-new, so it exercises the full template + mockup system and becomes the reference. Same-industry proof already exists: the live 41 Closer proof case is a Singapore industrial hardware distributor (42,000 products, 64.1% close rate, $300k/mo). Reuse it, anonymized, on the supplier page.
+
+## Design system — reuse, do not reinvent
+
+`41-closer.html` already ships a full landing-page kit (inline `<style>`, ~230 lines) plus a motion layer and JS. The audience pages are part of the 41 Closer family and reuse it verbatim:
+
+- Layout: `clo-section`, `clo-deep` / `clo-light` / `clo-white`, `clo-wrap`, `clo-narrow`, `clo-center`
+- Type: `clo-h1/h2`, `clo-lead`, `clo-eyebrow`, `clo-grad` gradient text
+- **WhatsApp mockups (the visual engine):** `clo-phone` (hero animated thread), `clo-ex` / `clo-ex-card` (mini chats), `clo-b.in/.out` bubbles, typing dots, `clo-pay` paid confirmation
+- Blocks: `clo-vs` (today vs with-Closer), `clo-steps`, `clo-cats`, `clo-costs`, `clo-tiers`, `clo-case` (proof), `clo-founder`, `clo-qr-card`
+- Motion: scroll reveals, animated hero chat, count-up stats (JS at end of `41-closer.html`)
+
+**Refactor for the rollout:** extract the `clo-*` CSS + JS from `41-closer.html` into shared `styles-closer.css` and `closer.js`, so every audience page links them instead of duplicating ~250 lines each. To de-risk review, the shared files are created and used on the NEW page first; `41-closer.html` is switched over to them (and its inline copy removed) as a separate, verified step after the template is approved.
+
+## Page template (per audience) — section order
+
+Editorial article shell for SEO (head meta, Article + FAQPage + BreadcrumbList schema, navbar, breadcrumb, footer, scripts) but the body is the `clo-*` landing kit in this order:
+
+1. **Hero** — headline = that trade's exact leak in their words. Right side = `clo-phone` animated WhatsApp thread scripted for that trade (supplier = stock/price/reorder close; aircon = 9pm breakdown booking; reno = after-hours quote). CTA to `wa.me/6580124848` with a trade-specific prefilled message.
+2. **Is this you?** — the 3-symptom self-qualifier written as their real day.
+3. **Cost of the leak** — their real math: deal size x miss rate = $ lost/month. Real numbers, flagged if unverified.
+4. **How it works, in your world** — 3 `clo-steps` using their enquiry types and jargon.
+5. **Handles your exact situations** — `clo-ex` mini WhatsApp chats of the real message types that trade gets.
+6. **Your objection, answered** — the one objection that trade raises, pre-empted.
+7. **Proof** — `clo-case`, same-trade where we have it (supplier uses the real distributor case).
+8. **CTA** — `clo-btn-xl` + QR to the agent, trade-specific prefilled message.
+
+## The injected block (for audiences with an existing page)
+
+A self-contained slab dropped near the top of the existing industry page (after the intro), same skeleton, custom copy:
+
+- Gut-punch hook (one scenario, one line) + "This is you if" 3 symptoms
+- One `clo-ex`-style WhatsApp mini-chat for that trade
+- Two pain examples with a dollar figure
+- One line on how it works + CTA to `wa.me/6580124848`
+
+Copy is audience-specific, so blocks are authored per page, not generated by a single inject script.
+
+## Copy rules (every line)
+
+- Speak to one specific person in that trade (Satterfield velvet rope). Short sentences, common words.
+- **No em dashes.** Periods, commas, parentheses.
+- One concrete example per section with a real dollar or volume figure. No hype, no emoji bullets, no "unlock/leverage".
+- Never name a client (ACH stays internal). Most specific allowed for the proof is "Singapore industrial hardware distributor".
+
+## Mechanics (bake in, non-negotiable)
+
+- Every CTA links exactly `https://wa.me/6580124848?text=<trade-specific prefilled>` (the 41 Closer bot; a wrong number loses the lead).
+- Head shell matches siblings: deferred GA4/GTM stub, `/track.js`, favicons, canonical, geo tags, OG/Twitter. Add Meta Pixel + the `fbq('Contact')` on WhatsApp clicks like `41-closer.html`.
+- New page added to `sitemap.xml`, the Industries nav dropdown / `industries.html`, and internal links.
+- Mobile first. Verify 375 / 768 / 1440. Respect `prefers-reduced-motion` (kit already does).
+
+## Verification
+
+- Playwright: page returns 200, renders; every CTA points to exactly `wa.me/6580124848`; hero chat + mockups present; no console errors.
+- Manual: eyeball at 375 / 768 / 1440; scan the QR on a phone and confirm it opens WhatsApp with the prefilled message.
+- Link check: no broken relative links (nav, footer, breadcrumb).
+
+## Out of scope (for now)
+
+- The other ~7 audiences beyond the 3 flagships (scale after review).
+- Buying `41closer.ai`; any change to the Hermes app.
+- Real photography, pricing changes, new tracking infra.
+
+## Open items to confirm at review
+
+1. Supplier page economics figures (average trade order value, monthly leak) — flagged inline.
+2. Whether audience pages use the landing template (recommended) or match the editorial style of the existing 30. Building #1 as landing to show the difference.
+3. Prefilled WhatsApp wording per trade.
