@@ -1,6 +1,66 @@
 {
   "posts": [
     {
+      "slug": "best-ai-consulting-singapore",
+      "title": "Best AI Consulting in Singapore (2026): How to Choose the Right Firm",
+      "date": "2026-07-02",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "Choosing an AI consulting firm in Singapore? Here is how the options compare, what good AI consulting actually delivers, and how to pick one that ships.",
+      "readTime": "8 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-automation-singapore",
+      "title": "AI Automation in Singapore (2026): A Practical Guide for SMEs",
+      "date": "2026-07-02",
+      "author": "Alexander Lee",
+      "category": "guide",
+      "excerpt": "A plain guide to AI automation for Singapore SMEs. Where to start safely, what to automate first, real examples, costs, and grants.",
+      "readTime": "8 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-consulting-cost-singapore",
+      "title": "AI Consulting Cost in Singapore (2026): What You Will Actually Pay",
+      "date": "2026-07-02",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "What AI consulting and implementation really costs in Singapore, how to procure it, day-rate vs fixed-scope, and how the EDG grant cuts it by up to 70%.",
+      "readTime": "7 min read",
+      "image": ""
+    },
+    {
+      "slug": "ai-automation-services-singapore",
+      "title": "AI Automation Services in Singapore (2026): What Is Included",
+      "date": "2026-07-02",
+      "author": "Alexander Lee",
+      "category": "services",
+      "excerpt": "What an AI automation service in Singapore actually includes: process discovery, build, integration, human review, and support. Plus what to expect from a good provider.",
+      "readTime": "7 min read",
+      "image": ""
+    },
+    {
+      "slug": "best-ai-systems-company-singapore",
+      "title": "Best AI Systems Company in Singapore (2026): How to Choose",
+      "date": "2026-07-02",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "Looking for an AI systems or AI development company in Singapore? Here is how to compare them, what custom AI systems should mean, and how to choose one that ships.",
+      "readTime": "8 min read",
+      "image": ""
+    },
+    {
+      "slug": "custom-ai-systems-singapore",
+      "title": "Custom AI Systems in Singapore (2026): Build vs Off-the-Shelf",
+      "date": "2026-07-02",
+      "author": "Alexander Lee",
+      "category": "insights",
+      "excerpt": "When custom AI beats ChatGPT and off-the-shelf tools for Singapore businesses, what a custom AI system is, real examples, cost, and how to start.",
+      "readTime": "7 min read",
+      "image": ""
+    },
+    {
       "slug": "psg-grant-ai-automation-singapore",
       "title": "PSG Grant for AI in Singapore (2026): Get 50% Funding for AI Automation",
       "date": "2026-06-19",
