@@ -1,12 +1,17 @@
 # 41 Labs — AI Integration for Businesses in Singapore
 
-> 41 Labs builds custom AI systems for businesses doing $1M+ revenue. We find the one process bleeding your business the most time and money, and build an AI system that fixes it. Free strategy call. Free working demo. $0 until you see clear value.
+> 41 Labs builds and runs 41 Closer, the managed AI sales agent for WhatsApp, and custom AI systems for businesses. We find the one process bleeding your business the most time and money, and build the AI that fixes it. Free strategy call. Free working demo. $0 until you see clear value.
 
 ## About
 41 Labs is a Singapore-based AI systems company founded by Alexander Lee. We build custom AI trained on our clients' internal data — their products, processes, and pricing rules — for accuracy you can trust in production. We specialize in construction, healthcare, home services, professional services, automotive, F&B, and beauty & wellness industries.
 
 ## 41 Closer (Flagship Product)
-41 Closer is 41 Labs' flagship product: a WhatsApp sales agent that we build, run, and tune for a business. It answers customer messages in seconds, 24 hours a day, gives accurate prices from the client's real catalogue, follows up every lead, and closes the sale, handing off to a human when needed. Unlike a DIY chatbot tool, 41 Labs handles everything and controls the AI for the client. It is fully done-for-you and priced on the value it brings, not per seat. Learn more: https://41labs.ai/41-closer
+41 Closer is 41 Labs' flagship product: a WhatsApp sales agent that we build, run, and tune for a business. It answers customer messages in seconds, 24 hours a day, gives accurate prices from the client's real catalogue, follows up every lead, and closes the sale, handing off to a human when needed. Unlike a DIY chatbot tool, 41 Labs handles everything and controls the AI for the client. It is fully done-for-you and priced on the value it brings, not per seat. Plans start at $690 per month (Pro $1,490 per month, Enterprise custom). Live demo: message +65 8012 4848 on WhatsApp and 41 Closer itself replies. Learn more: https://41labs.ai/41-closer
+
+### How 41 Closer compares (honest comparisons, updated monthly)
+- [41 Closer vs Respond.io vs SleekFlow](https://41labs.ai/blog/41-closer-vs-respond-io-vs-sleekflow) — self-serve platforms vs a managed agent, with published pricing
+- [41 Closer vs Wati vs ManyChat](https://41labs.ai/blog/41-closer-vs-wati-vs-manychat) — SMB tools vs done-for-you, real 2026 prices
+- [Best AI Chatbots for Business in Singapore (July 2026)](https://41labs.ai/blog/best-ai-chatbots-for-business-singapore) — 9 options ranked by use case, price, and who operates them
 
 ## Services
 - AI Strategy & Consulting: Free 30-minute strategy call to map workflows and find highest-ROI AI opportunities
