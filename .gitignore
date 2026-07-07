@@ -1,53 +1,45 @@
-# Dependencies
-node_modules/
 
+!uploads/.gitkeep
+# Build outputs
+# Credentials (NEVER commit)
+# Dependencies
+# Editor files
 # Environment files (NEVER commit these)
+# Local Netlify folder
+# Logs
+# OS files
+# Playwright test output (generated — should not be committed)
+# Uploads (if large files)
+*.env
+*.key
+*.log
+*.pem
+*.swo
+*.swp
+*credentials*
+*secret*
+.DS_Store
+.cache/
 .env
 .env.local
 .env.production
-*.env
-
-# OS files
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Editor files
-.vscode/
 .idea/
-*.swp
-*.swo
-
-# Build outputs
-dist/
-build/
-.cache/
-
-# Logs
-*.log
-npm-debug.log*
-
-# Uploads (if large files)
-uploads/*.jpg
-uploads/*.png
-uploads/*.gif
-uploads/*.mp4
-!uploads/.gitkeep
-
-# Local Netlify folder
 .netlify/
-
-# Credentials (NEVER commit)
-*credentials*
-*secret*
-*.pem
-*.key
-.vercel
-
 .playwright-mcp/
-nav-check.png
+.reddit-venv
+.vercel
+.vscode/
+Thumbs.db
+build/
+desktop.ini
+dist/
 events-live.jpeg
-
-# Playwright test output (generated — should not be committed)
-test-results/
+nav-check.png
+node_modules/
+npm-debug.log*
 playwright-report/
+test-results/
+uploads/*.gif
+uploads/*.jpg
+uploads/*.mp4
+uploads/*.png
