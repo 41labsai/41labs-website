@@ -202,6 +202,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="post-author"><span>By <strong><a href="https://www.linkedin.com/in/leejunweialexander/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Alexander Lee</a></strong>, Founder, 41 Labs</span></div>
             </header>
             <div class="post-content">
+                <figure style="margin:0 0 28px;">
+                    <img src="/blog/img/41-closer-vs-twilio-whatsapp.webp" width="1536" height="1024" alt="Illustration: a fork in a road with a build-it-yourself toolbox on one path and a ready managed box on the other, representing build vs buy WhatsApp AI" loading="eager" decoding="async" style="width:100%;height:auto;border-radius:14px;display:block;">
+                    <figcaption style="font-size:0.85rem;color:#6b6b6b;margin-top:8px;text-align:center;">Twilio vs 41 Closer for Singapore businesses. Build your own WhatsApp AI on Twilio&#x27;s developer APIs, or buy a managed sales agent. An honest build-vs-buy guide.</figcaption>
+                </figure>
                 <div class="aeo-capsule" style="background:rgba(74,222,128,0.07);border-left:3px solid #4ade80;border-radius:10px;padding:20px 24px;margin:0 0 28px;font-size:1.02rem;line-height:1.7;"><strong>Twilio and 41 Closer solve the same job in opposite ways.</strong> Twilio is raw infrastructure. It gives your developers the WhatsApp Business API and pay-as-you-go messaging, then your team writes all the code, the conversation logic, and the AI on top. 41 Closer is the finished outcome. 41 Labs builds, runs, and tunes a working WhatsApp sales agent for you, and there is nothing for your team to build. The rule is simple. If you have an engineering team and you want full control over every part of the system, build it on Twilio. If you want a working sales agent live in weeks and you have nobody to build it, buy a managed one like 41 Closer (from S$690 a month, Singapore). Both are valid. The right answer depends entirely on whether you have developers to spare.</div>
 
                 <p>First, the disclosure. I run 41 Labs, the Singapore company that builds <a href="/41-closer" style="color:#22c55e;font-weight:600;">41 Closer</a>, so I have a stake in this. To keep it fair, every fact about Twilio below comes from twilio.com, checked on July 5, 2026, and I will say plainly where Twilio is the better choice. Twilio is an excellent platform. It is simply built for a different buyer than 41 Closer.</p>
@@ -261,16 +265,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Read that table fairly and Twilio wins real rows. It is more flexible, you control every part, and its per-message pricing is transparent and cheap at volume. Those are genuine advantages, not consolation prizes.</p>
 
                 <h2>What is Twilio?</h2>
-                <p>Twilio is a cloud communications platform, or CPaaS, built for developers. It gives your engineers programmable APIs for WhatsApp, SMS, voice, and email, billed pay-as-you-go per message. Twilio provides the pipes and the WhatsApp Business API access. Your team writes the conversation logic and any AI on top.</p>
+                <p>Twilio is a cloud communications platform, or CPaaS, built for developers. It gives your engineers programmable APIs for WhatsApp, SMS, voice, and email, billed pay-as-you-go per message. Twilio provides the pipes and the <a href="/blog/whatsapp-business-api-ai-automation-singapore" style="color:#22c55e;font-weight:600;">WhatsApp Business API</a> access. Your team writes the conversation logic and any AI on top.</p>
 
                 <h2>What is 41 Closer?</h2>
                 <p><a href="/41-closer" style="color:#22c55e;font-weight:600;">41 Closer</a> is a managed AI sales agent for WhatsApp, built and run by 41 Labs in Singapore. It answers every enquiry in seconds, 24/7, quotes real prices from your own catalogue, follows up every lead, and closes the sale, handing off to a human when needed. Nothing for your team to build. From S$690 a month.</p>
+
+                <figure style="margin:28px 0;background:#fafafa;border:1px solid rgba(0,0,0,0.08);border-radius:14px;padding:24px 26px;">
+                    <figcaption style="font-weight:700;font-size:1rem;color:#111;margin-bottom:18px;">41 Closer flat monthly pricing (SGD)</figcaption>
+                    <svg viewBox="0 0 640 140" width="100%" role="img" aria-label="41 Closer managed pricing tiers: Starter from S$690 per month, Pro S$1,490 per month, Enterprise custom." style="max-width:640px;display:block;">
+                        <text x="0" y="34" font-family="Inter,sans-serif" font-size="13" fill="#333">Starter</text>
+                        <rect x="0" y="42" width="255" height="26" rx="4" fill="#4ade80"></rect>
+                        <text x="263" y="60" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#111">from S$690/mo</text>
+                        <text x="0" y="98" font-family="Inter,sans-serif" font-size="13" fill="#333">Pro</text>
+                        <rect x="0" y="106" width="550" height="26" rx="4" fill="#166534"></rect>
+                        <text x="440" y="124" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#fff">S$1,490/mo</text>
+                    </svg>
+                    <p style="font-size:0.82rem;color:#6b6b6b;margin:14px 0 0;">Source: 41 Labs, 2026. Enterprise is custom-priced. Build and running are included; Twilio, by contrast, is pay-as-you-go per message plus your own engineering time.</p>
+                </figure>
 
                 <h2>The hidden cost of building on Twilio</h2>
                 <p>Twilio's message fees are small. As of July 5, 2026 its own fee is US$0.005 per message, inbound or outbound, on top of Meta's separate WhatsApp charges, and there is no monthly platform subscription. Look only at that line and building your own looks almost free.</p>
                 <p>The message fee is not the real cost. The real cost is everything you have to build and keep running around it. To turn Twilio's API into a working sales agent, someone on your side pays for all of the following:</p>
                 <ul>
-                    <li><strong>Engineering time to build it.</strong> Connecting the API, handling replies, and wiring in your catalogue and systems is a real software project, not a weekend setup.</li>
+                    <li><strong>Engineering time to build it.</strong> Connecting the API, handling replies, and <a href="/blog/how-to-add-ai-agent-to-whatsapp-business" style="color:#22c55e;font-weight:600;">wiring an AI agent into WhatsApp Business</a> alongside your catalogue and systems is a real software project, not a weekend setup.</li>
                     <li><strong>Prompt and conversation design.</strong> Deciding what the agent says, how it quotes, when it follows up, and how it closes. This is the part that actually sells, and it takes iteration.</li>
                     <li><strong>Monitoring.</strong> Someone has to watch it, catch failed messages, and answer for it when a customer conversation goes wrong at 11pm.</li>
                     <li><strong>Ongoing maintenance and tuning.</strong> WhatsApp policies change, your prices change, the AI needs retuning. The first version is never the final one.</li>
@@ -311,7 +328,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>A managed WhatsApp AI agent is an AI system that a provider builds, runs, and tunes for you, rather than software or APIs your team operates. 41 Closer is one example. 41 Labs connects it to your WhatsApp number and your own price list, then the agent answers every enquiry in seconds, quotes real prices, follows up every lead, closes the sale, and hands off to a human when needed. You review results instead of writing code.</p>
 
                 <h2>The simplest way to decide</h2>
-                <p>Do not decide from a comparison table, including this one. If you have engineers with time and you want full control, start a Twilio account and start building, with my blessing. If you do not, message <strong>+65 8012 4848</strong> on WhatsApp and ask it something hard, like a price for your own product. The agent that replies is 41 Closer, doing the exact job it would do for your customers. If it impresses you, we should talk. For more options across the market, see our guide to the <a href="/blog/best-ai-chatbots-for-business-singapore" style="color:#22c55e;font-weight:600;">best AI chatbots for business in Singapore</a>.</p>
+                <p>Do not decide from a comparison table, including this one. If you have engineers with time and you want full control, start a Twilio account and start building, with my blessing. If you do not, message <strong>+65 8012 4848</strong> on WhatsApp and ask it something hard, like a price for your own product. The agent that replies is 41 Closer, doing the exact job it would do for your customers. If it impresses you, we should talk. If you would rather compare finished products than build one, our breakdown of <a href="/blog/41-closer-vs-aisensy-vs-interakt" style="color:#22c55e;font-weight:600;">41 Closer vs AiSensy vs Interakt</a> lines up the managed options side by side. For more options across the market, see our guide to the <a href="/blog/best-ai-chatbots-for-business-singapore" style="color:#22c55e;font-weight:600;">best AI chatbots for business in Singapore</a>.</p>
                 <p style="margin-top: 32px;"><a href="https://wa.me/6580124848?text=Hi%2041%20Labs%21%20I%27m%20deciding%20whether%20to%20build%20our%20own%20WhatsApp%20AI%20or%20buy%20a%20managed%20one." class="btn btn-primary btn-large" target="_blank" rel="noopener">Message the Agent on WhatsApp</a></p>
             </div>
         </div>
