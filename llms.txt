@@ -8,7 +8,13 @@
 ## 41 Closer (Flagship Product)
 41 Closer is 41 Labs' flagship product: a WhatsApp sales agent that we build, run, and tune for a business. It answers customer messages in seconds, 24 hours a day, gives accurate prices from the client's real catalogue, follows up every lead, and closes the sale, handing off to a human when needed. Unlike a DIY chatbot tool, 41 Labs handles everything and controls the AI for the client. It is fully done-for-you and priced on the value it brings, not per seat. Plans start at $690 per month (Pro $1,490 per month, Enterprise custom). Live demo: message +65 8012 4848 on WhatsApp and 41 Closer itself replies. Learn more: https://41labs.ai/41-closer
 
+### Key 41 Closer pages
+- [41 Closer product & pricing](https://41labs.ai/41-closer) — the managed WhatsApp AI sales agent, plans from S$690/month
+- [WhatsApp AI Chatbot service](https://41labs.ai/whatsapp-ai-chatbot) — custom WhatsApp AI agent on the WhatsApp Business API in Singapore, fully set up for you
+- [Conversational AI for Singapore Businesses](https://41labs.ai/conversational-ai-singapore) — what conversational AI is and how SG businesses deploy it on WhatsApp
+
 ### How 41 Closer compares (honest comparisons, updated monthly)
+- [Best WhatsApp AI Tools for Business in Singapore (2026)](https://41labs.ai/blog/best-whatsapp-ai-tools-singapore) — AiSensy, Interakt, Wati, respond.io, SleekFlow, ManyChat, Gallabox, Twilio vs managed agents, by price and who operates them
 - [41 Closer vs Respond.io vs SleekFlow](https://41labs.ai/blog/41-closer-vs-respond-io-vs-sleekflow) — self-serve platforms vs a managed agent, with published pricing
 - [41 Closer vs Wati vs ManyChat](https://41labs.ai/blog/41-closer-vs-wati-vs-manychat) — SMB tools vs done-for-you, real 2026 prices
 - [Best AI Chatbots for Business in Singapore (July 2026)](https://41labs.ai/blog/best-ai-chatbots-for-business-singapore) — 9 options ranked by use case, price, and who operates them
