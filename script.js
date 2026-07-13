@@ -277,8 +277,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const faqItems = document.querySelectorAll('.faq-item');
 
     faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
+        // Support both markups: .faq-question (homepage) and a bare <h3> heading (landing pages)
+        const question = item.querySelector('.faq-question') || item.querySelector('h3');
+        if (!question) return;
 
+        question.style.cursor = 'pointer';
         question.addEventListener('click', () => {
             faqItems.forEach(otherItem => {
                 if (otherItem !== item && otherItem.classList.contains('active')) {
@@ -431,9 +434,12 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(showPopup, 45000);
 
         // Close popup
-        document.getElementById('lead-popup-close').addEventListener('click', function() {
-            leadPopup.classList.remove('active');
-        });
+        const leadPopupClose = document.getElementById('lead-popup-close');
+        if (leadPopupClose) {
+            leadPopupClose.addEventListener('click', function() {
+                leadPopup.classList.remove('active');
+            });
+        }
 
         leadPopup.addEventListener('click', function(e) {
             if (e.target === leadPopup) leadPopup.classList.remove('active');
